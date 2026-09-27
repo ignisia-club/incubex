@@ -387,7 +387,7 @@
 
         <!-- Desktop Navigation Links: Clear, Intuitive, Tidy & Beautifully Spaced -->
         <nav class="hidden lg:flex items-center space-x-5 xl:space-x-7 text-[13px] font-semibold text-slate-600">
-          <a class="whitespace-nowrap py-1 hover:text-indigo-600 transition-colors nav-link" href="#arena">Tracks</a>
+          <a class="whitespace-nowrap py-1 hover:text-indigo-600 transition-colors nav-link" href="#arena">Register</a>
           <a class="whitespace-nowrap py-1 hover:text-indigo-600 transition-colors nav-link" href="#mission-map">Timeline</a>
           <a class="whitespace-nowrap py-1 hover:text-indigo-600 transition-colors nav-link" href="#finalists">Finalists</a>
           <a class="whitespace-nowrap py-1 hover:text-indigo-600 transition-colors nav-link" href="#categories">Domains</a>
@@ -430,7 +430,7 @@
 
     <!-- Mobile Navigation Dropdown -->
     <div class="hidden lg:hidden bg-white/95 backdrop-blur-xl border-b border-indigo-100 px-6 py-5 space-y-3 font-semibold text-sm text-slate-700 shadow-xl transition-all" id="mobile-menu">
-      <a class="block py-1.5 hover:text-indigo-600" href="#arena">Tracks (Product &amp; Prototype)</a>
+      <a class="block py-1.5 hover:text-indigo-600" href="#arena">Register</a>
       <a class="block py-1.5 hover:text-indigo-600" href="#mission-map">Timeline (8-Step Roadmap)</a>
       <a class="block py-1.5 hover:text-indigo-600" href="#finalists">Finalists (80 Booth Quota)</a>
       <a class="block py-1.5 hover:text-indigo-600" href="#categories">Innovation Domains</a>
@@ -550,7 +550,7 @@
           onclick="openRegisterModal(); playSound('click');" 
           class="btn-shimmer px-8 py-4 rounded-full font-black text-sm tracking-wider uppercase text-white bg-gradient-to-r from-blue-600 via-indigo-600 to-indigo-700 shadow-glow hover:shadow-hover hover:-translate-y-1 active:translate-y-0 transition-all duration-300 inline-flex items-center space-x-3 cursor-pointer"
         >
-          <span>REGISTER ON UNSTOP</span>
+          <span>REGISTER</span>
           <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
             <path d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" stroke-linecap="round" stroke-linejoin="round"></path>
           </svg>
@@ -561,7 +561,7 @@
           href="#arena"
           onclick="playSound('hover');"
         >
-          EXPLORE 2 TRACKS
+          HOW TO REGISTER
         </a>
 
         <button 
@@ -575,7 +575,7 @@
         </button>
       </div>
       <p class="mb-10 text-sm text-slate-600">
-        <a href="https://unstop.com/p/incubex-by-ignisia-2026-national-level-tech-launchpad-mit-world-peace-university-pune-maharashtra-1759743" target="_blank" rel="noopener noreferrer" class="font-semibold text-indigo-700 underline decoration-indigo-300 underline-offset-4 hover:text-indigo-900">Open the official Unstop registration page</a>
+        <a href="https://unstop.com/p/incubex-by-ignisia-2026-national-level-tech-launchpad-mit-world-peace-university-pune-maharashtra-1759743" target="_blank" rel="noopener noreferrer" class="font-semibold text-indigo-700 underline decoration-indigo-300 underline-offset-4 hover:text-indigo-900">Students from other colleges: register on Unstop</a>
       </p>
 
       <!-- Live Interactive Countdown to 21 October 2026 -->
@@ -671,188 +671,41 @@
   </section>
   <!-- END: HighlightPosterPillars -->
 
-  <!-- ======================================================== -->
-  <!-- UNIQUE FEATURE 1: INTERACTIVE COMPETITION ARENA MATRIX   -->
-  <!-- ======================================================== -->
   <section class="py-16 md:py-24 relative reveal" id="arena">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
       <div class="text-center max-w-3xl mx-auto mb-10">
         <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight">
-          CHOOSE YOUR BATTLEGROUND
+          REGISTER
         </h2>
         <p class="text-base text-slate-600 mt-3">
-          Switch between tracks to compare team size, how ready the build should be, how you present it, and how many booths are on campus.
+          MIT-WPU students and students from other colleges register separately. The Product or Prototype track is chosen on the form, not on this page.
         </p>
       </div>
 
-      <!-- Arena Mode Selector Pill Switcher -->
-      <div class="flex justify-center mb-10">
-        <div class="inline-flex p-1.5 bg-slate-200/80 rounded-full border border-slate-300 shadow-inner">
-          <button 
-            id="arena-tab-prod"
-            onclick="switchArenaTrack('product'); playSound('click');" 
-            class="px-6 py-2.5 rounded-full text-xs sm:text-sm font-extrabold transition-all bg-indigo-600 text-white shadow-md cursor-pointer flex items-center space-x-2"
-          >
-            <span>Product Track (30 Slots)</span>
-          </button>
-          <button 
-            id="arena-tab-proto"
-            onclick="switchArenaTrack('prototype'); playSound('click');" 
-            class="px-6 py-2.5 rounded-full text-xs sm:text-sm font-extrabold text-slate-600 hover:text-slate-900 transition-all cursor-pointer flex items-center space-x-2"
-          >
-            <span>Prototype Expo Track (50 Slots)</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- Arena Dynamic Card Presentation (Interactive Side-by-Side Faceoff) -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
-        
-        <!-- Track 1: Product Track (Rocket) -->
-        <div id="card-product" class="tilt-card glass-panel rounded-3xl border-2 border-indigo-200/90 p-8 shadow-card hover:shadow-hover relative flex flex-col justify-between group overflow-hidden transition-all duration-300">
-          <div class="absolute -top-16 -right-16 w-48 h-48 bg-indigo-100/60 rounded-full blur-2xl group-hover:scale-125 transition-transform duration-500 pointer-events-none"></div>
-          
-          <div class="relative z-10">
-            <div class="flex items-center space-x-4 mb-5">
-              <div class="w-16 h-16 rounded-2xl bg-indigo-50 border border-indigo-200 flex items-center justify-center text-indigo-600 shadow-sm group-hover:scale-105 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300 flex-shrink-0">
-                <svg class="w-9 h-9" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                  <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path>
-                  <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path>
-                  <path d="M9 12H4s.55-3.03 2-4.5c1.62-1.63 5-2.5 5-2.5"></path>
-                  <path d="M12 15v5s3.03-.55 4.5-2c1.63-1.62 2.5-5 2.5-5"></path>
-                </svg>
-              </div>
-              <div class="border-l-3 border-indigo-600 pl-4">
-                <h3 class="text-2xl sm:text-3xl font-black text-slate-900 leading-none">Product</h3>
-                <h3 class="text-2xl sm:text-3xl font-black text-indigo-700 leading-tight">Track</h3>
-                <p class="mt-2 text-sm font-semibold text-slate-600">30 finalist slots · working products you can demo</p>
-              </div>
-            </div>
-
-            <!-- Quote badge from poster -->
-            <div class="bg-indigo-50/90 rounded-2xl p-4 border border-indigo-200/80 mb-6">
-              <p class="text-xs sm:text-sm font-bold text-indigo-950 italic">
-                "For project ideas which deserve to become real-world solutions."
-              </p>
-            </div>
-
-            <!-- 3 Core Themes from PDF -->
-            <div class="mb-6 space-y-2">
-              <span class="text-[10px] font-black uppercase tracking-wider text-slate-600 block">3 Strategic Themes (from Summit Guide):</span>
-              <div class="grid grid-cols-1 gap-2 text-xs font-semibold">
-                <div class="bg-white p-2.5 rounded-xl border border-slate-100 flex items-center space-x-2">
-                  <span class="text-indigo-600 font-bold">1.</span>
-                  <span><strong>Digital &amp; Software Ventures:</strong> SaaS, FinTech, EdTech, mobile apps, platforms</span>
-                </div>
-                <div class="bg-white p-2.5 rounded-xl border border-slate-100 flex items-center space-x-2">
-                  <span class="text-indigo-600 font-bold">2.</span>
-                  <span><strong>Smart Systems &amp; Hardware:</strong> Robotics, IoT, consumer electronics, devices</span>
-                </div>
-                <div class="bg-white p-2.5 rounded-xl border border-slate-100 flex items-center space-x-2">
-                  <span class="text-indigo-600 font-bold">3.</span>
-                  <span><strong>Open Innovation:</strong> Unconventional business models, cross-domain projects</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Specifications List -->
-            <ul class="space-y-3 text-xs sm:text-sm text-slate-800 font-semibold mb-8">
-              <li class="flex items-start space-x-3">
-                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">✓</span>
-                <span class="text-slate-800"><strong class="text-slate-900 font-black">Team Size:</strong> 1 – 6 members (Solo founders permitted)</span>
-              </li>
-              <li class="flex items-start space-x-3">
-                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">✓</span>
-                <span class="text-slate-800"><strong class="text-slate-900 font-black">Maturity:</strong> A working product, around readiness 5–7, with a commercial model</span>
-              </li>
-              <li class="flex items-start space-x-3">
-                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">✓</span>
-                <span class="text-slate-800"><strong class="text-slate-900 font-black">Format:</strong> Live walkthrough &amp; closed-door venture pitch to Angels/VCs</span>
-              </li>
-            </ul>
+        <div class="glass-panel rounded-3xl border-2 border-indigo-200/90 p-8 shadow-card hover:shadow-hover relative flex flex-col justify-between overflow-hidden">
+          <div>
+            <h3 class="text-2xl sm:text-3xl font-black text-slate-900 leading-tight">MIT-WPU students</h3>
+            <p class="mt-3 text-sm text-slate-600 leading-relaxed">Current students of Dr. Vishwanath Karad MIT World Peace University, Pune.</p>
           </div>
-
-          <button 
-            onclick="openRegisterModal(); playSound('click');" 
-            class="btn-shimmer w-full py-4 text-center rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs uppercase tracking-wider transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 relative z-10 cursor-pointer"
-          >
-            Register (₹200) →
+          <button type="button" disabled class="mt-8 w-full py-4 text-center rounded-2xl bg-indigo-600 text-white font-extrabold text-xs uppercase tracking-wider opacity-60 cursor-not-allowed">
+            Registration link coming soon
           </button>
         </div>
 
-        <!-- Track 2: Prototype Track (Lightbulb/Nodes) -->
-        <div id="card-prototype" class="tilt-card glass-panel rounded-3xl border-2 border-cyan-200/90 p-8 shadow-card hover:shadow-hover relative flex flex-col justify-between group overflow-hidden transition-all duration-300">
-          <div class="absolute -top-16 -right-16 w-48 h-48 bg-cyan-100/60 rounded-full blur-2xl group-hover:scale-125 transition-transform duration-500 pointer-events-none"></div>
-
-          <div class="relative z-10">
-            <div class="flex items-center space-x-4 mb-5">
-              <div class="w-16 h-16 rounded-2xl bg-cyan-50 border border-cyan-200 flex items-center justify-center text-cyan-600 shadow-sm group-hover:scale-105 group-hover:bg-cyan-600 group-hover:text-white transition-all duration-300 flex-shrink-0">
-                <svg class="w-9 h-9" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                  <circle cx="12" cy="12" r="4"></circle>
-                  <path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path>
-                </svg>
-              </div>
-              <div class="border-l-3 border-cyan-600 pl-4">
-                <h3 class="text-2xl sm:text-3xl font-black text-slate-900 leading-none">Prototype</h3>
-                <h3 class="text-2xl sm:text-3xl font-black text-cyan-700 leading-tight">Expo Track</h3>
-                <p class="mt-2 text-sm font-semibold text-slate-600">50 finalist slots · research and lab builds</p>
-              </div>
-            </div>
-
-            <!-- Quote badge from poster -->
-            <div class="bg-cyan-50/90 rounded-2xl p-4 border border-cyan-200/80 mb-6">
-              <p class="text-xs sm:text-sm font-bold text-cyan-950 italic">
-                "Academic &amp; research builds software + hardware"
-              </p>
-            </div>
-
-            <!-- Core Focus from PDF -->
-            <div class="mb-6 space-y-2">
-              <span class="text-[10px] font-black uppercase tracking-wider text-slate-600 block">Exhibition &amp; Lab Highlights (from Summit Guide):</span>
-              <div class="grid grid-cols-1 gap-2 text-xs font-semibold">
-                <div class="bg-white p-2.5 rounded-xl border border-slate-100 flex items-center space-x-2">
-                  <span class="text-cyan-600 font-bold">1.</span>
-                  <span><strong>Research &amp; Capstones:</strong> Engineering builds, research models, proof-of-concept</span>
-                </div>
-                <div class="bg-white p-2.5 rounded-xl border border-slate-100 flex items-center space-x-2">
-                  <span class="text-cyan-600 font-bold">2.</span>
-                  <span><strong>Booth Exhibition:</strong> Dedicated on-campus booth with 230V power &amp; demo rigs</span>
-                </div>
-                <div class="bg-white p-2.5 rounded-xl border border-slate-100 flex items-center space-x-2">
-                  <span class="text-cyan-600 font-bold">3.</span>
-                  <span><strong>Institutional Honors:</strong> Category trophies, cash awards, 2 exclusive MIT-WPU honors</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Specifications List -->
-            <ul class="space-y-3 text-xs sm:text-sm text-slate-800 font-semibold mb-8">
-              <li class="flex items-start space-x-3">
-                <span class="w-5 h-5 rounded-full bg-cyan-100 text-cyan-800 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">✓</span>
-                <span class="text-slate-800"><strong class="text-slate-900 font-black">Team Size:</strong> 3 – 6 members per team</span>
-              </li>
-              <li class="flex items-start space-x-3">
-                <span class="w-5 h-5 rounded-full bg-cyan-100 text-cyan-800 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">✓</span>
-                <span class="text-slate-800"><strong class="text-slate-900 font-black">Maturity:</strong> A working prototype or physical model, around readiness 1–4</span>
-              </li>
-              <li class="flex items-start space-x-3">
-                <span class="w-5 h-5 rounded-full bg-cyan-100 text-cyan-800 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">✓</span>
-                <span class="text-slate-800"><strong class="text-slate-900 font-black">Format:</strong> Full-day live public exhibition &amp; walk-around jury evaluation</span>
-              </li>
-            </ul>
+        <div class="glass-panel rounded-3xl border-2 border-cyan-200/90 p-8 shadow-card hover:shadow-hover relative flex flex-col justify-between overflow-hidden">
+          <div>
+            <h3 class="text-2xl sm:text-3xl font-black text-slate-900 leading-tight">Students from all over India</h3>
+            <p class="mt-3 text-sm text-slate-600 leading-relaxed">UG and PG students from colleges outside MIT-WPU. Register on the official Unstop listing.</p>
           </div>
-
-          <button 
-            onclick="openRegisterModal(); playSound('click');" 
-            class="btn-shimmer w-full py-4 text-center rounded-2xl bg-cyan-700 hover:bg-cyan-800 text-white font-extrabold text-xs uppercase tracking-wider transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 relative z-10 cursor-pointer"
-          >
-            Register (₹200) →
-          </button>
+          <a href="https://unstop.com/p/incubex-by-ignisia-2026-national-level-tech-launchpad-mit-world-peace-university-pune-maharashtra-1759743" target="_blank" rel="noopener noreferrer" class="btn-shimmer mt-8 block w-full py-4 text-center rounded-2xl bg-cyan-700 hover:bg-cyan-800 text-white font-extrabold text-xs uppercase tracking-wider transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5">
+            Register on Unstop →
+          </a>
         </div>
       </div>
     </div>
   </section>
+
 
   
 
@@ -1773,11 +1626,11 @@
         <div class="lg:col-span-3">
           <h4 class="mb-4 text-xs font-bold uppercase tracking-wider text-slate-900">Summit Navigation</h4>
           <ul class="space-y-2.5 text-xs sm:text-sm text-slate-600">
-            <li><a class="transition-colors hover:text-indigo-600" href="#arena">Competition Arena</a></li>
+            <li><a class="transition-colors hover:text-indigo-600" href="#arena">Register</a></li>
             <li><a class="transition-colors hover:text-indigo-600" href="https://unstop.com/p/incubex-by-ignisia-2026-national-level-tech-launchpad-mit-world-peace-university-pune-maharashtra-1759743" target="_blank" rel="noopener noreferrer">Register on Unstop</a></li>
             <li><a class="transition-colors hover:text-indigo-600" href="assets/Incubex%20Brochure.pdf">Official Brochure (PDF)</a></li>
             <li><a class="transition-colors hover:text-indigo-600" href="#mission-map">8-Step Roadmap</a></li>
-            <li><a class="transition-colors hover:text-indigo-600" href="#arena">80 Finalist Quota</a></li>
+            <li><a class="transition-colors hover:text-indigo-600" href="#finalists">80 Finalist Quota</a></li>
             <li><a class="transition-colors hover:text-indigo-600" href="#fees">Registration Fees</a></li>
             <li><a class="transition-colors hover:text-indigo-600" href="#faq">Frequently Asked Questions</a></li>
           </ul>
@@ -1911,7 +1764,6 @@
             <span class="text-[10px] text-slate-500 font-medium">UG and PG students from other colleges</span>
           </button>
         </div>
-        <p class="text-[11px] text-slate-500 mt-2">Product or Prototype is chosen on Unstop, not here.</p>
       </div>
 
       <!-- Step 2: Transparent Fee Confirmation -->
@@ -1941,17 +1793,20 @@
         </div>
       </div>
 
-      <!-- Action Button -->
+      <button id="register-mit-action" type="button" disabled class="w-full py-4 text-center rounded-2xl font-black text-sm tracking-wider uppercase text-white bg-indigo-600 opacity-60 cursor-not-allowed">
+        MIT-WPU link coming soon
+      </button>
       <a 
+        id="register-india-action"
         href="https://unstop.com/p/incubex-by-ignisia-2026-national-level-tech-launchpad-mit-world-peace-university-pune-maharashtra-1759743" 
         target="_blank" 
         rel="noopener noreferrer" 
-        class="btn-shimmer block w-full py-4 text-center rounded-2xl font-black text-sm tracking-wider uppercase text-white bg-gradient-to-r from-blue-600 via-indigo-600 to-indigo-700 shadow-glow hover:shadow-hover hover:-translate-y-0.5 active:translate-y-0 transition-all"
+        class="hidden btn-shimmer block w-full py-4 text-center rounded-2xl font-black text-sm tracking-wider uppercase text-white bg-gradient-to-r from-blue-600 via-indigo-600 to-indigo-700 shadow-glow hover:shadow-hover hover:-translate-y-0.5 active:translate-y-0 transition-all"
         onclick="playSound('success');"
       >
-        Proceed to Unstop Portal →
+        Register on Unstop →
       </a>
-      <p class="text-center text-[10px] text-slate-600 mt-2.5">You will be redirected securely to the official Unstop listing</p>
+      <p id="register-action-note" class="text-center text-[10px] text-slate-600 mt-2.5">The MIT-WPU registration link will be added here.</p>
     </div>
   </div>
 
@@ -2312,23 +2167,6 @@
 
   <!-- Script 7: Arena Switcher & Domain Search Filter -->
   <script data-purpose="arena-and-filter">
-    function switchArenaTrack(type) {
-      const prodCard = document.getElementById('card-product');
-      const protoCard = document.getElementById('card-prototype');
-      const prodTab = document.getElementById('arena-tab-prod');
-      const protoTab = document.getElementById('arena-tab-proto');
-
-      if (type === 'product') {
-        prodTab.className = "px-6 py-2.5 rounded-full text-xs sm:text-sm font-extrabold transition-all bg-indigo-600 text-white shadow-md cursor-pointer flex items-center space-x-2";
-        protoTab.className = "px-6 py-2.5 rounded-full text-xs sm:text-sm font-extrabold text-slate-600 hover:text-slate-900 transition-all cursor-pointer flex items-center space-x-2";
-        prodCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      } else {
-        protoTab.className = "px-6 py-2.5 rounded-full text-xs sm:text-sm font-extrabold transition-all bg-cyan-600 text-white shadow-md cursor-pointer flex items-center space-x-2";
-        prodTab.className = "px-6 py-2.5 rounded-full text-xs sm:text-sm font-extrabold text-slate-600 hover:text-slate-900 transition-all cursor-pointer flex items-center space-x-2";
-        protoCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
-    }
-
     function filterDomains(query) {
       const q = query.toLowerCase().trim();
       const cards = document.querySelectorAll('.domain-card');
@@ -2484,14 +2322,23 @@
     function setModalAudience(which) {
       const mitBtn = document.getElementById('modal-btn-mit');
       const indiaBtn = document.getElementById('modal-btn-india');
+      const mitAction = document.getElementById('register-mit-action');
+      const indiaAction = document.getElementById('register-india-action');
+      const note = document.getElementById('register-action-note');
       const selected = "p-3 text-left rounded-2xl border-2 border-indigo-600 bg-indigo-50/60 font-bold text-xs text-indigo-900 transition-all cursor-pointer";
       const idle = "p-3 text-left rounded-2xl border-2 border-slate-200 hover:border-indigo-500 font-bold text-xs text-slate-700 transition-all cursor-pointer";
       if (which === 'mit') {
         mitBtn.className = selected;
         indiaBtn.className = idle;
+        mitAction.classList.remove('hidden');
+        indiaAction.classList.add('hidden');
+        note.textContent = 'The MIT-WPU registration link will be added here.';
       } else {
         indiaBtn.className = selected;
         mitBtn.className = idle;
+        indiaAction.classList.remove('hidden');
+        mitAction.classList.add('hidden');
+        note.textContent = 'This opens the official Unstop listing for students outside MIT-WPU.';
       }
     }
 
