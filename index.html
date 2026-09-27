@@ -9,9 +9,15 @@
   <link rel="apple-touch-icon" href="assets/ignisialogo.png" />
 
   
+  <!-- Cache Control to guarantee immediate live updates in browser -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  
   <!-- SEO & Meta -->
   <meta name="description" content="INCUBEX 2026 is Ignisia’s national tech launchpad at MIT-WPU Pune on 21 October 2026. 80 finalist booths across Product and Prototype tracks. Register from ₹200." />
   <meta name="robots" content="index, follow" />
+
   <link rel="canonical" href="https://incubex.ignisia.tech/" />
   <meta name="theme-color" content="#4F46E5" />
   <meta property="og:type" content="website" />
@@ -150,21 +156,34 @@
   <link href="https://api.fontshare.com" rel="preconnect"/>
   <link crossorigin="" href="https://cdn.fontshare.com" rel="preconnect"/>
   <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900,300i,400i,500i,700i,900i&display=swap" rel="stylesheet"/>
+  <!-- Instrument Serif (Google Fonts) — ignisia.tech editorial serif for date labels & italic accents -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet"/>
   <!-- Phosphor icons, loaded on demand through Iconify -->
   <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
   
   <!-- Custom Core Styles, Animations & Dynamic Cyber Lighting -->
   <style data-purpose="custom-styling">
+    /* ── Design tokens aligned with ignisia.tech brand system ── */
     :root {
-      --page-bg: #F8F8F6;
-      --page-bg-strong: #F3F3F1;
-      --surface: rgba(255, 255, 255, 0.9);
+      --font-serif: 'Instrument Serif', serif;   /* ignisia editorial serif */
+      --font-head:  'Satoshi', sans-serif;
+      --page-bg: #FFFFFF;                        /* ignisia: pure white */
+      --page-bg-strong: #f8f9fa;                 /* ignisia: card surface */
+      --surface: #ffffff;
+      --surface-card: #f8f9fa;                   /* ignisia about-card / club-card */
       --surface-strong: #ffffff;
-      --ink: #0f172a;
-      --muted: #475569;
-      --line: rgba(148, 163, 184, 0.28);
-      --brand: #4f46e5;
-      --brand-soft: #eef2ff;
+      --ink: #1a1a1a;                            /* ignisia primary text */
+      --ink-secondary: #4b5563;                  /* ignisia body copy */
+      --muted: #6b7280;                          /* ignisia tertiary */
+      --line: #e5e7eb;                           /* ignisia border */
+      --line-soft: #d1d5db;
+      --brand: #2938cf;                          /* ignisia primary blue */
+      --brand-violet: #a78bfa;                   /* ignisia gradient endpoint */
+      --brand-soft: rgba(41, 56, 207, 0.08);
+      --brand-gradient: linear-gradient(to right, #2938cf 0%, #a78bfa 100%);
     }
 
     * { box-sizing: border-box; }
@@ -174,8 +193,8 @@
       max-width: 100%;
     }
     body {
-      font-family: Satoshi, sans-serif;
-      background-color: #F8F8F6;
+      font-family: 'Satoshi', sans-serif;
+      background-color: var(--page-bg);
       background-image: none;
       background-attachment: scroll;
       color: var(--ink);
@@ -184,6 +203,7 @@
       width: 100%;
       cursor: default;
     }
+
 
     img { max-width: 100%; display: block; }
     a, button { -webkit-tap-highlight-color: transparent; }
@@ -204,13 +224,71 @@
       will-change: transform;
     }
     
-    /* High-Contrast Vibrant Gradient for INCUBEX on Light Background */
-    .gradient-incubex-anim {
-      background: linear-gradient(120deg, #1E3A8A 0%, #2563EB 25%, #4F46E5 50%, #7C3AED 75%, #0891B2 100%);
-      background-size: 250% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: shineGradient 6s ease-in-out infinite alternate;
+    /* INCUBEX hero title — ignisia.tech brand typography & gradient (Instrument Serif italic) */
+    /* INCUBEX hero title — ignisia.tech brand typography & gradient (Instrument Serif italic) */
+    .gradient-incubex-anim,
+    .gradient-incubex-title,
+    .hero-incubex-title {
+      font-family: 'Instrument Serif', Georgia, serif !important;
+      font-style: italic !important;
+      font-size: clamp(4.25rem, 12vw, 10.5rem) !important;
+      line-height: 0.9 !important;
+      letter-spacing: -0.02em !important;
+      display: inline-block !important;
+      background: linear-gradient(135deg, #1e1b4b 0%, #2938cf 40%, #6366f1 75%, #818cf8 100%) !important;
+      background-size: 200% auto !important;
+      -webkit-background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+      animation: shineGradient 6s ease-in-out infinite alternate !important;
+    }
+
+    .font-ignisia {
+      font-family: 'Instrument Serif', Georgia, serif !important;
+      font-style: italic !important;
+    }
+
+    #countdown-timer .countdown {
+      font-size: 2rem !important;
+      line-height: 1 !important;
+    }
+    @media (min-width: 640px) {
+      #countdown-timer .countdown {
+        font-size: 2.5rem !important;
+      }
+    }
+    #countdown-timer .countdown-unit {
+      color: #64748b !important;
+      font-size: 0.72rem !important;
+      font-weight: 700 !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.05em !important;
+      margin-top: 0.25rem !important;
+    }
+
+    .justify-end {
+      justify-content: flex-end !important;
+    }
+
+    #hero-countdown-block {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: flex-end !important;
+      justify-content: flex-end !important;
+      width: 100% !important;
+      margin-top: 1.5rem !important;
+      padding-right: 1.5rem !important;
+      text-align: right !important;
+    }
+
+    @media (min-width: 1024px) {
+      #hero-countdown-block {
+        position: absolute !important;
+        right: 1.5rem !important;
+        bottom: 0.5rem !important;
+        width: auto !important;
+        margin-top: 0 !important;
+        padding-right: 0 !important;
+      }
     }
 
     @keyframes shineGradient {
@@ -243,18 +321,18 @@
       display: none !important;
     }
 
-    /* Ultra-Refined Modern Frosted Glassmorphism Header */
+    /* ── Navbar: ignisia-style transparent frosted glass ── */
     .glass-header {
-      background: rgba(255, 255, 255, 0.72) !important;
-      backdrop-filter: blur(24px) saturate(180%) !important;
-      -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.85) !important;
-      box-shadow: 0 8px 32px 0 rgba(99, 102, 241, 0.06), inset 0 1px 0 0 rgba(255, 255, 255, 0.95), inset 0 -1px 0 0 rgba(226, 232, 240, 0.5) !important;
+      background: rgba(255, 255, 255, 0.15) !important;
+      backdrop-filter: blur(32px) saturate(160%) !important;
+      -webkit-backdrop-filter: blur(32px) saturate(160%) !important;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
     }
 
     .glass-header-scrolled {
-      background: rgba(255, 255, 255, 0.84) !important;
-      box-shadow: 0 12px 36px 0 rgba(99, 102, 241, 0.09), inset 0 1px 0 0 rgba(255, 255, 255, 1) !important;
+      background: rgba(255, 255, 255, 0.72) !important;
+      box-shadow: 0 8px 32px rgba(41, 56, 207, 0.06) !important;
     }
 
     /* Button Shimmer Sweep Effect */
@@ -285,13 +363,118 @@
       will-change: transform;
     }
 
-    /* Frosted Light Glass Panel */
+    /* ── Card surfaces: ignisia-style flat clean white ── */
     .glass-panel {
-      background: rgba(255, 255, 255, 0.84);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.9);
-      box-shadow: 0 10px 30px -5px rgba(99, 102, 241, 0.06);
+      background: #ffffff;
+      border: 1px solid var(--line);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+      /* Removed heavy backdrop-filter — matches ignisia flat card style */
+    }
+    .glass-panel:hover {
+      border-color: rgba(41, 56, 207, 0.25);
+      box-shadow: 0 16px 36px rgba(41, 56, 207, 0.08);
+    }
+
+    /* ── ignisia-style section badge pill ── */
+    .ignisia-section-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #2938cf;
+      background: rgba(41, 56, 207, 0.08);
+      padding: 0.28rem 0.85rem;
+      border-radius: 9999px;
+    }
+
+    /* ── Timeline date labels: Instrument Serif italic (ignisia.tech exact match) ── */
+    .timeline-serif-date {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 500;
+      color: #9ca3af;          /* inactive: light grey — exactly like ignisia */
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      transition: color 0.25s ease;
+    }
+
+    /* Upgrade existing italic date headings in the vertical timeline */
+    #mission-map h3.font-serif {
+      font-family: var(--font-serif) !important;
+      font-style: italic !important;
+      font-weight: 500 !important;
+      color: #9ca3af;
+      transition: color 0.25s ease;
+    }
+    #mission-map .group:hover h3.font-serif,
+    #mission-map .timeline-item.active h3.font-serif {
+      color: #1a1a1a;
+    }
+
+    /* ── Section heading text: ignisia body text color ── */
+    .section-body-text {
+      color: var(--ink-secondary);
+      line-height: 1.65;
+    }
+
+    /* ── ignisia-style "concluded / status" tag ── */
+    .tag-concluded {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.26rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      background: #ecfdf5;
+      color: #065f46;
+      border: 1px solid #a7f3d0;
+    }
+
+    /* ── Content tags / chips: ignisia style ── */
+    .ignisia-tag {
+      font-size: 0.82rem;
+      font-weight: 500;
+      padding: 0.35rem 0.75rem;
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: #334155;
+    }
+    .ignisia-tag.highlight {
+      background: rgba(41, 56, 207, 0.06);
+      border-color: rgba(41, 56, 207, 0.18);
+      color: #2938cf;
+      font-weight: 600;
+    }
+
+    /* ── Upgrade existing section label pills to ignisia palette ── */
+    /* Target the small uppercase eyebrow pills above section headings */
+    span.inline-flex.items-center.text-\[11px\].uppercase.font-extrabold.tracking-wide.text-indigo-600.bg-indigo-50 {
+      background: rgba(41, 56, 207, 0.08) !important;
+      color: #2938cf !important;
+      border: none !important;
+    }
+
+    /* ── Main CTA gradient: ignisia brand gradient ── */
+    .bg-gradient-to-r.from-blue-600.via-indigo-600.to-indigo-700 {
+      background: linear-gradient(to right, #2938cf, #4f46e5) !important;
+    }
+
+    /* ── Section text alignment tweak: match ignisia editorial style ── */
+    /* Section subheading (descriptive paragraph under h2) */
+    #arena .text-base.text-slate-600,
+    #mission-map .text-base.text-slate-600,
+    #finalists .text-base.text-slate-600,
+    #categories .text-base.text-slate-600,
+    #fees .text-base.text-slate-600,
+    #faq .text-base.text-slate-600 {
+      color: var(--ink-secondary) !important;
     }
 
     @media (max-width: 640px) {
@@ -323,7 +506,1529 @@
       }
     }
   </style>
+
+  <!-- ═══════════════════════════════════════════════════════
+       IGNISIA GLASS DESIGN SYSTEM (MATCHING IGNISIA.TECH SCREENSHOT)
+       Full site frosted glassmorphism, iridescent glow, pill navbar
+  ═══════════════════════════════════════════════════════ -->
+  <style data-purpose="ignisia-glass-system">
+
+    /* ── 1. FLOATING PILL NAVBAR (Exact match to ignisia.tech screenshot) ── */
+    #main-header.glass-header {
+      background: linear-gradient(90deg, rgba(220, 229, 255, 0.78) 0%, rgba(255, 255, 255, 0.6) 35%, rgba(240, 245, 255, 0.72) 100%) !important;
+      backdrop-filter: blur(32px) saturate(200%) brightness(1.02) !important;
+      -webkit-backdrop-filter: blur(32px) saturate(200%) brightness(1.02) !important;
+      border: 1px solid rgba(255, 255, 255, 0.9) !important;
+      border-radius: 9999px !important;
+      box-shadow:
+        0 10px 35px -5px rgba(41, 56, 207, 0.08),
+        0 1px 2px rgba(255, 255, 255, 0.95) inset,
+        0 -1px 0 rgba(41, 56, 207, 0.04) inset !important;
+    }
+    #main-header.glass-header-scrolled {
+      background: linear-gradient(90deg, rgba(230, 237, 255, 0.92) 0%, rgba(255, 255, 255, 0.88) 35%, rgba(245, 248, 255, 0.92) 100%) !important;
+      box-shadow:
+        0 14px 40px rgba(41, 56, 207, 0.1),
+        0 1px 2px rgba(255, 255, 255, 1) inset !important;
+    }
+
+    /* ── 2. MAIN CONTENT OFFSET (Lower all hero content down) ── */
+    #content {
+      padding-top: 104px;
+    }
+    #hero {
+      padding-top: 36px !important;
+    }
+    @media (min-width: 1024px) {
+      #content {
+        padding-top: 112px;
+      }
+      #hero {
+        padding-top: 48px !important;
+      }
+    }
+
+
+    /* ── 3. AMBIENT IRIDESCENT GLOWS ── */
+    .ambient-glow-1 {
+      background: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.16) 0%, rgba(41, 56, 207, 0.06) 45%, transparent 70%) !important;
+    }
+    .ambient-glow-2 {
+      background: radial-gradient(circle at 50% 50%, rgba(167, 139, 250, 0.14) 0%, rgba(139, 92, 246, 0.05) 45%, transparent 70%) !important;
+    }
+    .ambient-glow-3 {
+      background: radial-gradient(circle at 50% 50%, rgba(41, 56, 207, 0.12) 0%, rgba(6, 182, 212, 0.06) 45%, transparent 70%) !important;
+    }
+
+    /* ── 4. HERO CAPSULE BADGE (MIT-WPU Logo Pill from screenshot) ── */
+    .glass-hero-capsule {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0.22) 100%) !important;
+      border: 1px solid rgba(255, 255, 255, 0.75) !important;
+      box-shadow:
+        0 14px 36px rgba(41, 56, 207, 0.1),
+        0 1px 1px rgba(255, 255, 255, 0.8) inset !important;
+      backdrop-filter: blur(20px) saturate(160%) !important;
+      -webkit-backdrop-filter: blur(20px) saturate(160%) !important;
+      border-radius: 9999px !important;
+    }
+
+    /* ── 5. THREE FLOATING GLASS SOCIAL/LINK PILLS (Screenshot exact match) ── */
+    .hero-glass-pill {
+      background: rgba(255, 255, 255, 0.65) !important;
+      border: 1px solid rgba(255, 255, 255, 0.85) !important;
+      box-shadow:
+        0 10px 30px rgba(41, 56, 207, 0.07),
+        0 1px 1px rgba(255, 255, 255, 0.9) inset !important;
+      backdrop-filter: blur(20px) saturate(180%) !important;
+      -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+      border-radius: 9999px !important;
+      padding: 0.65rem 1rem !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      text-decoration: none !important;
+      transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+      color: #1a1a1a !important;
+      cursor: pointer;
+    }
+    .hero-glass-pill:hover {
+      background: rgba(255, 255, 255, 0.92) !important;
+      border-color: rgba(41, 56, 207, 0.32) !important;
+      transform: translateY(-2px) scale(1.02) !important;
+      box-shadow:
+        0 16px 36px rgba(41, 56, 207, 0.12),
+        0 0 16px rgba(99, 102, 241, 0.15),
+        0 1px 1px #ffffff inset !important;
+    }
+    .hero-glass-pill-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #2938cf;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      flex-shrink: 0;
+      margin-right: 0.65rem;
+      box-shadow: 0 4px 12px rgba(41, 56, 207, 0.25);
+    }
+    .hero-glass-pill-content {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+    .hero-glass-pill-kicker {
+      font-size: 0.62rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #64748b;
+      line-height: 1.2;
+    }
+    .hero-glass-pill-title {
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: #2938cf;
+      line-height: 1.25;
+      white-space: normal;
+    }
+    .hero-glass-pill-arrow {
+      color: #2938cf;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-left: 0.4rem;
+      transition: transform 0.2s ease;
+    }
+    .hero-glass-pill:hover .hero-glass-pill-arrow {
+      transform: translate(2px, -2px);
+    }
+
+    /* ── HERO CENTERED LAYOUT ── */
+    .hero-layout-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      position: relative;
+    }
+    .hero-content-col {
+      width: 100%;
+      max-width: 1060px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    /* ── 6. TRUE FROSTED GLASS PANELS ACROSS ENTIRE WEBSITE ── */
+    .glass-panel {
+      background: rgba(255, 255, 255, 0.7) !important;
+      backdrop-filter: blur(28px) saturate(180%) !important;
+      -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
+      border: 1px solid rgba(255, 255, 255, 0.88) !important;
+      box-shadow:
+        0 10px 32px -4px rgba(41, 56, 207, 0.06),
+        0 1px 2px rgba(255, 255, 255, 0.95) inset !important;
+      border-radius: 1.5rem !important;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+    .glass-panel:hover {
+      background: rgba(255, 255, 255, 0.85) !important;
+      border-color: rgba(41, 56, 207, 0.3) !important;
+      box-shadow:
+        0 20px 45px -8px rgba(41, 56, 207, 0.12),
+        0 0 20px rgba(99, 102, 241, 0.12),
+        0 1px 2px #ffffff inset !important;
+      transform: translateY(-3px);
+    }
+
+    /* ── 7. 3D TILT ARENA CARDS ── */
+    .tilt-card {
+      background: rgba(255, 255, 255, 0.72) !important;
+      backdrop-filter: blur(28px) saturate(190%) !important;
+      -webkit-backdrop-filter: blur(28px) saturate(190%) !important;
+      border: 1px solid rgba(255, 255, 255, 0.88) !important;
+      box-shadow:
+        0 14px 40px -8px rgba(41, 56, 207, 0.08),
+        0 1px 2px rgba(255, 255, 255, 0.95) inset !important;
+      border-radius: 1.75rem !important;
+    }
+    .tilt-card:hover {
+      border-color: rgba(41, 56, 207, 0.35) !important;
+      box-shadow:
+        0 25px 55px -10px rgba(41, 56, 207, 0.16),
+        0 0 28px rgba(99, 102, 241, 0.18),
+        0 1px 2px #ffffff inset !important;
+    }
+
+    /* ── 8. COUNTDOWN TIMER (DAISYUI SPECIFICATION) ── */
+    .auto-cols-max {
+      grid-auto-columns: max-content !important;
+    }
+    .grid-flow-col {
+      grid-auto-flow: column !important;
+    }
+    .text-5xl {
+      font-size: 3rem !important;
+      line-height: 1 !important;
+    }
+    .countdown {
+      display: inline-flex !important;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
+      font-weight: 800 !important;
+      color: #2938cf !important;
+    }
+    .countdown > * {
+      height: 1em !important;
+      width: 1.25em !important;
+      display: inline-block !important;
+      overflow: hidden !important;
+      text-align: center !important;
+      line-height: 1em !important;
+    }
+    .countdown > *:before {
+      display: block !important;
+      position: relative !important;
+      content: "00\A 01\A 02\A 03\A 04\A 05\A 06\A 07\A 08\A 09\A 10\A 11\A 12\A 13\A 14\A 15\A 16\A 17\A 18\A 19\A 20\A 21\A 22\A 23\A 24\A 25\A 26\A 27\A 28\A 29\A 30\A 31\A 32\A 33\A 34\A 35\A 36\A 37\A 38\A 39\A 40\A 41\A 42\A 43\A 44\A 45\A 46\A 47\A 48\A 49\A 50\A 51\A 52\A 53\A 54\A 55\A 56\A 57\A 58\A 59\A 60\A 61\A 62\A 63\A 64\A 65\A 66\A 67\A 68\A 69\A 70\A 71\A 72\A 73\A 74\A 75\A 76\A 77\A 78\A 79\A 80\A 81\A 82\A 83\A 84\A 85\A 86\A 87\A 88\A 89\A 90\A 91\A 92\A 93\A 94\A 95\A 96\A 97\A 98\A 99\A" !important;
+      white-space: pre !important;
+      top: calc(var(--value) * -1em) !important;
+      text-align: center !important;
+      line-height: 1em !important;
+      height: 1em !important;
+      transition: top 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+    .hero-launchpad-col .grid-flow-col > .flex-col {
+      color: #64748b;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    @media (max-width: 640px) {
+      .hero-launchpad-col .text-5xl {
+        font-size: 2.25rem !important;
+      }
+    }
+
+    /* ── 9. INFINITE AUTO-SCROLLING PERKS CAROUSEL (#benefits) ── */
+    #benefits {
+      padding-top: 4.5rem !important;
+      padding-bottom: 5.5rem !important;
+      margin-top: 1.5rem !important;
+      margin-bottom: 2.5rem !important;
+    }
+    @media (min-width: 768px) {
+      #benefits {
+        padding-top: 6.5rem !important;
+        padding-bottom: 7.5rem !important;
+        margin-top: 2.5rem !important;
+        margin-bottom: 3.5rem !important;
+      }
+    }
+    .perks-carousel-wrapper {
+      overflow: hidden;
+      width: 100%;
+      position: relative;
+      padding: 1.5rem 0 2.5rem 0;
+      mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+    }
+    .perks-carousel-track {
+      display: flex;
+      width: max-content;
+      gap: 1.5rem;
+      animation: perks-scroll-ltr 28s linear infinite;
+    }
+    .perks-carousel-track:hover {
+      animation-play-state: paused;
+    }
+    @keyframes perks-scroll-ltr {
+      0% {
+        transform: translateX(-50%);
+      }
+      100% {
+        transform: translateX(0%);
+      }
+    }
+    .perks-card {
+      flex: 0 0 240px;
+      width: 240px;
+      padding: 1.25rem 1.25rem;
+      background: rgba(255, 255, 255, 0.7) !important;
+      backdrop-filter: blur(24px) saturate(160%) !important;
+      -webkit-backdrop-filter: blur(24px) saturate(160%) !important;
+      border: 1px solid rgba(255, 255, 255, 0.9) !important;
+      border-radius: 1.25rem !important;
+      box-shadow:
+        0 8px 24px rgba(41, 56, 207, 0.06),
+        0 1px 2px rgba(255, 255, 255, 0.95) inset !important;
+      text-align: center;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: default;
+      user-select: none;
+    }
+    .perks-card:hover {
+      background: rgba(255, 255, 255, 0.95) !important;
+      border-color: rgba(41, 56, 207, 0.35) !important;
+      transform: translateY(-4px) scale(1.02);
+      box-shadow:
+        0 18px 36px rgba(41, 56, 207, 0.14),
+        0 0 20px rgba(99, 102, 241, 0.15),
+        0 1px 2px #fff inset !important;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .perks-carousel-track {
+        animation: none;
+        overflow-x: auto;
+      }
+    }
+
+    /* ── 10. SECTION BADGE PILLS ── */
+    [class*="text-indigo"][class*="bg-indigo-50"],
+    span.text-indigo-600 {
+      color: #2938cf !important;
+    }
+    [class*="bg-indigo-50"] {
+      background-color: rgba(41, 56, 207, 0.07) !important;
+      border: 1px solid rgba(41, 56, 207, 0.12) !important;
+    }
+
+    /* ── 11. NAV LINKS ── */
+    nav a.nav-link {
+      color: #4b5563 !important;
+    }
+    nav a.nav-link:hover {
+      color: #2938cf !important;
+    }
+
+    /* ── 12. REGISTER CTA BUTTON (Shimmer & Glow) ── */
+    button.btn-shimmer,
+    a.btn-shimmer {
+      background: linear-gradient(to right, #2938cf 0%, #4338ca 60%, #6366f1 100%) !important;
+      box-shadow:
+        0 8px 28px rgba(41, 56, 207, 0.35),
+        0 1px 1px rgba(255, 255, 255, 0.4) inset !important;
+    }
+
+    /* ── 13. TIMELINE — Instrument Serif Dates & Glass Nodes ── */
+    #mission-map h3 {
+      font-family: 'Instrument Serif', serif !important;
+      font-style: italic !important;
+      font-weight: 500 !important;
+      font-size: 1.75rem !important;
+      letter-spacing: -0.01em !important;
+      line-height: 1.15 !important;
+      color: #9ca3af;
+      transition: color 0.25s ease;
+    }
+    #mission-map .group:hover h3,
+    #mission-map .group:focus-within h3 {
+      color: #1a1a1a !important;
+    }
+    #mission-map h3.text-rose-600 {
+      color: #e11d48 !important;
+    }
+    #mission-map .absolute.left-\[23px\].top-0 {
+      background: linear-gradient(to bottom, rgba(41,56,207,0) 0%, #2938cf 15%, #6366f1 60%, rgba(41,56,207,0) 100%) !important;
+    }
+
+    /* ── 14. FAQ ACCORDION GLASS ── */
+    #faq .glass-panel {
+      background: rgba(255, 255, 255, 0.72) !important;
+    }
+    #faq .faq-answer {
+      background: rgba(248, 250, 252, 0.8) !important;
+    }
+
+    /* ── 15. SECTION HEADINGS ── */
+    section h2.font-black {
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      color: #1a1a1a;
+    }
+    section p.text-slate-600,
+    section p.text-slate-700 {
+      color: #4b5563 !important;
+    }
+
+    /* ── 16. SCROLL PROGRESS BAR ── */
+    #scroll-progress-bar {
+      background: linear-gradient(to right, #2938cf, #6366f1, #a78bfa) !important;
+    }
+
+    /* ── 17. BACK TO TOP BUTTON ── */
+    #back-to-top {
+      background: #2938cf !important;
+      box-shadow: 0 4px 20px rgba(41, 56, 207, 0.4) !important;
+    }
+
+    /* ── 18. FOOTER GLASS ACCENTS ── */
+    footer {
+      background: rgba(241, 245, 249, 0.85) !important;
+      backdrop-filter: blur(20px) !important;
+      -webkit-backdrop-filter: blur(20px) !important;
+      border-top: 1px solid rgba(226, 232, 240, 0.9) !important;
+    }
+
+    /* ── NAVBAR + HERO REFINEMENT ── */
+    #main-header {
+      width: calc(100% - 64px) !important;
+      max-width: 1180px !important;
+      top: 26px !important;
+    }
+    #main-header .navbar-shell {
+      height: 68px !important;
+    }
+    #main-header .nav-brand-lockup {
+      gap: 1rem !important;
+    }
+    #main-header .nav-mit-logo,
+    #main-header .nav-ignisia-logo {
+      height: 38px !important;
+      width: auto !important;
+      max-width: none !important;
+      object-fit: contain !important;
+    }
+    #main-header .nav-ignisia-logo {
+      height: 43px !important;
+    }
+    #main-header nav {
+      gap: clamp(0.7rem, 1vw, 1.05rem) !important;
+    }
+    #main-header nav > a + a {
+      margin-left: 0 !important;
+    }
+
+    #content {
+      padding-top: 20px !important;
+    }
+    #hero {
+      width: calc(100% - 32px);
+      max-width: 1500px;
+      min-height: min(860px, calc(100svh - 40px));
+      margin: 0 auto 3rem;
+      padding: 128px 32px 112px !important;
+      display: flex;
+      align-items: center;
+      border: 1px solid rgba(99, 102, 241, 0.2);
+      border-radius: 34px;
+      box-shadow: 0 24px 70px rgba(41, 56, 207, 0.08);
+      isolation: isolate;
+    }
+    #hero > .absolute.inset-0 {
+      border-radius: inherit;
+    }
+    #hero > .max-w-7xl {
+      width: 100%;
+      position: static;
+    }
+    #hero > .absolute.inset-0 > img {
+      width: 100% !important;
+      height: 100% !important;
+      max-width: none !important;
+      opacity: 1 !important;
+      object-fit: cover !important;
+      object-position: center 52% !important;
+      transform: scale(1.22) !important;
+      filter: saturate(1.08) contrast(1.04) !important;
+      -webkit-mask-image: none !important;
+      mask-image: none !important;
+    }
+    #hero > .absolute.inset-0 > div {
+      background: linear-gradient(180deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0.02) 48%, rgba(255,255,255,0.24) 100%) !important;
+    }
+    #hero .hero-content-col {
+      max-width: 1040px;
+      position: relative;
+      z-index: 10;
+    }
+    #hero .hero-layout-wrapper {
+      position: static;
+    }
+    #hero .hero-title {
+      margin-top: 0 !important;
+      margin-bottom: 0.35rem !important;
+    }
+    #hero .hero-incubex-title {
+      font-size: clamp(6.5rem, 13.5vw, 12rem) !important;
+      text-shadow: 0 12px 34px rgba(255,255,255,0.6);
+    }
+    #hero .hero-kicker {
+      color: #2938cf !important;
+      text-shadow: 0 1px 14px rgba(255,255,255,0.96);
+    }
+    #hero .hero-tagline-lockup {
+      display: inline-flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      box-shadow: none;
+    }
+    #hero .hero-tagline-lockup h2,
+    #hero .hero-tagline-lockup p {
+      color: #111827 !important;
+      text-shadow: 0 1px 2px #fff, 0 2px 14px rgba(255,255,255,0.98);
+    }
+    #hero .hero-tagline-lockup p {
+      font-size: 0.9rem !important;
+      font-weight: 700 !important;
+    }
+    #hero .hero-meta-rail {
+      width: min(100%, 900px);
+      max-width: none !important;
+      margin: 1.15rem auto 1.55rem !important;
+      padding: 0;
+      overflow: visible;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      box-shadow: none;
+      text-align: left;
+    }
+    #hero .hero-event-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.5rem;
+    }
+    #hero .hero-event-card {
+      position: relative;
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      align-items: center;
+      gap: 0.8rem;
+      min-width: 0;
+      min-height: 78px;
+      padding: 0.85rem 1rem;
+      overflow: hidden;
+      border: 1px solid rgba(99,102,241,0.2);
+      border-radius: 18px 8px 8px 18px;
+      background: #ffffff;
+      box-shadow: 0 12px 28px rgba(41,56,207,0.11);
+    }
+    #hero .hero-event-card:nth-child(2) {
+      border-radius: 8px 18px 18px 8px;
+    }
+    #hero .hero-event-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 4px;
+      background: linear-gradient(180deg, #2938cf, #7c6cf6);
+    }
+    #hero .hero-event-card:nth-child(2)::before {
+      background: linear-gradient(180deg, #0891b2, #22d3ee);
+    }
+    #hero .hero-event-icon {
+      width: 2.55rem;
+      height: 2.55rem;
+      display: grid;
+      place-items: center;
+      border-radius: 13px;
+      color: #ffffff;
+      background: linear-gradient(145deg, #2938cf, #6258eb);
+      box-shadow: 0 7px 18px rgba(41,56,207,0.2);
+    }
+    #hero .hero-event-card:nth-child(2) .hero-event-icon {
+      background: linear-gradient(145deg, #087ea4, #22b8cf);
+      box-shadow: 0 7px 18px rgba(8,126,164,0.2);
+    }
+    #hero .hero-event-label {
+      display: block;
+      margin-bottom: 0.14rem;
+      color: #68708a;
+      font-size: 0.58rem;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+    #hero .hero-event-value {
+      display: block;
+      color: #172055;
+      font-size: clamp(0.86rem, 1.4vw, 1.02rem);
+      font-weight: 900;
+      line-height: 1.15;
+      letter-spacing: 0.015em;
+    }
+    #hero .hero-event-subvalue {
+      display: block;
+      margin-top: 0.2rem;
+      color: #64748b;
+      font-size: 0.68rem;
+      font-weight: 650;
+      line-height: 1.2;
+    }
+    #hero .hero-event-lower {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 1rem;
+      margin: 0.5rem 0.55rem 0;
+      padding: 0.68rem 0.95rem;
+      border: 1px solid #cfd8f3;
+      border-radius: 14px;
+      background: linear-gradient(112deg, #ffffff, #eef2ff 58%, #eefaff);
+      box-shadow: 0 10px 24px rgba(41,56,207,0.1);
+    }
+    #hero .hero-eligibility {
+      color: #253052;
+      font-size: clamp(0.58rem, 0.9vw, 0.7rem);
+      font-weight: 850;
+      line-height: 1.35;
+      letter-spacing: 0.075em;
+    }
+    #hero .hero-fees {
+      display: inline-flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0.65rem;
+      white-space: nowrap;
+      color: #34405f;
+      font-size: 0.72rem;
+      font-weight: 750;
+    }
+    #hero .hero-fees strong {
+      color: #2938cf;
+      font-size: 0.96rem;
+      font-weight: 900;
+    }
+    #hero .hero-fee-divider {
+      color: #b6bfd7;
+      font-weight: 400;
+    }
+    #hero .hero-glass-pill {
+      background: #ffffff !important;
+      border-color: #dbe3f4 !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      box-shadow: 0 10px 24px rgba(41,56,207,0.12) !important;
+    }
+    #hero .hero-glass-pill:hover {
+      background: #ffffff !important;
+      border-color: #9aa8ed !important;
+      box-shadow: 0 14px 30px rgba(41,56,207,0.17) !important;
+    }
+    #hero-countdown-block {
+      position: absolute !important;
+      right: 2rem !important;
+      bottom: 1.65rem !important;
+      width: auto !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      z-index: 20;
+    }
+    #hero-countdown-block > div {
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      box-shadow: none;
+      text-shadow: 0 1px 2px #fff, 0 2px 12px rgba(255,255,255,0.96);
+    }
+    #hero .hero-social-dock {
+      position: absolute;
+      left: 2rem;
+      bottom: 1.65rem;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    #hero .hero-social-link {
+      position: relative;
+      width: 46px;
+      height: 46px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.42);
+      border-radius: 14px;
+      color: #ffffff;
+      box-shadow: 0 10px 24px rgba(15,23,42,0.22), inset 0 1px 0 rgba(255,255,255,0.28);
+      transition: transform 200ms ease, box-shadow 200ms ease;
+    }
+    #hero .hero-social-link::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(145deg, rgba(255,255,255,0.22), transparent 48%);
+      pointer-events: none;
+    }
+    #hero .hero-social-link:hover {
+      transform: translateY(-3px) scale(1.04);
+      box-shadow: 0 14px 30px rgba(15,23,42,0.28), 0 0 18px rgba(99,102,241,0.22);
+    }
+    #hero .hero-social-link iconify-icon {
+      position: relative;
+      z-index: 1;
+    }
+    #hero .hero-social-instagram {
+      background: linear-gradient(145deg, #833ab4 0%, #e1306c 52%, #fcb045 100%);
+    }
+    #hero .hero-social-x {
+      background: linear-gradient(145deg, #22242a 0%, #050505 100%);
+    }
+    #hero .hero-social-linkedin {
+      background: linear-gradient(145deg, #2f7bcf 0%, #0758a5 100%);
+    }
+    #countdown-timer .countdown {
+      font-size: 1.65rem !important;
+    }
+    @media (min-width: 1024px) {
+      #hero-countdown-block {
+        top: auto !important;
+        bottom: 1.65rem !important;
+      }
+    }
+
+    /* ── TYPOGRAPHY + SECTION RHYTHM ── */
+    #hero .hero-kicker {
+      margin-top: 0.65rem !important;
+      margin-bottom: 0.85rem !important;
+      font-size: clamp(0.72rem, 1.05vw, 0.9rem) !important;
+      font-weight: 800 !important;
+      line-height: 1.4 !important;
+      letter-spacing: 0.18em !important;
+    }
+    #hero .hero-tagline-lockup {
+      gap: 0.45rem;
+      margin-bottom: 1rem !important;
+    }
+    #hero .hero-tagline-lockup p {
+      max-width: 46rem;
+      margin-inline: auto;
+      font-size: clamp(0.82rem, 1vw, 0.95rem) !important;
+      font-weight: 650 !important;
+      line-height: 1.6 !important;
+      letter-spacing: 0.015em !important;
+      color: #27324a !important;
+    }
+    #benefits,
+    #arena,
+    #mission-map,
+    #finalists,
+    #categories,
+    #fees,
+    #faq {
+      padding-top: clamp(3.5rem, 6vw, 5rem) !important;
+      padding-bottom: clamp(3.5rem, 6vw, 5rem) !important;
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
+    }
+    #benefits > .text-center,
+    #arena > div > .text-center,
+    #finalists > div > .text-center,
+    #categories > div > .text-center,
+    #fees > div > .text-center {
+      margin-bottom: 2.25rem !important;
+    }
+    #mission-map > div > .text-center {
+      margin-bottom: 3rem !important;
+    }
+    #benefits h2.font-black,
+    #arena h2.font-black,
+    #mission-map h2.font-black,
+    #finalists h2.font-black,
+    #categories h2.font-black,
+    #fees h2.font-black,
+    #faq h2.font-black {
+      margin: 0 !important;
+      font-size: clamp(2rem, 4.2vw, 3.25rem) !important;
+      font-weight: 850 !important;
+      line-height: 1.04 !important;
+      letter-spacing: -0.035em !important;
+      text-wrap: balance;
+    }
+    #arena h2 + p,
+    #mission-map h2 + p,
+    #finalists h2 + p,
+    #categories h2 + p,
+    #fees h2 + p,
+    #faq h2 + p {
+      margin-top: 0.85rem !important;
+      line-height: 1.65 !important;
+    }
+
+    /* ── SCROLL-SYNCED TIMELINE ── */
+    #timeline-spine {
+      overflow: hidden;
+      background: rgba(99, 102, 241, 0.16) !important;
+      border-radius: 999px;
+    }
+    #timeline-progress {
+      position: absolute;
+      inset: 0 0 auto;
+      width: 100%;
+      height: 0;
+      border-radius: inherit;
+      background: linear-gradient(180deg, #4f46e5 0%, #2563eb 58%, #22d3ee 100%);
+      box-shadow: 0 0 18px rgba(79, 70, 229, 0.7);
+      transition: height 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    .timeline-item {
+      opacity: 0.56;
+      transform: translateX(0);
+      transition: opacity 320ms ease, transform 320ms ease;
+    }
+    .timeline-item.is-past,
+    .timeline-item.is-active {
+      opacity: 1;
+    }
+    .timeline-item.is-active {
+      transform: translateX(5px);
+    }
+    .timeline-item > div:nth-child(2) > div {
+      transition: transform 300ms ease, border-color 300ms ease, background 300ms ease, box-shadow 300ms ease;
+    }
+    .timeline-item > div:nth-child(2) > div > div {
+      transition: transform 300ms ease, background 300ms ease;
+    }
+    .timeline-item.is-past > div:nth-child(2) > div {
+      border-color: #6366f1 !important;
+      background: #4f46e5 !important;
+    }
+    .timeline-item.is-past > div:nth-child(2) > div > div {
+      background: #ffffff !important;
+    }
+    .timeline-item.is-active > div:nth-child(2) > div {
+      transform: scale(1.2);
+      border-color: #67e8f9 !important;
+      background: #172554 !important;
+      box-shadow: 0 0 0 7px rgba(99,102,241,0.12), 0 0 26px rgba(34,211,238,0.7) !important;
+    }
+    .timeline-item.is-active > div:nth-child(2) > div > div {
+      transform: scale(0.72);
+      background: #67e8f9 !important;
+    }
+    .timeline-item.is-active > div:first-child h3 {
+      color: #2938cf !important;
+    }
+    .timeline-item.is-active > div:nth-child(3) > div {
+      border-color: rgba(99,102,241,0.55) !important;
+      background: rgba(255,255,255,0.98) !important;
+      box-shadow: 0 22px 48px rgba(41,56,207,0.15), 0 0 0 1px rgba(99,102,241,0.08) !important;
+    }
+
+    /* ── FINALIST BOARDING PASS ── */
+    #finalists .finalist-privileges-banner {
+      --ticket-stub: 190px;
+      max-width: 68rem !important;
+      display: grid !important;
+      grid-template-columns: minmax(0, 1fr) var(--ticket-stub);
+      gap: 0 !important;
+      padding: 0 !important;
+      border-radius: 24px !important;
+      border: 1px solid #cdd5ef !important;
+      background: #ffffff !important;
+      box-shadow: 0 18px 46px rgba(41,56,207,0.1) !important;
+      position: relative;
+      overflow: visible;
+      align-items: center !important;
+    }
+    #finalists .finalist-privileges-banner::before,
+    #finalists .finalist-privileges-banner::after {
+      content: "";
+      position: absolute;
+      z-index: 2;
+      right: calc(var(--ticket-stub) - 9px);
+      width: 18px;
+      height: 18px;
+      border: 1px solid #cdd5ef;
+      border-radius: 50%;
+      background: #ffffff;
+    }
+    #finalists .finalist-privileges-banner::before {
+      top: -10px;
+    }
+    #finalists .finalist-privileges-banner::after {
+      bottom: -10px;
+    }
+    #finalists .finalist-privileges-main {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      min-width: 0;
+      padding: 1.1rem 1.35rem 1.1rem 1.55rem;
+      border-radius: 23px 0 0 23px;
+      background: linear-gradient(90deg, #eef2ff 0 7px, #ffffff 7px 100%);
+    }
+    #finalists .finalist-privileges-icon {
+      width: 3.2rem;
+      height: 3.2rem;
+      flex: 0 0 3.2rem;
+      display: grid;
+      place-items: center;
+      border: 1px solid #c7d2fe;
+      border-radius: 16px;
+      color: #2938cf;
+      background: linear-gradient(145deg, #eef2ff, #e0e7ff);
+      box-shadow: 0 8px 20px rgba(41,56,207,0.1);
+    }
+    #finalists .finalist-privileges-copy {
+      min-width: 0;
+      padding: 0.1rem 0;
+    }
+    #finalists .finalist-privileges-banner h4 {
+      color: #111827 !important;
+      font-size: clamp(0.95rem, 1.4vw, 1.1rem) !important;
+      line-height: 1.28 !important;
+      letter-spacing: -0.01em;
+    }
+    #finalists .finalist-privileges-banner p {
+      max-width: 43rem !important;
+      margin-top: 0.25rem !important;
+      color: #64748b !important;
+      font-size: 0.76rem !important;
+      line-height: 1.45 !important;
+    }
+    #finalists .finalist-privileges-cta {
+      align-self: stretch;
+      min-width: 0;
+      padding: 1rem !important;
+      border: 0 !important;
+      border-left: 1px dashed #aeb9de !important;
+      border-radius: 0 23px 23px 0 !important;
+      background: linear-gradient(145deg, #f5f7ff, #eaf7ff) !important;
+      color: #2938cf !important;
+      font-size: 0.7rem !important;
+      box-shadow: none !important;
+    }
+    #finalists .finalist-privileges-cta:hover {
+      background: #e5eaff !important;
+      color: #1f2ca8 !important;
+      transform: none;
+    }
+
+    /* ── ORBITAL INNOVATION DOMAINS HEADING ── */
+    #categories .domains-heading-wrap {
+      max-width: 52rem;
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      align-items: center;
+      gap: clamp(1.25rem, 3vw, 2.4rem);
+      margin: 0 auto 2.25rem;
+      text-align: left;
+    }
+    #categories .domains-orbit {
+      position: relative;
+      width: clamp(6.5rem, 11vw, 8.5rem);
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(99,102,241,0.24);
+      border-radius: 50%;
+      background: radial-gradient(circle at 38% 30%, #ffffff 0 18%, #eef2ff 52%, #e0e7ff 100%);
+      box-shadow: 0 18px 42px rgba(41,56,207,0.12), inset 0 0 0 10px rgba(255,255,255,0.5);
+      isolation: isolate;
+    }
+    #categories .domains-orbit::before,
+    #categories .domains-orbit::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+    }
+    #categories .domains-orbit::before {
+      inset: -8px;
+      border: 1px dashed rgba(41,56,207,0.35);
+      animation: domains-orbit-spin 18s linear infinite;
+    }
+    #categories .domains-orbit::after {
+      width: 0.72rem;
+      height: 0.72rem;
+      top: -0.36rem;
+      left: 50%;
+      background: #22d3ee;
+      box-shadow: 0 0 18px rgba(34,211,238,0.8);
+    }
+    #categories .domains-number {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-size: clamp(3.6rem, 7vw, 5.5rem);
+      font-style: italic;
+      line-height: 0.8;
+      letter-spacing: -0.07em;
+      color: #2938cf;
+      transform: translateX(-0.08em);
+    }
+    #categories .domains-heading-title {
+      margin: 0;
+      font-size: clamp(2rem, 4.2vw, 4rem) !important;
+      line-height: 0.95;
+      letter-spacing: -0.045em;
+    }
+    #categories .domains-heading-copy p {
+      max-width: 36rem;
+      margin-top: 0.75rem !important;
+      line-height: 1.55;
+    }
+    @keyframes domains-orbit-spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ── READABLE DOMAIN DIRECTORIES ── */
+    #domains-container {
+      gap: 1.25rem !important;
+      align-items: stretch;
+    }
+    #domains-container > .domain-group {
+      padding: 0 !important;
+      overflow: hidden;
+      border: 1px solid #dfe5f5 !important;
+      border-radius: 26px !important;
+      background: #ffffff !important;
+      box-shadow: 0 18px 45px rgba(38,51,126,0.09) !important;
+    }
+    #domains-container .domain-group-header {
+      display: grid !important;
+      grid-template-columns: auto minmax(0, 1fr);
+      align-items: center;
+      gap: 0.9rem !important;
+      margin: 0 !important;
+      padding: 1.15rem 1.25rem !important;
+      border: 0 !important;
+      border-bottom: 1px solid #dfe5f5 !important;
+      background: linear-gradient(112deg, #f2f4ff, #e8edff) !important;
+    }
+    #domains-container .domain-group-hardware .domain-group-header {
+      background: linear-gradient(112deg, #effcff, #e6f7fb) !important;
+    }
+    #domains-container .domain-group-icon {
+      width: 2.75rem !important;
+      height: 2.75rem !important;
+      border: 1px solid #c7d2fe !important;
+      border-radius: 13px !important;
+      background: #ffffff !important;
+      color: #2938cf !important;
+      box-shadow: 0 6px 16px rgba(41,56,207,0.08) !important;
+    }
+    #domains-container .domain-group-header h3 {
+      color: #172055 !important;
+      font-size: clamp(1rem, 1.7vw, 1.22rem) !important;
+      line-height: 1.15 !important;
+    }
+    #domains-container .domain-group-header p {
+      margin-top: 0.2rem;
+      color: #4f5fc7 !important;
+      font-size: 0.68rem !important;
+      font-weight: 650 !important;
+    }
+    #domains-container .domain-group-hardware .domain-group-header p {
+      color: #087ea4 !important;
+    }
+    #domains-container .domain-grid {
+      counter-reset: domain;
+      gap: 0 !important;
+      padding: 0.55rem 1.15rem 0.85rem;
+    }
+    #domains-container .domain-group-hardware .domain-grid {
+      counter-reset: domain 8;
+    }
+    #domains-container .domain-card {
+      counter-increment: domain;
+      position: relative;
+      min-height: 76px;
+      padding: 0.85rem 0.85rem 0.85rem 3.15rem !important;
+      border: 0 !important;
+      border-bottom: 1px solid #e8ebf3 !important;
+      border-radius: 0 !important;
+      background: transparent !important;
+      box-shadow: none !important;
+      transition: background 180ms ease, transform 180ms ease !important;
+    }
+    #domains-container .domain-card:nth-last-child(-n+2) {
+      border-bottom-color: transparent !important;
+    }
+    #domains-container .domain-card::before {
+      content: counter(domain, decimal-leading-zero);
+      position: absolute;
+      left: 0.75rem;
+      top: 0.82rem;
+      width: 1.75rem;
+      height: 1.75rem;
+      display: grid;
+      place-items: center;
+      border-radius: 9px;
+      background: #eef2ff;
+      color: #2938cf;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.62rem;
+      font-weight: 900;
+    }
+    #domains-container .domain-group-hardware .domain-card::before {
+      background: #ecfeff;
+      color: #087ea4;
+    }
+    #domains-container .domain-card:hover {
+      z-index: 1;
+      background: #f7f8ff !important;
+      transform: translateX(3px);
+    }
+    #domains-container .domain-card > span:first-child {
+      color: #172055 !important;
+      font-size: 0.79rem !important;
+      font-weight: 850 !important;
+      line-height: 1.25;
+    }
+    #domains-container .domain-card > span:last-child {
+      display: block;
+      margin-top: 0.28rem;
+      color: #64748b !important;
+      font-size: 0.69rem !important;
+      line-height: 1.4;
+    }
+
+    /* ── FAQ KNOWLEDGE PANEL + BROCHURE OBJECT ── */
+    #faq {
+      width: min(calc(100% - 32px), 1500px);
+      margin-inline: auto;
+      border: 1px solid #e1e5f3;
+      border-radius: 34px;
+      background: linear-gradient(145deg, #f7f8ff 0%, #ffffff 48%, #f2f9ff 100%);
+      box-shadow: 0 24px 65px rgba(41,56,207,0.07);
+    }
+    #faq .faq-layout {
+      align-items: start;
+    }
+    #faq #faq-search-input {
+      min-height: 48px;
+      padding-left: 2.85rem !important;
+      border: 1px solid #d7dced !important;
+      border-radius: 14px !important;
+      background: #ffffff !important;
+      box-shadow: 0 8px 22px rgba(41,56,207,0.06) !important;
+    }
+    #faq .faq-filter-btn {
+      padding: 0.48rem 0.85rem !important;
+      border-radius: 10px !important;
+      font-size: 0.68rem !important;
+    }
+    #faq-container {
+      counter-reset: faq;
+      display: grid;
+      gap: 0.7rem !important;
+    }
+    #faq .faq-item {
+      counter-increment: faq;
+      position: relative;
+      border: 1px solid #e0e5f1 !important;
+      border-radius: 16px !important;
+      background: #ffffff !important;
+      box-shadow: 0 7px 20px rgba(38,51,126,0.045) !important;
+    }
+    #faq .faq-item::before {
+      content: counter(faq, decimal-leading-zero);
+      position: absolute;
+      left: 1rem;
+      top: 1rem;
+      color: #8a94ad;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+    }
+    #faq .faq-item > button {
+      min-height: 58px;
+      padding: 0.9rem 1rem 0.9rem 3.2rem !important;
+    }
+    #faq .faq-item > button > span:first-child {
+      color: #172055;
+      font-size: 0.86rem !important;
+      line-height: 1.4;
+    }
+    #faq .faq-item .faq-icon-wrapper {
+      width: 2rem !important;
+      height: 2rem !important;
+      border-radius: 10px !important;
+      background: #eef2ff !important;
+    }
+    #faq .faq-answer {
+      margin: 0 1rem 1rem 3.2rem;
+      padding: 0.8rem 0 0 !important;
+      border-color: #e8ebf3 !important;
+      color: #526079 !important;
+      line-height: 1.65 !important;
+    }
+    #faq .faq-item.is-open {
+      border-color: rgba(41,56,207,0.38) !important;
+      box-shadow: 0 14px 32px rgba(41,56,207,0.09) !important;
+    }
+    #faq .faq-item.is-open::before {
+      color: #2938cf;
+    }
+    #faq .faq-brochure-aside {
+      width: 100%;
+      min-width: 0;
+    }
+    #faq .faq-brochure-card {
+      width: min(100%, 390px);
+      margin-inline: auto;
+      padding: 0.75rem 0.75rem 0.75rem 1.25rem;
+      overflow: visible;
+      border: 1px solid #cfd7f2 !important;
+      border-radius: 24px !important;
+      background: linear-gradient(145deg, #f2f4ff, #e8f8ff) !important;
+      box-shadow: 0 24px 55px rgba(41,56,207,0.14) !important;
+      transform: none;
+    }
+    #faq .faq-brochure-card::before {
+      content: "";
+      position: absolute;
+      left: 0.55rem;
+      top: 1.5rem;
+      bottom: 1.5rem;
+      width: 3px;
+      border-radius: 999px;
+      background: repeating-linear-gradient(to bottom, #7c8bea 0 10px, transparent 10px 18px);
+    }
+    #faq .faq-brochure-trigger {
+      position: relative;
+      display: block;
+      width: 100%;
+      padding: 0;
+      overflow: hidden;
+      border: 0;
+      border-radius: 17px;
+      background: #ffffff;
+      cursor: pointer;
+      text-align: left;
+    }
+    #faq .faq-brochure-card img {
+      width: 100%;
+      max-height: none !important;
+      aspect-ratio: 680 / 1024;
+      object-fit: cover;
+      object-position: top;
+      border-radius: 17px;
+      transition: transform 300ms ease, filter 300ms ease;
+    }
+    #faq .faq-brochure-trigger:hover img {
+      transform: scale(1.02);
+      filter: saturate(1.08);
+    }
+    #faq .faq-brochure-open-icon {
+      position: absolute;
+      right: 0.75rem;
+      bottom: 0.75rem;
+      width: 2.75rem;
+      height: 2.75rem;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,0.28);
+      border-radius: 13px;
+      background: #2938cf;
+      color: #ffffff;
+      box-shadow: 0 10px 24px rgba(23,32,85,0.35);
+      transition: transform 200ms ease;
+    }
+    #faq .faq-brochure-trigger:hover .faq-brochure-open-icon {
+      transform: translateY(-3px);
+    }
+    #faq .faq-help-card {
+      width: 100%;
+      margin-top: 2rem !important;
+      padding: clamp(1.35rem, 3vw, 2rem) clamp(1.25rem, 4vw, 2.5rem) !important;
+      border: 1px solid #d9e0f2 !important;
+      border-radius: 22px !important;
+      background: linear-gradient(105deg, #ffffff, #f3f6ff 62%, #eefaff) !important;
+      box-shadow: 0 14px 34px rgba(41,56,207,0.08) !important;
+    }
+    @media (min-width: 1024px) {
+      #faq .faq-layout {
+        grid-template-columns: minmax(0, 1.55fr) minmax(300px, 0.7fr) !important;
+        gap: clamp(2rem, 4vw, 3.5rem) !important;
+      }
+      #faq .faq-brochure-card {
+        position: sticky;
+        top: 7rem;
+      }
+    }
+    @media (max-width: 640px) {
+      #domains-container .domain-grid {
+        grid-template-columns: 1fr !important;
+      }
+      #domains-container .domain-card:nth-last-child(-n+2) {
+        border-bottom-color: #e8ebf3 !important;
+      }
+      #domains-container .domain-card:last-child {
+        border-bottom-color: transparent !important;
+      }
+      #faq {
+        width: calc(100% - 12px);
+        border-radius: 24px;
+      }
+      #faq .faq-answer {
+        margin-left: 1rem;
+      }
+    }
+    @media (max-width: 767px) {
+      .timeline-item {
+        opacity: 0.72;
+      }
+      .timeline-item.is-active {
+        transform: translateX(0);
+      }
+      #finalists .finalist-privileges-banner {
+        --ticket-stub: 52px;
+        grid-template-columns: 1fr !important;
+        align-items: stretch !important;
+      }
+      #finalists .finalist-privileges-banner::before,
+      #finalists .finalist-privileges-banner::after {
+        top: auto;
+        bottom: calc(var(--ticket-stub) - 9px);
+      }
+      #finalists .finalist-privileges-banner::before {
+        left: -10px;
+        right: auto;
+      }
+      #finalists .finalist-privileges-banner::after {
+        right: -10px;
+      }
+      #finalists .finalist-privileges-main {
+        width: 100%;
+        padding: 1rem 1rem 0.9rem 1.2rem;
+        border-radius: 23px 23px 0 0;
+      }
+      #finalists .finalist-privileges-cta {
+        width: 100%;
+        min-width: 0;
+        min-height: var(--ticket-stub);
+        padding: 0.75rem 1rem !important;
+        border-left: 0 !important;
+        border-top: 1px dashed #aeb9de !important;
+        border-radius: 0 0 23px 23px !important;
+      }
+      #finalists .finalist-privileges-icon {
+        width: 2.75rem;
+        height: 2.75rem;
+        flex-basis: 2.75rem;
+      }
+      #categories .domains-heading-wrap {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        gap: 1rem;
+        text-align: center;
+        margin-bottom: 1.75rem;
+      }
+      #categories .domains-orbit {
+        width: 6rem;
+      }
+      #categories .domains-heading-copy p {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      #hero .hero-social-dock {
+        left: 0.9rem;
+        bottom: 0.9rem;
+        gap: 0.4rem;
+      }
+      #hero .hero-social-link {
+        width: 38px;
+        height: 38px;
+        border-radius: 12px;
+      }
+    }
+
+    footer .footer-build-mark {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.5rem 0.85rem;
+      border: 1px solid rgba(99,102,241,0.2);
+      border-radius: 999px;
+      background: #ffffff;
+      color: #334155;
+      font-weight: 700;
+      box-shadow: 0 6px 18px rgba(41,56,207,0.08);
+    }
+    footer .footer-build-mark span {
+      color: #2938cf;
+      font-weight: 850;
+    }
+
+    /* ── 19. MODALS GLASS ── */
+    #qr-popup {
+      background: rgba(255, 255, 255, 0.92) !important;
+      backdrop-filter: blur(28px) saturate(180%) !important;
+      -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
+      border: 1px solid rgba(255, 255, 255, 0.9) !important;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    /* ── 20. MOBILE RESPONSIVENESS ── */
+    @media (max-width: 768px) {
+      #main-header.glass-header {
+        border-radius: 9999px !important;
+        top: 8px !important;
+        width: calc(100% - 16px) !important;
+      }
+      #main-header .navbar-shell {
+        height: 62px !important;
+      }
+      #main-header .nav-brand-lockup {
+        gap: 0.45rem !important;
+      }
+      #main-header .nav-mit-logo,
+      #main-header .nav-ignisia-logo {
+        height: 28px !important;
+      }
+      #main-header .nav-ignisia-logo {
+        height: 34px !important;
+      }
+      #content {
+        padding-top: 8px !important;
+      }
+      #hero {
+        width: calc(100% - 16px);
+        min-height: 920px;
+        padding: 88px 14px 150px !important;
+        border-radius: 26px;
+      }
+      #hero > .absolute.inset-0 > img {
+        object-position: center center !important;
+        transform: scale(1.42) !important;
+      }
+      #hero .hero-incubex-title {
+        font-size: clamp(5.5rem, 24vw, 8rem) !important;
+      }
+      #hero .hero-meta-rail {
+        width: min(100%, 560px);
+      }
+      #hero .hero-event-lower {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        gap: 0.45rem;
+        text-align: center;
+      }
+      #hero-countdown-block {
+        right: 0.9rem !important;
+        bottom: 0.9rem !important;
+      }
+      #hero .hero-primary-actions {
+        margin-bottom: 6.5rem;
+      }
+      #mobile-menu {
+        top: 76px !important;
+        left: 8px !important;
+        right: 8px !important;
+        border-radius: 20px !important;
+      }
+    }
+
+    @media (max-width: 480px) {
+      #main-header.glass-header {
+        border-radius: 9999px !important;
+        top: 6px !important;
+        width: calc(100% - 12px) !important;
+      }
+      #content {
+        padding-top: 6px !important;
+      }
+      #hero {
+        width: calc(100% - 12px);
+        min-height: 1020px;
+        padding: 82px 10px 142px !important;
+        border-radius: 22px;
+      }
+      #hero .hero-incubex-title {
+        font-size: clamp(4.8rem, 25vw, 6.8rem) !important;
+      }
+      #hero .hero-kicker {
+        letter-spacing: 0.16em !important;
+      }
+      #hero .hero-tagline-lockup {
+        padding: 0.6rem 0.75rem;
+      }
+      #hero .hero-tagline-lockup h2 {
+        font-size: 1.55rem !important;
+      }
+      #hero .hero-tagline-lockup p {
+        font-size: 0.76rem !important;
+      }
+      #hero .hero-meta-rail {
+        padding: 0.38rem;
+      }
+      #hero .hero-event-grid {
+        grid-template-columns: 1fr;
+        gap: 0.38rem;
+      }
+      #hero .hero-event-card {
+        padding: 0.62rem 0.7rem;
+      }
+      #hero .hero-event-lower {
+        padding: 0.6rem 0.4rem 0.3rem;
+      }
+      #hero .hero-fees {
+        gap: 0.45rem;
+        font-size: 0.66rem;
+      }
+      #hero-countdown-block > div {
+        padding: 0.55rem 0.7rem;
+      }
+      #countdown-timer .countdown {
+        font-size: 1.45rem !important;
+      }
+      #mobile-menu {
+        top: 70px !important;
+        left: 6px !important;
+        right: 6px !important;
+      }
+    }
+
+  </style>
+
 </head>
+
 <body class="text-slate-900 antialiased selection:bg-indigo-500 selection:text-white">
 
   <!-- Interactive Dynamic Cursor Glow Follower -->
@@ -350,13 +2055,13 @@
 
   
 
-  <!-- BEGIN: MainHeader (Featuring BOTH MIT-WPU & 3D IGNISIA Logos Side-by-Side + Modern Glassmorphism) -->
-  <header class="sticky top-0 z-40 glass-header transition-all duration-300" id="main-header">
-    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16 sm:h-20 min-w-0 gap-2">
+  <!-- BEGIN: MainHeader — ignisia.tech floating frosted-glass pill style -->
+  <header class="glass-header transition-all duration-300" id="main-header" style="position:fixed;top:12px;left:50%;transform:translateX(-50%);width:calc(100% - 24px);max-width:1312px;z-index:40;border-radius:9999px;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="navbar-shell flex items-center justify-between h-16 sm:h-20 min-w-0 gap-2">
         
         <!-- Left: MIT-WPU Official Logo + IGNISIA Official 3D Glossy Logo -->
-        <div class="flex items-center gap-1.5 sm:gap-4 min-w-0">
+        <div class="nav-brand-lockup flex items-center gap-1.5 sm:gap-4 min-w-0">
           <!-- MIT-WPU Official Crest Logo -->
           <a class="flex items-center min-w-0 group transition-transform hover:scale-[1.02]" href="#hero" title="Dr. Vishwanath Karad MIT World Peace University, Pune">
             <img 
@@ -364,7 +2069,7 @@
               alt="MIT World Peace University Pune" 
               width="943"
               height="264"
-              class="h-6 sm:h-11 w-auto max-w-[68px] sm:max-w-none object-contain drop-shadow-xs"
+              class="nav-mit-logo h-6 sm:h-11 w-auto max-w-[68px] sm:max-w-none object-contain drop-shadow-xs"
               loading="eager"
             />
           </a>
@@ -373,43 +2078,34 @@
           <div class="h-8 w-px bg-slate-300/80 hidden sm:block"></div>
           
           <!-- Ignisia Official Logo -->
-          <a class="flex items-center min-w-0 group transition-transform hover:scale-[1.02]" href="#hero" title="Ignisia Club - Think Build Evolve">
+          <a class="flex items-center space-x-2 min-w-0 group transition-transform hover:scale-[1.02]" href="#hero" title="Ignisia Club - Think Build Evolve">
             <img 
               src="assets/ignisia-logo.png" 
               alt="Ignisia - Think Build Evolve" 
               width="817"
               height="305"
-              class="h-5 sm:h-9 w-auto max-w-[56px] sm:max-w-none object-contain drop-shadow-xs"
+              class="nav-ignisia-logo h-5 sm:h-8 w-auto max-w-[50px] sm:max-w-none object-contain drop-shadow-xs"
               loading="eager"
             />
           </a>
         </div>
 
         <!-- Desktop Navigation Links: Clear, Intuitive, Tidy & Beautifully Spaced -->
-        <nav class="hidden lg:flex items-center space-x-5 xl:space-x-7 text-[13px] font-semibold text-slate-600">
-          <button type="button" onclick="openRegisterModal(); playSound('click');" class="whitespace-nowrap py-1 hover:text-indigo-600 transition-colors nav-link cursor-pointer">Register</button>
-          <a class="whitespace-nowrap py-1 hover:text-indigo-600 transition-colors nav-link" href="#mission-map">Timeline</a>
+        <nav class="hidden lg:flex items-center text-[12px] font-semibold text-slate-600">
+          <a class="whitespace-nowrap py-1 hover:text-indigo-600 transition-colors nav-link" href="#benefits">Honours</a>
+          <a class="whitespace-nowrap py-1 hover:text-indigo-600 transition-colors nav-link" href="#arena">Tracks</a>
+          <a class="whitespace-nowrap py-1 hover:text-indigo-600 transition-colors nav-link" href="#mission-map">Roadmap</a>
           <a class="whitespace-nowrap py-1 hover:text-indigo-600 transition-colors nav-link" href="#finalists">Finalists</a>
           <a class="whitespace-nowrap py-1 hover:text-indigo-600 transition-colors nav-link" href="#categories">Domains</a>
           <a class="whitespace-nowrap py-1 hover:text-indigo-600 transition-colors nav-link" href="#fees">Fees</a>
           <a class="whitespace-nowrap py-1 hover:text-indigo-600 transition-colors nav-link" href="#faq">FAQ</a>
-          <button 
-            onclick="openPosterModal(); playSound('click');" 
-            class="whitespace-nowrap px-3.5 py-1.5 rounded-full text-indigo-700 bg-indigo-50/90 hover:bg-indigo-100 hover:text-indigo-800 border border-indigo-200/80 transition-all nav-link inline-flex items-center gap-1.5 cursor-pointer font-bold text-xs shadow-2xs group"
-            title="Download & View Official INCUBEX Brochure / Poster"
-          >
-            <svg class="w-3.5 h-3.5 text-indigo-600 transition-transform group-hover:translate-y-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-              <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-            </svg>
-            <span>Brochure</span>
-          </button>
         </nav>
 
         <!-- Right Action: Clean Prominent Register Button with ample space -->
         <div class="flex items-center gap-1.5 sm:gap-3 shrink-0">
           <!-- Register Now CTA with Shimmer & Glow -->
           <button 
-            onclick="openRegisterModal()" 
+            onclick="goToUnstop(); playSound('click');" 
             class="btn-shimmer relative px-2.5 sm:px-6 py-2 sm:py-2.5 rounded-full font-bold text-[10px] sm:text-xs tracking-wider uppercase text-white bg-gradient-to-r from-blue-600 via-indigo-600 to-indigo-700 shadow-glow hover:shadow-hover hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 inline-flex items-center gap-1.5 sm:gap-2 cursor-pointer"
           >
             <span>REGISTER NOW</span>
@@ -427,31 +2123,31 @@
         </div>
       </div>
     </div>
-
-    <!-- Mobile Navigation Dropdown -->
-    <div class="hidden lg:hidden bg-white/95 backdrop-blur-xl border-b border-indigo-100 px-6 py-5 space-y-3 font-semibold text-sm text-slate-700 shadow-xl transition-all" id="mobile-menu">
-      <button type="button" onclick="openRegisterModal(); playSound('click');" class="block py-1.5 text-left hover:text-indigo-600 cursor-pointer">Register</button>
-      <a class="block py-1.5 hover:text-indigo-600" href="#mission-map">Timeline (8-Step Roadmap)</a>
-      <a class="block py-1.5 hover:text-indigo-600" href="#finalists">Finalists (80 Booth Quota)</a>
-      <a class="block py-1.5 hover:text-indigo-600" href="#categories">Innovation Domains</a>
-      <a class="block py-1.5 hover:text-indigo-600" href="#fees">Fees (₹200 Registration)</a>
-      <a class="block py-1.5 hover:text-indigo-600" href="#faq">FAQ</a>
-      <div class="pt-3 border-t border-slate-100 flex flex-col gap-2">
-        <button onclick="openPosterModal(); playSound('click');" class="w-full py-2.5 px-4 text-center text-xs font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-xl inline-flex items-center justify-center space-x-2">
-          <svg class="w-4 h-4 text-indigo-600" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-          <span>Download / View Brochure</span>
-        </button>
-        <button onclick="openRegisterModal(); playSound('click');" class="w-full py-2.5 text-center text-xs font-bold text-white bg-indigo-600 rounded-xl shadow-md">Register</button>
-      </div>
-    </div>
   </header>
   <!-- END: MainHeader -->
 
+  <!-- Mobile Navigation Dropdown — floating card below the pill navbar -->
+  <div class="hidden lg:hidden" id="mobile-menu" style="position:fixed;top:84px;left:12px;right:12px;z-index:39;background:rgba(255,255,255,0.97);backdrop-filter:blur(32px) saturate(180%);-webkit-backdrop-filter:blur(32px) saturate(180%);border:1px solid rgba(255,255,255,0.9);border-radius:16px;box-shadow:0 20px 40px rgba(0,0,0,0.08),0 0 0 1px rgba(41,56,207,0.06);padding:1.25rem 1.5rem;font-weight:600;font-size:0.875rem;color:#374151;">
+    <a class="block py-1.5 hover:text-indigo-600" href="#benefits">Summit Honours &amp; Institutional Perks</a>
+    <a class="block py-1.5 hover:text-indigo-600" href="#arena">Tracks (Product &amp; Prototype)</a>
+    <a class="block py-1.5 hover:text-indigo-600" href="#mission-map">Timeline (8-Step Roadmap)</a>
+    <a class="block py-1.5 hover:text-indigo-600" href="#finalists">Finalists (80 Booth Quota)</a>
+    <a class="block py-1.5 hover:text-indigo-600" href="#categories">Innovation Domains</a>
+    <a class="block py-1.5 hover:text-indigo-600" href="#fees">Fees (₹200 Registration)</a>
+    <a class="block py-1.5 hover:text-indigo-600" href="#faq">FAQ</a>
+    <div class="pt-3 border-t border-slate-100 flex flex-col gap-2">
+      <button onclick="goToUnstop(); playSound('click');" class="w-full py-2.5 text-center text-xs font-bold text-white bg-indigo-600 rounded-xl shadow-md">Register on Unstop →</button>
+    </div>
+  </div>
+
+
+
   <main id="content">
-  <!-- BEGIN: HeroSection (Clean Light Theme with High-Contrast Typography & Ignisia Fluid Ribbon Art) -->
-  <section class="relative pt-12 pb-16 md:pt-16 md:pb-24 overflow-hidden text-center bg-transparent" id="hero">
+  <!-- BEGIN: HeroSection (Exact Glassmorphic Visual Match to ignisia.tech Reference Screenshot) -->
+  <section class="relative pt-8 pb-16 md:pt-12 md:pb-24 overflow-hidden text-center bg-transparent" id="hero">
+
     
-    <!-- Scoped Hero Fluid Background: Ignisia 3D Crystal Ribbon Artwork -->
+    <!-- Scoped Hero Fluid Background: Ignisia 3D Crystal Ribbon Artwork (Vibrant & Full) -->
     <div class="absolute inset-0 pointer-events-none z-0 overflow-hidden flex items-center justify-center">
       <img 
         src="assets/ignisia-fluid-bg.jpg" 
@@ -459,206 +2155,513 @@
         width="1376"
         height="768"
         fetchpriority="high"
-        class="w-full h-full object-cover object-center opacity-70 mix-blend-multiply scale-105 filter contrast-[1.05]"
-        style="mask-image: radial-gradient(ellipse at 50% 45%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 85%); -webkit-mask-image: radial-gradient(ellipse at 50% 45%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 85%);"
+        class="w-full h-full object-cover object-center opacity-90 scale-105 filter contrast-[1.02]"
       />
       <!-- Soft ambient edge fade -->
-      <div class="absolute inset-0 bg-gradient-to-b from-[#F8F7FF]/20 via-transparent to-[#F8F7FF]/80"></div>
+      <div class="absolute inset-0 bg-gradient-to-b from-white/30 via-transparent to-white/70 pointer-events-none"></div>
     </div>
 
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-      
-      <!-- Eyebrow Pill with Live Pulse indicator & Frosted Glass -->
-      <div class="inline-flex items-center bg-white/80 backdrop-blur-xl border border-white/90 text-indigo-950 font-extrabold px-4 py-1.5 rounded-full text-xs tracking-wider uppercase mb-5 shadow-glass">
-        <span>MIT-WPU × IGNISIA • POWERED BY UNSTOP</span>
-      </div>
-
-      <!-- Main Poster Title: INCUBEX 2026 (High Contrast & Visible) -->
-      <h1 class="text-4xl xs:text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tight uppercase leading-none font-sans select-none mb-3 break-words">
-        <span class="gradient-incubex-anim inline-block filter drop-shadow-xs transition-transform hover:scale-[1.01] duration-300">INCUBEX</span>
-        <span class="block text-slate-900 font-black tracking-tight text-3xl xs:text-4xl sm:text-6xl md:text-7xl lg:text-8xl mt-1">2026</span>
-      </h1>
-
-      <!-- Poster Subtitle Lockup -->
-      <div class="mt-4 mb-8">
-        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
-          From Vision To Venture
-        </h2>
-        <p class="text-base sm:text-lg md:text-xl font-medium text-slate-700 mt-1 italic tracking-wide">
-          a national-level tech launchpad by <span class="text-indigo-700 font-black not-italic">Ignisia</span>
-        </p>
-      </div>
-
-      <!-- Poster Specific Date & Venue Meta Card (Clean Light Frosted Glass) -->
-      <div class="max-w-2xl mx-auto bg-white/80 backdrop-blur-xl border border-white/90 shadow-card hover:shadow-hover rounded-3xl p-5 sm:p-6 mb-8 transition-all duration-300 transform hover:-translate-y-1">
-        <div class="flex flex-col sm:flex-row items-center justify-around gap-4 text-slate-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="hero-layout-wrapper">
+        
+        <!-- Left / Center Main Content: Uncongested & Spacious -->
+        <div class="hero-content-col">
           
-          <!-- Date & Time -->
-          <div class="flex items-center space-x-3.5 text-left w-full sm:w-auto">
-            <div class="w-12 h-12 rounded-2xl bg-indigo-50 border border-indigo-200 flex items-center justify-center text-indigo-700 shadow-xs flex-shrink-0">
-              <iconify-icon icon="ph:calendar-blank-duotone" width="26" height="26"></iconify-icon>
+          <!-- 2. Main Title: Incubex (Expanded in Instrument Serif italic - matches Ignisia font) -->
+          <h1 class="hero-title select-none mt-1 mb-2 tracking-tight">
+            <span class="hero-incubex-title filter drop-shadow-sm">
+              Incubex
+            </span>
+          </h1>
+
+          <!-- 3. Subtitle / Kicker (Matches screenshot "AI & INNOVATION CLUB" style) -->
+          <p class="hero-kicker font-sans font-black text-xs sm:text-sm md:text-base uppercase tracking-[0.25em] sm:tracking-[0.3em] text-indigo-700 mt-2 mb-3">
+            2026 &nbsp;•&nbsp; NATIONAL-LEVEL TECH LAUNCHPAD
+          </p>
+
+          <!-- 4. Tagline Lockup (Matches "Think Build Evolve" with editorial serif accent) -->
+          <div class="hero-tagline-lockup mb-5 space-y-1">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
+              From Vision To <span class="font-serif italic text-indigo-600 font-normal">Venture</span>
+            </h2>
+            <p class="text-xs sm:text-sm font-semibold text-slate-500">
+              Think <span class="font-serif italic text-indigo-600">Build</span> Evolve &nbsp;•&nbsp; a national-level tech launchpad by <span class="text-indigo-700 font-bold">Ignisia</span>
+            </p>
+          </div>
+
+          <!-- 6. Event details dossier -->
+          <div class="hero-meta-rail">
+            <div class="hero-event-grid">
+              <div class="hero-event-card">
+                <span class="hero-event-icon" aria-hidden="true">
+                  <iconify-icon icon="ph:calendar-check-duotone" width="22" height="22"></iconify-icon>
+                </span>
+                <span>
+                  <span class="hero-event-label">Summit Date</span>
+                  <span class="hero-event-value">21 OCTOBER 2026</span>
+                  <span class="hero-event-subvalue">9:00 AM – 6:00 PM IST</span>
+                </span>
+              </div>
+              <div class="hero-event-card">
+                <span class="hero-event-icon" aria-hidden="true">
+                  <iconify-icon icon="ph:map-pin-area-duotone" width="22" height="22"></iconify-icon>
+                </span>
+                <span>
+                  <span class="hero-event-label">Host Campus</span>
+                  <span class="hero-event-value">MIT-WPU, Pune</span>
+                  <span class="hero-event-subvalue">Kothrud, Pune, Maharashtra</span>
+                </span>
+              </div>
             </div>
-            <div>
-              <div class="text-[10px] uppercase font-black tracking-widest text-slate-500">Summit Date</div>
-              <div class="font-black text-slate-900 text-base sm:text-lg tracking-tight">21 OCTOBER 2026</div>
-              <div class="text-xs font-bold text-indigo-700 flex items-center space-x-1">
-                <iconify-icon icon="ph:clock-duotone" width="15" height="15"></iconify-icon>
-                <span>9:00 AM – 6:00 PM IST</span>
+            <div class="hero-event-lower">
+              <p class="hero-eligibility">NATIONAL-LEVEL &nbsp;•&nbsp; UG &amp; PG STUDENTS &nbsp;•&nbsp; ACROSS INDIA</p>
+              <div class="hero-fees" aria-label="Registration and finalist fees">
+                <span><strong>₹200</strong> Registration</span>
+                <span class="hero-fee-divider" aria-hidden="true">|</span>
+                <span><strong>₹600</strong> Finalist Fee</span>
               </div>
             </div>
           </div>
 
-          <div class="hidden sm:block w-px h-12 bg-slate-200"></div>
+          <!-- 7. Three Signature Floating Glass Pills (Screenshot exact match) -->
+          <div class="hero-primary-actions grid grid-cols-1 sm:grid-cols-3 gap-3.5 max-w-3xl xl:max-w-[52rem] mx-auto text-left">
+            <!-- Pill 1: Register on Unstop -->
+            <button onclick="goToUnstop(); playSound('click');" class="hero-glass-pill group w-full text-left cursor-pointer">
+              <span class="hero-glass-pill-icon" style="background:linear-gradient(135deg, #2938cf, #7c3aed);">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                  <path d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+              </span>
+              <span class="hero-glass-pill-content">
+                <span class="hero-glass-pill-kicker">OFFICIAL PORTAL</span>
+                <span class="hero-glass-pill-title">REGISTER ON UNSTOP</span>
+              </span>
+              <span class="hero-glass-pill-arrow">↗</span>
+            </button>
 
-          <!-- Location -->
-          <div class="flex items-center space-x-3.5 text-left w-full sm:w-auto">
-            <div class="w-12 h-12 rounded-2xl bg-cyan-50 border border-cyan-200 flex items-center justify-center text-cyan-700 shadow-xs flex-shrink-0">
-              <iconify-icon icon="ph:map-pin-duotone" width="26" height="26"></iconify-icon>
+            <!-- Pill 2: Explore 2 Tracks -->
+            <a href="#arena" onclick="playSound('hover');" class="hero-glass-pill group">
+              <span class="hero-glass-pill-icon" style="background:#2938cf;">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                  <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path>
+                  <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path>
+                </svg>
+              </span>
+              <span class="hero-glass-pill-content">
+                <span class="hero-glass-pill-kicker">COMPETITION ARENA</span>
+                <span class="hero-glass-pill-title">EXPLORE 2 TRACKS</span>
+              </span>
+              <span class="hero-glass-pill-arrow">↗</span>
+            </a>
+
+            <!-- Pill 3: View Brochure -->
+            <button onclick="openPosterModal(); playSound('click');" class="hero-glass-pill group w-full text-left cursor-pointer">
+              <span class="hero-glass-pill-icon" style="background:#0891b2;">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                  <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                </svg>
+              </span>
+              <span class="hero-glass-pill-content">
+                <span class="hero-glass-pill-kicker">SUMMIT GUIDE</span>
+                <span class="hero-glass-pill-title">VIEW BROCHURE</span>
+              </span>
+              <span class="hero-glass-pill-arrow">↗</span>
+            </button>
+          </div>
+
+        </div>
+        <!-- END: hero-content-col -->
+
+        <!-- Social links anchored opposite the countdown -->
+        <nav class="hero-social-dock" aria-label="Ignisia social links">
+          <a
+            class="hero-social-link hero-social-instagram"
+            href="https://www.instagram.com/ignisiamit?igsh=cm5hamdoYXVsODR1&amp;utm_source=qr"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram: @ignisiamit"
+            title="Instagram: @ignisiamit"
+          >
+            <iconify-icon icon="mdi:instagram" width="25" height="25"></iconify-icon>
+          </a>
+          <a
+            class="hero-social-link hero-social-x"
+            href="https://x.com/ignisiamit?s=11"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="X (Twitter): @ignisiamit"
+            title="X (Twitter): @ignisiamit"
+          >
+            <iconify-icon icon="simple-icons:x" width="21" height="21"></iconify-icon>
+          </a>
+          <a
+            class="hero-social-link hero-social-linkedin"
+            href="https://www.linkedin.com/company/ignisia-26/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn: @ignisia"
+            title="LinkedIn: @ignisia"
+          >
+            <iconify-icon icon="mdi:linkedin" width="26" height="26"></iconify-icon>
+          </a>
+        </nav>
+
+        <!-- 8. Countdown strictly to the right: NO CARD, ONLY TEXT -->
+        <div class="w-full flex justify-end mt-6 pr-2 sm:pr-6 lg:absolute lg:right-0 lg:bottom-1 lg:mt-0 lg:w-auto z-20" id="hero-countdown-block">
+          <div class="flex flex-col items-end text-right">
+            <!-- Explicit Heading: "Countdown" -->
+            <div class="mb-1 text-[11px] sm:text-xs font-black uppercase tracking-widest text-indigo-600 flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-indigo-600 animate-ping"></span>
+              <span>Countdown</span>
             </div>
-            <div>
-              <div class="text-[10px] uppercase font-black tracking-widest text-slate-500">Host Campus</div>
-              <div class="font-black text-slate-900 text-base sm:text-lg tracking-tight">MIT-WPU, Pune</div>
-              <div class="text-xs font-bold text-slate-600">Kothrud, Pune, Maharashtra</div>
+
+            <!-- Pure Text Monospace Countdown Timer (No enclosing card or border) -->
+            <div class="grid auto-cols-max grid-flow-col gap-3 sm:gap-4 text-center" id="countdown-timer">
+              <div class="flex flex-col items-center">
+                <span class="countdown font-mono text-indigo-700">
+                  <span id="days" style="--value:23;" aria-live="polite" aria-label="23">23</span>
+                </span>
+                <span class="countdown-unit">days</span>
+              </div>
+              <div class="flex flex-col items-center">
+                <span class="countdown font-mono text-indigo-700">
+                  <span id="hours" style="--value:14;" aria-live="polite" aria-label="14">14</span>
+                </span>
+                <span class="countdown-unit">hours</span>
+              </div>
+              <div class="flex flex-col items-center">
+                <span class="countdown font-mono text-indigo-700">
+                  <span id="minutes" style="--value:45;" aria-live="polite" aria-label="45">45</span>
+                </span>
+                <span class="countdown-unit">min</span>
+              </div>
+              <div class="flex flex-col items-center">
+                <span class="countdown font-mono text-indigo-700">
+                  <span id="seconds" style="--value:24;" aria-live="polite" aria-label="24">24</span>
+                </span>
+                <span class="countdown-unit">sec</span>
+              </div>
             </div>
           </div>
         </div>
-
-        <!-- Audience Badge -->
-        <div class="mt-4 pt-3.5 border-t border-slate-100 flex items-center justify-center">
-          <span class="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-extrabold bg-indigo-50/90 text-indigo-900 border border-indigo-200 tracking-wider">
-            NATIONAL-LEVEL &nbsp;•&nbsp; UG &amp; PG STUDENTS &nbsp;•&nbsp; ACROSS INDIA
-          </span>
-        </div>
-
-        <!-- Direct Pricing Badges (High Contrast Rupee Badges) -->
-        <div class="mt-4 flex items-center justify-center space-x-4 text-xs font-bold">
-          <div class="flex items-center space-x-2 text-indigo-800 bg-indigo-50 px-4 py-2 rounded-xl border border-indigo-200 shadow-xs font-black">
-            <span class="text-sm font-black text-indigo-700">₹</span>
-            <span>200 Registration</span>
-          </div>
-          <span class="text-slate-700 font-bold">|</span>
-          <div class="flex items-center space-x-2 text-blue-800 bg-blue-50 px-4 py-2 rounded-xl border border-blue-200 shadow-xs font-black">
-            <span class="text-sm font-black text-blue-700">₹</span>
-            <span>600 Finalist Fee</span>
-          </div>
-        </div>
       </div>
-
-      <!-- Hero Action Buttons with Micro-interactions -->
-      <div class="flex flex-wrap items-center justify-center gap-4 mb-12">
-        <button 
-          onclick="openRegisterModal(); playSound('click');" 
-          class="btn-shimmer px-8 py-4 rounded-full font-black text-sm tracking-wider uppercase text-white bg-gradient-to-r from-blue-600 via-indigo-600 to-indigo-700 shadow-glow hover:shadow-hover hover:-translate-y-1 active:translate-y-0 transition-all duration-300 inline-flex items-center space-x-3 cursor-pointer"
-        >
-          <span>REGISTER</span>
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-            <path d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" stroke-linecap="round" stroke-linejoin="round"></path>
-          </svg>
-        </button>
-
-        <button 
-          onclick="openPosterModal(); playSound('click');" 
-          class="px-7 py-4 rounded-full font-bold text-sm tracking-wider uppercase text-indigo-700 bg-indigo-50/90 hover:bg-indigo-100 border border-indigo-200 shadow-xs hover:shadow-md transition-all duration-200 hover:-translate-y-0.5 inline-flex items-center space-x-2 cursor-pointer"
-        >
-          <svg class="w-4 h-4 text-indigo-600" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-            <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
-          </svg>
-          <span>VIEW BROCHURE</span>
-        </button>
-      </div>
-
-      <!-- Live Interactive Countdown to 21 October 2026 -->
-      <div class="max-w-xl mx-auto bg-white/95 border border-indigo-100 p-5 rounded-3xl shadow-card">
-        <p class="text-xs uppercase font-black tracking-widest text-slate-500 mb-3 text-center">Countdown To Launchpad Grand Finale</p>
-        <div class="grid grid-cols-4 gap-1.5 sm:gap-4 text-center" id="countdown-timer">
-          <div class="bg-white p-2 sm:p-3 rounded-xl sm:rounded-2xl border border-slate-100 shadow-xs hover:border-indigo-200 transition-colors">
-            <span class="text-xl sm:text-4xl font-black text-blue-700 block tracking-tight" id="days">--</span>
-            <span class="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-slate-600">Days</span>
-          </div>
-          <div class="bg-white p-2 sm:p-3 rounded-xl sm:rounded-2xl border border-slate-100 shadow-xs hover:border-indigo-200 transition-colors">
-            <span class="text-xl sm:text-4xl font-black text-indigo-700 block tracking-tight" id="hours">--</span>
-            <span class="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-slate-600">Hours</span>
-          </div>
-          <div class="bg-white p-2 sm:p-3 rounded-xl sm:rounded-2xl border border-slate-100 shadow-xs hover:border-indigo-200 transition-colors">
-            <span class="text-xl sm:text-4xl font-black text-purple-700 block tracking-tight" id="minutes">--</span>
-            <span class="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-slate-600">Minutes</span>
-          </div>
-          <div class="bg-white p-2 sm:p-3 rounded-xl sm:rounded-2xl border border-slate-100 shadow-xs hover:border-indigo-200 transition-colors">
-            <span class="text-xl sm:text-4xl font-black text-cyan-700 block tracking-tight tick-pulse" id="seconds">--</span>
-            <span class="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-slate-600">Seconds</span>
-          </div>
-        </div>
-      </div>
-
     </div>
   </section>
   <!-- END: HeroSection -->
 
-  <!-- BEGIN: HighlightPosterPillars (Row of 6 Perks directly from poster) -->
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-2 mb-12 relative z-20 reveal" id="benefits">
-    <div class="flex justify-center mb-5">
-      <span class="inline-flex items-center text-[11px] uppercase font-extrabold tracking-wide text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100">
+  <!-- BEGIN: HighlightPosterPillars (Infinite Auto-scrolling Carousel of 6 Perks) -->
+  <section class="w-full py-8 md:py-12 relative z-20 overflow-hidden reveal" id="benefits">
+    <!-- Prominent Bold Heading with generous vertical spacing -->
+    <div class="text-center max-w-4xl mx-auto mb-12 md:mb-16 px-4">
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight uppercase">
         Summit Honours &amp; Institutional Perks
-      </span>
+      </h2>
     </div>
-    
-    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3.5 sm:gap-4 text-center">
-      <!-- 1. Cash Prizes -->
-      <div class="glass-panel p-4 rounded-2xl border border-indigo-100 shadow-sm hover:shadow-card hover:-translate-y-1 transition-all duration-300 group cursor-default">
-        <div class="w-12 h-12 mx-auto rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-2.5 group-hover:scale-110 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
-          <iconify-icon icon="ph:trophy-duotone" width="26" height="26"></iconify-icon>
-        </div>
-        <h3 class="font-extrabold text-xs sm:text-sm text-slate-900 leading-snug">Cash Prizes</h3>
-        <p class="text-[11px] text-slate-500 mt-0.5">Top 1st, 2nd &amp; 3rd</p>
-      </div>
 
-      <!-- 2. Incubation Support -->
-      <div class="glass-panel p-4 rounded-2xl border border-indigo-100 shadow-sm hover:shadow-card hover:-translate-y-1 transition-all duration-300 group cursor-default">
-        <div class="w-12 h-12 mx-auto rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-2.5 group-hover:scale-110 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300">
-          <iconify-icon icon="ph:plant-duotone" width="26" height="26"></iconify-icon>
+    <!-- Infinite Auto-Scrolling Carousel (Left to Right) -->
+    <div class="perks-carousel-wrapper" aria-label="Summit Honours &amp; Institutional Perks Carousel">
+      <div class="perks-carousel-track">
+        <!-- Set 1 -->
+        <!-- Card 1: Cash Prizes -->
+        <div class="perks-card group">
+          <div class="w-12 h-12 mx-auto rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-3 group-hover:scale-110 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
+            <iconify-icon icon="ph:trophy-duotone" width="26" height="26"></iconify-icon>
+          </div>
+          <h3 class="font-extrabold text-sm sm:text-base text-slate-900 leading-snug">Cash Prizes</h3>
+          <p class="text-xs text-slate-500 mt-1 font-medium">Top 1st, 2nd &amp; 3rd</p>
         </div>
-        <h3 class="font-extrabold text-xs sm:text-sm text-slate-900 leading-snug">Incubation Support</h3>
-        <p class="text-[11px] text-slate-500 mt-0.5">MIT-WPU Innovation</p>
-      </div>
 
-      <!-- 3. Investor Pitch Access -->
-      <div class="glass-panel p-4 rounded-2xl border border-indigo-100 shadow-sm hover:shadow-card hover:-translate-y-1 transition-all duration-300 group cursor-default">
-        <div class="w-12 h-12 mx-auto rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center mb-2.5 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
-          <iconify-icon icon="ph:chart-line-up-duotone" width="26" height="26"></iconify-icon>
+        <!-- Card 2: Incubation Support -->
+        <div class="perks-card group">
+          <div class="w-12 h-12 mx-auto rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-3 group-hover:scale-110 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300">
+            <iconify-icon icon="ph:plant-duotone" width="26" height="26"></iconify-icon>
+          </div>
+          <h3 class="font-extrabold text-sm sm:text-base text-slate-900 leading-snug">Incubation Support</h3>
+          <p class="text-xs text-slate-500 mt-1 font-medium">MIT-WPU Innovation</p>
         </div>
-        <h3 class="font-extrabold text-xs sm:text-sm text-slate-900 leading-snug">Investor Pitch</h3>
-        <p class="text-[11px] text-slate-500 mt-0.5">Angel &amp; VC Panel</p>
-      </div>
 
-      <!-- 4. Trophies -->
-      <div class="glass-panel p-4 rounded-2xl border border-indigo-100 shadow-sm hover:shadow-card hover:-translate-y-1 transition-all duration-300 group cursor-default">
-        <div class="w-12 h-12 mx-auto rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center mb-2.5 group-hover:scale-110 group-hover:bg-purple-600 group-hover:text-white transition-all duration-300">
-          <iconify-icon icon="ph:medal-duotone" width="26" height="26"></iconify-icon>
+        <!-- Card 3: Investor Pitch -->
+        <div class="perks-card group">
+          <div class="w-12 h-12 mx-auto rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center mb-3 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
+            <iconify-icon icon="ph:chart-line-up-duotone" width="26" height="26"></iconify-icon>
+          </div>
+          <h3 class="font-extrabold text-sm sm:text-base text-slate-900 leading-snug">Investor Pitch</h3>
+          <p class="text-xs text-slate-500 mt-1 font-medium">Angel &amp; VC Panel</p>
         </div>
-        <h3 class="font-extrabold text-xs sm:text-sm text-slate-900 leading-snug">Trophies</h3>
-        <p class="text-[11px] text-slate-500 mt-0.5">Category Laurels</p>
-      </div>
 
-      <!-- 5. Certificates -->
-      <div class="glass-panel p-4 rounded-2xl border border-indigo-100 shadow-sm hover:shadow-card hover:-translate-y-1 transition-all duration-300 group cursor-default">
-        <div class="w-12 h-12 mx-auto rounded-2xl bg-cyan-50 text-cyan-600 flex items-center justify-center mb-2.5 group-hover:scale-110 group-hover:bg-cyan-600 group-hover:text-white transition-all duration-300">
-          <iconify-icon icon="ph:certificate-duotone" width="26" height="26"></iconify-icon>
+        <!-- Card 4: Trophies -->
+        <div class="perks-card group">
+          <div class="w-12 h-12 mx-auto rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center mb-3 group-hover:scale-110 group-hover:bg-purple-600 group-hover:text-white transition-all duration-300">
+            <iconify-icon icon="ph:medal-duotone" width="26" height="26"></iconify-icon>
+          </div>
+          <h3 class="font-extrabold text-sm sm:text-base text-slate-900 leading-snug">Trophies</h3>
+          <p class="text-xs text-slate-500 mt-1 font-medium">Category Laurels</p>
         </div>
-        <h3 class="font-extrabold text-xs sm:text-sm text-slate-900 leading-snug">Certificates</h3>
-        <p class="text-[11px] text-slate-500 mt-0.5">All Participants</p>
-      </div>
 
-      <!-- 6. Mentorship -->
-      <div class="glass-panel p-4 rounded-2xl border border-indigo-100 shadow-sm hover:shadow-card hover:-translate-y-1 transition-all duration-300 group cursor-default">
-        <div class="w-12 h-12 mx-auto rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-2.5 group-hover:scale-110 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
-          <iconify-icon icon="ph:users-three-duotone" width="26" height="26"></iconify-icon>
+        <!-- Card 5: Certificates -->
+        <div class="perks-card group">
+          <div class="w-12 h-12 mx-auto rounded-2xl bg-cyan-50 text-cyan-600 flex items-center justify-center mb-3 group-hover:scale-110 group-hover:bg-cyan-600 group-hover:text-white transition-all duration-300">
+            <iconify-icon icon="ph:certificate-duotone" width="26" height="26"></iconify-icon>
+          </div>
+          <h3 class="font-extrabold text-sm sm:text-base text-slate-900 leading-snug">Certificates</h3>
+          <p class="text-xs text-slate-500 mt-1 font-medium">All Participants</p>
         </div>
-        <h3 class="font-extrabold text-xs sm:text-sm text-slate-900 leading-snug">Mentorship</h3>
-        <p class="text-[11px] text-slate-500 mt-0.5">Industry Leaders</p>
+
+        <!-- Card 6: Mentorship -->
+        <div class="perks-card group">
+          <div class="w-12 h-12 mx-auto rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-3 group-hover:scale-110 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
+            <iconify-icon icon="ph:users-three-duotone" width="26" height="26"></iconify-icon>
+          </div>
+          <h3 class="font-extrabold text-sm sm:text-base text-slate-900 leading-snug">Mentorship</h3>
+          <p class="text-xs text-slate-500 mt-1 font-medium">Industry Leaders</p>
+        </div>
+
+        <!-- Set 2 (Duplicated for seamless infinite loop) -->
+        <!-- Card 1: Cash Prizes -->
+        <div class="perks-card group" aria-hidden="true">
+          <div class="w-12 h-12 mx-auto rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-3 group-hover:scale-110 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
+            <iconify-icon icon="ph:trophy-duotone" width="26" height="26"></iconify-icon>
+          </div>
+          <h3 class="font-extrabold text-sm sm:text-base text-slate-900 leading-snug">Cash Prizes</h3>
+          <p class="text-xs text-slate-500 mt-1 font-medium">Top 1st, 2nd &amp; 3rd</p>
+        </div>
+
+        <!-- Card 2: Incubation Support -->
+        <div class="perks-card group" aria-hidden="true">
+          <div class="w-12 h-12 mx-auto rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-3 group-hover:scale-110 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300">
+            <iconify-icon icon="ph:plant-duotone" width="26" height="26"></iconify-icon>
+          </div>
+          <h3 class="font-extrabold text-sm sm:text-base text-slate-900 leading-snug">Incubation Support</h3>
+          <p class="text-xs text-slate-500 mt-1 font-medium">MIT-WPU Innovation</p>
+        </div>
+
+        <!-- Card 3: Investor Pitch -->
+        <div class="perks-card group" aria-hidden="true">
+          <div class="w-12 h-12 mx-auto rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center mb-3 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
+            <iconify-icon icon="ph:chart-line-up-duotone" width="26" height="26"></iconify-icon>
+          </div>
+          <h3 class="font-extrabold text-sm sm:text-base text-slate-900 leading-snug">Investor Pitch</h3>
+          <p class="text-xs text-slate-500 mt-1 font-medium">Angel &amp; VC Panel</p>
+        </div>
+
+        <!-- Card 4: Trophies -->
+        <div class="perks-card group" aria-hidden="true">
+          <div class="w-12 h-12 mx-auto rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center mb-3 group-hover:scale-110 group-hover:bg-purple-600 group-hover:text-white transition-all duration-300">
+            <iconify-icon icon="ph:medal-duotone" width="26" height="26"></iconify-icon>
+          </div>
+          <h3 class="font-extrabold text-sm sm:text-base text-slate-900 leading-snug">Trophies</h3>
+          <p class="text-xs text-slate-500 mt-1 font-medium">Category Laurels</p>
+        </div>
+
+        <!-- Card 5: Certificates -->
+        <div class="perks-card group" aria-hidden="true">
+          <div class="w-12 h-12 mx-auto rounded-2xl bg-cyan-50 text-cyan-600 flex items-center justify-center mb-3 group-hover:scale-110 group-hover:bg-cyan-600 group-hover:text-white transition-all duration-300">
+            <iconify-icon icon="ph:certificate-duotone" width="26" height="26"></iconify-icon>
+          </div>
+          <h3 class="font-extrabold text-sm sm:text-base text-slate-900 leading-snug">Certificates</h3>
+          <p class="text-xs text-slate-500 mt-1 font-medium">All Participants</p>
+        </div>
+
+        <!-- Card 6: Mentorship -->
+        <div class="perks-card group" aria-hidden="true">
+          <div class="w-12 h-12 mx-auto rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-3 group-hover:scale-110 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
+            <iconify-icon icon="ph:users-three-duotone" width="26" height="26"></iconify-icon>
+          </div>
+          <h3 class="font-extrabold text-sm sm:text-base text-slate-900 leading-snug">Mentorship</h3>
+          <p class="text-xs text-slate-500 mt-1 font-medium">Industry Leaders</p>
+        </div>
       </div>
     </div>
   </section>
   <!-- END: HighlightPosterPillars -->
+
+  <!-- ======================================================== -->
+  <!-- UNIQUE FEATURE 1: INTERACTIVE COMPETITION ARENA MATRIX   -->
+  <!-- ======================================================== -->
+  <section class="py-16 md:py-24 relative reveal" id="arena">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-10">
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight">
+          CHOOSE YOUR BATTLEGROUND
+        </h2>
+        <p class="text-base text-slate-600 mt-3">
+          Switch between tracks to compare team size, how ready the build should be, how you present it, and how many booths are on campus.
+        </p>
+      </div>
+
+
+      <!-- Arena Dynamic Card Presentation (Interactive Side-by-Side Faceoff) -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+        
+        <!-- Track 1: Product Track (Rocket) -->
+        <div id="card-product" class="tilt-card glass-panel rounded-3xl border-2 border-indigo-200/90 p-8 shadow-card hover:shadow-hover relative flex flex-col justify-between group overflow-hidden transition-all duration-300">
+          <div class="absolute -top-16 -right-16 w-48 h-48 bg-indigo-100/60 rounded-full blur-2xl group-hover:scale-125 transition-transform duration-500 pointer-events-none"></div>
+          
+          <div class="relative z-10">
+            <!-- Glass Window Control Dots & Category Tag -->
+            <div class="flex items-center justify-between pb-3.5 mb-5 border-b border-indigo-100/70">
+              <div class="flex items-center space-x-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-rose-400 shadow-[0_0_8px_rgba(244,63,94,0.6)]"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.6)]"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(16,185,129,0.6)]"></span>
+              </div>
+              <span class="text-[10px] font-bold uppercase tracking-widest text-indigo-700 bg-indigo-50/90 px-2.5 py-0.5 rounded-full border border-indigo-200/60">TRACK 01 // 30 SLOTS</span>
+            </div>
+
+            <div class="flex items-center space-x-4 mb-5">
+
+              <div class="w-16 h-16 rounded-2xl bg-indigo-50 border border-indigo-200 flex items-center justify-center text-indigo-600 shadow-sm group-hover:scale-105 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300 flex-shrink-0">
+                <svg class="w-9 h-9" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path>
+                  <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path>
+                  <path d="M9 12H4s.55-3.03 2-4.5c1.62-1.63 5-2.5 5-2.5"></path>
+                  <path d="M12 15v5s3.03-.55 4.5-2c1.63-1.62 2.5-5 2.5-5"></path>
+                </svg>
+              </div>
+              <div class="border-l-3 border-indigo-600 pl-4">
+                <h3 class="text-2xl sm:text-3xl font-black text-slate-900 leading-none">Product</h3>
+                <h3 class="text-2xl sm:text-3xl font-black text-indigo-700 leading-tight">Track</h3>
+                <p class="mt-2 text-sm font-semibold text-slate-600">30 finalist slots · working products you can demo</p>
+              </div>
+            </div>
+
+            <!-- Quote badge from poster -->
+            <div class="bg-indigo-50/90 rounded-2xl p-4 border border-indigo-200/80 mb-6">
+              <p class="text-xs sm:text-sm font-bold text-indigo-950 italic">
+                "For project ideas which deserve to become real-world solutions."
+              </p>
+            </div>
+
+            <!-- 3 Core Themes from PDF -->
+            <div class="mb-6 space-y-2">
+              <span class="text-[10px] font-black uppercase tracking-wider text-slate-600 block">3 Strategic Themes (from Summit Guide):</span>
+              <div class="grid grid-cols-1 gap-2 text-xs font-semibold">
+                <div class="bg-white p-2.5 rounded-xl border border-slate-100 flex items-center space-x-2">
+                  <span class="text-indigo-600 font-bold">1.</span>
+                  <span><strong>Digital &amp; Software Ventures:</strong> SaaS, FinTech, EdTech, mobile apps, platforms</span>
+                </div>
+                <div class="bg-white p-2.5 rounded-xl border border-slate-100 flex items-center space-x-2">
+                  <span class="text-indigo-600 font-bold">2.</span>
+                  <span><strong>Smart Systems &amp; Hardware:</strong> Robotics, IoT, consumer electronics, devices</span>
+                </div>
+                <div class="bg-white p-2.5 rounded-xl border border-slate-100 flex items-center space-x-2">
+                  <span class="text-indigo-600 font-bold">3.</span>
+                  <span><strong>Open Innovation:</strong> Unconventional business models, cross-domain projects</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Specifications List -->
+            <ul class="space-y-3 text-xs sm:text-sm text-slate-800 font-semibold mb-8">
+              <li class="flex items-start space-x-3">
+                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">✓</span>
+                <span class="text-slate-800"><strong class="text-slate-900 font-black">Team Size:</strong> 1 – 6 members (Solo founders permitted)</span>
+              </li>
+              <li class="flex items-start space-x-3">
+                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">✓</span>
+                <span class="text-slate-800"><strong class="text-slate-900 font-black">Maturity:</strong> A working product, around readiness 5–7, with a commercial model</span>
+              </li>
+              <li class="flex items-start space-x-3">
+                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">✓</span>
+                <span class="text-slate-800"><strong class="text-slate-900 font-black">Format:</strong> Live walkthrough &amp; closed-door venture pitch to Angels/VCs</span>
+              </li>
+            </ul>
+          </div>
+
+          <button 
+            onclick="goToUnstop(); playSound('click');" 
+            class="btn-shimmer w-full py-4 text-center rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs uppercase tracking-wider transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 relative z-10 cursor-pointer"
+          >
+            Apply For Product Track (₹200) →
+          </button>
+        </div>
+
+        <!-- Track 2: Prototype Track (Lightbulb/Nodes) -->
+        <div id="card-prototype" class="tilt-card glass-panel rounded-3xl border-2 border-cyan-200/90 p-8 shadow-card hover:shadow-hover relative flex flex-col justify-between group overflow-hidden transition-all duration-300">
+          <div class="absolute -top-16 -right-16 w-48 h-48 bg-cyan-100/60 rounded-full blur-2xl group-hover:scale-125 transition-transform duration-500 pointer-events-none"></div>
+
+          <div class="relative z-10">
+            <!-- Glass Window Control Dots & Category Tag -->
+            <div class="flex items-center justify-between pb-3.5 mb-5 border-b border-cyan-100/70">
+              <div class="flex items-center space-x-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-rose-400 shadow-[0_0_8px_rgba(244,63,94,0.6)]"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.6)]"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(16,185,129,0.6)]"></span>
+              </div>
+              <span class="text-[10px] font-bold uppercase tracking-widest text-cyan-700 bg-cyan-50/90 px-2.5 py-0.5 rounded-full border border-cyan-200/60">TRACK 02 // 50 SLOTS</span>
+            </div>
+
+            <div class="flex items-center space-x-4 mb-5">
+
+              <div class="w-16 h-16 rounded-2xl bg-cyan-50 border border-cyan-200 flex items-center justify-center text-cyan-600 shadow-sm group-hover:scale-105 group-hover:bg-cyan-600 group-hover:text-white transition-all duration-300 flex-shrink-0">
+                <svg class="w-9 h-9" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="4"></circle>
+                  <path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path>
+                </svg>
+              </div>
+              <div class="border-l-3 border-cyan-600 pl-4">
+                <h3 class="text-2xl sm:text-3xl font-black text-slate-900 leading-none">Prototype</h3>
+                <h3 class="text-2xl sm:text-3xl font-black text-cyan-700 leading-tight">Expo Track</h3>
+                <p class="mt-2 text-sm font-semibold text-slate-600">50 finalist slots · research and lab builds</p>
+              </div>
+            </div>
+
+            <!-- Quote badge from poster -->
+            <div class="bg-cyan-50/90 rounded-2xl p-4 border border-cyan-200/80 mb-6">
+              <p class="text-xs sm:text-sm font-bold text-cyan-950 italic">
+                "Academic &amp; research builds software + hardware"
+              </p>
+            </div>
+
+            <!-- Core Focus from PDF -->
+            <div class="mb-6 space-y-2">
+              <span class="text-[10px] font-black uppercase tracking-wider text-slate-600 block">Exhibition &amp; Lab Highlights (from Summit Guide):</span>
+              <div class="grid grid-cols-1 gap-2 text-xs font-semibold">
+                <div class="bg-white p-2.5 rounded-xl border border-slate-100 flex items-center space-x-2">
+                  <span class="text-cyan-600 font-bold">1.</span>
+                  <span><strong>Research &amp; Capstones:</strong> Engineering builds, research models, proof-of-concept</span>
+                </div>
+                <div class="bg-white p-2.5 rounded-xl border border-slate-100 flex items-center space-x-2">
+                  <span class="text-cyan-600 font-bold">2.</span>
+                  <span><strong>Booth Exhibition:</strong> Dedicated on-campus booth with 230V power &amp; demo rigs</span>
+                </div>
+                <div class="bg-white p-2.5 rounded-xl border border-slate-100 flex items-center space-x-2">
+                  <span class="text-cyan-600 font-bold">3.</span>
+                  <span><strong>Institutional Honors:</strong> Category trophies, cash awards, 2 exclusive MIT-WPU honors</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Specifications List -->
+            <ul class="space-y-3 text-xs sm:text-sm text-slate-800 font-semibold mb-8">
+              <li class="flex items-start space-x-3">
+                <span class="w-5 h-5 rounded-full bg-cyan-100 text-cyan-800 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">✓</span>
+                <span class="text-slate-800"><strong class="text-slate-900 font-black">Team Size:</strong> 3 – 6 members per team</span>
+              </li>
+              <li class="flex items-start space-x-3">
+                <span class="w-5 h-5 rounded-full bg-cyan-100 text-cyan-800 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">✓</span>
+                <span class="text-slate-800"><strong class="text-slate-900 font-black">Maturity:</strong> A working prototype or physical model, around readiness 1–4</span>
+              </li>
+              <li class="flex items-start space-x-3">
+                <span class="w-5 h-5 rounded-full bg-cyan-100 text-cyan-800 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">✓</span>
+                <span class="text-slate-800"><strong class="text-slate-900 font-black">Format:</strong> Full-day live public exhibition &amp; walk-around jury evaluation</span>
+              </li>
+            </ul>
+          </div>
+
+          <button 
+            onclick="goToUnstop(); playSound('click');" 
+            class="btn-shimmer w-full py-4 text-center rounded-2xl bg-cyan-700 hover:bg-cyan-800 text-white font-extrabold text-xs uppercase tracking-wider transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 relative z-10 cursor-pointer"
+          >
+            Apply For Prototype Track (₹200) →
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
 
   <!-- ======================================================== -->
   <!-- 8-STEP LAUNCHPAD MISSION TIMELINE (IGNISIA VERTICAL STYLE) -->
@@ -693,7 +2696,9 @@
       <div class="relative">
         
         <!-- Continuous Vertical Spine Line -->
-        <div class="hidden md:block absolute left-72 top-6 bottom-6 w-0.5 bg-gradient-to-b from-indigo-500 via-blue-400 to-cyan-500"></div>
+        <div class="hidden md:block absolute left-72 top-6 bottom-6 w-0.5" id="timeline-spine" aria-hidden="true">
+          <div id="timeline-progress"></div>
+        </div>
 
         <!-- 8 Timeline Milestones -->
         <div class="space-y-12 sm:space-y-16">
@@ -1154,17 +3159,22 @@
       </div>
 
       <!-- Campus Finalist Privileges Banner -->
-      <div class="max-w-4xl mx-auto bg-gradient-to-r from-indigo-900 via-blue-900 to-indigo-950 text-white p-6 sm:p-8 rounded-3xl shadow-xl flex flex-col sm:flex-row items-center justify-between gap-6 border border-indigo-500/30">
-        <div>
-          <span class="text-[10px] font-mono uppercase tracking-widest text-cyan-300 block mb-1">Finalist On-Campus Privileges</span>
+      <div class="finalist-privileges-banner mx-auto flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 border">
+        <div class="finalist-privileges-main flex items-start sm:items-center gap-3 min-w-0">
+          <div class="finalist-privileges-icon" aria-hidden="true">
+            <iconify-icon icon="ph:ticket-duotone" width="24" height="24"></iconify-icon>
+          </div>
+          <div class="finalist-privileges-copy">
+          <span class="text-[9px] font-mono uppercase tracking-[0.16em] text-indigo-600 block mb-1">Finalist On-Campus Privileges</span>
           <h4 class="text-lg font-extrabold">Finalist Kits, Food Passes &amp; Tech Support Provided</h4>
           <p class="text-xs text-blue-100/80 mt-1 max-w-lg">
             Finalist fee (₹600) covers physical booth infrastructure, audio-visual display backdrops, meal coupons, and certificate felicitation for all 80 teams.
           </p>
+          </div>
         </div>
         <button 
-          onclick="openRegisterModal(); playSound('click');" 
-          class="btn-shimmer px-6 py-3 bg-white hover:bg-slate-100 text-slate-900 font-extrabold text-xs uppercase tracking-wider rounded-xl flex-shrink-0 cursor-pointer"
+          onclick="goToUnstop(); playSound('click');" 
+          class="finalist-privileges-cta btn-shimmer px-6 py-3 bg-white hover:bg-slate-100 text-slate-900 font-extrabold text-xs uppercase tracking-wider rounded-xl flex-shrink-0 cursor-pointer"
         >
           Secure Your Spot →
         </button>
@@ -1179,37 +3189,27 @@
   <section class="py-16 md:py-24 relative reveal" id="categories">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <div class="text-center max-w-3xl mx-auto mb-10">
-        <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight">
-          14 INNOVATION DOMAINS
+      <div class="domains-heading-wrap">
+        <div class="domains-orbit" aria-hidden="true">
+          <span class="domains-number">14</span>
+        </div>
+        <div class="domains-heading-copy">
+        <h2 class="domains-heading-title font-black text-slate-900" aria-label="14 Innovation Domains">
+          INNOVATION<br>DOMAINS
         </h2>
         <p class="text-base text-slate-600 mt-3">
           Select or search any tech vertical to see how your project aligns with INCUBEX 2026.
         </p>
-      </div>
-
-      <!-- Domain Search Input -->
-      <div class="max-w-md mx-auto mb-8">
-        <div class="relative">
-          <input 
-            type="text" 
-            id="domain-search-input" 
-            placeholder="Search domain (e.g., AI, Robotics, Health, Drone)..." 
-            class="w-full px-5 py-3 pl-11 rounded-2xl bg-white border border-indigo-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-xs font-semibold shadow-xs"
-            oninput="filterDomains(this.value); playSound('hover');"
-          />
-          <svg class="w-4 h-4 text-slate-600 absolute left-4 top-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <circle cx="11" cy="11" r="8"></circle><line x1="21" x2="16.65" y1="21" y2="16.65"></line>
-          </svg>
         </div>
       </div>
+
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8" id="domains-container">
         
         <!-- Category Group 1: Software & Digital Innovation -->
-        <div class="bg-gradient-to-br from-white to-blue-50/50 p-8 rounded-3xl border border-blue-100 shadow-card">
-          <div class="flex items-center space-x-3.5 mb-6 pb-4 border-b border-blue-100">
-            <div class="w-12 h-12 rounded-2xl bg-blue-100 text-blue-700 flex items-center justify-center font-black text-lg shadow-xs">
+        <div class="domain-group domain-group-software bg-gradient-to-br from-white to-blue-50/50 p-8 rounded-3xl border border-blue-100 shadow-card">
+          <div class="domain-group-header flex items-center space-x-3.5 mb-6 pb-4 border-b border-blue-100">
+            <div class="domain-group-icon w-12 h-12 rounded-2xl bg-blue-100 text-blue-700 flex items-center justify-center font-black text-lg shadow-xs">
               &lt;/&gt;
             </div>
             <div>
@@ -1254,9 +3254,9 @@
         </div>
 
         <!-- Category Group 2: Hardware & Physical Engineering -->
-        <div class="bg-gradient-to-br from-white to-cyan-50/50 p-8 rounded-3xl border border-cyan-100 shadow-card">
-          <div class="flex items-center space-x-3.5 mb-6 pb-4 border-b border-cyan-100">
-            <div class="w-12 h-12 rounded-2xl bg-cyan-100 text-cyan-700 flex items-center justify-center font-black text-lg shadow-xs">
+        <div class="domain-group domain-group-hardware bg-gradient-to-br from-white to-cyan-50/50 p-8 rounded-3xl border border-cyan-100 shadow-card">
+          <div class="domain-group-header flex items-center space-x-3.5 mb-6 pb-4 border-b border-cyan-100">
+            <div class="domain-group-icon w-12 h-12 rounded-2xl bg-cyan-100 text-cyan-700 flex items-center justify-center font-black text-lg shadow-xs">
               ⚙
             </div>
             <div>
@@ -1397,8 +3397,8 @@
   <!-- BEGIN: FAQSection (Animated & Filterable) -->
   <section class="py-16 md:py-24 relative reveal" id="faq">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 gap-8 xl:grid-cols-[1.7fr_0.9fr] xl:items-start">
-        <div>
+      <div class="faq-layout grid grid-cols-1 gap-8 xl:grid-cols-[1.7fr_0.9fr] xl:items-start">
+        <div class="faq-main min-w-0">
           <div class="text-center max-w-3xl mx-auto mb-12 xl:text-left xl:mx-0">
             <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight">
               FREQUENTLY ASKED QUESTIONS
@@ -1524,30 +3524,36 @@
 
           </div>
 
-          <!-- Still have questions? Help Card -->
-          <div class="mt-12 bg-white/90 backdrop-blur-md rounded-2xl p-6 sm:p-8 border border-indigo-100 text-center shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div class="text-left">
-              <h4 class="text-base sm:text-lg font-extrabold text-slate-900">Still have questions or need custom clarifications?</h4>
-              <p class="text-xs text-slate-600 mt-1">Our organizing committee is available around the clock to support student innovators.</p>
-            </div>
-            <div class="flex items-center space-x-3 flex-shrink-0">
-              <a href="mailto:ignisia@mitwpu.edu.in" class="px-5 py-2.5 rounded-full text-xs font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 transition-all inline-flex items-center space-x-1.5">
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                <span>Email Committee</span>
-              </a>
-              <button onclick="openRegisterModal(); playSound('click');" class="px-5 py-2.5 rounded-full text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-700 transition-all shadow-xs inline-flex items-center space-x-1.5 cursor-pointer">
-                <span>Register</span>
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
-              </button>
-            </div>
-          </div>
         </div>
 
-        <aside class="xl:pt-4">
-          <div class="sticky top-24 overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-card max-w-sm mx-auto">
-            <img src="assets/incubex-poster.jpg" alt="INCUBEX 2026 poster" width="680" height="1024" class="w-full max-h-[500px] object-cover object-top" loading="lazy" />
+        <aside class="faq-brochure-aside">
+          <div class="faq-brochure-card sticky top-24 overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-card max-w-sm mx-auto">
+            <button class="faq-brochure-trigger" onclick="openPosterModal(); playSound('click');" aria-label="Download the INCUBEX 2026 brochure">
+              <img src="assets/incubex-poster.jpg" alt="INCUBEX 2026 poster" width="680" height="1024" class="w-full max-h-[500px] object-cover object-top" loading="lazy" />
+              <span class="faq-brochure-open-icon" aria-hidden="true">
+                <iconify-icon icon="ph:download-simple-bold" width="21" height="21"></iconify-icon>
+              </span>
+            </button>
           </div>
         </aside>
+      </div>
+
+      <!-- Still have questions? Full-width help card -->
+      <div class="faq-help-card bg-white rounded-2xl border border-indigo-100 text-center flex flex-col sm:flex-row items-center justify-between gap-5">
+        <div class="text-center sm:text-left">
+          <h4 class="text-base sm:text-lg font-extrabold text-slate-900">Still have questions or need custom clarifications?</h4>
+          <p class="text-xs text-slate-600 mt-1">Our organizing committee is available around the clock to support student innovators.</p>
+        </div>
+        <div class="flex flex-wrap items-center justify-center gap-3 flex-shrink-0">
+          <a href="mailto:ignisia@mitwpu.edu.in" class="px-5 py-2.5 rounded-full text-xs font-bold text-slate-700 bg-white border border-slate-200 hover:border-indigo-300 transition-all inline-flex items-center space-x-1.5">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            <span>Email Committee</span>
+          </a>
+          <button onclick="goToUnstop(); playSound('click');" class="px-5 py-2.5 rounded-full text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-700 transition-all shadow-xs inline-flex items-center space-x-1.5 cursor-pointer">
+            <span>Register on Unstop</span>
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+          </button>
+        </div>
       </div>
     </div>
   </section>
@@ -1577,10 +3583,11 @@
         <div class="lg:col-span-3">
           <h4 class="mb-4 text-xs font-bold uppercase tracking-wider text-slate-900">Summit Navigation</h4>
           <ul class="space-y-2.5 text-xs sm:text-sm text-slate-600">
-            <li><button type="button" onclick="openRegisterModal(); playSound('click');" class="text-left transition-colors hover:text-indigo-600 cursor-pointer">Register</button></li>
+            <li><a class="transition-colors hover:text-indigo-600" href="#arena">Competition Arena</a></li>
+            <li><a class="transition-colors hover:text-indigo-600" href="https://unstop.com/p/incubex-by-ignisia-2026-national-level-tech-launchpad-mit-world-peace-university-pune-maharashtra-1759743" target="_blank" rel="noopener noreferrer">Register on Unstop</a></li>
             <li><a class="transition-colors hover:text-indigo-600" href="assets/Incubex%20Brochure.pdf">Official Brochure (PDF)</a></li>
             <li><a class="transition-colors hover:text-indigo-600" href="#mission-map">8-Step Roadmap</a></li>
-            <li><a class="transition-colors hover:text-indigo-600" href="#finalists">80 Finalist Quota</a></li>
+            <li><a class="transition-colors hover:text-indigo-600" href="#arena">80 Finalist Quota</a></li>
             <li><a class="transition-colors hover:text-indigo-600" href="#fees">Registration Fees</a></li>
             <li><a class="transition-colors hover:text-indigo-600" href="#faq">Frequently Asked Questions</a></li>
           </ul>
@@ -1616,6 +3623,7 @@
       <!-- Bottom Bar -->
       <div class="flex flex-col items-center justify-between gap-3 border-t border-slate-200/90 pt-6 text-xs text-slate-500 sm:flex-row">
         <p>© 2026 IGNISIA Club, MIT-WPU Pune. All rights reserved.</p>
+        <p class="footer-build-mark">Built by <span>Ignisia Tech Team</span></p>
         <p class="font-normal text-slate-500">Powered by Unstop • Dr. Vishwanath Karad MIT World Peace University</p>
       </div>
     </div>
@@ -1623,26 +3631,34 @@
   <!-- END: ContactAndFooter -->
 
   <!-- ======================================================== -->
-  <!-- FLOATING COMMAND DOCK & QUICK CONTROLS                   -->
+  <!-- FLOATING COMMAND DOCKS (BOTTOM-LEFT & BOTTOM-RIGHT)       -->
   <!-- ======================================================== -->
-  <div class="fixed z-30 bottom-3 right-3 sm:bottom-6 sm:right-6 flex flex-col items-end gap-2">
+
+  <!-- Fixed Bottom-Left Dock: "Scroll to Top" Button strictly on the bottom-left -->
+  <div class="fixed z-30 bottom-3 left-3 sm:bottom-6 sm:left-6 flex flex-col items-start gap-2">
     <!-- Floating Back to Top Button -->
     <button 
       id="back-to-top" 
       onclick="window.scrollTo({top: 0, behavior: 'smooth'}); playSound('click');" 
-      class="opacity-0 pointer-events-none transition-all duration-300 w-11 h-11 rounded-full bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg flex items-center justify-center cursor-pointer"
+      class="opacity-0 pointer-events-none transition-all duration-300 w-11 h-11 rounded-full bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg flex items-center justify-center cursor-pointer hover:scale-105 active:scale-95"
       title="Back to Top"
+      aria-label="Scroll to Top"
     >
       <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
       </svg>
     </button>
+  </div>
 
-    <!-- QR trigger stays in the corner so it does not cover the phone CTAs -->
+  <!-- Fixed Bottom-Right Dock: Floating QR Button -->
+  <div class="fixed z-30 bottom-3 right-3 sm:bottom-6 sm:right-6 flex flex-col items-end gap-2">
+    <!-- QR trigger: hidden initially in upper viewport, appears when reaching Summit Honours -->
     <button 
+      id="floating-qr-btn"
       onclick="toggleQrWidget(); playSound('click');" 
-      class="group glass-panel hover:bg-white text-indigo-700 font-extrabold text-xs w-11 h-11 sm:w-auto sm:h-11 sm:px-3.5 rounded-full shadow-lg border border-indigo-200/90 flex items-center justify-center gap-2 transition-all hover:scale-105 active:scale-95 cursor-pointer"
+      class="opacity-0 pointer-events-none translate-y-4 group glass-panel hover:bg-white text-indigo-700 font-extrabold text-xs w-11 h-11 sm:w-auto sm:h-11 sm:px-3.5 rounded-full shadow-lg border border-indigo-200/90 flex items-center justify-center gap-2 transition-all duration-300 ease-out hover:scale-105 active:scale-95 cursor-pointer"
       title="Scan QR to Register on Mobile"
+      aria-label="Scan QR to Register on Mobile"
     >
       <iconify-icon icon="ph:qr-code-duotone" width="20" height="20"></iconify-icon>
       <span class="hidden sm:inline">Scan QR</span>
@@ -1685,33 +3701,6 @@
       <div class="overflow-y-auto p-4 flex justify-center bg-slate-100/50">
         <img src="assets/incubex-poster.jpg" alt="INCUBEX 2026 Official Poster" width="680" height="1024" class="max-h-[75vh] w-auto object-contain rounded-2xl shadow-md border border-slate-200" />
       </div>
-    </div>
-  </div>
-
-  <!-- Interactive Registration Flow Modal -->
-  <div id="register-modal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
-    <div class="relative max-w-lg w-full bg-white rounded-3xl overflow-hidden shadow-2xl p-6 sm:p-8 border border-indigo-100">
-      <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-6">
-        <div>
-          <span class="text-[10px] font-black uppercase tracking-wider text-indigo-600 block">INCUBEX 2026 Registration</span>
-          <h3 class="text-xl font-extrabold text-slate-900">Choose how you register</h3>
-        </div>
-        <button onclick="closeRegisterModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-700 font-bold cursor-pointer">
-          &times;
-        </button>
-      </div>
-
-      <div class="grid grid-cols-1 gap-3">
-        <a href="https://forms.gle/32GdFvZuNhFadqmh9" target="_blank" rel="noopener noreferrer" onclick="playSound('success');" class="p-4 text-left rounded-2xl border-2 border-indigo-600 bg-indigo-50/60 hover:bg-indigo-100 transition-all">
-          <span class="block text-sm font-extrabold text-indigo-950">MIT-WPU students</span>
-          <span class="block text-[11px] text-indigo-700 font-medium mt-1">Current students of MIT-WPU, Pune. Opens the campus form.</span>
-        </a>
-        <a href="https://unstop.com/p/incubex-by-ignisia-2026-national-level-tech-launchpad-mit-world-peace-university-pune-maharashtra-1759743" target="_blank" rel="noopener noreferrer" onclick="playSound('success');" class="p-4 text-left rounded-2xl border-2 border-slate-200 hover:border-indigo-500 hover:bg-slate-50 transition-all">
-          <span class="block text-sm font-extrabold text-slate-900">Students from all over India</span>
-          <span class="block text-[11px] text-slate-500 font-medium mt-1">UG and PG students from other colleges. Register on Unstop.</span>
-        </a>
-      </div>
-      <p class="text-[11px] text-slate-500 mt-4">Registration is ₹200 per team. The ₹600 finalist fee applies only if your team is shortlisted.</p>
     </div>
   </div>
 
@@ -1899,10 +3888,31 @@
         const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-        document.getElementById("days").innerText = String(days).padStart(2, '0');
-        document.getElementById("hours").innerText = String(hours).padStart(2, '0');
-        document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
-        document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
+        const daysEl = document.getElementById("days");
+        const hoursEl = document.getElementById("hours");
+        const minutesEl = document.getElementById("minutes");
+        const secondsEl = document.getElementById("seconds");
+
+        if (daysEl) {
+          daysEl.style.setProperty("--value", days);
+          daysEl.innerText = days;
+          daysEl.setAttribute("aria-label", days);
+        }
+        if (hoursEl) {
+          hoursEl.style.setProperty("--value", hours);
+          hoursEl.innerText = String(hours).padStart(2, '0');
+          hoursEl.setAttribute("aria-label", hours);
+        }
+        if (minutesEl) {
+          minutesEl.style.setProperty("--value", minutes);
+          minutesEl.innerText = String(minutes).padStart(2, '0');
+          minutesEl.setAttribute("aria-label", minutes);
+        }
+        if (secondsEl) {
+          secondsEl.style.setProperty("--value", seconds);
+          secondsEl.innerText = String(seconds).padStart(2, '0');
+          secondsEl.setAttribute("aria-label", seconds);
+        }
       }
 
       updateTimer();
@@ -2068,10 +4078,80 @@
         }, 3200);
       }
     }
+
+    // Scroll-synced timeline progress and active milestone state
+    const timelineItems = Array.from(document.querySelectorAll('#mission-map .timeline-item'));
+    const timelineSpine = document.getElementById('timeline-spine');
+    const timelineProgress = document.getElementById('timeline-progress');
+    let timelineScrollFrame = null;
+
+    function updateTimelineScrollState() {
+      timelineScrollFrame = null;
+      if (!timelineItems.length) return;
+
+      const focusLine = window.innerHeight * 0.46;
+      let activeIndex = 0;
+      let nearestDistance = Number.POSITIVE_INFINITY;
+
+      timelineItems.forEach((item, index) => {
+        const rect = item.getBoundingClientRect();
+        const itemFocus = rect.top + Math.min(rect.height * 0.34, 150);
+        const distance = Math.abs(itemFocus - focusLine);
+        if (distance < nearestDistance) {
+          nearestDistance = distance;
+          activeIndex = index;
+        }
+      });
+
+      timelineItems.forEach((item, index) => {
+        const isActive = index === activeIndex;
+        item.classList.toggle('is-active', isActive);
+        item.classList.toggle('is-past', index < activeIndex);
+        if (isActive) {
+          item.setAttribute('aria-current', 'step');
+        } else {
+          item.removeAttribute('aria-current');
+        }
+      });
+
+      if (timelineSpine && timelineProgress && window.innerWidth >= 768) {
+        const spineRect = timelineSpine.getBoundingClientRect();
+        const activeRect = timelineItems[activeIndex].getBoundingClientRect();
+        const activeNodeY = activeRect.top + 16;
+        const progressHeight = Math.max(0, Math.min(spineRect.height, activeNodeY - spineRect.top));
+        timelineProgress.style.height = `${progressHeight}px`;
+      }
+    }
+
+    function requestTimelineScrollUpdate() {
+      if (timelineScrollFrame !== null) return;
+      timelineScrollFrame = window.requestAnimationFrame(updateTimelineScrollState);
+    }
+
+    window.addEventListener('scroll', requestTimelineScrollUpdate, { passive: true });
+    window.addEventListener('resize', requestTimelineScrollUpdate, { passive: true });
+    updateTimelineScrollState();
   </script>
 
   <!-- Script 7: Arena Switcher & Domain Search Filter -->
   <script data-purpose="arena-and-filter">
+    function switchArenaTrack(type) {
+      const prodCard = document.getElementById('card-product');
+      const protoCard = document.getElementById('card-prototype');
+      const prodTab = document.getElementById('arena-tab-prod');
+      const protoTab = document.getElementById('arena-tab-proto');
+
+      if (type === 'product') {
+        prodTab.className = "px-6 py-2.5 rounded-full text-xs sm:text-sm font-extrabold transition-all bg-indigo-600 text-white shadow-md cursor-pointer flex items-center space-x-2";
+        protoTab.className = "px-6 py-2.5 rounded-full text-xs sm:text-sm font-extrabold text-slate-600 hover:text-slate-900 transition-all cursor-pointer flex items-center space-x-2";
+        prodCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        protoTab.className = "px-6 py-2.5 rounded-full text-xs sm:text-sm font-extrabold transition-all bg-cyan-600 text-white shadow-md cursor-pointer flex items-center space-x-2";
+        prodTab.className = "px-6 py-2.5 rounded-full text-xs sm:text-sm font-extrabold text-slate-600 hover:text-slate-900 transition-all cursor-pointer flex items-center space-x-2";
+        protoCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+
     function filterDomains(query) {
       const q = query.toLowerCase().trim();
       const cards = document.querySelectorAll('.domain-card');
@@ -2090,15 +4170,17 @@
 
   <!-- Script 8: Scroll Progress, 3D Tilt, Accordion, Modals -->
   <script data-purpose="general-ui">
-    // 1. Scroll Progress Bar & Back to top button
+    // 1. Scroll Progress Bar, Back to top button (bottom-left) & Sticky QR Visibility (bottom-right)
     const progressBar = document.getElementById('scroll-progress-bar');
     const backToTopBtn = document.getElementById('back-to-top');
     const mainHeader = document.getElementById('main-header');
+    const floatingQrBtn = document.getElementById('floating-qr-btn');
+    const benefitsSection = document.getElementById('benefits');
 
-    window.addEventListener('scroll', () => {
+    function handleScrollUi() {
       const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
-      const scrolled = (window.scrollY / totalScroll);
-      progressBar.style.transform = `scaleX(${scrolled})`;
+      const scrolled = totalScroll > 0 ? (window.scrollY / totalScroll) : 0;
+      if (progressBar) progressBar.style.transform = `scaleX(${scrolled})`;
 
       if (mainHeader) {
         if (window.scrollY > 20) {
@@ -2108,12 +4190,35 @@
         }
       }
 
-      if (window.scrollY > 400) {
-        backToTopBtn.classList.remove('opacity-0', 'pointer-events-none');
-      } else {
-        backToTopBtn.classList.add('opacity-0', 'pointer-events-none');
+      // "Scroll to Top" button (strictly on bottom-left)
+      if (backToTopBtn) {
+        if (window.scrollY > 350) {
+          backToTopBtn.classList.remove('opacity-0', 'pointer-events-none');
+        } else {
+          backToTopBtn.classList.add('opacity-0', 'pointer-events-none');
+        }
       }
-    });
+
+      // Sticky / Floating QR Button:
+      // - Hidden initially in upper viewport
+      // - Appears fixed on screen only when user scrolls down to reach "Summit Honours & Institutional Perks" heading
+      // - Stays visible continuously throughout rest of website
+      if (floatingQrBtn && benefitsSection) {
+        const rect = benefitsSection.getBoundingClientRect();
+        const sectionTop = window.scrollY + rect.top;
+        if (window.scrollY + (window.innerHeight * 0.75) >= sectionTop) {
+          floatingQrBtn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
+          floatingQrBtn.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
+        } else {
+          floatingQrBtn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+          floatingQrBtn.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+        }
+      }
+    }
+
+    window.addEventListener('scroll', handleScrollUi, { passive: true });
+    window.addEventListener('resize', handleScrollUi, { passive: true });
+    handleScrollUi();
 
     // 2. IntersectionObserver for smooth scroll reveals
     const revealElements = document.querySelectorAll('.reveal');
@@ -2186,6 +4291,7 @@
       const isHidden = answer.classList.contains('hidden');
 
       document.querySelectorAll('.faq-answer').forEach(ans => ans.classList.add('hidden'));
+      document.querySelectorAll('.faq-item').forEach(item => item.classList.remove('is-open'));
       document.querySelectorAll('.faq-icon').forEach(ic => {
         ic.innerText = '+';
         ic.style.transform = 'rotate(0deg)';
@@ -2193,6 +4299,7 @@
 
       if (isHidden) {
         answer.classList.remove('hidden');
+        button.closest('.faq-item')?.classList.add('is-open');
         icon.innerText = '−';
         icon.style.transform = 'rotate(180deg)';
       }
@@ -2214,23 +4321,15 @@
       document.body.style.overflow = 'auto';
     }
 
-    // 7. Registration Modal Controls
-    function openRegisterModal() {
-      document.getElementById('register-modal').classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
-      const mobileMenu = document.getElementById('mobile-menu');
-      if (mobileMenu) mobileMenu.classList.add('hidden');
-    }
-    function closeRegisterModal() {
-      document.getElementById('register-modal').classList.add('hidden');
-      document.body.style.overflow = 'auto';
+    // 7. Direct registration routing (no intermediate modal)
+    function goToUnstop() {
+      window.location.href = "https://unstop.com/p/incubex-by-ignisia-2026-national-level-tech-launchpad-mit-world-peace-university-pune-maharashtra-1759743";
     }
 
     // Close modals on Esc key
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         closePosterModal();
-        closeRegisterModal();
         document.getElementById('qr-popup').classList.add('hidden');
       }
     });
