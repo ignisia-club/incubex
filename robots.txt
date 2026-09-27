@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://incubex.ignisia.tech/sitemap.xml

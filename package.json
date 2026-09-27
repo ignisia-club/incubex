@@ -1,0 +1,17 @@
+{
+  "name": "incubex",
+  "version": "1.0.0",
+  "private": true,
+  "description": "INCUBEX 2026 site for Ignisia at MIT-WPU.",
+  "scripts": {
+    "build:css": "tailwindcss -c tailwind.config.js -i styles/tailwind.input.css -o assets/site.css --minify"
+  },
+  "dependencies": {
+    "@dpawlikowski/liquid-glass": "^0.3.0",
+    "@jungherz-de/glasskit": "^1.19.1",
+    "liquid-glass-component-kit": "^1.0.3"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.19"
+  }
+}
