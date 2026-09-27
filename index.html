@@ -688,9 +688,9 @@
             <h3 class="text-2xl sm:text-3xl font-black text-slate-900 leading-tight">MIT-WPU students</h3>
             <p class="mt-3 text-sm text-slate-600 leading-relaxed">Current students of Dr. Vishwanath Karad MIT World Peace University, Pune.</p>
           </div>
-          <button type="button" disabled class="mt-8 w-full py-4 text-center rounded-2xl bg-indigo-600 text-white font-extrabold text-xs uppercase tracking-wider opacity-60 cursor-not-allowed">
-            Registration link coming soon
-          </button>
+          <a href="https://forms.gle/32GdFvZuNhFadqmh9" target="_blank" rel="noopener noreferrer" class="btn-shimmer mt-8 block w-full py-4 text-center rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs uppercase tracking-wider transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5">
+            Register →
+          </a>
         </div>
 
         <div class="glass-panel rounded-3xl border-2 border-cyan-200/90 p-8 shadow-card hover:shadow-hover relative flex flex-col justify-between overflow-hidden">
@@ -1793,9 +1793,16 @@
         </div>
       </div>
 
-      <button id="register-mit-action" type="button" disabled class="w-full py-4 text-center rounded-2xl font-black text-sm tracking-wider uppercase text-white bg-indigo-600 opacity-60 cursor-not-allowed">
-        MIT-WPU link coming soon
-      </button>
+      <a
+        id="register-mit-action"
+        href="https://forms.gle/32GdFvZuNhFadqmh9"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn-shimmer block w-full py-4 text-center rounded-2xl font-black text-sm tracking-wider uppercase text-white bg-indigo-600 hover:bg-indigo-700 shadow-md hover:-translate-y-0.5 active:translate-y-0 transition-all"
+        onclick="playSound('success');"
+      >
+        Open the MIT-WPU form →
+      </a>
       <a 
         id="register-india-action"
         href="https://unstop.com/p/incubex-by-ignisia-2026-national-level-tech-launchpad-mit-world-peace-university-pune-maharashtra-1759743" 
@@ -1806,7 +1813,7 @@
       >
         Register on Unstop →
       </a>
-      <p id="register-action-note" class="text-center text-[10px] text-slate-600 mt-2.5">The MIT-WPU registration link will be added here.</p>
+      <p id="register-action-note" class="text-center text-[10px] text-slate-600 mt-2.5">This opens the MIT-WPU student registration form.</p>
     </div>
   </div>
 
@@ -2332,7 +2339,7 @@
         indiaBtn.className = idle;
         mitAction.classList.remove('hidden');
         indiaAction.classList.add('hidden');
-        note.textContent = 'The MIT-WPU registration link will be added here.';
+        note.textContent = 'This opens the MIT-WPU student registration form.';
       } else {
         indiaBtn.className = selected;
         mitBtn.className = idle;
