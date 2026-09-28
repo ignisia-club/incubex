@@ -53,7 +53,6 @@
           "@type": "ContactPoint",
           "contactType": "event support",
           "email": "ignisia@mitwpu.edu.in",
-          "telephone": "+91-89991-29332",
           "areaServed": "IN",
           "availableLanguage": "en"
         },
@@ -142,7 +141,7 @@
             "name": "What is the difference between Product Track and Prototype Track?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Product Track is designed for ventures with working minimum viable products, commercial business models, customer validation, and high readiness (30 slots). Prototype Track is intended for academic research, lab hardware builds, IoT circuits, and engineering demonstrations showcasing novelty, technical excellence, and functional feasibility (50 slots)."
+              "text": "Product Track is designed for ventures with working minimum viable products, commercial business models, customer validation, and high readiness. Prototype Track is intended for academic research, lab hardware builds, IoT circuits, and engineering demonstrations showcasing novelty, technical excellence, and functional feasibility. Teams of 1–6 members can enter either track."
             }
           },
           {
@@ -200,7 +199,7 @@
   <!-- Instrument Serif (Google Fonts) — ignisia.tech editorial serif for date labels & italic accents -->
   <link href="https://fonts.googleapis.com" rel="preconnect"/>
   <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Montserrat:wght@500;600;900&amp;display=swap" rel="stylesheet"/>
   <!-- Phosphor icons, loaded on demand through Iconify -->
   <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 
@@ -545,6 +544,408 @@
         width: 100%;
         justify-content: center;
       }
+    }
+    /* ── HERO WORDMARK (poster styling) ── */
+    #hero .hero-wordmark {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0 auto;
+      line-height: 1;
+    }
+    #hero .hero-wordmark-row {
+      position: relative;
+      display: inline-flex;
+      align-items: flex-end;
+      gap: clamp(0.5rem, 1.2vw, 1rem);
+    }
+    #hero .hero-wordmark-name {
+      display: block;
+      width: clamp(250px, 54vw, 700px);
+      height: auto;
+      filter: drop-shadow(0 10px 26px rgba(41, 56, 207, 0.14));
+    }
+    #hero .hero-wordmark-by {
+      position: absolute;
+      left: 100%;
+      bottom: -0.05em;
+      margin-left: 0.35em;
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(2.2rem, 4.2vw, 3.8rem);
+      line-height: 1;
+      white-space: nowrap;
+      color: #475569;
+    }
+    @media (min-width: 640px) and (max-width: 900px) {
+      #hero .hero-wordmark-name { width: 50vw; }
+      #hero .hero-wordmark-by { font-size: 1.9rem; }
+    }
+    #hero .hero-wordmark-by span {
+      padding-right: 0.14em;
+      background: linear-gradient(135deg, #1e1b4b 0%, #2938cf 50%, #6366f1 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    #hero .hero-wordmark-year {
+      display: block;
+      width: clamp(120px, 21vw, 270px);
+      height: auto;
+      margin-top: clamp(0.5rem, 1.2vw, 1rem);
+      filter: drop-shadow(0 8px 22px rgba(79, 70, 229, 0.14));
+    }
+    #hero .hero-launchpad-line {
+      margin: 1.25rem auto 0;
+    }
+    #hero .hero-launchpad-line span {
+      display: inline-block;
+      padding: 0.6rem 1.4rem;
+      border-radius: 9999px;
+      font-size: clamp(0.72rem, 1vw, 0.85rem);
+      font-weight: 900;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #2635b4;
+      background: rgba(255, 255, 255, 0.62);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      box-shadow: 0 10px 30px rgba(41, 56, 207, 0.08), 0 1px 1px rgba(255, 255, 255, 0.95) inset;
+      backdrop-filter: blur(18px) saturate(170%);
+      -webkit-backdrop-filter: blur(18px) saturate(170%);
+    }
+    #hero .hero-vision-line {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 0.22em;
+      margin: 0.7rem auto 0;
+      line-height: 1;
+    }
+    #hero .hero-cta-stack {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    #hero .hero-register-big {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      min-width: min(100%, 22rem);
+      padding: 1.15rem 2.75rem;
+      border-radius: 9999px;
+      font-family: 'Montserrat', 'Satoshi', sans-serif;
+      font-size: clamp(1rem, 1.5vw, 1.2rem);
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #fff;
+      background: linear-gradient(90deg, #2938cf 0%, #4f46e5 55%, #7c3aed 100%);
+      box-shadow: 0 18px 40px rgba(41, 56, 207, 0.32), 0 1px 0 rgba(255, 255, 255, 0.35) inset;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s ease;
+    }
+    #hero .hero-register-big:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 24px 48px rgba(41, 56, 207, 0.4), 0 1px 0 rgba(255, 255, 255, 0.35) inset;
+    }
+    #hero .hero-register-big svg { transition: transform 0.2s ease; }
+    #hero .hero-register-big:hover svg { transform: translateX(4px); }
+    #hero .hero-secondary-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+    #hero .hero-secondary-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.7rem 1.35rem;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #2938cf;
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      box-shadow: 0 10px 26px rgba(41, 56, 207, 0.08), 0 1px 1px rgba(255, 255, 255, 0.9) inset;
+      backdrop-filter: blur(18px) saturate(170%);
+      -webkit-backdrop-filter: blur(18px) saturate(170%);
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    #hero .hero-secondary-link:hover {
+      background: rgba(255, 255, 255, 0.95);
+      border-color: rgba(41, 56, 207, 0.3);
+      transform: translateY(-2px);
+    }
+    @media (max-width: 639px) {
+      #hero .hero-wordmark-row { flex-direction: column; align-items: center; gap: 0; }
+      #hero .hero-wordmark-by { position: static; align-self: flex-end; margin: 0.1em 0.1em 0 0; font-size: 1.9rem; }
+      #hero .hero-wordmark-name { width: min(86vw, 330px); }
+      #hero .hero-wordmark-year { width: min(38vw, 140px); margin-top: 0.35rem; }
+      #hero .hero-launchpad-line span { letter-spacing: 0.14em; padding: 0.55rem 1rem; }
+      #hero .hero-register-big { width: 100%; padding: 1rem 1.5rem; }
+    }
+
+    /* ── HEADER MANTRA (Think · Build · Evolve) ── */
+    .nav-mantra {
+      display: none;
+      flex-direction: column;
+      margin-left: 0.55rem;
+      padding-left: 0.6rem;
+      border-left: 1px solid rgba(148, 163, 184, 0.6);
+      font-size: 0.6rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      line-height: 1.25;
+      text-transform: uppercase;
+      color: #475569;
+    }
+    .nav-mantra span:nth-child(2) { color: #16a34a; }
+    .nav-mantra span:nth-child(3) { color: #2938cf; }
+    @media (min-width: 768px) {
+      .nav-mantra { display: inline-flex; }
+    }
+    .mobile-menu-mantra {
+      margin: 0 0 0.25rem;
+      text-align: center;
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #64748b;
+    }
+
+    /* ── EVENT DETAILS STRIP ── */
+    .event-info-section {
+      position: relative;
+      z-index: 20;
+      padding: 0.5rem 0 1.5rem;
+    }
+    .event-info-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    @media (min-width: 768px) {
+      .event-info-grid { grid-template-columns: 1fr 1fr; }
+    }
+    .event-info-card {
+      display: flex;
+      align-items: center;
+      gap: 1.1rem;
+      padding: 1.1rem 1.4rem;
+      border-radius: 1.5rem;
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid rgba(99, 102, 241, 0.18);
+      box-shadow: 0 14px 36px rgba(41, 56, 207, 0.08), 0 1px 1px rgba(255, 255, 255, 0.95) inset;
+      backdrop-filter: blur(22px) saturate(170%);
+      -webkit-backdrop-filter: blur(22px) saturate(170%);
+    }
+    .event-info-date {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.55rem 0.9rem;
+      border-radius: 1rem;
+      background: #eef2ff;
+      border: 1px solid rgba(99, 102, 241, 0.2);
+      flex-shrink: 0;
+    }
+    .event-info-day {
+      font-family: 'Montserrat', 'Satoshi', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 900;
+      line-height: 1;
+      color: #2938cf;
+    }
+    .event-info-month {
+      font-size: 0.66rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      line-height: 1.25;
+      text-transform: uppercase;
+      color: #334155;
+    }
+    .event-info-icon {
+      width: 3.4rem;
+      height: 3.4rem;
+      border-radius: 1rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: #0e7490;
+      background: #ecfeff;
+      border: 1px solid rgba(8, 145, 178, 0.2);
+    }
+    .event-info-copy {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      min-width: 0;
+    }
+    .event-info-label {
+      font-size: 0.66rem;
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #6366f1;
+    }
+    .event-info-value {
+      font-size: 1.2rem;
+      font-weight: 900;
+      color: #0f172a;
+      line-height: 1.3;
+    }
+    .event-info-sub {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #475569;
+    }
+    .event-info-eligibility {
+      margin: 1rem auto 0;
+      text-align: center;
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #334155;
+    }
+
+    /* ── REGISTRATION MODAL ── */
+    .register-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      background: rgba(2, 6, 23, 0.72);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .register-modal.hidden { display: none; }
+    .register-modal-card {
+      width: 100%;
+      max-width: 32rem;
+      padding: 1.6rem;
+      border-radius: 1.75rem;
+      background: #fff;
+      border: 1px solid #e0e7ff;
+      box-shadow: 0 30px 80px rgba(15, 23, 42, 0.35);
+      animation: registerModalIn 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    @keyframes registerModalIn {
+      from { opacity: 0; transform: translateY(12px) scale(0.98); }
+      to { opacity: 1; transform: none; }
+    }
+    .register-modal-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      padding-bottom: 1rem;
+      margin-bottom: 1.2rem;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .register-modal-kicker {
+      display: block;
+      font-size: 0.66rem;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #4f46e5;
+    }
+    .register-modal-head h3 {
+      margin-top: 0.2rem;
+      font-size: 1.35rem;
+      font-weight: 900;
+      color: #0f172a;
+    }
+    .register-modal-close {
+      width: 2.1rem;
+      height: 2.1rem;
+      border-radius: 9999px;
+      background: #f1f5f9;
+      color: #334155;
+      font-size: 1.3rem;
+      line-height: 1;
+      font-weight: 700;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .register-modal-close:hover { background: #e2e8f0; }
+    .register-modal-options {
+      display: grid;
+      gap: 0.75rem;
+    }
+    .register-option {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      padding: 1rem 1.1rem;
+      border-radius: 1.25rem;
+      border: 2px solid #e2e8f0;
+      background: #fff;
+      text-align: left;
+      transition: all 0.2s ease;
+    }
+    .register-option:hover {
+      border-color: #6366f1;
+      background: #f8faff;
+      transform: translateY(-1px);
+    }
+    .register-option-primary {
+      border-color: #4f46e5;
+      background: #eef2ff;
+    }
+    .register-option-icon {
+      width: 2.75rem;
+      height: 2.75rem;
+      border-radius: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: #fff;
+      background: linear-gradient(135deg, #2938cf, #7c3aed);
+    }
+    .register-option-copy {
+      display: flex;
+      flex-direction: column;
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+    .register-option-title {
+      font-size: 0.95rem;
+      font-weight: 900;
+      color: #0f172a;
+    }
+    .register-option-sub {
+      margin-top: 0.15rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #475569;
+    }
+    .register-option-arrow {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #4f46e5;
+    }
+    .register-modal-note {
+      margin-top: 1rem;
+      font-size: 0.72rem;
+      color: #64748b;
     }
   </style>
 
@@ -2555,6 +2956,7 @@
               class="nav-ignisia-logo h-5 sm:h-8 w-auto max-w-[50px] sm:max-w-none object-contain drop-shadow-xs"
               loading="eager"
             />
+            <span class="nav-mantra" aria-label="Think, Build, Evolve"><span>Think</span><span>Build</span><span>Evolve</span></span>
           </a>
         </div>
 
@@ -2562,9 +2964,8 @@
         <nav class="hidden lg:flex items-center text-[12px] font-semibold text-slate-600">
           <a class="whitespace-nowrap py-1 hover:text-indigo-600 transition-colors nav-link" href="#benefits">Honours</a>
           <a class="whitespace-nowrap py-1 hover:text-indigo-600 transition-colors nav-link" href="#arena">Tracks</a>
-          <a class="whitespace-nowrap py-1 hover:text-indigo-600 transition-colors nav-link" href="#mission-map">Roadmap</a>
-          <a class="whitespace-nowrap py-1 hover:text-indigo-600 transition-colors nav-link" href="#finalists">Finalists</a>
           <a class="whitespace-nowrap py-1 hover:text-indigo-600 transition-colors nav-link" href="#categories">Domains</a>
+          <a class="whitespace-nowrap py-1 hover:text-indigo-600 transition-colors nav-link" href="#mission-map">Timeline</a>
           <a class="whitespace-nowrap py-1 hover:text-indigo-600 transition-colors nav-link" href="#fees">Fees</a>
           <a class="whitespace-nowrap py-1 hover:text-indigo-600 transition-colors nav-link" href="#faq">FAQ</a>
         </nav>
@@ -2572,16 +2973,16 @@
         <!-- Right Action: Clean Prominent Register Button with ample space -->
         <div class="flex items-center gap-1.5 sm:gap-3 shrink-0">
           <!-- Register Now CTA with Shimmer & Glow -->
-          <a
-            href="https://unstop.com/p/incubex-by-ignisia-2026-national-level-tech-launchpad-mit-world-peace-university-pune-maharashtra-1759743"
-            onclick="playSound('click');"
+          <button
+            type="button"
+            onclick="openRegisterModal(); playSound('click');"
             class="btn-shimmer relative px-2.5 sm:px-6 py-2 sm:py-2.5 rounded-full font-bold text-[10px] sm:text-xs tracking-wider uppercase text-white bg-gradient-to-r from-blue-600 via-indigo-600 to-indigo-700 shadow-glow hover:shadow-hover hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 inline-flex items-center gap-1.5 sm:gap-2 cursor-pointer"
           >
             <span>REGISTER NOW</span>
             <svg class="hidden sm:block w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
               <path d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" stroke-linecap="round" stroke-linejoin="round"></path>
             </svg>
-          </a>
+          </button>
 
           <!-- Mobile Menu Trigger -->
           <button aria-label="Open navigation menu" aria-controls="mobile-menu" aria-expanded="false" class="lg:hidden rounded-xl text-slate-700 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" id="mobile-menu-btn">
@@ -2600,15 +3001,15 @@
   <!-- Mobile Navigation Dropdown — animated vertical panel below the pill navbar -->
   <div id="mobile-menu-backdrop" aria-hidden="true"></div>
   <nav id="mobile-menu" aria-hidden="true" aria-label="Mobile navigation">
-    <a class="block py-1.5 hover:text-indigo-600" href="#benefits">Summit Honours &amp; Institutional Perks</a>
+    <a class="block py-1.5 hover:text-indigo-600" href="#benefits">Summit Honours &amp; Perks</a>
     <a class="block py-1.5 hover:text-indigo-600" href="#arena">Tracks (Product &amp; Prototype)</a>
-    <a class="block py-1.5 hover:text-indigo-600" href="#mission-map">Timeline (8-Step Roadmap)</a>
-    <a class="block py-1.5 hover:text-indigo-600" href="#finalists">Finalists (80 Booth Quota)</a>
     <a class="block py-1.5 hover:text-indigo-600" href="#categories">Innovation Domains</a>
-    <a class="block py-1.5 hover:text-indigo-600" href="#fees">Fees (₹200 Registration)</a>
+    <a class="block py-1.5 hover:text-indigo-600" href="#mission-map">Timeline</a>
+    <a class="block py-1.5 hover:text-indigo-600" href="#fees">Fees</a>
     <a class="block py-1.5 hover:text-indigo-600" href="#faq">FAQ</a>
     <div class="pt-3 border-t border-slate-100 flex flex-col gap-2">
-      <a href="https://unstop.com/p/incubex-by-ignisia-2026-national-level-tech-launchpad-mit-world-peace-university-pune-maharashtra-1759743" onclick="playSound('click');" class="w-full py-2.5 text-center text-xs font-bold text-white bg-indigo-600 rounded-xl shadow-md">Register on Unstop →</a>
+      <p class="mobile-menu-mantra">Think · Build · Evolve</p>
+      <button type="button" onclick="openRegisterModal(); playSound('click');" class="w-full py-2.5 text-center text-xs font-bold text-white bg-indigo-600 rounded-xl shadow-md cursor-pointer">Register Now →</button>
     </div>
   </nav>
 
@@ -2639,122 +3040,40 @@
         <!-- Left / Center Main Content: Uncongested & Spacious -->
         <div class="hero-content-col">
           
-          <!-- 2. Main Title: Incubex (Expanded in Instrument Serif italic - matches Ignisia font) -->
-          <h1 class="hero-title select-none mt-1 mb-2 tracking-tight">
-            <span class="hero-incubex-title filter drop-shadow-sm">
-              Incubex
+          <!-- Wordmark: INCUBEX / 2026 in poster styling, "by Ignisia" in the ignisia.tech serif -->
+          <h1 class="hero-wordmark select-none" aria-label="INCUBEX by Ignisia 2026">
+            <span class="hero-wordmark-row">
+              <img class="hero-wordmark-name" src="assets/incubex-wordmark.png" alt="INCUBEX" width="1428" height="233" fetchpriority="high" />
+              <span class="hero-wordmark-by">by <span>Ignisia</span></span>
             </span>
-            <!-- 3. Subtitle / Kicker (Matches screenshot "AI & INNOVATION CLUB" style) -->
-            <span class="hero-kicker font-sans font-black text-xs sm:text-sm md:text-base uppercase tracking-[0.25em] sm:tracking-[0.3em] text-indigo-700 mt-2 mb-3">
-              <span class="hero-kicker-year">2026</span>
-              <span class="hero-kicker-dot" aria-hidden="true">•</span>
-              <span class="hero-kicker-copy">NATIONAL-LEVEL TECH LAUNCHPAD</span>
-            </span>
+            <img class="hero-wordmark-year" src="assets/incubex-2026.png" alt="2026" width="801" height="216" />
           </h1>
 
-          <!-- 4. Tagline Lockup (Matches "Think Build Evolve" with editorial serif accent) -->
-          <div class="hero-tagline-lockup mb-5 space-y-1">
-            <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
-              <span class="hero-vision-phrase">From Vision To</span>
-              <span class="hero-venture-word">Venture</span>
-            </h2>
-            <p class="text-xs sm:text-sm font-semibold text-slate-500">
-              <span class="hero-mantra">
-                <span>Think</span>
-                <span class="hero-mantra-build">Build</span>
-                <span>Evolve</span>
-              </span>
-              <span class="hero-tagline-separator" aria-hidden="true">•</span>
-              <span class="hero-tagline-credit"><strong>Incubex by Ignisia</strong></span>
-            </p>
-          </div>
+          <p class="hero-launchpad-line"><span>National-Level Tech Launchpad</span></p>
 
-          <!-- 6. Event journey: date to destination -->
-          <div class="hero-meta-rail">
-            <div class="hero-journey">
-              <div class="hero-journey-card hero-date-card" aria-label="Summit Date 21 October 2026, 9:00 AM to 6:00 PM IST">
-                <span class="hero-date-stamp">
-                  <span class="hero-date-day">21</span>
-                  <span class="hero-date-month">OCTOBER</span>
-                  <span class="hero-date-year">2026</span>
-                </span>
-                <span class="hero-event-copy">
-                  <span class="hero-event-label">Summit Date</span>
-                  <span class="hero-event-subvalue">9:00 AM – 6:00 PM IST</span>
-                </span>
-              </div>
+          <p class="hero-vision-line">
+            <span class="hero-vision-phrase">From Vision To</span>
+            <span class="hero-venture-word">Venture</span>
+          </p>
 
-              <div class="hero-route-link" aria-hidden="true">
-                <span class="hero-route-icon">
-                  <iconify-icon icon="ph:rocket-launch-duotone" width="18" height="18"></iconify-icon>
-                </span>
-              </div>
-
-              <div class="hero-journey-card hero-campus-card">
-                <span class="hero-campus-pin" aria-hidden="true">
-                  <iconify-icon icon="ph:map-pin-area-duotone" width="25" height="25"></iconify-icon>
-                </span>
-                <span class="hero-event-copy">
-                  <span class="hero-event-label">Host Campus</span>
-                  <span class="hero-event-value">MIT-WPU, Pune</span>
-                  <span class="hero-event-subvalue">Kothrud, Pune, Maharashtra</span>
-                </span>
-              </div>
-            </div>
-
-            <div class="hero-event-foot">
-              <p class="hero-eligibility">NATIONAL-LEVEL &nbsp;•&nbsp; UG &amp; PG STUDENTS &nbsp;•&nbsp; ACROSS INDIA</p>
-              <div class="hero-fees" aria-label="Registration and finalist fees">
-                <span class="hero-fee-token"><strong>₹200</strong> Registration</span>
-                <span class="hero-fee-token"><strong>₹600</strong> Finalist Fee</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- 7. Three Signature Floating Glass Pills (Screenshot exact match) -->
-          <div class="hero-primary-actions grid grid-cols-1 sm:grid-cols-3 gap-3.5 max-w-3xl xl:max-w-[52rem] mx-auto text-left">
-            <!-- Pill 1: Register on Unstop -->
-            <a href="https://unstop.com/p/incubex-by-ignisia-2026-national-level-tech-launchpad-mit-world-peace-university-pune-maharashtra-1759743" onclick="playSound('click');" class="hero-glass-pill hero-register-cta group w-full text-left cursor-pointer">
-              <span class="hero-glass-pill-icon" style="background:linear-gradient(135deg, #2938cf, #7c3aed);">
-                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                  <path d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" stroke-linecap="round" stroke-linejoin="round"></path>
-                </svg>
-              </span>
-              <span class="hero-glass-pill-content">
-                <span class="hero-glass-pill-kicker">OFFICIAL PORTAL</span>
-                <span class="hero-glass-pill-title">REGISTER ON UNSTOP</span>
-              </span>
-              <span class="hero-glass-pill-arrow">↗</span>
-            </a>
-
-            <!-- Pill 2: Explore 2 Tracks -->
-            <a href="#arena" onclick="playSound('hover');" class="hero-glass-pill group">
-              <span class="hero-glass-pill-icon" style="background:#2938cf;">
-                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-                  <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path>
-                  <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path>
-                </svg>
-              </span>
-              <span class="hero-glass-pill-content">
-                <span class="hero-glass-pill-kicker">COMPETITION ARENA</span>
-                <span class="hero-glass-pill-title">EXPLORE 2 TRACKS</span>
-              </span>
-              <span class="hero-glass-pill-arrow">↗</span>
-            </a>
-
-            <!-- Pill 3: View Brochure -->
-            <button onclick="openPosterModal(); playSound('click');" class="hero-glass-pill group w-full text-left cursor-pointer">
-              <span class="hero-glass-pill-icon" style="background:#0891b2;">
-                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                  <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
-                </svg>
-              </span>
-              <span class="hero-glass-pill-content">
-                <span class="hero-glass-pill-kicker">SUMMIT GUIDE</span>
-                <span class="hero-glass-pill-title">VIEW BROCHURE</span>
-              </span>
-              <span class="hero-glass-pill-arrow">↗</span>
+          <div class="hero-cta-stack">
+            <button type="button" onclick="openRegisterModal(); playSound('click');" class="hero-register-big btn-shimmer">
+              <span>Register Now</span>
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
             </button>
+
+            <div class="hero-secondary-actions">
+              <a href="#arena" onclick="playSound('hover');" class="hero-secondary-link">
+                <iconify-icon icon="ph:rocket-launch-duotone" width="18" height="18" aria-hidden="true"></iconify-icon>
+                <span>Explore Tracks</span>
+              </a>
+              <button type="button" onclick="openPosterModal(); playSound('click');" class="hero-secondary-link">
+                <iconify-icon icon="ph:download-simple-bold" width="17" height="17" aria-hidden="true"></iconify-icon>
+                <span>View Brochure</span>
+              </button>
+            </div>
           </div>
 
         </div>
@@ -2836,6 +3155,37 @@
     </div>
   </section>
   <!-- END: HeroSection -->
+
+  <!-- BEGIN: Event details (date + venue) -->
+  <section class="event-info-section reveal" id="event-info" aria-label="Event date and venue">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="event-info-grid">
+        <div class="event-info-card">
+          <span class="event-info-date" aria-hidden="true">
+            <span class="event-info-day">21</span>
+            <span class="event-info-month">Oct<br>2026</span>
+          </span>
+          <span class="event-info-copy">
+            <span class="event-info-label">Grand Finale</span>
+            <span class="event-info-value">21 October 2026</span>
+            <span class="event-info-sub">9:00 AM – 6:00 PM IST</span>
+          </span>
+        </div>
+        <div class="event-info-card">
+          <span class="event-info-icon" aria-hidden="true">
+            <iconify-icon icon="ph:map-pin-area-duotone" width="26" height="26"></iconify-icon>
+          </span>
+          <span class="event-info-copy">
+            <span class="event-info-label">Venue</span>
+            <span class="event-info-value">MIT-WPU, Pune</span>
+            <span class="event-info-sub">Kothrud, Pune, Maharashtra</span>
+          </span>
+        </div>
+      </div>
+      <p class="event-info-eligibility">National-level &nbsp;•&nbsp; UG &amp; PG students &nbsp;•&nbsp; Across India</p>
+    </div>
+  </section>
+  <!-- END: Event details -->
 
   <!-- BEGIN: HighlightPosterPillars (Infinite Auto-scrolling Carousel of 6 Perks) -->
   <section class="w-full py-8 md:py-12 relative z-20 overflow-hidden reveal" id="benefits">
@@ -2971,10 +3321,10 @@
       
       <div class="text-center max-w-3xl mx-auto mb-10">
         <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight">
-          CHOOSE YOUR BATTLEGROUND
+          COMPETITION TRACKS
         </h2>
         <p class="text-base text-slate-600 mt-3">
-          Switch between tracks to compare team size, how ready the build should be, how you present it, and how many booths are on campus.
+          Two tracks, each with its own expectations for build maturity and presentation format.
         </p>
       </div>
 
@@ -2994,7 +3344,7 @@
                 <span class="w-2.5 h-2.5 rounded-full bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.6)]"></span>
                 <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(16,185,129,0.6)]"></span>
               </div>
-              <span class="text-[10px] font-bold uppercase tracking-widest text-indigo-700 bg-indigo-50/90 px-2.5 py-0.5 rounded-full border border-indigo-200/60">TRACK 01 // 30 SLOTS</span>
+              <span class="text-[10px] font-bold uppercase tracking-widest text-indigo-700 bg-indigo-50/90 px-2.5 py-0.5 rounded-full border border-indigo-200/60">TRACK 01</span>
             </div>
 
             <div class="flex items-center space-x-4 mb-5">
@@ -3011,7 +3361,7 @@
                 <h3 class="text-2xl sm:text-3xl font-black text-slate-900 leading-none">
                   Product <span class="block text-indigo-700 leading-tight">Track</span>
                 </h3>
-                <p class="mt-2 text-sm font-semibold text-slate-600">30 finalist slots · working products you can demo</p>
+                <p class="mt-2 text-sm font-semibold text-slate-600">Working products you can demo</p>
               </div>
             </div>
 
@@ -3058,13 +3408,13 @@
             </ul>
           </div>
 
-          <a
-            href="https://unstop.com/p/incubex-by-ignisia-2026-national-level-tech-launchpad-mit-world-peace-university-pune-maharashtra-1759743"
-            onclick="playSound('click');"
+          <button
+            type="button"
+            onclick="openRegisterModal(); playSound('click');"
             class="btn-shimmer w-full py-4 text-center rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs uppercase tracking-wider transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 relative z-10 cursor-pointer"
           >
             Apply For Product Track (₹200) →
-          </a>
+          </button>
         </div>
 
         <!-- Track 2: Prototype Track (Lightbulb/Nodes) -->
@@ -3079,7 +3429,7 @@
                 <span class="w-2.5 h-2.5 rounded-full bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.6)]"></span>
                 <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(16,185,129,0.6)]"></span>
               </div>
-              <span class="text-[10px] font-bold uppercase tracking-widest text-cyan-700 bg-cyan-50/90 px-2.5 py-0.5 rounded-full border border-cyan-200/60">TRACK 02 // 50 SLOTS</span>
+              <span class="text-[10px] font-bold uppercase tracking-widest text-cyan-700 bg-cyan-50/90 px-2.5 py-0.5 rounded-full border border-cyan-200/60">TRACK 02</span>
             </div>
 
             <div class="flex items-center space-x-4 mb-5">
@@ -3094,7 +3444,7 @@
                 <h3 class="text-2xl sm:text-3xl font-black text-slate-900 leading-none">
                   Prototype <span class="block text-cyan-700 leading-tight">Expo Track</span>
                 </h3>
-                <p class="mt-2 text-sm font-semibold text-slate-600">50 finalist slots · research and lab builds</p>
+                <p class="mt-2 text-sm font-semibold text-slate-600">Research and lab builds</p>
               </div>
             </div>
 
@@ -3128,7 +3478,7 @@
             <ul class="space-y-3 text-xs sm:text-sm text-slate-800 font-semibold mb-8">
               <li class="flex items-start space-x-3">
                 <span class="w-5 h-5 rounded-full bg-cyan-100 text-cyan-800 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">✓</span>
-                <span class="text-slate-800"><strong class="text-slate-900 font-black">Team Size:</strong> 3 – 6 members per team</span>
+                <span class="text-slate-800"><strong class="text-slate-900 font-black">Team Size:</strong> 1 – 6 members per team</span>
               </li>
               <li class="flex items-start space-x-3">
                 <span class="w-5 h-5 rounded-full bg-cyan-100 text-cyan-800 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">✓</span>
@@ -3141,540 +3491,19 @@
             </ul>
           </div>
 
-          <a
-            href="https://unstop.com/p/incubex-by-ignisia-2026-national-level-tech-launchpad-mit-world-peace-university-pune-maharashtra-1759743"
-            onclick="playSound('click');"
+          <button
+            type="button"
+            onclick="openRegisterModal(); playSound('click');"
             class="btn-shimmer w-full py-4 text-center rounded-2xl bg-cyan-700 hover:bg-cyan-800 text-white font-extrabold text-xs uppercase tracking-wider transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 relative z-10 cursor-pointer"
           >
             Apply For Prototype Track (₹200) →
-          </a>
+          </button>
         </div>
       </div>
     </div>
   </section>
 
   
-
-  <!-- ======================================================== -->
-  <!-- 8-STEP LAUNCHPAD MISSION TIMELINE (IGNISIA VERTICAL STYLE) -->
-  <!-- ======================================================== -->
-  <section class="py-16 md:py-24 relative reveal" id="mission-map">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <!-- Section Header -->
-      <div class="text-center max-w-3xl mx-auto mb-16">
-        <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight">
-          8-STEP LAUNCHPAD TIMELINE
-        </h2>
-        <p class="text-base text-slate-600 mt-3">
-          Follow the structured chronological milestones from national registration on Unstop to the Grand Finale at MIT-WPU Pune.
-        </p>
-
-        <!-- Quick Timeline Action Filters -->
-        <div class="flex items-center justify-center mt-6">
-          <button
-            id="timeline-toggle"
-            onclick="toggleTimelineDetails(); playSound('click');"
-            class="px-4 py-1.5 rounded-full text-xs font-bold text-slate-700 bg-white border border-slate-200 hover:border-indigo-400 hover:text-indigo-600 transition-all shadow-xs cursor-pointer inline-flex items-center gap-1.5"
-            aria-expanded="false"
-          >
-            <svg id="timeline-toggle-icon" class="w-3.5 h-3.5 text-indigo-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
-            <span id="timeline-toggle-label">Expand All Details</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- Vertical Continuous Timeline (Matching ignisia.tech Reference Design) -->
-      <div class="relative">
-        
-        <!-- Continuous Vertical Spine Line -->
-        <div class="hidden md:block absolute left-72 top-6 bottom-6 w-0.5" id="timeline-spine" aria-hidden="true">
-          <div id="timeline-progress"></div>
-        </div>
-
-        <!-- 8 Timeline Milestones -->
-        <div class="space-y-12 sm:space-y-16">
-          
-          <!-- Step 1: 25 Sept – 2 Oct 2026 -->
-          <div class="relative flex flex-col md:flex-row items-start group timeline-item" id="step-node-1">
-            <!-- Left Date Column -->
-            <div class="w-full md:w-72 md:shrink-0 md:pr-8 text-left md:text-right pb-3 md:pb-0">
-              <time datetime="2026-09-25" data-end-date="2026-10-02" class="font-serif italic text-2xl sm:text-3xl text-slate-900 font-bold group-hover:text-indigo-600 transition-colors">
-                25 Sept – 2 Oct 2026
-              </time>
-              <span class="text-[11px] font-mono uppercase tracking-wider text-indigo-600 font-bold block mt-1">
-                Step 01 • Phase 1
-              </span>
-            </div>
-
-            <!-- Center Node Marker -->
-            <div class="hidden md:flex absolute left-72 -translate-x-1/2 items-center justify-center z-10">
-              <div class="w-8 h-8 rounded-full border-2 border-indigo-600 bg-white flex items-center justify-center shadow-md group-hover:scale-110 group-hover:border-blue-500 transition-transform">
-                <div class="w-3 h-3 rounded-full bg-indigo-600"></div>
-              </div>
-            </div>
-
-            <!-- Right Content Card -->
-            <div class="w-full md:flex-1 md:min-w-0 md:pl-12">
-              <div class="bg-white/90 backdrop-blur-sm border border-indigo-100/90 rounded-2xl p-6 sm:p-7 shadow-xs hover:shadow-card hover:border-indigo-300 transition-all">
-                <div class="flex items-center space-x-2 mb-2">
-                  <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold tracking-wider uppercase bg-blue-50 text-blue-700 border border-blue-200">
-                    Registration &amp; Outreach
-                  </span>
-                </div>
-                <h3 class="text-xl sm:text-2xl font-black text-slate-900 mb-2">
-                  Team Enrolment on Unstop
-                </h3>
-                <p class="text-sm text-slate-700 leading-relaxed font-normal mb-4">
-                  Assemble your team (1–6 members for Product Track, 3–6 for Prototype Expo) and register on the official Unstop portal. Teams pay the initial flat ₹200 registration fee to secure their participation.
-                </p>
-                <div id="step-expanded-1" class="hidden mt-4 pt-4 border-t border-slate-100 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                  <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
-                    <span class="block font-bold text-slate-700 mb-1">Required Deliverable:</span>
-                    <span class="text-slate-600">Provide college ID credentials and select track &amp; category.</span>
-                  </div>
-                  <div class="bg-indigo-50/70 p-3.5 rounded-xl border border-indigo-100">
-                    <span class="block font-bold text-indigo-900 mb-1">Immediate Milestone:</span>
-                    <span class="text-indigo-800">Unlocks download access to the official 10-slide INCUBEX blueprint template.</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Step 2: Early Oct 2026 -->
-          <div class="relative flex flex-col md:flex-row items-start group timeline-item" id="step-node-2">
-            <div class="w-full md:w-72 md:shrink-0 md:pr-8 text-left md:text-right pb-3 md:pb-0">
-              <time datetime="2026-10" class="font-serif italic text-2xl sm:text-3xl text-slate-900 font-bold group-hover:text-indigo-600 transition-colors">
-                Early Oct 2026
-              </time>
-              <span class="text-[11px] font-mono uppercase tracking-wider text-indigo-600 font-bold block mt-1">
-                Step 02 • Blueprint Build
-              </span>
-            </div>
-
-            <div class="hidden md:flex absolute left-72 -translate-x-1/2 items-center justify-center z-10">
-              <div class="w-8 h-8 rounded-full border-2 border-indigo-600 bg-white flex items-center justify-center shadow-md group-hover:scale-110 group-hover:border-blue-500 transition-transform">
-                <div class="w-3 h-3 rounded-full bg-indigo-600"></div>
-              </div>
-            </div>
-
-            <div class="w-full md:flex-1 md:min-w-0 md:pl-12">
-              <div class="bg-white/90 backdrop-blur-sm border border-indigo-100/90 rounded-2xl p-6 sm:p-7 shadow-xs hover:shadow-card hover:border-indigo-300 transition-all">
-                <div class="flex items-center space-x-2 mb-2">
-                  <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold tracking-wider uppercase bg-purple-50 text-purple-700 border border-purple-200">
-                    Preparation &amp; Architecture
-                  </span>
-                </div>
-                <h3 class="text-xl sm:text-2xl font-black text-slate-900 mb-2">
-                  Project Formulation &amp; 10-Slide Deck Building
-                </h3>
-                <p class="text-sm text-slate-700 leading-relaxed font-normal mb-4">
-                  Teams draft their comprehensive presentation according to the official INCUBEX 10-slide standard blueprint covering problem validation, technical schematics, market viability, and system architecture.
-                </p>
-                <div id="step-expanded-2" class="hidden mt-4 pt-4 border-t border-slate-100 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                  <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
-                    <span class="block font-bold text-slate-700 mb-1">Focus Areas:</span>
-                    <span class="text-slate-600">Hardware BOM, block diagrams, software code/CAD repo links, and customer pain point validation.</span>
-                  </div>
-                  <div class="bg-purple-50/70 p-3.5 rounded-xl border border-purple-100">
-                    <span class="block font-bold text-purple-900 mb-1">Demo Video:</span>
-                    <span class="text-purple-800">Record a 3-minute video showing the functional hardware prototype circuit or software walkthrough.</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Step 3: 5 Oct 2026 -->
-          <div class="relative flex flex-col md:flex-row items-start group timeline-item" id="step-node-3">
-            <div class="w-full md:w-72 md:shrink-0 md:pr-8 text-left md:text-right pb-3 md:pb-0">
-              <time datetime="2026-10-05T23:59:00+05:30" class="font-serif italic text-2xl sm:text-3xl text-rose-600 group-hover:text-rose-700 transition-colors">
-                5 Oct 2026
-              </time>
-              <span class="text-[11px] font-mono uppercase tracking-wider text-rose-600 font-bold block mt-1">
-                Strict Cutoff (11:59 PM)
-              </span>
-            </div>
-
-            <div class="hidden md:flex absolute left-72 -translate-x-1/2 items-center justify-center z-10">
-              <div class="w-8 h-8 rounded-full border-2 border-rose-600 bg-white flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
-                <div class="w-3 h-3 rounded-full bg-rose-600"></div>
-              </div>
-            </div>
-
-            <div class="w-full md:flex-1 md:min-w-0 md:pl-12">
-              <div class="bg-white/90 backdrop-blur-sm border border-rose-200/90 rounded-2xl p-6 sm:p-7 shadow-xs hover:shadow-card hover:border-rose-400 transition-all">
-                <div class="flex items-center space-x-2 mb-2">
-                  <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold tracking-wider uppercase bg-rose-50 text-rose-700 border border-rose-200">
-                    National Submission Deadline
-                  </span>
-                </div>
-                <h3 class="text-xl sm:text-2xl font-black text-slate-900 mb-2">
-                  Online Submission Cutoff on Unstop
-                </h3>
-                <p class="text-sm text-slate-700 leading-relaxed font-normal mb-4">
-                  Strict nationwide digital submission deadline on Unstop. Teams must upload their presentation deck, functional demo video link, and repository/schematic preview before midnight.
-                </p>
-                <div id="step-expanded-3" class="hidden mt-4 pt-4 border-t border-rose-100 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                  <div class="bg-rose-50/70 p-3.5 rounded-xl border border-rose-100">
-                    <span class="block font-bold text-rose-900 mb-1">Cutoff Time:</span>
-                    <span class="text-rose-800">11:59 PM IST sharp. Portal closes automatically. Late entries will not be admitted.</span>
-                  </div>
-                  <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
-                    <span class="block font-bold text-slate-700 mb-1">Screening Ingestion:</span>
-                    <span class="text-slate-600">All submissions are batched and routed to the faculty and industry screening jury.</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Step 4: 6 - 7 Oct 2026 -->
-          <div class="relative flex flex-col md:flex-row items-start group timeline-item" id="step-node-4">
-            <div class="w-full md:w-72 md:shrink-0 md:pr-8 text-left md:text-right pb-3 md:pb-0">
-              <time datetime="2026-10-06" data-end-date="2026-10-07" class="font-serif italic text-2xl sm:text-3xl text-slate-900 font-bold group-hover:text-indigo-600 transition-colors">
-                6 – 7 Oct 2026
-              </time>
-              <span class="text-[11px] font-mono uppercase tracking-wider text-indigo-600 font-bold block mt-1">
-                Step 04 • Virtual Defense
-              </span>
-            </div>
-
-            <div class="hidden md:flex absolute left-72 -translate-x-1/2 items-center justify-center z-10">
-              <div class="w-8 h-8 rounded-full border-2 border-indigo-600 bg-white flex items-center justify-center shadow-md group-hover:scale-110 group-hover:border-blue-500 transition-transform">
-                <div class="w-3 h-3 rounded-full bg-indigo-600"></div>
-              </div>
-            </div>
-
-            <div class="w-full md:flex-1 md:min-w-0 md:pl-12">
-              <div class="bg-white/90 backdrop-blur-sm border border-indigo-100/90 rounded-2xl p-6 sm:p-7 shadow-xs hover:shadow-card hover:border-indigo-300 transition-all">
-                <div class="flex items-center space-x-2 mb-2">
-                  <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold tracking-wider uppercase bg-amber-50 text-amber-700 border border-amber-200">
-                    Qualifier Round
-                  </span>
-                </div>
-                <h3 class="text-xl sm:text-2xl font-black text-slate-900 mb-2">
-                  Online Qualifier Round &amp; Virtual Jury Defense
-                </h3>
-                <p class="text-sm text-slate-700 leading-relaxed font-normal mb-4">
-                  Shortlisted teams present virtually to expert screening panels composed of academic evaluators, university faculty, and industry CTOs. Conducted 100% online to facilitate pan-India participation without travel friction.
-                </p>
-                <div id="step-expanded-4" class="hidden mt-4 pt-4 border-t border-slate-100 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                  <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
-                    <span class="block font-bold text-slate-700 mb-1">Defense Timing:</span>
-                    <span class="text-slate-600">7-minute pitch presentation + 5-minute technical Q&amp;A defense before panels.</span>
-                  </div>
-                  <div class="bg-amber-50/70 p-3.5 rounded-xl border border-amber-100">
-                    <span class="block font-bold text-amber-900 mb-1">Jury Rubric:</span>
-                    <span class="text-amber-800">Scored across Problem Need (25%), Tech Feasibility (25%), Novelty (25%), and Market Impact (25%).</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Step 5: 9 Oct 2026 -->
-          <div class="relative flex flex-col md:flex-row items-start group timeline-item" id="step-node-5">
-            <div class="w-full md:w-72 md:shrink-0 md:pr-8 text-left md:text-right pb-3 md:pb-0">
-              <time datetime="2026-10-09" class="font-serif italic text-2xl sm:text-3xl text-emerald-600 group-hover:text-emerald-700 transition-colors">
-                9 Oct 2026
-              </time>
-              <span class="text-[11px] font-mono uppercase tracking-wider text-emerald-600 font-bold block mt-1">
-                Step 05 • 80 Finalists
-              </span>
-            </div>
-
-            <div class="hidden md:flex absolute left-72 -translate-x-1/2 items-center justify-center z-10">
-              <div class="w-8 h-8 rounded-full border-2 border-emerald-600 bg-white flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
-                <div class="w-3 h-3 rounded-full bg-emerald-600"></div>
-              </div>
-            </div>
-
-            <div class="w-full md:flex-1 md:min-w-0 md:pl-12">
-              <div class="bg-white/90 backdrop-blur-sm border border-emerald-200/90 rounded-2xl p-6 sm:p-7 shadow-xs hover:shadow-card hover:border-emerald-300 transition-all">
-                <div class="flex items-center space-x-2 mb-2">
-                  <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold tracking-wider uppercase bg-emerald-50 text-emerald-700 border border-emerald-200">
-                    National Shortlist
-                  </span>
-                </div>
-                <h3 class="text-xl sm:text-2xl font-black text-slate-900 mb-2">
-                  Official Declaration of 80 Finalists
-                </h3>
-                <p class="text-sm text-slate-700 leading-relaxed font-normal mb-4">
-                  The nationwide shortlist is declared: strictly 30 Product Track teams and 50 Prototype Track teams advance to the Grand Finale at MIT-WPU Pune. Selected teams pay the ₹600 finalist fee to confirm on-campus booth infrastructure and amenities.
-                </p>
-                <div id="step-expanded-5" class="hidden mt-4 pt-4 border-t border-emerald-100 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                  <div class="bg-emerald-50/70 p-3.5 rounded-xl border border-emerald-100">
-                    <span class="block font-bold text-emerald-900 mb-1">Finalist Pass (₹600):</span>
-                    <span class="text-emerald-800">Confirms designated exhibition booth, food passes, electricity points, and MIT-WPU security entry pass.</span>
-                  </div>
-                  <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
-                    <span class="block font-bold text-slate-700 mb-1">Official Documents:</span>
-                    <span class="text-slate-600">Formal university leave recommendation letters issued to help outstation teams secure college leave.</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Step 6: 15 – 18 Oct 2026 -->
-          <div class="relative flex flex-col md:flex-row items-start group timeline-item" id="step-node-6">
-            <div class="w-full md:w-72 md:shrink-0 md:pr-8 text-left md:text-right pb-3 md:pb-0">
-              <time datetime="2026-10-15" data-end-date="2026-10-18" class="font-serif italic text-2xl sm:text-3xl text-slate-900 font-bold group-hover:text-indigo-600 transition-colors">
-                15 – 18 Oct 2026
-              </time>
-              <span class="text-[11px] font-mono uppercase tracking-wider text-indigo-600 font-bold block mt-1">
-                Step 06 • Mentorship
-              </span>
-            </div>
-
-            <div class="hidden md:flex absolute left-72 -translate-x-1/2 items-center justify-center z-10">
-              <div class="w-8 h-8 rounded-full border-2 border-indigo-600 bg-white flex items-center justify-center shadow-md group-hover:scale-110 group-hover:border-blue-500 transition-transform">
-                <div class="w-3 h-3 rounded-full bg-indigo-600"></div>
-              </div>
-            </div>
-
-            <div class="w-full md:flex-1 md:min-w-0 md:pl-12">
-              <div class="bg-white/90 backdrop-blur-sm border border-indigo-100/90 rounded-2xl p-6 sm:p-7 shadow-xs hover:shadow-card hover:border-indigo-300 transition-all">
-                <div class="flex items-center space-x-2 mb-2">
-                  <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold tracking-wider uppercase bg-cyan-50 text-cyan-700 border border-cyan-200">
-                    Clinic &amp; Polish
-                  </span>
-                </div>
-                <h3 class="text-xl sm:text-2xl font-black text-slate-900 mb-2">
-                  Prototype Readiness &amp; Pitch Deck Finalization
-                </h3>
-                <p class="text-sm text-slate-700 leading-relaxed font-normal mb-4">
-                  Finalist teams undergo virtual mentoring clinic sessions with domain mentors to fine-tune physical hardware rigs, review cloud uptime, ensure safety compliance, and rehearse their 7-minute stage pitch.
-                </p>
-                <div id="step-expanded-6" class="hidden mt-4 pt-4 border-t border-slate-100 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                  <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
-                    <span class="block font-bold text-slate-700 mb-1">Hardware Testing:</span>
-                    <span class="text-slate-600">Review sensor calibrations, mechanical casings, power supplies, and battery specs.</span>
-                  </div>
-                  <div class="bg-cyan-50/70 p-3.5 rounded-xl border border-cyan-100">
-                    <span class="block font-bold text-cyan-900 mb-1">Presentation Coaching:</span>
-                    <span class="text-cyan-800">1-on-1 feedback on executive pitch narrative and live stage demo pacing.</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Step 7: 21 Oct 2026 (Grand Finale Day - Featured with image like ignisia.tech) -->
-          <div class="relative flex flex-col md:flex-row items-start group timeline-item" id="step-node-7">
-            <div class="w-full md:w-72 md:shrink-0 md:pr-8 text-left md:text-right pb-3 md:pb-0">
-              <time datetime="2026-10-21" class="font-serif italic text-3xl sm:text-4xl text-indigo-700 group-hover:text-indigo-800 transition-colors font-bold">
-                21 Oct 2026
-              </time>
-              <span class="text-xs font-mono uppercase tracking-wider text-indigo-600 font-extrabold block mt-1">
-                The Grand Finale Day
-              </span>
-            </div>
-
-            <div class="hidden md:flex absolute left-72 -translate-x-1/2 items-center justify-center z-10">
-              <div class="w-9 h-9 rounded-full border-2 border-indigo-600 bg-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-                <div class="w-4 h-4 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600"></div>
-              </div>
-            </div>
-
-            <div class="w-full md:flex-1 md:min-w-0 md:pl-12">
-              <div class="bg-gradient-to-br from-white via-indigo-50/30 to-white backdrop-blur-sm border-2 border-indigo-300 rounded-3xl p-6 sm:p-8 shadow-card hover:shadow-hover hover:border-indigo-400 transition-all">
-                <div class="flex items-center space-x-2 mb-2">
-                  <span class="px-3 py-1 rounded-full text-[10px] font-black tracking-widest uppercase bg-indigo-600 text-white shadow-xs">
-                    MIT-WPU Pune Campus • In-Person Expo
-                  </span>
-                </div>
-                <h3 class="text-2xl sm:text-3xl font-black text-slate-900 mb-3 tracking-tight">
-                  The Grand Finale &amp; National Technology Expo
-                </h3>
-                <p class="text-sm sm:text-base text-slate-600 leading-relaxed mb-5">
-                  Full-day national exhibition on the historic MIT-WPU Kothrud campus in Pune. 80 physical exhibition booths, live walk-around judging, investor pitches in the auditorium, live delegates, and the grand awards gala.
-                </p>
-
-                <!-- Featured Stage Image (Matching Screenshot 3 design from ignisia.tech) -->
-                <div class="mb-5 rounded-2xl overflow-hidden shadow-md border border-indigo-200/80 group/img relative">
-                  <img 
-                    src="assets/mit-wpu-summit-stage.jpg" 
-                    alt="INCUBEX 2026 Grand Finale Stage at MIT-WPU Pune" 
-                    width="1376"
-                    height="768"
-                    class="w-full h-56 sm:h-72 object-cover object-center group-hover/img:scale-102 transition-transform duration-500"
-                    loading="lazy"
-                  />
-                  <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex items-end p-4">
-                    <span class="text-white text-xs font-bold tracking-wide flex items-center space-x-1.5">
-                      <svg class="w-4 h-4 text-cyan-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
-                      <span>Auditorium Keynote Stage &amp; Live Jury Rounds • MIT-WPU Pune</span>
-                    </span>
-                  </div>
-                </div>
-
-                <div id="step-expanded-7" class="hidden mt-4 pt-4 border-t border-indigo-100 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                  <div class="bg-white p-3.5 rounded-xl border border-indigo-100 shadow-2xs">
-                    <span class="block font-bold text-slate-700 mb-1">Morning Schedule:</span>
-                    <span class="text-slate-600">8:30 AM Booth Setup → 10:00 AM Inauguration → 11:00 AM Walk-around Jury Rounds across all 80 booths.</span>
-                  </div>
-                  <div class="bg-indigo-50/70 p-3.5 rounded-xl border border-indigo-100">
-                    <span class="block font-bold text-indigo-900 mb-1">Afternoon &amp; Evening:</span>
-                    <span class="text-indigo-800">2:30 PM Top 10 Stage Pitching in front of VCs &amp; Angels → 5:00 PM Cash Awards &amp; Valedictory Ceremony.</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Step 8: Post 21 Oct 2026 -->
-          <div class="relative flex flex-col md:flex-row items-start group timeline-item" id="step-node-8">
-            <div class="w-full md:w-72 md:shrink-0 md:pr-8 text-left md:text-right pb-3 md:pb-0">
-              <time datetime="2026-10-22" class="font-serif italic text-2xl sm:text-3xl text-slate-900 font-bold group-hover:text-indigo-600 transition-colors">
-                Post 21 Oct 2026
-              </time>
-              <span class="text-[11px] font-mono uppercase tracking-wider text-indigo-600 font-bold block mt-1">
-                Step 08 • Evolve &amp; Scale
-              </span>
-            </div>
-
-            <div class="hidden md:flex absolute left-72 -translate-x-1/2 items-center justify-center z-10">
-              <div class="w-8 h-8 rounded-full border-2 border-indigo-600 bg-white flex items-center justify-center shadow-md group-hover:scale-110 group-hover:border-blue-500 transition-transform">
-                <div class="w-3 h-3 rounded-full bg-indigo-600"></div>
-              </div>
-            </div>
-
-            <div class="w-full md:flex-1 md:min-w-0 md:pl-12">
-              <div class="bg-white/90 backdrop-blur-sm border border-indigo-100/90 rounded-2xl p-6 sm:p-7 shadow-xs hover:shadow-card hover:border-indigo-300 transition-all">
-                <div class="flex items-center space-x-2 mb-2">
-                  <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold tracking-wider uppercase bg-emerald-50 text-emerald-700 border border-emerald-200">
-                    Incubation &amp; Acceleration
-                  </span>
-                </div>
-                <h3 class="text-xl sm:text-2xl font-black text-slate-900 mb-2">
-                  Incubation, Seed Support &amp; Network Access
-                </h3>
-                <p class="text-sm text-slate-700 leading-relaxed font-normal mb-4">
-                  Winners and standout projects receive fast-track incubation support at MIT-WPU Technology Business Incubator (TBI), direct investor syndicate introductions, patent consultation, national merit certificates, and cash prize disbursements.
-                </p>
-                <div id="step-expanded-8" class="hidden mt-4 pt-4 border-t border-slate-100 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                  <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
-                    <span class="block font-bold text-slate-700 mb-1">Ongoing Mentorship:</span>
-                    <span class="text-slate-600">Access to Ignisia's alumni network, venture capital partner office hours, and technical labs.</span>
-                  </div>
-                  <div class="bg-emerald-50/70 p-3.5 rounded-xl border border-emerald-100">
-                    <span class="block font-bold text-emerald-900 mb-1">Venture Fast-Track:</span>
-                    <span class="text-emerald-800">Direct pitch routing to institutional venture funds and state/central government grant programs.</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ======================================================== -->
-  <!-- UNIQUE FEATURE 4: 80 FINALIST BOOTHS ALLOCATION (FROM PDF) -->
-  <!-- ======================================================== -->
-  <section class="py-16 md:py-24 relative reveal" id="finalists">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <div class="text-center max-w-3xl mx-auto mb-14">
-        <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight">
-          80 ON-CAMPUS FINALIST BOOTHS
-        </h2>
-        <p class="text-base text-slate-600 mt-3">
-          Strictly limited to 80 student innovation teams across India. Shortlisted finalists exhibit physically at MIT-WPU Pune on 21 October 2026.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-12">
-        
-        <!-- 30 Project Track Teams -->
-        <div class="glass-panel p-8 rounded-3xl border-2 border-indigo-200 shadow-card hover:shadow-hover transition-all">
-          <div class="flex items-center justify-between mb-4">
-            <span class="text-4xl font-black text-indigo-600 font-mono">30</span>
-            <span class="bg-indigo-100 text-indigo-800 text-[10px] font-extrabold uppercase tracking-wider px-3 py-1 rounded-full">
-              Project Track Booths
-            </span>
-          </div>
-          <h3 class="text-lg font-black text-slate-900 mb-2">Startup &amp; High-TRL Launchpad</h3>
-          <p class="text-xs text-slate-600 leading-relaxed mb-4">
-            Reserved for operating MVPs, digital ventures, and hardware systems ready for venture stress-testing.
-          </p>
-          <ul class="space-y-2 text-xs text-slate-700 font-semibold">
-            <li class="flex items-center space-x-2">
-              <span class="text-emerald-500 font-black">✓</span>
-              <span>10-minute closed-door pitch before Angel &amp; VC jury</span>
-            </li>
-            <li class="flex items-center space-x-2">
-              <span class="text-emerald-500 font-black">✓</span>
-              <span>Fast-track incubation entry to MIT-WPU Innovation Centres</span>
-            </li>
-            <li class="flex items-center space-x-2">
-              <span class="text-emerald-500 font-black">✓</span>
-              <span>Direct investor term-sheet &amp; seed funding exploration</span>
-            </li>
-          </ul>
-        </div>
-
-        <!-- 50 Prototype Expo Teams -->
-        <div class="glass-panel p-8 rounded-3xl border-2 border-cyan-200 shadow-card hover:shadow-hover transition-all">
-          <div class="flex items-center justify-between mb-4">
-            <span class="text-4xl font-black text-cyan-600 font-mono">50</span>
-            <span class="bg-cyan-100 text-cyan-800 text-[10px] font-extrabold uppercase tracking-wider px-3 py-1 rounded-full">
-              Prototype Expo Booths
-            </span>
-          </div>
-          <h3 class="text-lg font-black text-slate-900 mb-2">Engineering &amp; Research Expo</h3>
-          <p class="text-xs text-slate-600 leading-relaxed mb-4">
-            Dedicated exhibition tables for physical circuits, robotics, CAD prototypes, and innovative software tools.
-          </p>
-          <ul class="space-y-2 text-xs text-slate-700 font-semibold">
-            <li class="flex items-center space-x-2">
-              <span class="text-cyan-600 font-black">✓</span>
-              <span>Assigned display space with 230V power sockets &amp; internet</span>
-            </li>
-            <li class="flex items-center space-x-2">
-              <span class="text-cyan-600 font-black">✓</span>
-              <span>Category trophies &amp; cash prizes (1st, 2nd, 3rd + 3 Consolations)</span>
-            </li>
-            <li class="flex items-center space-x-2">
-              <span class="text-cyan-600 font-black">✓</span>
-              <span><strong>2 Exclusive MIT-WPU Institutional Awards</strong> reserved for campus teams</span>
-            </li>
-          </ul>
-        </div>
-
-      </div>
-
-      <!-- Campus Finalist Privileges Banner -->
-      <div class="finalist-privileges-banner mx-auto flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 border">
-        <div class="finalist-privileges-main flex items-start sm:items-center gap-3 min-w-0">
-          <div class="finalist-privileges-icon" aria-hidden="true">
-            <iconify-icon icon="ph:ticket-duotone" width="24" height="24"></iconify-icon>
-          </div>
-          <div class="finalist-privileges-copy">
-          <span class="text-[9px] font-mono uppercase tracking-[0.16em] text-indigo-600 block mb-1">Finalist On-Campus Privileges</span>
-          <h3 class="text-lg font-extrabold">Finalist Kits, Food Passes &amp; Tech Support Provided</h3>
-          <p class="text-xs text-blue-100/80 mt-1 max-w-lg">
-            Finalist fee (₹600) covers physical booth infrastructure, audio-visual display backdrops, meal coupons, and certificate felicitation for all 80 teams.
-          </p>
-          </div>
-        </div>
-        <a
-          href="https://unstop.com/p/incubex-by-ignisia-2026-national-level-tech-launchpad-mit-world-peace-university-pune-maharashtra-1759743"
-          onclick="playSound('click');"
-          class="finalist-privileges-cta btn-shimmer px-6 py-3 bg-white hover:bg-slate-100 text-slate-900 font-extrabold text-xs uppercase tracking-wider rounded-xl flex-shrink-0 cursor-pointer"
-        >
-          Secure Your Spot →
-        </a>
-      </div>
-
-    </div>
-  </section>
 
   <!-- ======================================================== -->
   <!-- INNOVATION DOMAINS WITH SEARCH & FILTER                  -->
@@ -3790,6 +3619,294 @@
   </section>
 
   <!-- ======================================================== -->
+  <!-- 8-STEP LAUNCHPAD MISSION TIMELINE (IGNISIA VERTICAL STYLE) -->
+  <!-- ======================================================== -->
+  <section class="py-16 md:py-24 relative reveal" id="mission-map">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight">
+          EVENT TIMELINE
+        </h2>
+        <p class="text-base text-slate-600 mt-3">
+          Key dates from registration to the Grand Finale at MIT-WPU Pune.
+        </p>
+
+        <!-- Quick Timeline Action Filters -->
+        <div class="flex items-center justify-center mt-6">
+          <button
+            id="timeline-toggle"
+            onclick="toggleTimelineDetails(); playSound('click');"
+            class="px-4 py-1.5 rounded-full text-xs font-bold text-slate-700 bg-white border border-slate-200 hover:border-indigo-400 hover:text-indigo-600 transition-all shadow-xs cursor-pointer inline-flex items-center gap-1.5"
+            aria-expanded="false"
+          >
+            <svg id="timeline-toggle-icon" class="w-3.5 h-3.5 text-indigo-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+            <span id="timeline-toggle-label">Expand All Details</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Vertical Continuous Timeline (Matching ignisia.tech Reference Design) -->
+      <div class="relative">
+        
+        <!-- Continuous Vertical Spine Line -->
+        <div class="hidden md:block absolute left-72 top-6 bottom-6 w-0.5" id="timeline-spine" aria-hidden="true">
+          <div id="timeline-progress"></div>
+        </div>
+
+        <!-- 8 Timeline Milestones -->
+        <div class="space-y-12 sm:space-y-16">
+          
+          <!-- Step 1: 25 Sept – 2 Oct 2026 -->
+          <div class="relative flex flex-col md:flex-row items-start group timeline-item" id="step-node-1">
+            <!-- Left Date Column -->
+            <div class="w-full md:w-72 md:shrink-0 md:pr-8 text-left md:text-right pb-3 md:pb-0">
+              <time datetime="2026-09-25" data-end-date="2026-10-02" class="font-serif italic text-2xl sm:text-3xl text-slate-900 font-bold group-hover:text-indigo-600 transition-colors">
+                25 Sept – 2 Oct 2026
+              </time>
+              <span class="text-[11px] font-mono uppercase tracking-wider text-indigo-600 font-bold block mt-1">
+                Step 01 • Registration
+              </span>
+            </div>
+
+            <!-- Center Node Marker -->
+            <div class="hidden md:flex absolute left-72 -translate-x-1/2 items-center justify-center z-10">
+              <div class="w-8 h-8 rounded-full border-2 border-indigo-600 bg-white flex items-center justify-center shadow-md group-hover:scale-110 group-hover:border-blue-500 transition-transform">
+                <div class="w-3 h-3 rounded-full bg-indigo-600"></div>
+              </div>
+            </div>
+
+            <!-- Right Content Card -->
+            <div class="w-full md:flex-1 md:min-w-0 md:pl-12">
+              <div class="bg-white/90 backdrop-blur-sm border border-indigo-100/90 rounded-2xl p-6 sm:p-7 shadow-xs hover:shadow-card hover:border-indigo-300 transition-all">
+                <div class="flex items-center space-x-2 mb-2">
+                  <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold tracking-wider uppercase bg-blue-50 text-blue-700 border border-blue-200">
+                    Registration &amp; Outreach
+                  </span>
+                </div>
+                <h3 class="text-xl sm:text-2xl font-black text-slate-900 mb-2">
+                  Team Enrolment on Unstop
+                </h3>
+                <p class="text-sm text-slate-700 leading-relaxed font-normal mb-4">
+                  Assemble your team of 1–6 members and register for either track. Teams pay the initial flat ₹200 registration fee to secure their participation.
+                </p>
+                <div id="step-expanded-1" class="hidden mt-4 pt-4 border-t border-slate-100 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                  <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
+                    <span class="block font-bold text-slate-700 mb-1">Required Deliverable:</span>
+                    <span class="text-slate-600">Provide college ID credentials and select track &amp; category.</span>
+                  </div>
+                  <div class="bg-indigo-50/70 p-3.5 rounded-xl border border-indigo-100">
+                    <span class="block font-bold text-indigo-900 mb-1">Immediate Milestone:</span>
+                    <span class="text-indigo-800">Unlocks download access to the official 10-slide INCUBEX blueprint template.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 4: 6 - 7 Oct 2026 -->
+          <div class="relative flex flex-col md:flex-row items-start group timeline-item" id="step-node-4">
+            <div class="w-full md:w-72 md:shrink-0 md:pr-8 text-left md:text-right pb-3 md:pb-0">
+              <time datetime="2026-10-06" data-end-date="2026-10-07" class="font-serif italic text-2xl sm:text-3xl text-slate-900 font-bold group-hover:text-indigo-600 transition-colors">
+                6 – 7 Oct 2026
+              </time>
+              <span class="text-[11px] font-mono uppercase tracking-wider text-indigo-600 font-bold block mt-1">
+                Step 02 • Qualifier Round
+              </span>
+            </div>
+
+            <div class="hidden md:flex absolute left-72 -translate-x-1/2 items-center justify-center z-10">
+              <div class="w-8 h-8 rounded-full border-2 border-indigo-600 bg-white flex items-center justify-center shadow-md group-hover:scale-110 group-hover:border-blue-500 transition-transform">
+                <div class="w-3 h-3 rounded-full bg-indigo-600"></div>
+              </div>
+            </div>
+
+            <div class="w-full md:flex-1 md:min-w-0 md:pl-12">
+              <div class="bg-white/90 backdrop-blur-sm border border-indigo-100/90 rounded-2xl p-6 sm:p-7 shadow-xs hover:shadow-card hover:border-indigo-300 transition-all">
+                <div class="flex items-center space-x-2 mb-2">
+                  <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold tracking-wider uppercase bg-amber-50 text-amber-700 border border-amber-200">
+                    Qualifier Round
+                  </span>
+                </div>
+                <h3 class="text-xl sm:text-2xl font-black text-slate-900 mb-2">
+                  Online Qualifier Round
+                </h3>
+                <p class="text-sm text-slate-700 leading-relaxed font-normal mb-4">
+                  Registered teams present online to screening panels of faculty and industry experts. The round is fully online, so teams across India can take part without travelling.
+                </p>
+                <div id="step-expanded-4" class="hidden mt-4 pt-4 border-t border-slate-100 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                  <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
+                    <span class="block font-bold text-slate-700 mb-1">Defense Timing:</span>
+                    <span class="text-slate-600">7-minute pitch presentation + 5-minute technical Q&amp;A defense before panels.</span>
+                  </div>
+                  <div class="bg-amber-50/70 p-3.5 rounded-xl border border-amber-100">
+                    <span class="block font-bold text-amber-900 mb-1">Jury Rubric:</span>
+                    <span class="text-amber-800">Scored across Problem Need (25%), Tech Feasibility (25%), Novelty (25%), and Market Impact (25%).</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 6: 15 – 18 Oct 2026 -->
+          <div class="relative flex flex-col md:flex-row items-start group timeline-item" id="step-node-6">
+            <div class="w-full md:w-72 md:shrink-0 md:pr-8 text-left md:text-right pb-3 md:pb-0">
+              <time datetime="2026-10-15" data-end-date="2026-10-18" class="font-serif italic text-2xl sm:text-3xl text-slate-900 font-bold group-hover:text-indigo-600 transition-colors">
+                15 – 18 Oct 2026
+              </time>
+              <span class="text-[11px] font-mono uppercase tracking-wider text-indigo-600 font-bold block mt-1">
+                Step 03 • Mentorship
+              </span>
+            </div>
+
+            <div class="hidden md:flex absolute left-72 -translate-x-1/2 items-center justify-center z-10">
+              <div class="w-8 h-8 rounded-full border-2 border-indigo-600 bg-white flex items-center justify-center shadow-md group-hover:scale-110 group-hover:border-blue-500 transition-transform">
+                <div class="w-3 h-3 rounded-full bg-indigo-600"></div>
+              </div>
+            </div>
+
+            <div class="w-full md:flex-1 md:min-w-0 md:pl-12">
+              <div class="bg-white/90 backdrop-blur-sm border border-indigo-100/90 rounded-2xl p-6 sm:p-7 shadow-xs hover:shadow-card hover:border-indigo-300 transition-all">
+                <div class="flex items-center space-x-2 mb-2">
+                  <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold tracking-wider uppercase bg-cyan-50 text-cyan-700 border border-cyan-200">
+                    Mentoring
+                  </span>
+                </div>
+                <h3 class="text-xl sm:text-2xl font-black text-slate-900 mb-2">
+                  Mentoring Sessions
+                </h3>
+                <p class="text-sm text-slate-700 leading-relaxed font-normal mb-4">
+                  Finalist teams work with domain mentors in online sessions to refine their build, strengthen the pitch, and prepare for the Grand Finale.
+                </p>
+                <div id="step-expanded-6" class="hidden mt-4 pt-4 border-t border-slate-100 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                  <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
+                    <span class="block font-bold text-slate-700 mb-1">Hardware Testing:</span>
+                    <span class="text-slate-600">Review sensor calibrations, mechanical casings, power supplies, and battery specs.</span>
+                  </div>
+                  <div class="bg-cyan-50/70 p-3.5 rounded-xl border border-cyan-100">
+                    <span class="block font-bold text-cyan-900 mb-1">Presentation Coaching:</span>
+                    <span class="text-cyan-800">1-on-1 feedback on executive pitch narrative and live stage demo pacing.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 7: 21 Oct 2026 (Grand Finale Day - Featured with image like ignisia.tech) -->
+          <div class="relative flex flex-col md:flex-row items-start group timeline-item" id="step-node-7">
+            <div class="w-full md:w-72 md:shrink-0 md:pr-8 text-left md:text-right pb-3 md:pb-0">
+              <time datetime="2026-10-21" class="font-serif italic text-3xl sm:text-4xl text-indigo-700 group-hover:text-indigo-800 transition-colors font-bold">
+                21 Oct 2026
+              </time>
+              <span class="text-xs font-mono uppercase tracking-wider text-indigo-600 font-extrabold block mt-1">
+                Step 04 • Grand Finale
+              </span>
+            </div>
+
+            <div class="hidden md:flex absolute left-72 -translate-x-1/2 items-center justify-center z-10">
+              <div class="w-9 h-9 rounded-full border-2 border-indigo-600 bg-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                <div class="w-4 h-4 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600"></div>
+              </div>
+            </div>
+
+            <div class="w-full md:flex-1 md:min-w-0 md:pl-12">
+              <div class="bg-gradient-to-br from-white via-indigo-50/30 to-white backdrop-blur-sm border-2 border-indigo-300 rounded-3xl p-6 sm:p-8 shadow-card hover:shadow-hover hover:border-indigo-400 transition-all">
+                <div class="flex items-center space-x-2 mb-2">
+                  <span class="px-3 py-1 rounded-full text-[10px] font-black tracking-widest uppercase bg-indigo-600 text-white shadow-xs">
+                    MIT-WPU Pune Campus • In-Person Expo
+                  </span>
+                </div>
+                <h3 class="text-2xl sm:text-3xl font-black text-slate-900 mb-3 tracking-tight">
+                  The Grand Finale &amp; National Technology Expo
+                </h3>
+                <p class="text-sm sm:text-base text-slate-600 leading-relaxed mb-5">
+                  A full-day exhibition at the MIT-WPU Kothrud campus in Pune, with live booth judging, investor pitches, and the awards ceremony.
+                </p>
+
+                <!-- Featured Stage Image (Matching Screenshot 3 design from ignisia.tech) -->
+                <div class="mb-5 rounded-2xl overflow-hidden shadow-md border border-indigo-200/80 group/img relative">
+                  <img 
+                    src="assets/mit-wpu-summit-stage.jpg" 
+                    alt="INCUBEX 2026 Grand Finale Stage at MIT-WPU Pune" 
+                    width="1376"
+                    height="768"
+                    class="w-full h-56 sm:h-72 object-cover object-center group-hover/img:scale-102 transition-transform duration-500"
+                    loading="lazy"
+                  />
+                  <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex items-end p-4">
+                    <span class="text-white text-xs font-bold tracking-wide flex items-center space-x-1.5">
+                      <svg class="w-4 h-4 text-cyan-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                      <span>Auditorium Keynote Stage &amp; Live Jury Rounds • MIT-WPU Pune</span>
+                    </span>
+                  </div>
+                </div>
+
+                <div id="step-expanded-7" class="hidden mt-4 pt-4 border-t border-indigo-100 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                  <div class="bg-white p-3.5 rounded-xl border border-indigo-100 shadow-2xs">
+                    <span class="block font-bold text-slate-700 mb-1">Morning Schedule:</span>
+                    <span class="text-slate-600">8:30 AM Booth Setup → 10:00 AM Inauguration → 11:00 AM Walk-around Jury Rounds.</span>
+                  </div>
+                  <div class="bg-indigo-50/70 p-3.5 rounded-xl border border-indigo-100">
+                    <span class="block font-bold text-indigo-900 mb-1">Afternoon &amp; Evening:</span>
+                    <span class="text-indigo-800">2:30 PM Top 10 Stage Pitching in front of VCs &amp; Angels → 5:00 PM Cash Awards &amp; Valedictory Ceremony.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 8: Post 21 Oct 2026 -->
+          <div class="relative flex flex-col md:flex-row items-start group timeline-item" id="step-node-8">
+            <div class="w-full md:w-72 md:shrink-0 md:pr-8 text-left md:text-right pb-3 md:pb-0">
+              <time datetime="2026-10-22" class="font-serif italic text-2xl sm:text-3xl text-slate-900 font-bold group-hover:text-indigo-600 transition-colors">
+                Post 21 Oct 2026
+              </time>
+              <span class="text-[11px] font-mono uppercase tracking-wider text-indigo-600 font-bold block mt-1">
+                Step 05 • Evolve &amp; Scale
+              </span>
+            </div>
+
+            <div class="hidden md:flex absolute left-72 -translate-x-1/2 items-center justify-center z-10">
+              <div class="w-8 h-8 rounded-full border-2 border-indigo-600 bg-white flex items-center justify-center shadow-md group-hover:scale-110 group-hover:border-blue-500 transition-transform">
+                <div class="w-3 h-3 rounded-full bg-indigo-600"></div>
+              </div>
+            </div>
+
+            <div class="w-full md:flex-1 md:min-w-0 md:pl-12">
+              <div class="bg-white/90 backdrop-blur-sm border border-indigo-100/90 rounded-2xl p-6 sm:p-7 shadow-xs hover:shadow-card hover:border-indigo-300 transition-all">
+                <div class="flex items-center space-x-2 mb-2">
+                  <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold tracking-wider uppercase bg-emerald-50 text-emerald-700 border border-emerald-200">
+                    Incubation &amp; Acceleration
+                  </span>
+                </div>
+                <h3 class="text-xl sm:text-2xl font-black text-slate-900 mb-2">
+                  Incubation, Seed Support &amp; Network Access
+                </h3>
+                <p class="text-sm text-slate-700 leading-relaxed font-normal mb-4">
+                  Winners and standout projects receive fast-track incubation support at MIT-WPU Technology Business Incubator (TBI), direct investor syndicate introductions, patent consultation, national merit certificates, and cash prize disbursements.
+                </p>
+                <div id="step-expanded-8" class="hidden mt-4 pt-4 border-t border-slate-100 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                  <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
+                    <span class="block font-bold text-slate-700 mb-1">Ongoing Mentorship:</span>
+                    <span class="text-slate-600">Access to Ignisia's alumni network, venture capital partner office hours, and technical labs.</span>
+                  </div>
+                  <div class="bg-emerald-50/70 p-3.5 rounded-xl border border-emerald-100">
+                    <span class="block font-bold text-emerald-900 mb-1">Venture Fast-Track:</span>
+                    <span class="text-emerald-800">Direct pitch routing to institutional venture funds and state/central government grant programs.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
   <!-- TRANSPARENT FEES SECTION (EXACT COMPLIANCE WITH POSTER)  -->
   <!-- ======================================================== -->
   <section class="py-16 md:py-24 relative reveal" id="fees">
@@ -3797,10 +3914,10 @@
       
       <div class="text-center max-w-3xl mx-auto mb-16">
         <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight">
-          TRANSPARENT PARTICIPATION FEES
+          PARTICIPATION FEES
         </h2>
         <p class="text-base text-slate-600 mt-3">
-          Affordable, equitable, and tiered directly as published on the official summit launchpad poster.
+          One registration fee per team. The finalist fee applies only to teams shortlisted for the Grand Finale.
         </p>
       </div>
 
@@ -3815,34 +3932,34 @@
                 <rect width="18" height="18" x="3" y="3" rx="2"></rect>
                 <path d="m9 12 2 2 4-4"></path>
               </svg>
-              <span>Stage 1: All Applying Teams</span>
+              <span>Stage 1: All Registered Teams</span>
             </div>
             <div class="flex items-baseline space-x-2 mt-4 mb-2">
               <span class="text-5xl font-black text-slate-900 tracking-tight">₹200</span>
-              <span class="text-sm font-bold text-slate-600">/ team (Not per head)</span>
+              <span class="text-sm font-bold text-slate-600">per team</span>
             </div>
             <h3 class="text-lg font-bold text-slate-900 mb-4">Initial Registration Fee</h3>
             <ul class="space-y-3 text-xs sm:text-sm text-slate-600 mb-8 border-t border-slate-100 pt-4">
               <li class="flex items-start space-x-2">
                 <span class="text-emerald-500 font-bold">✓</span>
-                <span>Covers entire team (1-6 members)</span>
+                <span>Covers the whole team (1–6 members)</span>
               </li>
               <li class="flex items-start space-x-2">
                 <span class="text-emerald-500 font-bold">✓</span>
-                <span>Includes access to Online Qualifier Screening</span>
+                <span>Entry to the online qualifier round</span>
               </li>
               <li class="flex items-start space-x-2">
                 <span class="text-emerald-500 font-bold">✓</span>
-                <span>Formal submission evaluation by jury</span>
+                <span>Evaluation by the jury panel</span>
               </li>
               <li class="flex items-start space-x-2">
                 <span class="text-emerald-500 font-bold">✓</span>
-                <span>Digital Certificate of Participation for all members</span>
+                <span>Digital participation certificate for every member</span>
               </li>
             </ul>
           </div>
           <div class="bg-blue-50/90 p-3.5 rounded-2xl border border-blue-100 text-center text-xs font-bold text-blue-900">
-            Payable via Unstop during online round entry
+            Paid at the time of registration
           </div>
         </div>
 
@@ -3852,17 +3969,17 @@
           <div>
             <div class="flex items-center space-x-2 text-indigo-600 font-bold text-xs uppercase tracking-wider mb-2">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              <span>Stage 2: Shortlisted 80 Teams Only</span>
+              <span>Stage 2: Shortlisted Finalists</span>
             </div>
             <div class="flex items-baseline space-x-2 mt-4 mb-2">
               <span class="text-5xl font-black text-indigo-900 tracking-tight">₹600</span>
-              <span class="text-sm font-bold text-slate-600">/ team (Not per head)</span>
+              <span class="text-sm font-bold text-slate-600">per team</span>
             </div>
             <h3 class="text-lg font-bold text-slate-900 mb-4">Finalist Pass</h3>
             <ul class="space-y-3 text-xs sm:text-sm text-slate-600 mb-8 border-t border-slate-100 pt-4">
               <li class="flex items-start space-x-2">
                 <span class="text-emerald-500 font-bold">✓</span>
-                <span>Payable ONLY after qualifying online screening</span>
+                <span>Payable only after qualifying in the online round</span>
               </li>
               <li class="flex items-start space-x-2">
                 <span class="text-emerald-500 font-bold">✓</span>
@@ -3870,16 +3987,16 @@
               </li>
               <li class="flex items-start space-x-2">
                 <span class="text-emerald-500 font-bold">✓</span>
-                <span>Live in-person evaluation &amp; pitch slot before judges</span>
+                <span>In-person evaluation and pitch slot with the jury</span>
               </li>
               <li class="flex items-start space-x-2">
                 <span class="text-emerald-500 font-bold">✓</span>
-                <span>Finalist kits, meal coupons &amp; national recognition</span>
+                <span>Finalist kit, meals and certificate</span>
               </li>
             </ul>
           </div>
           <div class="bg-indigo-50/90 p-3.5 rounded-2xl border border-indigo-200 text-center text-xs font-bold text-indigo-950">
-            Payable only upon official Grand Finale shortlisting
+            Payable once your team is shortlisted for the Grand Finale
           </div>
         </div>
       </div>
@@ -3947,7 +4064,20 @@
                 </div>
               </button>
               <div class="faq-answer hidden px-6 pb-6 text-xs sm:text-sm text-slate-700 leading-relaxed font-normal border-t border-slate-100 pt-4">
-                <strong>Product Track</strong> is designed for ventures with working minimum viable products, commercial business models, customer validation, and high readiness (30 slots). <strong>Prototype Track</strong> is intended for academic research, lab hardware builds, IoT circuits, and engineering demonstrations showcasing novelty, technical excellence, and functional feasibility (50 slots).
+                <strong>Product Track</strong> is designed for ventures with working minimum viable products, commercial business models, customer validation, and high readiness. <strong>Prototype Track</strong> is intended for academic research, lab hardware builds, IoT circuits, and engineering demonstrations showcasing novelty, technical excellence, and functional feasibility. Teams of 1–6 members can enter either track.
+              </div>
+            </div>
+
+            <!-- FAQ: Finalist count -->
+            <div class="faq-item border border-indigo-100/90 rounded-2xl bg-white/95 overflow-hidden shadow-xs hover:border-indigo-300 hover:shadow-card transition-all duration-300" data-category="finale" data-keywords="how many teams finalists finale booths shortlist 80 30 50 quota slots">
+              <button class="w-full text-left px-6 py-5 font-extrabold text-slate-900 flex justify-between items-center focus:outline-none cursor-pointer group" onclick="toggleFaq(this); playSound('click');">
+                <span class="text-sm sm:text-base pr-4 group-hover:text-indigo-600 transition-colors">How many teams qualify for the Grand Finale?</span>
+                <div class="faq-icon-wrapper w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center flex-shrink-0 text-indigo-600 transition-transform duration-300">
+                  <span class="faq-icon text-lg font-bold">+</span>
+                </div>
+              </button>
+              <div class="faq-answer hidden px-6 pb-6 text-xs sm:text-sm text-slate-700 leading-relaxed font-normal border-t border-slate-100 pt-4">
+                <strong>80 teams</strong> are shortlisted after the online qualifier round: <strong>30 in the Product Track</strong> and <strong>50 in the Prototype Track</strong>. Each finalist team exhibits at its own booth at MIT-WPU Pune on 21 October 2026.
               </div>
             </div>
 
@@ -4043,10 +4173,10 @@
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
             <span>Email Committee</span>
           </a>
-          <a href="https://unstop.com/p/incubex-by-ignisia-2026-national-level-tech-launchpad-mit-world-peace-university-pune-maharashtra-1759743" onclick="playSound('click');" class="px-5 py-2.5 rounded-full text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-700 transition-all shadow-xs inline-flex items-center space-x-1.5 cursor-pointer">
-            <span>Register on Unstop</span>
+          <button type="button" onclick="openRegisterModal(); playSound('click');" class="px-5 py-2.5 rounded-full text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-700 transition-all shadow-xs inline-flex items-center space-x-1.5 cursor-pointer">
+            <span>Register Now</span>
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
-          </a>
+          </button>
         </div>
       </div>
     </div>
@@ -4081,11 +4211,11 @@
         <div class="lg:col-span-3">
           <h2 class="mb-4 text-xs font-bold uppercase tracking-wider text-slate-900">Summit Navigation</h2>
           <ul class="space-y-2.5 text-xs sm:text-sm text-slate-600">
-            <li><a class="transition-colors hover:text-indigo-600" href="#arena">Competition Arena</a></li>
-            <li><a class="transition-colors hover:text-indigo-600" href="https://unstop.com/p/incubex-by-ignisia-2026-national-level-tech-launchpad-mit-world-peace-university-pune-maharashtra-1759743" target="_blank" rel="noopener noreferrer">Register on Unstop</a></li>
+            <li><a class="transition-colors hover:text-indigo-600" href="#arena">Competition Tracks</a></li>
+            <li><button type="button" class="text-left transition-colors hover:text-indigo-600 cursor-pointer" onclick="openRegisterModal(); playSound('click');">Register</button></li>
             <li><a class="transition-colors hover:text-indigo-600" href="assets/Incubex%20Brochure.pdf">Official Brochure (PDF)</a></li>
-            <li><a class="transition-colors hover:text-indigo-600" href="#mission-map">8-Step Roadmap</a></li>
-            <li><a class="transition-colors hover:text-indigo-600" href="#finalists">80 Finalist Quota</a></li>
+            <li><a class="transition-colors hover:text-indigo-600" href="#categories">Innovation Domains</a></li>
+            <li><a class="transition-colors hover:text-indigo-600" href="#mission-map">Event Timeline</a></li>
             <li><a class="transition-colors hover:text-indigo-600" href="#fees">Registration Fees</a></li>
             <li><a class="transition-colors hover:text-indigo-600" href="#faq">Frequently Asked Questions</a></li>
           </ul>
@@ -4098,13 +4228,6 @@
             <div>
               <span class="block font-semibold text-slate-800 text-xs sm:text-sm">Email Helpdesk:</span>
               <a href="mailto:ignisia@mitwpu.edu.in" class="text-xs sm:text-sm text-indigo-600 hover:text-indigo-700 transition-colors font-medium">ignisia@mitwpu.edu.in</a>
-            </div>
-            <div>
-              <span class="block font-semibold text-slate-800 text-xs sm:text-sm">Direct Phone Inquiries:</span>
-              <div class="text-xs sm:text-sm text-slate-600 space-y-0.5 mt-0.5">
-                <a href="tel:+918999129332" class="block hover:text-indigo-600 transition-colors">+91 89991 29332</a>
-                <a href="tel:+919769695019" class="block hover:text-indigo-600 transition-colors">+91 97696 95019</a>
-              </div>
             </div>
             <div>
               <span class="block font-semibold text-slate-800 text-xs sm:text-sm">Social Handles:</span>
@@ -4176,6 +4299,39 @@
     <button onclick="copyRegisterLink(this)" class="w-full py-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold text-xs rounded-xl border border-indigo-200 transition-colors">
       Copy Registration Link
     </button>
+  </div>
+
+  <!-- Registration choice modal -->
+  <div id="register-modal" class="register-modal hidden" role="dialog" aria-modal="true" aria-labelledby="register-modal-title" onclick="if (event.target === this) closeRegisterModal();">
+    <div class="register-modal-card">
+      <div class="register-modal-head">
+        <div>
+          <span class="register-modal-kicker">INCUBEX 2026 Registration</span>
+          <h3 id="register-modal-title">Choose how you register</h3>
+        </div>
+        <button type="button" onclick="closeRegisterModal()" class="register-modal-close" aria-label="Close registration options">&times;</button>
+      </div>
+
+      <div class="register-modal-options">
+        <a href="https://unstop.com/p/incubex-by-ignisia-2026-national-level-tech-launchpad-mit-world-peace-university-pune-maharashtra-1759743" target="_blank" rel="noopener noreferrer" onclick="playSound('success'); closeRegisterModal();" class="register-option register-option-primary">
+          <span class="register-option-icon" aria-hidden="true"><iconify-icon icon="ph:globe-hemisphere-east-duotone" width="24" height="24"></iconify-icon></span>
+          <span class="register-option-copy">
+            <span class="register-option-title">Students from all over India</span>
+            <span class="register-option-sub">UG and PG students from any college. Register on Unstop.</span>
+          </span>
+          <span class="register-option-arrow" aria-hidden="true">↗</span>
+        </a>
+        <a href="https://forms.gle/32GdFvZuNhFadqmh9" target="_blank" rel="noopener noreferrer" onclick="playSound('success'); closeRegisterModal();" class="register-option">
+          <span class="register-option-icon" aria-hidden="true"><iconify-icon icon="ph:graduation-cap-duotone" width="24" height="24"></iconify-icon></span>
+          <span class="register-option-copy">
+            <span class="register-option-title">MIT-WPU students</span>
+            <span class="register-option-sub">Current students of MIT-WPU, Pune. Opens the campus form.</span>
+          </span>
+          <span class="register-option-arrow" aria-hidden="true">↗</span>
+        </a>
+      </div>
+      <p class="register-modal-note">Registration is ₹200 per team. The ₹600 finalist fee applies only if your team is shortlisted.</p>
+    </div>
   </div>
 
   <!-- Interactive Official Poster Lightbox Modal -->
@@ -4429,7 +4585,7 @@
         title: "Team Enrolment on Unstop",
         phase: "Phase 1: National Outreach & Registration",
         date: "25 Sept – 2 Oct 2026",
-        action: "Assemble your team (1-6 members for Product Track, 3-6 for Prototype Expo) and register on the official Unstop portal. Pay the flat ₹200 team fee.",
+        action: "Assemble your team of 1-6 members and register for either track. Pay the flat ₹200 team fee.",
         reqs: "Select one innovation category and track matching your project maturity level. Provide valid college identity details for all participants.",
         outcome: "Immediate confirmation of team registration and unlocked access to download the official INCUBEX 2026 submission slide template."
       },
@@ -4835,10 +4991,22 @@
       document.body.style.overflow = 'auto';
     }
 
+    // 7. Registration choice modal
+    function openRegisterModal() {
+      if (typeof setMobileMenu === 'function') setMobileMenu(false);
+      document.getElementById('register-modal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeRegisterModal() {
+      document.getElementById('register-modal').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
     // Close modals on Esc key
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         closePosterModal();
+        closeRegisterModal();
         document.getElementById('qr-popup').classList.add('hidden');
       }
     });
