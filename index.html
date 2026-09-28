@@ -3004,7 +3004,7 @@
       --ix-lilac: #a78bfa;
       --ix-ink: #151936;
       --ix-grad: linear-gradient(90deg, #2938cf 0%, #5b5bf6 55%, #a78bfa 100%);
-      --ix-capsule: linear-gradient(180deg, rgba(255,255,255,0.75) 0%, rgba(255,255,255,0) 48%), linear-gradient(90deg, #4f6bff 0%, #7c6cf6 55%, #b79cff 100%);
+      --ix-capsule: linear-gradient(180deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0) 40%), linear-gradient(90deg, #ffffff 0%, #dcdcff 35%, #9a8ff7 72%, #6e5ef0 100%);
       --page-bg: #f7f7fe;
     }
 
@@ -3040,7 +3040,7 @@
       height: 9px;
       border-radius: 999px;
       background: var(--ix-capsule);
-      box-shadow: 0 4px 12px rgba(91, 91, 246, 0.35);
+      box-shadow: 0 3px 8px rgba(106, 92, 240, 0.25);
       transform: rotate(-35deg);
     }
 
@@ -3093,12 +3093,13 @@
       content: "";
       position: absolute;
       z-index: 0;
-      width: clamp(110px, 14vw, 210px);
-      height: clamp(18px, 2.2vw, 34px);
+      width: clamp(150px, 16vw, 250px);
+      height: clamp(26px, 2.6vw, 42px);
       border-radius: 999px;
       background: var(--ix-capsule);
-      box-shadow: 0 14px 34px rgba(91, 91, 246, 0.28);
-      opacity: 0.75;
+      box-shadow: 0 16px 30px rgba(106, 92, 240, 0.16);
+      filter: blur(0.6px);
+      opacity: 0.9;
       pointer-events: none;
       --r: -40deg;
       transform: rotate(var(--r));
@@ -3111,19 +3112,18 @@
       width: 14px;
       height: 14px;
       border-radius: 50%;
-      background: radial-gradient(circle at 35% 30%, #ffffff, #c4b5fd);
-      border: 2px solid #fff;
-      box-shadow: 0 0 0 6px rgba(167, 139, 250, 0.12), 0 6px 16px rgba(91, 91, 246, 0.25);
+      background: #b8b4f4;
+      box-shadow: 0 0 0 7px rgba(184, 180, 244, 0.18);
       pointer-events: none;
       animation: ix-pulse 4.5s ease-in-out infinite;
     }
-    #arena::before { top: 3.5rem; right: -2.5rem; }
+    #arena::before { top: 3.5rem; right: -5rem; }
     #arena::after { top: 9rem; right: 7%; }
-    #categories::before { top: 4rem; left: -3rem; animation-delay: -4s; }
-    #mission-map::before { top: 5rem; right: -2rem; animation-delay: -7s; }
+    #categories::before { top: 4rem; left: -5.5rem; --r: 140deg; animation-delay: -4s; }
+    #mission-map::before { top: 5rem; right: -5rem; animation-delay: -7s; }
     #mission-map::after { top: 3rem; left: 8%; animation-delay: -2s; }
-    #fees::before { bottom: 4rem; left: -2.5rem; animation-delay: -3s; }
-    #faq::before { top: 4rem; right: -3rem; animation-delay: -6s; }
+    #fees::before { bottom: 4rem; left: -5.5rem; --r: 140deg; animation-delay: -3s; }
+    #faq::before { top: 4rem; right: -5rem; animation-delay: -6s; }
     #faq::after { bottom: 6rem; left: 5%; animation-delay: -1s; }
 
     @media (max-width: 767px) {
@@ -3149,20 +3149,20 @@
     #hero .hpa-bob-2 { animation-duration: 11s; animation-delay: -3s; }
     #hero .hpa-bob-3 { animation-duration: 13s; animation-delay: -6s; }
     #hero .hpa-bob-4 { animation-duration: 10s; animation-delay: -8s; }
-    #hero .hpa-lines path { stroke-dasharray: 6 8; animation: hpa-flow 6s linear infinite; }
+    #hero .hpa-orb { transform-box: fill-box; transform-origin: center; animation: hpa-breathe 14s ease-in-out infinite alternate; }
     #hero .hpa-dots circle { transform-box: fill-box; transform-origin: center; animation: ix-pulse 4s ease-in-out infinite; }
     #hero .hpa-dots circle:nth-child(2n) { animation-delay: -1.5s; }
     #hero .hpa-dots circle:nth-child(3n) { animation-delay: -2.7s; }
     #hero .hpa-glowblob { transform-box: fill-box; transform-origin: center; animation: hpa-breathe 12s ease-in-out infinite alternate; }
     @keyframes hpa-bob {
       0% { transform: translate(0, 0) rotate(0deg); }
-      50% { transform: translate(8px, -14px) rotate(2deg); }
-      100% { transform: translate(-6px, 10px) rotate(-1.5deg); }
+      50% { transform: translate(10px, -12px); }
+      100% { transform: translate(-6px, 8px); }
     }
     @keyframes hpa-flow { to { stroke-dashoffset: -56; } }
     @keyframes hpa-breathe {
-      0% { transform: scale(1); opacity: 0.55; }
-      100% { transform: scale(1.18); opacity: 0.85; }
+      0% { transform: scale(1); }
+      100% { transform: scale(1.05); }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -3301,17 +3301,19 @@
     <!-- Hero background: poster-style capsules and network nodes -->
     <div class="absolute inset-0 pointer-events-none z-0 overflow-hidden flex items-center justify-center">
       <svg class="hpa hpa-tl" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><defs>
-          <linearGradient id="hpa-cap" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#4f6bff"/><stop offset="0.55" stop-color="#7c6cf6"/><stop offset="1" stop-color="#b79cff"/></linearGradient>
-          <linearGradient id="hpa-cap-soft" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8fa2ff"/><stop offset="1" stop-color="#d4c6ff"/></linearGradient>
-          <linearGradient id="hpa-shine" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity="0.85"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></linearGradient>
-          <radialGradient id="hpa-orb" cx="0.35" cy="0.3" r="0.75"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#c4b5fd"/></radialGradient>
-          <filter id="hpa-blur-md" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8"/></filter>
-          <filter id="hpa-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="12"/></filter>
-          <filter id="hpa-blur-lg" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="30"/></filter>
-        </defs><circle class="hpa-glowblob" cx="40" cy="60" r="150" fill="#c7d2fe" opacity="0.7" filter="url(#hpa-blur-lg)"/><g class="hpa-bob hpa-bob-2"><g opacity="1" transform="rotate(-40 120 170)"><rect x="-30.0" y="143.0" width="300" height="54" rx="27.0" fill="url(#hpa-cap)" filter="url(#hpa-glow)" opacity="0.45"/><rect x="-30.0" y="143.0" width="300" height="54" rx="27.0" fill="url(#hpa-cap)"/><rect x="-11.100000000000001" y="148.4" width="262.2" height="18.360000000000003" rx="9.180000000000001" fill="url(#hpa-shine)"/></g></g><g class="hpa-bob hpa-bob-3"><g transform="rotate(-40 250 40)" opacity="0.6" filter="url(#hpa-blur-md)"><rect x="175.0" y="26.0" width="150" height="28" rx="14.0" fill="url(#hpa-cap-soft)"/></g></g></svg>
-      <svg class="hpa hpa-tr" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><circle class="hpa-glowblob" cx="360" cy="60" r="150" fill="#ddd6fe" opacity="0.6" filter="url(#hpa-blur-lg)"/><g class="hpa-lines" stroke="#a5b4fc" stroke-width="2" opacity="0.85" fill="none"><path d="M110 190 L200 130"/><path d="M200 130 L300 180"/><path d="M300 180 L370 90"/><path d="M200 130 L230 50"/></g><g class="hpa-dots" fill="url(#hpa-orb)" stroke="#ffffff" stroke-width="2.5"><circle cx="110" cy="190" r="8"/><circle cx="200" cy="130" r="12"/><circle cx="300" cy="180" r="9"/><circle cx="370" cy="90" r="7"/><circle cx="230" cy="50" r="6"/></g></svg>
-      <svg class="hpa hpa-bl" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><circle class="hpa-glowblob" cx="60" cy="360" r="190" fill="#ddd6fe" opacity="0.8" filter="url(#hpa-blur-lg)"/><g class="hpa-lines" stroke="#a5b4fc" stroke-width="2" opacity="0.85" fill="none"><path d="M40 180 L130 250"/><path d="M130 250 L90 350"/><path d="M130 250 L230 320"/><path d="M130 250 L220 200"/></g><g class="hpa-dots" fill="url(#hpa-orb)" stroke="#ffffff" stroke-width="2.5"><circle cx="40" cy="180" r="7"/><circle cx="130" cy="250" r="12"/><circle cx="90" cy="350" r="8"/><circle cx="230" cy="320" r="9"/><circle cx="220" cy="200" r="6"/></g><g class="hpa-bob hpa-bob-4"><g transform="rotate(-40 300 370)" opacity="0.55" filter="url(#hpa-blur-md)"><rect x="200.0" y="348.0" width="200" height="44" rx="22.0" fill="url(#hpa-cap-soft)"/></g></g></svg>
-      <svg class="hpa hpa-br" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><circle class="hpa-glowblob" cx="360" cy="360" r="170" fill="#bae6fd" opacity="0.5" filter="url(#hpa-blur-lg)"/><g class="hpa-bob hpa-bob-1"><g opacity="1" transform="rotate(-40 300 90)"><rect x="140.0" y="62.0" width="320" height="56" rx="28.0" fill="url(#hpa-cap)" filter="url(#hpa-glow)" opacity="0.45"/><rect x="140.0" y="62.0" width="320" height="56" rx="28.0" fill="url(#hpa-cap)"/><rect x="159.6" y="67.6" width="280.8" height="19.040000000000003" rx="9.520000000000001" fill="url(#hpa-shine)"/></g></g><g class="hpa-bob hpa-bob-2"><g transform="rotate(-40 200 360)" opacity="0.55" filter="url(#hpa-blur-md)"><rect x="70.0" y="332.0" width="260" height="56" rx="28.0" fill="url(#hpa-cap-soft)"/></g></g></svg>
+          <radialGradient id="hpa-orb-violet" gradientUnits="objectBoundingBox" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#f3f3ff"/><stop offset="0.55" stop-color="#c9c8ff"/><stop offset="0.86" stop-color="#8e82f6"/><stop offset="1" stop-color="#6d5ae8"/></radialGradient>
+          <radialGradient id="hpa-orb-teal" gradientUnits="objectBoundingBox" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#f1fbff"/><stop offset="0.55" stop-color="#c3ecfb"/><stop offset="0.86" stop-color="#8fc6f7"/><stop offset="1" stop-color="#7390ef"/></radialGradient>
+          <radialGradient id="hpa-orb-blue" gradientUnits="objectBoundingBox" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#f1f2ff"/><stop offset="0.5" stop-color="#c3c7ff"/><stop offset="0.84" stop-color="#7a74f2"/><stop offset="1" stop-color="#5146e0"/></radialGradient>
+          <radialGradient id="hpa-orb-haze" gradientUnits="objectBoundingBox" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#eeeefe" stop-opacity="0"/><stop offset="0.8" stop-color="#e3e3fd" stop-opacity="0.55"/><stop offset="1" stop-color="#d6d6fb" stop-opacity="0.8"/></radialGradient>
+          <linearGradient id="hpa-cap-violet" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffffff"/><stop offset="0.35" stop-color="#dcdcff"/><stop offset="0.72" stop-color="#9a8ff7"/><stop offset="1" stop-color="#6e5ef0"/></linearGradient>
+          <linearGradient id="hpa-cap-pink" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffffff"/><stop offset="0.35" stop-color="#eadcff"/><stop offset="0.72" stop-color="#b393f7"/><stop offset="1" stop-color="#7f5cf0"/></linearGradient>
+          <linearGradient id="hpa-cap-cyan" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffffff"/><stop offset="0.35" stop-color="#d4ecff"/><stop offset="0.72" stop-color="#86baf8"/><stop offset="1" stop-color="#5d78ee"/></linearGradient>
+          <filter id="hpa-edge" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="1.1"/></filter>
+          <filter id="hpa-soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="10"/></filter>
+        </defs><g class="hpa-orb"><circle cx="-30" cy="-30" r="250" fill="url(#hpa-orb-violet)" filter="url(#hpa-edge)"/><circle cx="-30" cy="-30" r="247" fill="none" stroke="#ffffff" stroke-width="2.5" opacity="0.45"/></g><circle cx="-30" cy="-30" r="330" fill="none" stroke="#dedffb" stroke-width="1.2"/><g class="hpa-bob hpa-bob-1"><g transform="rotate(145 10 340)"><rect x="-105.0" y="331.2" width="230" height="40" rx="20.0" fill="#6a5cf0" opacity="0.16" filter="url(#hpa-soft)"/><rect x="-105.0" y="320.0" width="230" height="40" rx="20.0" fill="url(#hpa-cap-violet)" filter="url(#hpa-edge)"/><rect x="-87.0" y="326.4" width="194.0" height="8.8" rx="4.4" fill="#ffffff" opacity="0.7"/></g></g></svg>
+      <svg class="hpa hpa-tr" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><circle cx="430" cy="230" r="190" fill="url(#hpa-orb-haze)"/><g class="hpa-lines" stroke="#c9ccf6" stroke-width="1.4" fill="none"><path d="M150 250 L235 175"/><path d="M235 175 L320 235"/><path d="M320 235 L385 120"/><path d="M235 175 L290 70"/><path d="M320 235 L230 330"/></g><g class="hpa-dots" fill="#b8b4f4"><circle cx="150" cy="250" r="6"/><circle cx="235" cy="175" r="9"/><circle cx="320" cy="235" r="7"/><circle cx="385" cy="120" r="6"/><circle cx="290" cy="70" r="5"/><circle cx="230" cy="330" r="5"/></g></svg>
+      <svg class="hpa hpa-bl" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><g class="hpa-orb"><circle cx="-30" cy="440" r="220" fill="url(#hpa-orb-teal)" filter="url(#hpa-edge)"/><circle cx="-30" cy="440" r="217" fill="none" stroke="#ffffff" stroke-width="2.5" opacity="0.45"/></g><g class="hpa-lines" stroke="#c9ccf6" stroke-width="1.4" fill="none"><path d="M40 170 L120 235"/><path d="M120 235 L70 320"/><path d="M120 235 L210 300"/><path d="M120 235 L190 190"/></g><g class="hpa-dots" fill="#b8b4f4"><circle cx="40" cy="170" r="6"/><circle cx="120" cy="235" r="9"/><circle cx="70" cy="320" r="6"/><circle cx="210" cy="300" r="7"/><circle cx="190" cy="190" r="5"/></g><g class="hpa-bob hpa-bob-2"><g transform="rotate(145 40 40)"><rect x="-90.0" y="30.32" width="260" height="44" rx="22.0" fill="#6a5cf0" opacity="0.16" filter="url(#hpa-soft)"/><rect x="-90.0" y="18.0" width="260" height="44" rx="22.0" fill="url(#hpa-cap-pink)" filter="url(#hpa-edge)"/><rect x="-70.2" y="25.04" width="220.4" height="9.68" rx="4.84" fill="#ffffff" opacity="0.7"/></g></g></svg>
+      <svg class="hpa hpa-br" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><g class="hpa-orb"><circle cx="470" cy="470" r="190" fill="url(#hpa-orb-blue)" filter="url(#hpa-edge)"/><circle cx="470" cy="470" r="187" fill="none" stroke="#ffffff" stroke-width="2.5" opacity="0.45"/></g><circle cx="470" cy="470" r="280" fill="none" stroke="#dedffb" stroke-width="1.2"/><g class="hpa-bob hpa-bob-3"><g transform="rotate(-35 360 110)"><rect x="250.0" y="101.64" width="220" height="38" rx="19.0" fill="#6a5cf0" opacity="0.16" filter="url(#hpa-soft)"/><rect x="250.0" y="91.0" width="220" height="38" rx="19.0" fill="url(#hpa-cap-cyan)" filter="url(#hpa-edge)"/><rect x="267.1" y="97.08" width="185.8" height="8.36" rx="4.18" fill="#ffffff" opacity="0.7"/></g></g></svg>
     </div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
