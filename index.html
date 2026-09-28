@@ -2995,6 +2995,185 @@
       #hero .hero-secondary-link { justify-content: center; padding: 0.75rem 0.5rem; font-size: 0.85rem; }
     }
   </style>
+  <style data-purpose="incubex-theme">
+    /* INCUBEX identity: Ignisia type system + poster palette and capsule motif */
+    :root {
+      --ix-blue: #2938cf;
+      --ix-indigo: #4f46e5;
+      --ix-violet: #7c5cff;
+      --ix-lilac: #a78bfa;
+      --ix-ink: #151936;
+      --ix-grad: linear-gradient(90deg, #2938cf 0%, #5b5bf6 55%, #a78bfa 100%);
+      --ix-capsule: linear-gradient(180deg, rgba(255,255,255,0.75) 0%, rgba(255,255,255,0) 48%), linear-gradient(90deg, #4f6bff 0%, #7c6cf6 55%, #b79cff 100%);
+      --page-bg: #f7f7fe;
+    }
+
+    /* page backdrop: soft poster glows */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        radial-gradient(38rem 30rem at 100% 0%, rgba(199, 210, 254, 0.55), transparent 70%),
+        radial-gradient(34rem 28rem at 0% 100%, rgba(221, 214, 254, 0.6), transparent 70%),
+        radial-gradient(28rem 22rem at 100% 100%, rgba(186, 230, 253, 0.3), transparent 70%);
+    }
+
+    /* section kicker with capsule glyph */
+    .ix-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      margin-bottom: 0.9rem;
+      font-family: 'Montserrat', 'Satoshi', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ix-blue);
+    }
+    .ix-kicker::before {
+      content: "";
+      width: 30px;
+      height: 9px;
+      border-radius: 999px;
+      background: var(--ix-capsule);
+      box-shadow: 0 4px 12px rgba(91, 91, 246, 0.35);
+      transform: rotate(-35deg);
+    }
+
+    /* section titles: ignisia serif, poster gradient accent */
+    section h2.ix-title,
+    #categories h2.ix-title.domains-heading-title {
+      margin: 0 !important;
+      font-family: 'Instrument Serif', Georgia, serif !important;
+      font-style: italic !important;
+      font-weight: 400 !important;
+      font-size: clamp(2.5rem, 5vw, 3.9rem) !important;
+      line-height: 1.02 !important;
+      letter-spacing: -0.015em !important;
+      text-transform: none !important;
+      color: var(--ix-ink) !important;
+      text-wrap: balance;
+    }
+    section h2.ix-title em {
+      font-style: italic;
+      padding-right: 0.08em;
+      background: var(--ix-grad);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    section h2.ix-title + p { margin-top: 0.9rem !important; }
+    #benefits > .text-center { display: flex; flex-direction: column; align-items: center; }
+    #categories .domains-heading-copy { display: flex; flex-direction: column; align-items: flex-start; }
+    @media (max-width: 767px) {
+      #categories .domains-heading-copy { align-items: center; }
+    }
+
+    /* track buttons: slim pills like the hero */
+    #arena .tilt-card > button {
+      border-radius: 999px !important;
+      padding: 0.95rem 1.5rem !important;
+      font-family: 'Satoshi', sans-serif !important;
+      font-size: 0.95rem !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.01em !important;
+      text-transform: none !important;
+    }
+    #arena #card-product > button { background: var(--ix-blue) !important; }
+    #arena #card-prototype > button { background: linear-gradient(90deg, #4f46e5 0%, #7c5cff 100%) !important; }
+
+    /* floating poster capsules around sections */
+    #arena, #categories, #mission-map, #fees, #faq { position: relative; }
+    #arena > div, #categories > div, #mission-map > div, #fees > div, #faq > div { position: relative; z-index: 1; }
+    #arena::before, #categories::before, #mission-map::before, #fees::before, #faq::before {
+      content: "";
+      position: absolute;
+      z-index: 0;
+      width: clamp(110px, 14vw, 210px);
+      height: clamp(18px, 2.2vw, 34px);
+      border-radius: 999px;
+      background: var(--ix-capsule);
+      box-shadow: 0 14px 34px rgba(91, 91, 246, 0.28);
+      opacity: 0.75;
+      pointer-events: none;
+      --r: -40deg;
+      transform: rotate(var(--r));
+      animation: ix-drift 11s ease-in-out infinite alternate;
+    }
+    #arena::after, #mission-map::after, #faq::after {
+      content: "";
+      position: absolute;
+      z-index: 0;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #ffffff, #c4b5fd);
+      border: 2px solid #fff;
+      box-shadow: 0 0 0 6px rgba(167, 139, 250, 0.12), 0 6px 16px rgba(91, 91, 246, 0.25);
+      pointer-events: none;
+      animation: ix-pulse 4.5s ease-in-out infinite;
+    }
+    #arena::before { top: 3.5rem; right: -2.5rem; }
+    #arena::after { top: 9rem; right: 7%; }
+    #categories::before { top: 4rem; left: -3rem; animation-delay: -4s; }
+    #mission-map::before { top: 5rem; right: -2rem; animation-delay: -7s; }
+    #mission-map::after { top: 3rem; left: 8%; animation-delay: -2s; }
+    #fees::before { bottom: 4rem; left: -2.5rem; animation-delay: -3s; }
+    #faq::before { top: 4rem; right: -3rem; animation-delay: -6s; }
+    #faq::after { bottom: 6rem; left: 5%; animation-delay: -1s; }
+
+    @media (max-width: 767px) {
+      #arena::before, #arena::after, #categories::before, #mission-map::before,
+      #mission-map::after, #fees::before, #faq::before, #faq::after { display: none; }
+    }
+    @keyframes ix-drift {
+      0% { transform: translate3d(0, 0, 0) rotate(var(--r)); }
+      100% { transform: translate3d(-12px, -22px, 0) rotate(calc(var(--r) + 4deg)); }
+    }
+    @keyframes ix-pulse {
+      0%, 100% { transform: scale(1); opacity: 0.85; }
+      50% { transform: scale(1.25); opacity: 1; }
+    }
+
+    /* hero artwork motion */
+    #hero .hpa { translate: calc(var(--hx, 0) * var(--depth, 10px)) calc(var(--hy, 0) * var(--depth, 10px)); transition: translate 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); }
+    #hero .hpa-tl { --depth: 14px; }
+    #hero .hpa-tr { --depth: -10px; }
+    #hero .hpa-bl { --depth: -16px; }
+    #hero .hpa-br { --depth: 12px; }
+    #hero .hpa-bob { transform-box: fill-box; transform-origin: center; animation: hpa-bob 9s ease-in-out infinite alternate; }
+    #hero .hpa-bob-2 { animation-duration: 11s; animation-delay: -3s; }
+    #hero .hpa-bob-3 { animation-duration: 13s; animation-delay: -6s; }
+    #hero .hpa-bob-4 { animation-duration: 10s; animation-delay: -8s; }
+    #hero .hpa-lines path { stroke-dasharray: 6 8; animation: hpa-flow 6s linear infinite; }
+    #hero .hpa-dots circle { transform-box: fill-box; transform-origin: center; animation: ix-pulse 4s ease-in-out infinite; }
+    #hero .hpa-dots circle:nth-child(2n) { animation-delay: -1.5s; }
+    #hero .hpa-dots circle:nth-child(3n) { animation-delay: -2.7s; }
+    #hero .hpa-glowblob { transform-box: fill-box; transform-origin: center; animation: hpa-breathe 12s ease-in-out infinite alternate; }
+    @keyframes hpa-bob {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      50% { transform: translate(8px, -14px) rotate(2deg); }
+      100% { transform: translate(-6px, 10px) rotate(-1.5deg); }
+    }
+    @keyframes hpa-flow { to { stroke-dashoffset: -56; } }
+    @keyframes hpa-breathe {
+      0% { transform: scale(1); opacity: 0.55; }
+      100% { transform: scale(1.18); opacity: 0.85; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #hero .hpa, #hero .hpa *, #arena::before, #arena::after, #categories::before,
+      #mission-map::before, #mission-map::after, #fees::before, #faq::before, #faq::after {
+        animation: none !important;
+        transition: none !important;
+        translate: none !important;
+      }
+    }
+  </style>
 </head>
 
 <body class="text-slate-900 antialiased selection:bg-indigo-500 selection:text-white">
@@ -3129,10 +3308,10 @@
           <filter id="hpa-blur-md" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8"/></filter>
           <filter id="hpa-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="12"/></filter>
           <filter id="hpa-blur-lg" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="30"/></filter>
-        </defs><circle cx="40" cy="60" r="150" fill="#c7d2fe" opacity="0.7" filter="url(#hpa-blur-lg)"/><g opacity="1" transform="rotate(-40 120 170)"><rect x="-30.0" y="143.0" width="300" height="54" rx="27.0" fill="url(#hpa-cap)" filter="url(#hpa-glow)" opacity="0.45"/><rect x="-30.0" y="143.0" width="300" height="54" rx="27.0" fill="url(#hpa-cap)"/><rect x="-11.100000000000001" y="148.4" width="262.2" height="18.360000000000003" rx="9.180000000000001" fill="url(#hpa-shine)"/></g><g transform="rotate(-40 250 40)" opacity="0.6" filter="url(#hpa-blur-md)"><rect x="175.0" y="26.0" width="150" height="28" rx="14.0" fill="url(#hpa-cap-soft)"/></g></svg>
-      <svg class="hpa hpa-tr" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><circle cx="360" cy="60" r="150" fill="#ddd6fe" opacity="0.6" filter="url(#hpa-blur-lg)"/><g stroke="#a5b4fc" stroke-width="2" opacity="0.85" fill="none"><path d="M110 190 L200 130"/><path d="M200 130 L300 180"/><path d="M300 180 L370 90"/><path d="M200 130 L230 50"/></g><g fill="url(#hpa-orb)" stroke="#ffffff" stroke-width="2.5"><circle cx="110" cy="190" r="8"/><circle cx="200" cy="130" r="12"/><circle cx="300" cy="180" r="9"/><circle cx="370" cy="90" r="7"/><circle cx="230" cy="50" r="6"/></g></svg>
-      <svg class="hpa hpa-bl" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><circle cx="60" cy="360" r="190" fill="#ddd6fe" opacity="0.8" filter="url(#hpa-blur-lg)"/><g stroke="#a5b4fc" stroke-width="2" opacity="0.85" fill="none"><path d="M40 180 L130 250"/><path d="M130 250 L90 350"/><path d="M130 250 L230 320"/><path d="M130 250 L220 200"/></g><g fill="url(#hpa-orb)" stroke="#ffffff" stroke-width="2.5"><circle cx="40" cy="180" r="7"/><circle cx="130" cy="250" r="12"/><circle cx="90" cy="350" r="8"/><circle cx="230" cy="320" r="9"/><circle cx="220" cy="200" r="6"/></g><g transform="rotate(-40 300 370)" opacity="0.55" filter="url(#hpa-blur-md)"><rect x="200.0" y="348.0" width="200" height="44" rx="22.0" fill="url(#hpa-cap-soft)"/></g></svg>
-      <svg class="hpa hpa-br" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><circle cx="360" cy="360" r="170" fill="#bae6fd" opacity="0.5" filter="url(#hpa-blur-lg)"/><g opacity="1" transform="rotate(-40 300 90)"><rect x="140.0" y="62.0" width="320" height="56" rx="28.0" fill="url(#hpa-cap)" filter="url(#hpa-glow)" opacity="0.45"/><rect x="140.0" y="62.0" width="320" height="56" rx="28.0" fill="url(#hpa-cap)"/><rect x="159.6" y="67.6" width="280.8" height="19.040000000000003" rx="9.520000000000001" fill="url(#hpa-shine)"/></g><g transform="rotate(-40 200 360)" opacity="0.55" filter="url(#hpa-blur-md)"><rect x="70.0" y="332.0" width="260" height="56" rx="28.0" fill="url(#hpa-cap-soft)"/></g></svg>
+        </defs><circle class="hpa-glowblob" cx="40" cy="60" r="150" fill="#c7d2fe" opacity="0.7" filter="url(#hpa-blur-lg)"/><g class="hpa-bob hpa-bob-2"><g opacity="1" transform="rotate(-40 120 170)"><rect x="-30.0" y="143.0" width="300" height="54" rx="27.0" fill="url(#hpa-cap)" filter="url(#hpa-glow)" opacity="0.45"/><rect x="-30.0" y="143.0" width="300" height="54" rx="27.0" fill="url(#hpa-cap)"/><rect x="-11.100000000000001" y="148.4" width="262.2" height="18.360000000000003" rx="9.180000000000001" fill="url(#hpa-shine)"/></g></g><g class="hpa-bob hpa-bob-3"><g transform="rotate(-40 250 40)" opacity="0.6" filter="url(#hpa-blur-md)"><rect x="175.0" y="26.0" width="150" height="28" rx="14.0" fill="url(#hpa-cap-soft)"/></g></g></svg>
+      <svg class="hpa hpa-tr" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><circle class="hpa-glowblob" cx="360" cy="60" r="150" fill="#ddd6fe" opacity="0.6" filter="url(#hpa-blur-lg)"/><g class="hpa-lines" stroke="#a5b4fc" stroke-width="2" opacity="0.85" fill="none"><path d="M110 190 L200 130"/><path d="M200 130 L300 180"/><path d="M300 180 L370 90"/><path d="M200 130 L230 50"/></g><g class="hpa-dots" fill="url(#hpa-orb)" stroke="#ffffff" stroke-width="2.5"><circle cx="110" cy="190" r="8"/><circle cx="200" cy="130" r="12"/><circle cx="300" cy="180" r="9"/><circle cx="370" cy="90" r="7"/><circle cx="230" cy="50" r="6"/></g></svg>
+      <svg class="hpa hpa-bl" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><circle class="hpa-glowblob" cx="60" cy="360" r="190" fill="#ddd6fe" opacity="0.8" filter="url(#hpa-blur-lg)"/><g class="hpa-lines" stroke="#a5b4fc" stroke-width="2" opacity="0.85" fill="none"><path d="M40 180 L130 250"/><path d="M130 250 L90 350"/><path d="M130 250 L230 320"/><path d="M130 250 L220 200"/></g><g class="hpa-dots" fill="url(#hpa-orb)" stroke="#ffffff" stroke-width="2.5"><circle cx="40" cy="180" r="7"/><circle cx="130" cy="250" r="12"/><circle cx="90" cy="350" r="8"/><circle cx="230" cy="320" r="9"/><circle cx="220" cy="200" r="6"/></g><g class="hpa-bob hpa-bob-4"><g transform="rotate(-40 300 370)" opacity="0.55" filter="url(#hpa-blur-md)"><rect x="200.0" y="348.0" width="200" height="44" rx="22.0" fill="url(#hpa-cap-soft)"/></g></g></svg>
+      <svg class="hpa hpa-br" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><circle class="hpa-glowblob" cx="360" cy="360" r="170" fill="#bae6fd" opacity="0.5" filter="url(#hpa-blur-lg)"/><g class="hpa-bob hpa-bob-1"><g opacity="1" transform="rotate(-40 300 90)"><rect x="140.0" y="62.0" width="320" height="56" rx="28.0" fill="url(#hpa-cap)" filter="url(#hpa-glow)" opacity="0.45"/><rect x="140.0" y="62.0" width="320" height="56" rx="28.0" fill="url(#hpa-cap)"/><rect x="159.6" y="67.6" width="280.8" height="19.040000000000003" rx="9.520000000000001" fill="url(#hpa-shine)"/></g></g><g class="hpa-bob hpa-bob-2"><g transform="rotate(-40 200 360)" opacity="0.55" filter="url(#hpa-blur-md)"><rect x="70.0" y="332.0" width="260" height="56" rx="28.0" fill="url(#hpa-cap-soft)"/></g></g></svg>
     </div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -3292,9 +3471,8 @@
   <section class="w-full py-8 md:py-12 relative z-20 overflow-hidden reveal" id="benefits">
     <!-- Prominent Bold Heading with generous vertical spacing -->
     <div class="text-center max-w-4xl mx-auto mb-12 md:mb-16 px-4">
-      <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight uppercase">
-        Summit Honours &amp; Institutional Perks
-      </h2>
+      <span class="ix-kicker">Why take part</span>
+      <h2 class="ix-title">Honours &amp; <em>Perks</em></h2>
     </div>
 
     <!-- Infinite Auto-Scrolling Carousel (Left to Right) -->
@@ -3421,9 +3599,8 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <div class="text-center max-w-3xl mx-auto mb-10">
-        <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight">
-          COMPETITION TRACKS
-        </h2>
+        <span class="ix-kicker">Two ways to compete</span>
+        <h2 class="ix-title">Competition <em>Tracks</em></h2>
         <p class="text-base text-slate-600 mt-3">
           Two tracks, each with its own expectations for build maturity and presentation format.
         </p>
@@ -3617,9 +3794,8 @@
           <span class="domains-number">14</span>
         </div>
         <div class="domains-heading-copy">
-        <h2 class="domains-heading-title font-black text-slate-900" aria-label="14 Innovation Domains">
-          INNOVATION<br>DOMAINS
-        </h2>
+        <span class="ix-kicker">Where to build</span>
+        <h2 class="domains-heading-title ix-title" aria-label="14 Innovation Domains">Innovation <em>Domains</em></h2>
         <p class="text-base text-slate-600 mt-3">
           Select or search any tech vertical to see how your project aligns with INCUBEX 2026.
         </p>
@@ -3727,9 +3903,8 @@
       
       <!-- Section Header -->
       <div class="text-center max-w-3xl mx-auto mb-16">
-        <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight">
-          EVENT TIMELINE
-        </h2>
+        <span class="ix-kicker">Key dates</span>
+        <h2 class="ix-title">Event <em>Timeline</em></h2>
         <p class="text-base text-slate-600 mt-3">
           Key dates from registration to the Grand Finale at MIT-WPU Pune.
         </p>
@@ -4014,9 +4189,8 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <div class="text-center max-w-3xl mx-auto mb-16">
-        <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight">
-          PARTICIPATION FEES
-        </h2>
+        <span class="ix-kicker">Per team</span>
+        <h2 class="ix-title">Participation <em>Fees</em></h2>
         <p class="text-base text-slate-600 mt-3">
           One registration fee per team. The finalist fee applies only to teams shortlisted for the Grand Finale.
         </p>
@@ -4111,9 +4285,8 @@
       <div class="faq-layout grid grid-cols-1 gap-8 xl:grid-cols-[1.7fr_0.9fr] xl:items-start">
         <div class="faq-main min-w-0">
           <div class="text-center max-w-3xl mx-auto mb-12 xl:text-left xl:mx-0">
-            <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight">
-              FREQUENTLY ASKED QUESTIONS
-            </h2>
+            <span class="ix-kicker">Need to know</span>
+            <h2 class="ix-title">Frequently Asked <em>Questions</em></h2>
             <p class="text-base text-slate-600 mt-3">
               Explore interactive answers categorized by eligibility, screening, finale logistics, and intellectual property.
             </p>
@@ -5128,5 +5301,26 @@
   </script>
   <!-- END: InteractiveScripts -->
 
+  <script data-purpose="hero-parallax">
+    (function () {
+      const hero = document.getElementById('hero');
+      if (!hero || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      if (!window.matchMedia('(pointer: fine)').matches) return;
+      let raf = 0;
+      hero.addEventListener('pointermove', (e) => {
+        if (raf) return;
+        raf = requestAnimationFrame(() => {
+          raf = 0;
+          const r = hero.getBoundingClientRect();
+          hero.style.setProperty('--hx', ((e.clientX - r.left) / r.width - 0.5) * 2);
+          hero.style.setProperty('--hy', ((e.clientY - r.top) / r.height - 0.5) * 2);
+        });
+      });
+      hero.addEventListener('pointerleave', () => {
+        hero.style.setProperty('--hx', 0);
+        hero.style.setProperty('--hy', 0);
+      });
+    })();
+  </script>
 </body>
 </html>
