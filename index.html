@@ -2618,13 +2618,13 @@
       display: none;
     }
 
-    @media (min-width: 1024px) {
+    @media (min-width: 1200px) {
       #mobile-menu-btn {
         display: none;
       }
     }
 
-    @media (max-width: 1023px) {
+    @media (max-width: 1199px) {
       body.mobile-nav-open {
         overflow: hidden;
       }
@@ -3967,6 +3967,60 @@
     #contact .footer-bottom-bar p { color: #3b3d58; }
     @media (max-width: 639px) { #contact .footer-brand-banner { margin-bottom: 1.2rem; } }
   </style>
+  <style data-purpose="verified-responsive-navbar-and-hero">
+    #main-header { transition: background-color 200ms ease, box-shadow 200ms ease; }
+    #main-header .btn-shimmer { transition: background-color 200ms ease, box-shadow 200ms ease, transform 200ms ease; }
+    @media (min-width: 769px) and (max-width: 1199px) {
+      #mobile-menu { top: 106px !important; max-height: calc(100svh - 118px); }
+    }
+    @media (max-width: 1199px) {
+      #main-header nav { display: none !important; }
+      #mobile-menu-btn { display: flex !important; flex: 0 0 42px; align-items: center; justify-content: center; }
+      #main-header .nav-mantra { display: none !important; }
+      #main-header .navbar-shell { gap: 12px !important; }
+      #main-header .navbar-shell > div:last-child { flex-shrink: 0; }
+      #main-header .btn-shimmer { min-width: 0 !important; }
+      #hero { min-height: 680px !important; padding-top: 136px !important; }
+    }
+    @media (max-width: 767px) {
+      #main-header { top: 8px !important; width: calc(100% - 16px) !important; }
+      #main-header > div { padding-inline: 12px !important; }
+      #main-header .navbar-shell { height: 60px !important; gap: 6px !important; }
+      #main-header .nav-brand-lockup { gap: 5px !important; }
+      #main-header .nav-brand-lockup a { margin: 0 !important; }
+      #main-header .nav-mit-logo { width: 88px !important; height: auto !important; }
+      #main-header .nav-ignisia-logo { width: 82px !important; height: auto !important; }
+      #main-header .btn-shimmer { padding: 10px 11px !important; font-size: 9px !important; letter-spacing: .02em !important; min-height: 38px; white-space: nowrap; }
+      #main-header .navbar-shell > div:last-child { gap: 5px !important; }
+      #mobile-menu-btn { width: 40px !important; height: 40px !important; flex-basis: 40px; }
+      #mobile-menu { top: 78px !important; max-height: calc(100svh - 90px); }
+      #hero { display: block; width: calc(100% - 16px); min-height: 0 !important; padding: 130px 12px 28px !important; }
+      #hero > .max-w-7xl { padding-inline: 8px !important; }
+      #hero .hero-layout-wrapper { position: relative; display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 32px 12px; }
+      #hero .hero-content-col { grid-column: 1 / -1; }
+      #hero .poster-wordmark { font-size: clamp(2.8rem, 15vw, 6rem); }
+      #hero .hero-vision-line { margin-top: 12px; }
+      #hero .hero-launchpad-line { margin-top: 6px; }
+      #hero .hero-cta-stack { margin-top: 24px; }
+      #hero .hero-social-dock { position: static; grid-column: 1; gap: 7px; align-self: end; }
+      #hero-countdown-block { position: static !important; grid-column: 2; width: auto !important; justify-content: flex-end; }
+      #hero-countdown-block > div { padding: 10px !important; }
+      #countdown-timer { gap: 9px; }
+      #countdown-timer .countdown { font-size: 1.35rem !important; }
+      #hero .poster-hero-sparkle { width: 40px; top: 85px; }
+      #hero .poster-hero-star { width: 72px; bottom: 145px; right: -32px; }
+    }
+    @media (max-width: 359px) {
+      #main-header > div { padding-inline: 8px !important; }
+      #main-header .nav-mit-logo { width: 72px !important; }
+      #main-header .nav-ignisia-logo { width: 66px !important; }
+      #main-header .btn-shimmer { padding-inline: 8px !important; font-size: 8px !important; }
+      #hero .hero-layout-wrapper { grid-template-columns: 1fr; gap: 24px; }
+      #hero .hero-social-dock { grid-column: 1; justify-content: center; }
+      #hero-countdown-block { grid-column: 1; justify-content: center; }
+      #hero .hero-secondary-link { font-size: .75rem; padding-inline: 8px; }
+    }
+  </style>
 </head>
 
 <body class="text-slate-900 antialiased selection:bg-indigo-500 selection:text-white">
@@ -5291,7 +5345,7 @@
           <ul class="space-y-2.5 text-xs sm:text-sm text-slate-600">
             <li><a class="transition-colors hover:text-indigo-600" href="#arena">Competition Tracks</a></li>
             <li><button type="button" class="text-left transition-colors hover:text-indigo-600 cursor-pointer" onclick="openRegisterModal(); playSound('click');">Register</button></li>
-            <li><a class="transition-colors hover:text-indigo-600" href="assets/Incubex%20Brochure.pdf">Official Brochure (PDF)</a></li>
+            <li><a class="transition-colors hover:text-indigo-600" href="assets/incubex-poster.pdf">Official Brochure (PDF)</a></li>
             <li><a class="transition-colors hover:text-indigo-600" href="#categories">Innovation Domains</a></li>
             <li><a class="transition-colors hover:text-indigo-600" href="#mission-map">Event Timeline</a></li>
             <li><a class="transition-colors hover:text-indigo-600" href="#fees">Registration Fees</a></li>
@@ -6000,7 +6054,7 @@
       if (event.key === 'Escape') setMobileMenu(false);
     });
     window.addEventListener('resize', () => {
-      if (window.innerWidth >= 1024) setMobileMenu(false);
+      if (window.innerWidth >= 1200) setMobileMenu(false);
     });
 
     // 5. FAQ search, category filters, and accordion
