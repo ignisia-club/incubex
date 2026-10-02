@@ -4141,14 +4141,9 @@
     }
   </style>
   <style data-purpose="footer-viewport-and-smart-navbar">
-    /* Smart navbar: slides away while scrolling down, returns on any upward scroll. */
+    /* Keep the fixed navbar visible throughout the page. */
     #main-header {
-      transition: background-color 200ms ease, box-shadow 200ms ease, transform 380ms cubic-bezier(.22, 1, .36, 1);
-      will-change: transform;
-    }
-    #main-header.nav-hidden {
-      transform: translate(-50%, calc(-100% - 28px)) !important;
-      pointer-events: none;
+      transition: background-color 200ms ease, box-shadow 200ms ease;
     }
     @media (prefers-reduced-motion: reduce) {
       #main-header { transition: background-color 200ms ease, box-shadow 200ms ease; }
@@ -6279,47 +6274,6 @@
     window.addEventListener('scroll', handleScrollUi, { passive: true });
     window.addEventListener('resize', handleScrollUi, { passive: true });
     handleScrollUi();
-    // Smart navbar: hide while scrolling down, reveal on scroll up.
-    (function () {
-      const header = document.getElementById('main-header');
-      if (!header) return;
-      const footer = document.getElementById('contact');
-      const HIDE_AFTER = 120;   // never hide near the top of the page
-      const THRESHOLD = 8;      // ignore tiny scroll jitter
-      let lastY = window.scrollY;
-
-      const setHidden = (hidden) => header.classList.toggle('nav-hidden', hidden);
-
-      function update() {
-        const y = Math.max(0, window.scrollY);
-        const maxY = document.documentElement.scrollHeight - window.innerHeight;
-        if (y > maxY + 2) return; // iOS rubber-band overscroll at the bottom
-
-        const menuOpen = document.body.classList.contains('mobile-nav-open');
-        // While the footer fills the screen the navbar stays out of its way,
-        // otherwise it would sit on top of the IGNISIA banner.
-        const footerCoversTop = footer && footer.getBoundingClientRect().top <= 8;
-        if (menuOpen) {
-          setHidden(false);
-        } else if (footerCoversTop) {
-          setHidden(true);
-        } else if (y < HIDE_AFTER) {
-          setHidden(false);
-        } else if (y - lastY > THRESHOLD) {
-          setHidden(true);
-        } else if (lastY - y > THRESHOLD) {
-          setHidden(false);
-        } else {
-          return;
-        }
-        lastY = y;
-      }
-
-      window.addEventListener('scroll', update, { passive: true });
-      header.addEventListener('focusin', () => setHidden(false));
-    })();
-
-
     // 2. IntersectionObserver for smooth scroll reveals
     const revealElements = document.querySelectorAll('.reveal');
     const revealObserver = new IntersectionObserver((entries) => {
