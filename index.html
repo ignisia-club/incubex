@@ -149,7 +149,7 @@
             "name": "What are the exact fees for participating in INCUBEX 2026?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Initial registration is ₹300 per team, paid on Unstop during registration. Registration is free for MIT-WPU Pune students. Participation in the offline Grand Finale at MIT-WPU Pune is free for all 80 shortlisted finalist teams."
+              "text": "Initial registration is ₹300 per team, paid on Unstop during registration. Registration is free for MIT-WPU Pune students."
             }
           },
           {
@@ -3994,10 +3994,21 @@
       #main-header .navbar-shell > div:last-child { gap: 5px !important; }
       #mobile-menu-btn { width: 40px !important; height: 40px !important; flex-basis: 40px; }
       #mobile-menu { top: 78px !important; max-height: calc(100svh - 90px); }
-      #hero { display: block; width: calc(100% - 16px); min-height: 0 !important; padding: 130px 12px 28px !important; }
-      #hero > .max-w-7xl { padding-inline: 8px !important; }
-      #hero .hero-layout-wrapper { position: relative; display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 32px 12px; }
-      #hero .hero-content-col { grid-column: 1 / -1; }
+      /* Hero fills the first phone screen with an 8px card margin top and bottom, so the
+         event-info cards start below the fold. The title block sits centred in the free
+         space, the CTAs anchor to the bottom, then the social/countdown row. */
+      #hero {
+        display: flex;
+        width: calc(100% - 16px);
+        min-height: calc(100vh - 16px) !important;
+        min-height: calc(100svh - 16px) !important;
+        padding: 96px 20px 28px !important;
+      }
+      #hero > .max-w-7xl { flex: 1 1 auto; align-self: stretch; display: flex; padding-inline: 0 !important; }
+      #hero .hero-layout-wrapper { position: relative; flex: 1 1 auto; display: grid; grid-template-columns: 1fr auto; grid-template-rows: 1fr auto; align-items: end; gap: 28px 12px; }
+      #hero .hero-content-col { grid-column: 1 / -1; display: flex; flex-direction: column; align-items: center; align-self: stretch; }
+      #hero .hero-content-col .hero-wordmark { margin-top: auto; }
+      #hero .hero-content-col .hero-cta-stack { margin-top: auto; padding-top: 28px; }
       #hero .poster-wordmark { font-size: clamp(2.8rem, 15vw, 6rem); }
       #hero .hero-vision-line { margin-top: 12px; }
       #hero .hero-launchpad-line { margin-top: 6px; }
@@ -4008,7 +4019,7 @@
       #countdown-timer { gap: 9px; }
       #countdown-timer .countdown { font-size: 1.35rem !important; }
       #hero .poster-hero-sparkle { width: 40px; top: 85px; }
-      #hero .poster-hero-star { width: 72px; bottom: 145px; right: -32px; }
+      #hero .poster-hero-star { width: 72px; top: 56%; bottom: auto; right: -32px; }
     }
     @media (max-width: 359px) {
       #main-header > div { padding-inline: 8px !important; }
@@ -4583,7 +4594,7 @@
                 </div>
                 <div class="bg-white p-2.5 rounded-xl border border-slate-100 flex items-center space-x-2">
                   <span class="text-cyan-600 font-bold">3.</span>
-                  <span><strong>Institutional Honors:</strong> Category trophies, cash awards, 2 exclusive MIT-WPU honors</span>
+                  <span><strong>Institutional Honors:</strong> Category trophies and cash awards</span>
                 </div>
               </div>
             </div>
@@ -5044,12 +5055,12 @@
         <span class="ix-kicker">Per team</span>
         <h2 class="ix-title">Participation <em>Fees</em></h2>
         <p class="text-base text-slate-600 mt-3">
-          One registration fee per team. Grand Finale participation is free for shortlisted finalists.
+          One registration fee per team.
         </p>
       </div>
 
-      <!-- Registration fee and free finalist participation -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-12">
+      <!-- Registration fee -->
+      <div class="grid grid-cols-1 gap-8 max-w-md mx-auto mb-12">
         <!-- Registration Fee Card -->
         <div class="glass-panel rounded-3xl border-2 border-blue-200 p-8 shadow-card flex flex-col justify-between relative overflow-hidden group hover:border-blue-400 transition-all duration-300">
           <div class="absolute -top-12 -right-12 w-36 h-36 bg-blue-100 rounded-full blur-2xl"></div>
@@ -5059,7 +5070,7 @@
                 <rect width="18" height="18" x="3" y="3" rx="2"></rect>
                 <path d="m9 12 2 2 4-4"></path>
               </svg>
-              <span>Stage 1: All Registered Teams</span>
+              <span>All Registered Teams</span>
             </div>
             <div class="flex items-baseline space-x-2 mt-4 mb-2">
               <span class="text-5xl font-black text-slate-900 tracking-tight">₹300</span>
@@ -5090,42 +5101,6 @@
           </div>
         </div>
 
-        <!-- Finalist Fee Card -->
-        <div class="glass-panel rounded-3xl border-2 border-indigo-400 p-8 shadow-hover flex flex-col justify-between relative overflow-hidden group hover:border-indigo-500 transition-all duration-300">
-          <div class="absolute -top-12 -right-12 w-36 h-36 bg-purple-100 rounded-full blur-2xl"></div>
-          <div>
-            <div class="flex items-center space-x-2 text-indigo-600 font-bold text-xs uppercase tracking-wider mb-2">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              <span>Stage 2: Shortlisted Finalists</span>
-            </div>
-            <div class="flex items-baseline space-x-2 mt-4 mb-2">
-              <span class="text-5xl font-black text-indigo-900 tracking-tight">Free</span>
-              <span class="text-sm font-bold text-slate-600">per team</span>
-            </div>
-            <h3 class="text-lg font-bold text-slate-900 mb-4">Finalist Pass</h3>
-            <ul class="space-y-3 text-xs sm:text-sm text-slate-600 mb-8 border-t border-slate-100 pt-4">
-              <li class="flex items-start space-x-2">
-                <span class="text-emerald-500 font-bold">✓</span>
-                <span>No additional fee after qualifying in the online round</span>
-              </li>
-              <li class="flex items-start space-x-2">
-                <span class="text-emerald-500 font-bold">✓</span>
-                <span>Dedicated exhibition booth &amp; power setup at MIT-WPU</span>
-              </li>
-              <li class="flex items-start space-x-2">
-                <span class="text-emerald-500 font-bold">✓</span>
-                <span>In-person evaluation and pitch slot with the jury</span>
-              </li>
-              <li class="flex items-start space-x-2">
-                <span class="text-emerald-500 font-bold">✓</span>
-                <span>Finalist kit, meals and certificate</span>
-              </li>
-            </ul>
-          </div>
-          <div class="bg-indigo-50/90 p-3.5 rounded-2xl border border-indigo-200 text-center text-xs font-bold text-indigo-950">
-            Free for all teams shortlisted for the Grand Finale
-          </div>
-        </div>
       </div>
 
     </div>
@@ -5216,7 +5191,7 @@
                 </div>
               </button>
               <div class="faq-answer hidden px-6 pb-6 text-xs sm:text-sm text-slate-700 leading-relaxed font-normal border-t border-slate-100 pt-4">
-                Initial registration is <strong>₹300 per team</strong>, paid on Unstop during registration. <strong>Registration is free for MIT-WPU Pune students.</strong> Participation in the offline Grand Finale at MIT-WPU Pune is <strong>free for all 80 shortlisted finalist teams</strong>.
+                Initial registration is <strong>₹300 per team</strong>, paid on Unstop during registration. <strong>Registration is free for MIT-WPU Pune students.</strong>
               </div>
             </div>
 
@@ -5462,7 +5437,7 @@
           <span class="register-option-arrow" aria-hidden="true">↗</span>
         </a>
       </div>
-      <p class="register-modal-note">Registration is ₹300 per team and free for MIT-WPU Pune students. Grand Finale participation is free for shortlisted finalists.</p>
+      <p class="register-modal-note">Registration is ₹300 per team and free for MIT-WPU Pune students.</p>
     </div>
   </div>
 
@@ -5750,7 +5725,7 @@
         phase: "Phase 2: Finalist Onboarding & Pass Allocation",
         date: "12 October 2026",
         action: "Official publication of shortlisted finalists (30 Product Track teams + 50 Prototype Expo teams). Teams confirm on-campus attendance.",
-        reqs: "Confirm your free Finalist Pass for on-campus booth infrastructure, food passes, and official invitation letter for college leave.",
+        reqs: "Confirm your attendance for on-campus booth infrastructure, food passes, and official invitation letter for college leave.",
         outcome: "Booth number assignment, exhibition handbook, and confirmed spot at MIT-WPU Pune."
       },
       6: {
