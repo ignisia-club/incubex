@@ -4206,6 +4206,27 @@
       #contact .footer-bottom-bar { padding-top: .7rem; }
     }
   </style>
+  <style data-purpose="faq-categories-and-horizontal-fees">
+    #fees > div > .text-center { margin-bottom: 2rem; }
+    #fees .participation-fee-panel { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.3fr); max-width: 1060px; margin: 0 auto; border: 1px solid rgba(104,120,216,.24); border-radius: 28px; background: linear-gradient(120deg, rgba(248,248,255,.78), rgba(200,184,248,.38)); box-shadow: 0 18px 50px rgba(56,88,200,.08); color: var(--ref-ink); }
+    #fees .fee-summary { padding: 2.25rem; border-right: 1px solid rgba(104,120,216,.2); }
+    #fees .fee-eyebrow { font-size: .65rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; color: var(--ref-indigo); }
+    #fees .fee-summary h3 { margin-top: .8rem; font-size: 1.1rem; font-weight: 700; }
+    #fees .fee-price { display: flex; align-items: baseline; gap: .75rem; margin: .6rem 0 1rem; }
+    #fees .fee-price strong { font-size: clamp(2.8rem, 5vw, 4rem); line-height: 1; letter-spacing: -.05em; }
+    #fees .fee-price span { font-size: .85rem; }
+    #fees .fee-exemption { font-size: .8rem; font-weight: 600; color: var(--ref-indigo); line-height: 1.6; }
+    #fees .fee-inclusions { display: grid; align-content: center; gap: 1.15rem; padding: 2.25rem; list-style: none; margin: 0; }
+    #fees .fee-inclusions li { display: flex; align-items: start; gap: .8rem; font-size: .9rem; line-height: 1.6; }
+    #fees .fee-inclusions li > span { flex: 0 0 24px; text-align: center; color: var(--ref-indigo); background: rgba(104,120,216,.12); border-radius: 50%; }
+    #faq .faq-results-status { margin: 0 0 1rem; font-size: .75rem; color: var(--ref-ink); opacity: .75; }
+    #faq .faq-filter-btn:focus-visible { outline: 2px solid var(--ref-indigo); outline-offset: 3px; }
+    @media (max-width: 639px) {
+      #fees .participation-fee-panel { grid-template-columns: 1fr; border-radius: 24px; }
+      #fees .fee-summary { padding: 1.5rem; border-right: 0; border-bottom: 1px solid rgba(104,120,216,.2); }
+      #fees .fee-inclusions { padding: 1.5rem; gap: 1rem; }
+    }
+  </style>
 </head>
 
 <body class="text-slate-900 antialiased selection:bg-indigo-500 selection:text-white">
@@ -5233,48 +5254,19 @@
         </p>
       </div>
 
-      <!-- Registration fee -->
-      <div class="grid grid-cols-1 gap-8 max-w-md mx-auto mb-12">
-        <!-- Registration Fee Card -->
-        <div class="glass-panel rounded-3xl border-2 border-blue-200 p-8 shadow-card flex flex-col justify-between relative overflow-hidden group hover:border-blue-400 transition-all duration-300">
-          <div class="absolute -top-12 -right-12 w-36 h-36 bg-blue-100 rounded-full blur-2xl"></div>
-          <div>
-            <div class="flex items-center space-x-2 text-blue-600 font-bold text-xs uppercase tracking-wider mb-2">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <rect width="18" height="18" x="3" y="3" rx="2"></rect>
-                <path d="m9 12 2 2 4-4"></path>
-              </svg>
-              <span>All Registered Teams</span>
-            </div>
-            <div class="flex items-baseline space-x-2 mt-4 mb-2">
-              <span class="text-5xl font-black text-slate-900 tracking-tight">₹300</span>
-              <span class="text-sm font-bold text-slate-600">per team</span>
-            </div>
-            <h3 class="text-lg font-bold text-slate-900 mb-4">Initial Registration Fee</h3>
-            <ul class="space-y-3 text-xs sm:text-sm text-slate-600 mb-8 border-t border-slate-100 pt-4">
-              <li class="flex items-start space-x-2">
-                <span class="text-emerald-500 font-bold">✓</span>
-                <span>Covers the whole team (Product: 1–6; Prototype Expo: 3–6 members)</span>
-              </li>
-              <li class="flex items-start space-x-2">
-                <span class="text-emerald-500 font-bold">✓</span>
-                <span>Entry to the online qualifier round</span>
-              </li>
-              <li class="flex items-start space-x-2">
-                <span class="text-emerald-500 font-bold">✓</span>
-                <span>Evaluation by the jury panel</span>
-              </li>
-              <li class="flex items-start space-x-2">
-                <span class="text-emerald-500 font-bold">✓</span>
-                <span>Digital participation certificate for every member</span>
-              </li>
-            </ul>
-          </div>
-          <div class="bg-blue-50/90 p-3.5 rounded-2xl border border-blue-100 text-center text-xs font-bold text-blue-900">
-            Free registration for MIT-WPU Pune students
-          </div>
+      <div class="participation-fee-panel">
+        <div class="fee-summary">
+          <span class="fee-eyebrow">All Registered Teams</span>
+          <h3>Initial Registration Fee</h3>
+          <p class="fee-price"><strong>₹300</strong><span>per team</span></p>
+          <p class="fee-exemption">Free registration for MIT-WPU Pune students</p>
         </div>
-
+        <ul class="fee-inclusions">
+          <li><span aria-hidden="true">✓</span>Covers the whole team (Product: 1–6; Prototype Expo: 3–6 members)</li>
+          <li><span aria-hidden="true">✓</span>Entry to the online qualifier round</li>
+          <li><span aria-hidden="true">✓</span>Evaluation by the jury panel</li>
+          <li><span aria-hidden="true">✓</span>Digital participation certificate for every member</li>
+        </ul>
       </div>
 
     </div>
@@ -5309,9 +5301,6 @@
 
             <!-- Interactive Category Filter Tabs -->
             <div class="flex flex-wrap items-center justify-center gap-2 mt-6 xl:justify-start" id="faq-category-filters">
-              <button onclick="setFaqCategory('all', this); playSound('hover');" class="faq-filter-btn px-4 py-1.5 rounded-full text-xs font-bold transition-all bg-indigo-600 text-white shadow-xs cursor-pointer">
-                All Questions
-              </button>
               <button onclick="setFaqCategory('event', this); playSound('hover');" class="faq-filter-btn px-4 py-1.5 rounded-full text-xs font-bold transition-all bg-white text-slate-800 border border-slate-300 hover:border-indigo-500 hover:text-indigo-700 cursor-pointer shadow-2xs">
                 Event &amp; Eligibility
               </button>
@@ -5327,6 +5316,7 @@
             </div>
           </div>
 
+          <p id="faq-results-status" class="faq-results-status" role="status" aria-live="polite"></p>
           <!-- FAQ Accordion List (Animated Cards) -->
           <div class="space-y-4" id="faq-container">
             <div class="faq-item border border-indigo-100/90 rounded-2xl bg-white/95 overflow-hidden shadow-xs hover:border-indigo-300 hover:shadow-card transition-all duration-300" data-category="event" data-keywords="What is INCUBEX 2026? INCUBEX 2026 is a national-level Project Expo + Launchpad Event organized by Ignisia Club at MIT-WPU. It brings together student innovators to showcase working projects, prototypes, and products to expert panels and investors.">
@@ -6331,16 +6321,21 @@
     });
 
     // 5. FAQ search, category filters, and accordion
-    let activeFaqCategory = 'all';
+    let activeFaqCategory = 'event';
 
     function setFaqCategory(category, button) {
       activeFaqCategory = category;
+      document.getElementById('faq-search-input').value = '';
+      document.querySelectorAll('.faq-answer').forEach(answer => answer.classList.add('hidden'));
+      document.querySelectorAll('.faq-item').forEach(item => item.classList.remove('is-open'));
+      document.querySelectorAll('.faq-icon').forEach(icon => { icon.textContent = '+'; icon.style.transform = 'rotate(0deg)'; });
       document.querySelectorAll('.faq-filter-btn').forEach((btn) => {
         btn.className = 'faq-filter-btn px-4 py-1.5 rounded-full text-xs font-bold transition-all bg-white text-slate-800 border border-slate-300 hover:border-indigo-500 hover:text-indigo-700 cursor-pointer';
       });
       if (button) {
         button.className = 'faq-filter-btn px-4 py-1.5 rounded-full text-xs font-bold transition-all bg-indigo-600 text-white shadow-xs cursor-pointer';
       }
+      document.querySelectorAll('.faq-filter-btn').forEach(btn => btn.setAttribute('aria-pressed', String(btn === button)));
       filterFaqs();
     }
 
@@ -6349,11 +6344,15 @@
       document.querySelectorAll('.faq-item').forEach((item) => {
         const category = item.getAttribute('data-category') || '';
         const haystack = ((item.getAttribute('data-keywords') || '') + ' ' + item.innerText).toLowerCase();
-        const categoryOk = activeFaqCategory === 'all' || category === activeFaqCategory;
+        const categoryOk = Boolean(query) || category === activeFaqCategory;
         const searchOk = !query || haystack.includes(query);
         item.classList.toggle('hidden', !(categoryOk && searchOk));
       });
+      const count = document.querySelectorAll('.faq-item:not(.hidden)').length;
+      document.getElementById('faq-results-status').textContent = count ? `${count} questions${query ? ' matching your search across all categories' : ' in this category'}` : 'No matching questions. Try a different search.';
     }
+
+    setFaqCategory('event', document.querySelector('.faq-filter-btn'));
 
     function toggleFaq(button) {
       const answer = button.nextElementSibling;
