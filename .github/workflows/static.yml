@@ -1,5 +1,5 @@
-# Simple workflow for deploying static content to GitHub Pages
-name: Deploy static content to Pages
+# Build the Vite/React app and deploy it to GitHub Pages (https://incubex.ignisia.tech)
+name: Build and deploy to Pages
 
 on:
   # Runs on pushes targeting the default branch
@@ -22,22 +22,51 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Single deploy job since we're just deploying
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+        env:
+          # These two values end up in the public JavaScript bundle by design (Supabase "anon" key,
+          # protected by Row Level Security), so they are safe to keep here. A repo admin can override
+          # them without a code change via Settings -> Secrets and variables -> Actions -> Variables.
+          # NEVER put a service_role key or any other secret here.
+          VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL || 'https://gxftluqkfouxdpcskzdq.supabase.co' }}
+          VITE_SUPABASE_ANON_KEY: ${{ vars.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd4ZnRsdXFrZm91eGRwY3NremRxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTEyNzgzOTEsImV4cCI6MjEwNjg1NDM5MX0.qnY4dTeAKB5urbW-AGsvFah9AlFNyNYHSl21JSn1aFY' }}
+
+      # GitHub Pages has no rewrite rules: opening /upload or /admin directly would show a 404.
+      # Serving the app shell as 404.html makes the React router handle those paths.
+      - name: SPA fallback for /upload and /admin
+        run: cp dist/index.html dist/404.html
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
-          path: '.'
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
