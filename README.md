@@ -45,14 +45,16 @@ Supabase handles the Database (PostgreSQL), Storage (S3-compatible), and Auth. T
 ### 1. Setup
 1. Install dependencies: `npm install`
 2. Configure environment variables in `.env` (`VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`).
-3. Run all `supabase/migrations/` files in order (`00_` to `11_`; `07`-`10` are only needed for the B2 backup) inside the Supabase SQL editor.
-   `11_admin_team_management.sql` lets admins add and remove Team IDs from `/admin`.
+3. Run all `supabase/migrations/` files in order (`00_` to `12_`; `07`-`10` are only needed for the B2 backup) inside the Supabase SQL editor.
+   `11_admin_team_management.sql` lets admins add and remove Team IDs from `/admin`;
+   `12_accept_any_numeric_team_id.sql` accepts every 4-5 digit Team ID without listing it first.
 4. Start the app: `npm run dev` (Opens at http://localhost:5173).
 
 ### 2. Testing the Upload Portal
 Go to `http://localhost:5173/upload`. 
-- **Team IDs:** either `INC-12345` or a Club OS team number (4-5 digits, e.g. `1003`; leading zeros kept). Only IDs in the `teams`
-  table are accepted. Add them from `/admin` → **Teams** (paste one per line, optionally `1003, leader@college.edu`).
+- **Team IDs:** every 4-5 digit number (`0000`-`9999`, `00000`-`99999`; leading zeros kept) is a valid Club OS Team ID and is
+  accepted as-is (migration `12`); its `teams` row is created on first upload. `INC-12345`-style IDs must be listed in `teams`
+  (add them from `/admin` → **Teams**).
   Dummy IDs `INC-12345`, `INC-56789` and `INC-99999` are seeded in migration `02`.
 - **Test Upload:** Enter `INC-12345`, upload a PDF, and hit Submit.
 - **Test Appeal:** Refresh the page and try entering `INC-12345` again. The system will detect the existing submission and prompt you with the Appeal form instead of the file drop!
