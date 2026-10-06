@@ -125,7 +125,7 @@ export default function Upload() {
 
   if (status === 'success' && receipt) {
     return (
-      <PortalShell>
+      <PortalShell hero>
         <div className="portal-card portal-success" role="status">
           <div className="portal-success-icon"><CheckCircle2 size={30} /></div>
           <h2>Deck received</h2>
@@ -142,7 +142,7 @@ export default function Upload() {
 
   if (status === 'appeal_success') {
     return (
-      <PortalShell>
+      <PortalShell hero>
         <div className="portal-card portal-success" role="status">
           <div className="portal-success-icon"><CheckCircle2 size={30} /></div>
           <h2>Request sent</h2>
@@ -154,7 +154,7 @@ export default function Upload() {
   }
 
   return (
-    <PortalShell>
+    <PortalShell hero>
       <header className="portal-head">
         <span className="portal-wordmark" aria-label="INCUBEX">INCUBE<span>X</span></span>
         <h1 className="portal-title">{appealing ? 'Already submitted' : 'Submit your deck'}</h1>

@@ -8,6 +8,16 @@
    the purple X, clean headings, pill buttons, pale #f4f3fc cards.
    ========================================================================== */
 
+:root {
+  --incubex-hero-background: linear-gradient(rgba(220, 210, 250, 0.18), rgba(220, 210, 250, 0.18)), url('/assets/incubex-lavender-gradient.jpg');
+}
+#hero > .absolute.inset-0 {
+  background-image: var(--incubex-hero-background) !important;
+  background-position: center 35% !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+}
+
 .portal {
   --p-navy: #050b40;
   --p-ink: #182052;
@@ -43,13 +53,26 @@
   justify-content: center;
   border-radius: 32px;
   border: 1px solid rgba(200, 184, 248, 0.6);
-  background:
-    linear-gradient(rgba(220, 210, 250, 0.18), rgba(220, 210, 250, 0.18)),
-    url('/assets/incubex-lavender-gradient.jpg') center 35% / cover no-repeat,
-    #e8e8f8;
+  background-color: #e8e8f8;
+  background-image: var(--incubex-hero-background);
+  background-position: center 35%;
+  background-size: cover;
+  background-repeat: no-repeat;
   overflow: hidden;
 }
 .portal-shell--top { align-items: flex-start; }
+
+/* Upload keeps the hero backdrop behind the fixed navbar as on the home page. */
+.portal--hero { padding: 20px 16px 40px; }
+.portal--hero .portal-shell {
+  max-width: 1500px;
+  min-height: calc(100svh - 40px);
+  padding-top: 128px;
+  padding-bottom: 64px;
+  border-radius: 34px;
+}
+.portal--hero .portal-art--sparkle { width: clamp(55px, 8vw, 110px); top: 115px; left: 3%; }
+.portal--hero .portal-art--star { width: clamp(90px, 15vw, 210px); right: -2%; top: 42%; }
 
 .portal-art { position: absolute; z-index: 0; height: auto; pointer-events: none; user-select: none; }
 .portal-art--sparkle { width: clamp(44px, 6vw, 86px); top: 7%; left: 4%; animation: portal-float 9s ease-in-out infinite alternate; }
@@ -460,6 +483,13 @@ textarea.portal-input { min-height: 104px; padding: 12px 14px; font-weight: 500;
   .portal-table .col-when { grid-column: 1 / -1; grid-row: 3; font-size: 0.8rem; }
   .portal-table .col-actions { grid-column: 1 / -1; grid-row: 4; }
   .portal-table .portal-empty { display: block; grid-column: 1 / -1; }
+}
+
+@media (max-width: 767px) {
+  .portal--hero { padding: 8px 8px 24px; }
+  .portal--hero .portal-shell { min-height: calc(100svh - 16px); padding: 96px 16px 32px; border-radius: 24px; }
+  .portal--hero .portal-art--sparkle { width: 40px; top: 85px; }
+  .portal--hero .portal-art--star { width: 72px; top: 56%; right: -32px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
