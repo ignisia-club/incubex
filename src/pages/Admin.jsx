@@ -1,14 +1,55 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { supabase } from '../lib/supabase.js';
-import { Lock, Loader2, LogOut, Check, X, RefreshCw, ExternalLink, AlertCircle, ArrowRight, Download, Trash2, MessageSquareWarning } from 'lucide-react';
+import { Loader2, LogOut, Check, X, RefreshCw, AlertCircle, ArrowRight, Download, Trash2, MessageSquareWarning, Search, Users, CheckCircle2 } from 'lucide-react';
 import * as XLSX from 'xlsx';
 
-// Maps a ppt_backups row (or its absence) to a label + the existing badge colour modifier.
+// Maps a ppt_backups row (or its absence) to a label + dot colour.
 function backupInfo(backup) {
-  if (!backup) return { label: 'Backup not started', mod: 'not_submitted', title: 'No backup record yet. The webhook may not have fired; the 2-hourly sweep will pick it up.' };
-  if (backup.status === 'success') return { label: 'Backed up', mod: 'approved', title: `Copied to B2 as ${backup.backup_key}` };
-  if (backup.status === 'failed') return { label: 'Backup failed', mod: 'rejected', title: backup.error || 'Backup failed; it will be retried by the next sweep.' };
+  if (!backup) return { label: 'Backup not started', mod: 'none', title: 'No backup record yet. The webhook may not have fired; the 2-hourly sweep will pick it up.' };
+  if (backup.status === 'success') return { label: 'Backed up', mod: 'success', title: `Backed up to B2 as ${backup.backup_key}` };
+  if (backup.status === 'failed') return { label: 'Backup failed', mod: 'failed', title: `Backup failed: ${backup.error || 'it will be retried by the next sweep.'}` };
   return { label: 'Backup pending', mod: 'pending', title: 'Backup in progress' };
+}
+
+const FILTERS = [
+  ['all', 'All'],
+  ['pending', 'Pending'],
+  ['approved', 'Approved'],
+  ['rejected', 'Rejected'],
+  ['not_submitted', 'Not submitted'],
+];
+
+// Team IDs: the original INC-12345 format, or a Club OS team number (4-5 digits, leading zeros kept).
+const TEAM_ID_RE = /^(INC-\d{5}|\d{4,5})$/;
+const NEEDS_MIGRATION = 'Adding and removing teams needs database migration 11 (supabase/migrations/11_admin_team_management.sql). Run it in the Supabase SQL editor, then try again.';
+
+// "1003" or "1003, leader@college.edu" per line (comma, tab or semicolon). Returns valid rows + rejected lines.
+function parseTeamLines(text) {
+  const rows = new Map();
+  const rejected = [];
+  text.split(/\r?\n/).forEach((line) => {
+    const raw = line.trim();
+    if (!raw) return;
+    const [idPart = '', emailPart = ''] = raw.split(/[,;\t]/).map((x) => x.trim());
+    const id = idPart.toUpperCase();
+    if (!TEAM_ID_RE.test(id)) { rejected.push(raw); return; }
+    rows.set(id, { team_id: id, ...(emailPart.includes('@') ? { leader_email: emailPart.toLowerCase() } : {}) });
+  });
+  return { rows: [...rows.values()], rejected };
+}
+
+const formatWhen = (iso) => new Date(iso).toLocaleString('en-IN', { day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit' });
+
+function PortalShell({ wide, children }) {
+  return (
+    <main className="portal">
+      <section className={`portal-shell${wide ? ' portal-shell--top' : ''}`}>
+        {!wide && <img className="portal-art portal-art--sparkle" src="/assets/hero-poster-sparkle.png" width="349" height="349" alt="" aria-hidden="true" />}
+        {!wide && <img className="portal-art portal-art--star" src="/assets/competition-star.png" width="673" height="762" alt="" aria-hidden="true" />}
+        <div className={`portal-inner ${wide ? 'portal-inner--wide' : 'portal-inner--narrow'}`}>{children}</div>
+      </section>
+    </main>
+  );
 }
 
 export default function Admin() {
@@ -22,7 +63,13 @@ export default function Admin() {
   const [submissions, setSubmissions] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
   const [statusFilter, setStatusFilter] = useState('all'); // all, pending, approved, rejected, not_submitted
+  const [query, setQuery] = useState('');
   const [backupsAvailable, setBackupsAvailable] = useState(false);
+
+  const [teamsOpen, setTeamsOpen] = useState(false);
+  const [teamsText, setTeamsText] = useState('');
+  const [teamsBusy, setTeamsBusy] = useState(false);
+  const [notice, setNotice] = useState(null); // { kind: 'ok' | 'error', text }
 
   useEffect(() => {
     // Check active session on mount
@@ -48,7 +95,7 @@ export default function Admin() {
       .order('created_at', { ascending: false });
 
     // Secondary (Backblaze B2) backup log, keyed by the storage path of each submitted deck.
-    // If the table doesn't exist yet (migration 07 not run) we simply show no backup badges.
+    // If the table doesn't exist yet (migration 07 not run) we simply show no backup status.
     const { data: backupRows, error: backupError } = await supabase
       .from('ppt_backups')
       .select('source_path, status, backup_key, version, error');
@@ -87,21 +134,68 @@ export default function Admin() {
   const handleLogout = () => supabase.auth.signOut();
 
   const handleApprove = async (id, status, teamId) => {
-    if (!window.confirm(`Are you sure you want to mark ${teamId} as ${status.toUpperCase()}?`)) return;
+    if (!window.confirm(`Mark ${teamId} as ${status}?`)) return;
     await supabase.from('submissions').update({ approval_status: status }).eq('id', id);
     fetchSubmissions();
   };
 
   const handleDelete = async (id, teamId, pptUrl) => {
-    if (!window.confirm(`Are you sure you want to completely DELETE ${teamId}'s submission? This cannot be undone.`)) return;
-    
+    if (!window.confirm(`Delete ${teamId}'s deck? This removes the file and lets the team upload again. It cannot be undone.`)) return;
+
     // Delete file from storage first
     if (pptUrl) {
       await supabase.storage.from('incubex-ppts').remove([pptUrl]);
     }
-    
+
     // Delete database record
     await supabase.from('submissions').delete().eq('id', id);
+    fetchSubmissions();
+  };
+
+  const openDeck = async (pptUrl) => {
+    if (pptUrl.startsWith('http')) { window.open(pptUrl, '_blank', 'noopener'); return; }
+    const { data, error } = await supabase.storage.from('incubex-ppts').createSignedUrl(pptUrl, 60);
+    if (data) window.open(data.signedUrl, '_blank', 'noopener');
+    else alert('Could not open the deck: ' + error?.message);
+  };
+
+  const handleAddTeams = async (e) => {
+    e.preventDefault();
+    const { rows, rejected } = parseTeamLines(teamsText);
+    if (rows.length === 0) {
+      setNotice({ kind: 'error', text: rejected.length ? `No valid Team IDs. Use INC-12345 or a 4-5 digit number (not: ${rejected.slice(0, 3).join(', ')}).` : 'Paste at least one Team ID.' });
+      return;
+    }
+    setTeamsBusy(true);
+    setNotice(null);
+    const known = new Set(submissions.map((s) => s.team_id));
+    const fresh = rows.filter((r) => !known.has(r.team_id));
+    let error = null;
+    if (fresh.length) {
+      ({ error } = await supabase.from('teams').upsert(fresh, { onConflict: 'team_id', ignoreDuplicates: true }));
+    }
+    setTeamsBusy(false);
+    if (error) {
+      const missing = error.code === '42501' || error.code === 'PGRST204' || error.code === '42703';
+      setNotice({ kind: 'error', text: missing ? NEEDS_MIGRATION : `Couldn't add teams: ${error.message}` });
+      return;
+    }
+    const parts = [`Added ${fresh.length} team${fresh.length === 1 ? '' : 's'}.`];
+    if (rows.length - fresh.length) parts.push(`${rows.length - fresh.length} already listed.`);
+    if (rejected.length) parts.push(`Skipped ${rejected.length} invalid: ${rejected.slice(0, 3).join(', ')}${rejected.length > 3 ? '…' : ''}`);
+    setNotice({ kind: rejected.length ? 'error' : 'ok', text: parts.join(' ') });
+    setTeamsText(rejected.join('\n'));
+    fetchSubmissions();
+  };
+
+  const handleRemoveTeam = async (teamId) => {
+    if (!window.confirm(`Remove ${teamId} from the team list? They won't be able to upload.`)) return;
+    const { error } = await supabase.from('teams').delete().eq('team_id', teamId);
+    if (error) {
+      setNotice({ kind: 'error', text: error.code === '23503' ? `${teamId} has a submission. Delete the deck first.` : (error.code === '42501' ? NEEDS_MIGRATION : `Couldn't remove ${teamId}: ${error.message}`) });
+      return;
+    }
+    setNotice({ kind: 'ok', text: `Removed ${teamId}.` });
     fetchSubmissions();
   };
 
@@ -109,7 +203,7 @@ export default function Admin() {
     // Collect all paths to sign
     const paths = filteredSubmissions.map(s => s.ppt_url).filter(Boolean);
     let signedUrlsMap = {};
-    
+
     if (paths.length > 0) {
       const { data } = await supabase.storage.from('incubex-ppts').createSignedUrls(paths, 60 * 60 * 24 * 7); // 7 days valid
       if (data) {
@@ -133,215 +227,240 @@ export default function Admin() {
     XLSX.writeFile(workbook, `Incubex_Submissions_${new Date().toISOString().split('T')[0]}.xlsx`);
   };
 
-  const stats = useMemo(() => ({
-    total: submissions.length,
-    pending: submissions.filter((s) => s.approval_status === 'pending').length,
-    approved: submissions.filter((s) => s.approval_status === 'approved').length,
-    rejected: submissions.filter((s) => s.approval_status === 'rejected').length,
-    not_submitted: submissions.filter((s) => s.approval_status === 'not_submitted').length,
-  }), [submissions]);
+  const counts = useMemo(() => {
+    const c = { all: submissions.length, pending: 0, approved: 0, rejected: 0, not_submitted: 0 };
+    submissions.forEach((s) => { c[s.approval_status] = (c[s.approval_status] || 0) + 1; });
+    return c;
+  }, [submissions]);
 
   const filteredSubmissions = useMemo(() => {
+    const q = query.trim().toUpperCase();
     let result = submissions;
-    if (statusFilter !== 'all') {
-      result = submissions.filter(s => s.approval_status === statusFilter);
-    }
-    // Always sort so that "pending" items float to the top
+    if (statusFilter !== 'all') result = result.filter(s => s.approval_status === statusFilter);
+    if (q) result = result.filter(s => s.team_id.toUpperCase().includes(q));
+    // Pending first, then newest upload first
     return [...result].sort((a, b) => {
       if (a.approval_status === 'pending' && b.approval_status !== 'pending') return -1;
       if (b.approval_status === 'pending' && a.approval_status !== 'pending') return 1;
-      return 0;
+      return (Date.parse(b.submitted_at || 0) || 0) - (Date.parse(a.submitted_at || 0) || 0);
     });
-  }, [submissions, statusFilter]);
+  }, [submissions, statusFilter, query]);
 
   if (loading) {
     return (
       <main className="portal">
-        <div className="portal-loading"><Loader2 size={36} className="portal-spin" /></div>
+        <div className="portal-loading"><Loader2 size={32} className="portal-spin" /></div>
       </main>
     );
   }
 
   if (!session) {
     return (
-      <main className="portal">
-        <section className="portal-shell">
-          <span className="portal-dot portal-dot--a" aria-hidden="true"></span>
-          <span className="portal-dot portal-dot--b" aria-hidden="true"></span>
+      <PortalShell>
+        <header className="portal-head">
+          <span className="portal-wordmark" aria-label="INCUBEX">INCUBE<span>X</span></span>
+          <h1 className="portal-title">Organiser sign in</h1>
+        </header>
 
-          <div className="portal-inner portal-inner--narrow" style={{ maxWidth: 460 }}>
-            <header className="portal-head">
-              <img className="portal-wordmark" src="/assets/incubex-wordmark.png" alt="INCUBEX" width="340" height="96" />
-              <span className="portal-kicker">Organisers Only</span>
-              <h1 className="portal-title">Admin <em>sign in</em></h1>
-            </header>
-
-            <div className="portal-card">
-              <form className="portal-form" onSubmit={handleLogin}>
-                <div className="portal-field">
-                  <label className="portal-label" htmlFor="admin-email">Email</label>
-                  <input
-                    id="admin-email"
-                    className="portal-input"
-                    type="email"
-                    autoComplete="username"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    disabled={signingIn}
-                  />
-                </div>
-                <div className="portal-field">
-                  <label className="portal-label" htmlFor="admin-password">Password</label>
-                  <input
-                    id="admin-password"
-                    className="portal-input"
-                    type="password"
-                    autoComplete="current-password"
-                    required
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    disabled={signingIn}
-                  />
-                </div>
-
-                {loginError && (
-                  <div className="portal-alert portal-alert--error" role="alert">
-                    <AlertCircle size={18} />
-                    <span>{loginError}</span>
-                  </div>
-                )}
-
-                <button type="submit" className="portal-btn portal-btn--block" disabled={signingIn}>
-                  {signingIn
-                    ? <><Loader2 size={18} className="portal-spin" /> Signing in...</>
-                    : <><Lock size={16} /> Sign in <ArrowRight size={18} /></>}
-                </button>
-              </form>
+        <div className="portal-card">
+          <form className="portal-form" onSubmit={handleLogin}>
+            <div className="portal-field">
+              <label className="portal-label" htmlFor="admin-email">Email</label>
+              <input
+                id="admin-email"
+                className="portal-input"
+                type="email"
+                autoComplete="username"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                disabled={signingIn}
+              />
             </div>
-          </div>
-        </section>
-      </main>
+            <div className="portal-field">
+              <label className="portal-label" htmlFor="admin-password">Password</label>
+              <input
+                id="admin-password"
+                className="portal-input"
+                type="password"
+                autoComplete="current-password"
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                disabled={signingIn}
+              />
+            </div>
+
+            {loginError && (
+              <div className="portal-alert portal-alert--error" role="alert">
+                <AlertCircle size={18} />
+                <span>{loginError}</span>
+              </div>
+            )}
+
+            <button type="submit" className="portal-btn portal-btn--block" disabled={signingIn}>
+              {signingIn
+                ? <><Loader2 size={18} className="portal-spin" /> Signing in…</>
+                : <>Sign in <ArrowRight size={18} /></>}
+            </button>
+          </form>
+        </div>
+      </PortalShell>
     );
   }
 
   return (
-    <main className="portal">
-      <section className="portal-shell">
-        <span className="portal-dot portal-dot--a" aria-hidden="true"></span>
+    <PortalShell wide>
+      <div className="portal-toolbar">
+        <header>
+          <span className="portal-wordmark" aria-label="INCUBEX">INCUBE<span>X</span></span>
+          <h1 className="portal-title">Submissions</h1>
+        </header>
+        <div className="portal-toolbar-actions">
+          <button type="button" className="portal-btn portal-btn--ghost portal-btn--sm" onClick={() => setTeamsOpen((o) => !o)} aria-expanded={teamsOpen}>
+            <Users size={15} /> Teams
+          </button>
+          <button type="button" className="portal-btn portal-btn--ghost portal-btn--sm" onClick={fetchSubmissions} disabled={refreshing} aria-label="Refresh">
+            <RefreshCw size={15} className={refreshing ? 'portal-spin' : ''} /> Refresh
+          </button>
+          <button type="button" className="portal-btn portal-btn--ghost portal-btn--sm" onClick={handleExport} disabled={filteredSubmissions.length === 0}>
+            <Download size={15} /> Export
+          </button>
+          <button type="button" className="portal-btn portal-btn--sm" onClick={handleLogout}>
+            <LogOut size={15} /> Sign out
+          </button>
+        </div>
+      </div>
 
-        <div className="portal-inner">
-          <div className="portal-toolbar">
-            <header className="portal-head">
-              <span className="portal-kicker">INCUBEX 2026 · Admin</span>
-              <h1 className="portal-title">Pitch deck <em>submissions</em></h1>
-            </header>
+      {teamsOpen && (
+        <form className="portal-card portal-teams" onSubmit={handleAddTeams}>
+          <label className="portal-label" htmlFor="teams-input">Add teams</label>
+          <textarea
+            id="teams-input"
+            className="portal-input"
+            placeholder={'1003\n1004, leader@college.edu\nINC-12345'}
+            value={teamsText}
+            onChange={(e) => setTeamsText(e.target.value)}
+            disabled={teamsBusy}
+            spellCheck="false"
+          />
+          <div className="portal-teams-foot">
+            <span className="portal-hint">One per line: Team ID, then the leader’s email if you have it.</span>
             <div className="portal-toolbar-actions">
-              <select className="portal-input" style={{ width: 'auto', padding: '0.25rem 0.75rem', height: '32px' }} value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
-                <option value="all">All Teams</option>
-                <option value="pending">Pending</option>
-                <option value="approved">Approved</option>
-                <option value="rejected">Rejected</option>
-                <option value="not_submitted">Not Submitted</option>
-              </select>
-              <button type="button" className="portal-btn portal-btn--ghost portal-btn--sm" onClick={handleExport} disabled={submissions.length === 0}>
-                <Download size={15} /> Export
-              </button>
-              <button type="button" className="portal-btn portal-btn--ghost portal-btn--sm" onClick={fetchSubmissions} disabled={refreshing}>
-                <RefreshCw size={15} className={refreshing ? 'portal-spin' : ''} /> Refresh
-              </button>
-              <button type="button" className="portal-btn portal-btn--sm" onClick={handleLogout}>
-                <LogOut size={15} /> Logout
+              <button type="button" className="portal-btn portal-btn--ghost portal-btn--sm" onClick={() => { setTeamsOpen(false); setNotice(null); }}>Close</button>
+              <button type="submit" className="portal-btn portal-btn--sm" disabled={teamsBusy || !teamsText.trim()}>
+                {teamsBusy ? <><Loader2 size={15} className="portal-spin" /> Adding…</> : 'Add'}
               </button>
             </div>
           </div>
+        </form>
+      )}
 
-          <div className="portal-stats">
-            <div className="portal-card portal-stat"><div className="portal-stat-label">Total Teams</div><div className="portal-stat-value">{stats.total}</div></div>
-            <div className="portal-card portal-stat"><div className="portal-stat-label">Pending</div><div className="portal-stat-value">{stats.pending}</div></div>
-            <div className="portal-card portal-stat"><div className="portal-stat-label">Approved</div><div className="portal-stat-value">{stats.approved}</div></div>
-            <div className="portal-card portal-stat"><div className="portal-stat-label">Not Submitted</div><div className="portal-stat-value">{stats.not_submitted}</div></div>
-          </div>
-
-          <div className="portal-card portal-table-wrap">
-            <table className="portal-table">
-              <thead>
-                <tr>
-                  <th>Team ID</th>
-                  <th>Pitch Deck</th>
-                  <th>Submitted</th>
-                  <th>Status</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredSubmissions.length === 0 ? (
-                  <tr><td colSpan={5} className="portal-empty">No records found.</td></tr>
-                ) : filteredSubmissions.map((sub) => {
-                  const st = sub.approval_status;
-                  return (
-                    <tr key={sub.team_id}>
-                      <td>
-                        <div className="is-strong">{sub.team_id}</div>
-                        {sub.appeal_message && (
-                          <div style={{ marginTop: '0.25rem', fontSize: '0.75rem', color: '#b45309', display: 'flex', gap: '0.25rem', alignItems: 'flex-start', maxWidth: '200px', whiteSpace: 'normal', lineHeight: '1.2' }}>
-                            <MessageSquareWarning size={14} style={{ flexShrink: 0 }} />
-                            <span>{sub.appeal_message}</span>
-                          </div>
-                        )}
-                      </td>
-                      <td>
-                        {!sub.ppt_url ? (
-                           <span className="portal-muted">Not Submitted</span>
-                        ) : sub.ppt_url.startsWith('http') ? (
-                           <a className="portal-link" href={sub.ppt_url} target="_blank" rel="noopener noreferrer">
-                             View deck <ExternalLink size={14} />
-                           </a>
-                        ) : (
-                           <button type="button" className="portal-link" onClick={async () => {
-                             const { data, error } = await supabase.storage.from('incubex-ppts').createSignedUrl(sub.ppt_url, 60);
-                             if (data) window.open(data.signedUrl, '_blank');
-                             else alert('Could not generate secure link: ' + error?.message);
-                           }}>
-                             View deck <ExternalLink size={14} />
-                           </button>
-                        )}
-                        {backupsAvailable && sub.ppt_url && (() => {
-                          const info = backupInfo(sub.backup);
-                          return (
-                            <div className="portal-backup">
-                              <span className={`portal-badge portal-badge--sm portal-badge--${info.mod}`} title={info.title}>{info.label}</span>
-                            </div>
-                          );
-                        })()}
-                      </td>
-                      <td>{sub.submitted_at ? new Date(sub.submitted_at).toLocaleString() : '—'}</td>
-                      <td><span className={`portal-badge portal-badge--${st}`}>{st.replace('_', ' ')}</span></td>
-                      <td>
-                        <div className="portal-row-actions">
-                          {sub.submitted && (
-                            <>
-                              <button type="button" className="portal-icon-btn portal-icon-btn--ok" title="Approve" aria-label={`Approve ${sub.team_id}`} onClick={() => handleApprove(sub.submission_id, 'approved', sub.team_id)}>
-                                <Check size={16} />
-                              </button>
-                              <button type="button" className="portal-icon-btn portal-icon-btn--no" title="Reject" aria-label={`Reject ${sub.team_id}`} onClick={() => handleApprove(sub.submission_id, 'rejected', sub.team_id)}>
-                                <X size={16} />
-                              </button>
-                              <button type="button" className="portal-icon-btn" style={{ color: '#be123c', backgroundColor: 'rgba(255, 228, 230, 0.7)' }} title="Delete/Reset Submission" aria-label={`Delete ${sub.team_id}`} onClick={() => handleDelete(sub.submission_id, sub.team_id, sub.ppt_url)}>
-                                <Trash2 size={16} />
-                              </button>
-                            </>
-                          )}
-                        </div>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
+      {notice && (
+        <div className={`portal-alert portal-alert--${notice.kind === 'ok' ? 'ok' : 'error'} portal-notice`} role="status">
+          {notice.kind === 'ok' ? <CheckCircle2 size={18} /> : <AlertCircle size={18} />}
+          <span>{notice.text}</span>
+          <button type="button" className="portal-notice-close" aria-label="Dismiss" onClick={() => setNotice(null)}><X size={14} /></button>
         </div>
-      </section>
-    </main>
+      )}
+
+      <div className="portal-controls">
+        <div className="portal-chips" role="tablist" aria-label="Filter by status">
+          {FILTERS.map(([key, label]) => (
+            <button
+              key={key}
+              type="button"
+              role="tab"
+              aria-selected={statusFilter === key}
+              className={`portal-chip${statusFilter === key ? ' is-active' : ''}`}
+              onClick={() => setStatusFilter(key)}
+            >
+              {label} <b>{counts[key] || 0}</b>
+            </button>
+          ))}
+        </div>
+        <label className="portal-search">
+          <Search size={15} />
+          <input
+            className="portal-input"
+            type="search"
+            placeholder="Search Team ID"
+            aria-label="Search Team ID"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+        </label>
+      </div>
+
+      <div className="portal-card portal-table-wrap">
+        <table className="portal-table">
+          <thead>
+            <tr>
+              <th>Team</th>
+              <th>Deck</th>
+              <th>Submitted</th>
+              <th>Status</th>
+              <th aria-label="Actions"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredSubmissions.length === 0 ? (
+              <tr><td colSpan={5} className="portal-empty">{submissions.length === 0 ? 'No teams yet. Add them with Teams.' : 'Nothing matches.'}</td></tr>
+            ) : filteredSubmissions.map((sub) => {
+              const st = sub.approval_status;
+              const info = backupsAvailable && sub.ppt_url ? backupInfo(sub.backup) : null;
+              return (
+                <tr key={sub.team_id}>
+                  <td className="col-team">
+                    <div className="portal-team">{sub.team_id}</div>
+                    {sub.appeal_message && (
+                      <div className="portal-appeal" title="Resubmission request">
+                        <MessageSquareWarning size={14} />
+                        <span>{sub.appeal_message}</span>
+                      </div>
+                    )}
+                  </td>
+                  <td className="col-deck">
+                    {!sub.ppt_url ? (
+                      <span className="portal-muted">—</span>
+                    ) : (
+                      <span className="portal-deck">
+                        <button type="button" className="portal-link" onClick={() => openDeck(sub.ppt_url)}>Open</button>
+                        <span className="portal-ext">{sub.ppt_url.split('.').pop()}</span>
+                        {info && <span className={`portal-backup portal-backup--${info.mod}`} title={info.title} aria-label={info.label}></span>}
+                      </span>
+                    )}
+                  </td>
+                  <td className="col-when">{sub.submitted_at ? <span className="portal-when">{formatWhen(sub.submitted_at)}</span> : <span className="portal-muted">—</span>}</td>
+                  <td className="col-status"><span className={`portal-badge portal-badge--${st}`}>{st.replace('_', ' ')}</span></td>
+                  <td className="col-actions">
+                    {!sub.submitted && (
+                      <div className="portal-row-actions">
+                        <button type="button" className="portal-icon-btn portal-icon-btn--del" title="Remove team" aria-label={`Remove ${sub.team_id}`} onClick={() => handleRemoveTeam(sub.team_id)}>
+                          <Trash2 size={16} />
+                        </button>
+                      </div>
+                    )}
+                    {sub.submitted && (
+                      <div className="portal-row-actions">
+                        <button type="button" className="portal-icon-btn portal-icon-btn--ok" title="Approve" aria-label={`Approve ${sub.team_id}`} onClick={() => handleApprove(sub.submission_id, 'approved', sub.team_id)}>
+                          <Check size={16} />
+                        </button>
+                        <button type="button" className="portal-icon-btn portal-icon-btn--no" title="Reject" aria-label={`Reject ${sub.team_id}`} onClick={() => handleApprove(sub.submission_id, 'rejected', sub.team_id)}>
+                          <X size={16} />
+                        </button>
+                        <button type="button" className="portal-icon-btn portal-icon-btn--del" title="Delete and let the team re-upload" aria-label={`Delete ${sub.team_id}`} onClick={() => handleDelete(sub.submission_id, sub.team_id, sub.ppt_url)}>
+                          <Trash2 size={16} />
+                        </button>
+                      </div>
+                    )}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </PortalShell>
   );
 }

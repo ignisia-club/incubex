@@ -13,6 +13,9 @@
 //   backup_status "success" | "pending" | "failed" | "none"
 //   approval_status, file_type
 //
+// Club OS reads the same items under `entries`, with these names (added alongside the ones above):
+//   id, teamId, url (link_1, else link_2), fileName (<team_id>.<ext>), submittedAt
+//
 // Links are temporary by design: the buckets are private. Call the API again for fresh links.
 //
 // Secrets:  API_KEY (required), B2_KEY_ID, B2_APP_KEY, B2_BUCKET, B2_ENDPOINT (shared with backup-ppt),
@@ -124,7 +127,7 @@ Deno.serve(async (req) => {
   if (params.has("team_id")) {
     teamFilter = (params.get("team_id") ?? "").trim().toUpperCase();
     if (!/^[A-Z0-9-]{1,50}$/.test(teamFilter)) {
-      return respond(req, { error: "team_id must look like INC-12345." }, 400);
+      return respond(req, { error: "team_id must look like 1003 or INC-12345." }, 400);
     }
   }
 
@@ -132,7 +135,7 @@ Deno.serve(async (req) => {
     // ---- read data -----------------------------------------------------------
     let query = supabase
       .from("submissions")
-      .select("team_id, ppt_url, approval_status, submitted_at, created_at")
+      .select("id, team_id, ppt_url, approval_status, submitted_at, created_at")
       .not("ppt_url", "is", null)
       .order("submitted_at", { ascending: false })
       .limit(MAX_ROWS);
@@ -162,14 +165,25 @@ Deno.serve(async (req) => {
       const backup = backupByPath.get(r.ppt_url);
       const signed = signedByPath.get(r.ppt_url);
       const backedUp = backup?.status === "success";
+      const link_1 = signed && !signed.error ? signed.signedUrl : null;
+      const link_2 = backedUp ? await presignB2(backup!.backup_key, expires) : null;
+      const uploaded_at = new Date(r.submitted_at ?? r.created_at).toISOString();
+      const file_type = (r.ppt_url.split(".").pop() ?? "").toLowerCase();
       return {
+        // Club OS field names
+        id: String(r.id),
+        teamId: r.team_id,
+        url: link_1 ?? link_2,
+        fileName: `${r.team_id}.${file_type}`,
+        submittedAt: uploaded_at,
+        // original field names
         team_id: r.team_id,
-        uploaded_at: new Date(r.submitted_at ?? r.created_at).toISOString(),
-        link_1: signed && !signed.error ? signed.signedUrl : null,
-        link_2: backedUp ? await presignB2(backup!.backup_key, expires) : null,
+        uploaded_at,
+        link_1,
+        link_2,
         backup_status: backup?.status ?? "none",
         approval_status: r.approval_status ?? "pending",
-        file_type: (r.ppt_url.split(".").pop() ?? "").toLowerCase(),
+        file_type,
       };
     }));
 
@@ -177,6 +191,7 @@ Deno.serve(async (req) => {
       generated_at: new Date().toISOString(),
       links_expire_in_seconds: expires,
       count: submissions.length,
+      entries: submissions, // what Club OS reads
       submissions,
     });
   } catch (err) {

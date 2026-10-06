@@ -9,9 +9,13 @@ BEGIN;
 DO $$
 DECLARE
   v_email    text := 'admin@ignisia.tech';
-  v_password text := 'IncubexAdmin2026!'; -- Safe to hardcode for this specific fix
+  v_password text := '__SET_ADMIN_PASSWORD__'; -- type the real password here in the SQL editor only; never commit it
   v_user_id  uuid := gen_random_uuid();
 BEGIN
+  IF v_password = '__SET_ADMIN_PASSWORD__' OR length(v_password) < 12 THEN
+    RAISE EXCEPTION 'Set a strong admin password (12+ chars) in the SQL editor before running. Do not commit it.';
+  END IF;
+
   -- 1. Wipe the malformed user and identity completely
   DELETE FROM auth.identities WHERE identity_data->>'email' = v_email;
   DELETE FROM auth.users WHERE email = v_email;

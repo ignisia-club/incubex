@@ -45,22 +45,24 @@ Supabase handles the Database (PostgreSQL), Storage (S3-compatible), and Auth. T
 ### 1. Setup
 1. Install dependencies: `npm install`
 2. Configure environment variables in `.env` (`VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`).
-3. Run all `supabase/migrations/` files in order (`00_` to `10_`; `07`-`10` are only needed for the B2 backup) inside the Supabase SQL editor.
+3. Run all `supabase/migrations/` files in order (`00_` to `11_`; `07`-`10` are only needed for the B2 backup) inside the Supabase SQL editor.
+   `11_admin_team_management.sql` lets admins add and remove Team IDs from `/admin`.
 4. Start the app: `npm run dev` (Opens at http://localhost:5173).
 
 ### 2. Testing the Upload Portal
 Go to `http://localhost:5173/upload`. 
-- **Valid Dummy Team IDs:** Use `INC-12345`, `INC-56789`, or `INC-99999` (seeded in migration `02`).
+- **Team IDs:** either `INC-12345` or a Club OS team number (4-5 digits, e.g. `1003`; leading zeros kept). Only IDs in the `teams`
+  table are accepted. Add them from `/admin` → **Teams** (paste one per line, optionally `1003, leader@college.edu`).
+  Dummy IDs `INC-12345`, `INC-56789` and `INC-99999` are seeded in migration `02`.
 - **Test Upload:** Enter `INC-12345`, upload a PDF, and hit Submit.
 - **Test Appeal:** Refresh the page and try entering `INC-12345` again. The system will detect the existing submission and prompt you with the Appeal form instead of the file drop!
 
 ### 3. Testing the Admin Dashboard
-Go to `http://localhost:5173/admin`.
-- **Username:** `admin@ignisia.tech`
-- **Password:** `IncubexAdmin2026!`
-*(Note: These credentials were securely injected via `pgcrypto` in migration `03`).*
+Go to `http://localhost:5173/admin` and sign in with an admin account (a user listed in `public.admins`).
+Admin passwords are set in the Supabase SQL editor (migration `03`) and are **never** written in this repo.
 
 Once inside:
+- Click **Teams** to add Team IDs, or the bin icon on a team without a submission to remove it.
 - Try filtering by "Pending" or "Not Submitted".
 - Approve or reject a submission.
 - Click the "Trash" icon on a submission to reset it, then check the Upload page to see if that team can upload again.
@@ -199,6 +201,11 @@ GET /functions/v1/submissions-api?team_id=INC-12345&expires_in=600
 | `submissions[].backup_status` | string | `success` (backup done), `pending` (in progress), `failed` (will be retried automatically every 2 hours), `none` (not started yet). |
 | `submissions[].approval_status` | string | Organisers' review result: `pending`, `approved` or `rejected`. |
 | `submissions[].file_type` | string | `pdf`, `ppt` or `pptx`. |
+
+**Club OS fields.** Every item also carries `id`, `teamId`, `url` (`link_1`, else `link_2`), `fileName` (`<team_id>.<ext>`)
+and `submittedAt`, and the same array is returned under `entries` as well as `submissions`. Club OS reads those names; the
+original fields are unchanged. Club OS calls `GET /functions/v1/submissions-api?expires_in=86400&event=act-incubex` with
+`Authorization: Bearer <API_KEY>` (the `event` parameter is ignored).
 
 Notes:
 - Results are sorted newest upload first. Teams that have **not** submitted are not listed. Maximum 2000 rows per call (far above the ~80 teams expected).
