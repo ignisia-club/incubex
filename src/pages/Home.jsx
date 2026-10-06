@@ -1,7 +1,18 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 
 export default function Home() {
+  useEffect(() => {
+    const trigger = () => {
+      if (window.initDynamicDom) window.initDynamicDom();
+      if (window.updateTimelineScrollState) window.updateTimelineScrollState();
+      if (window.handleScrollUi) window.handleScrollUi();
+    };
+    trigger();
+    const timer = setTimeout(trigger, 150);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div dangerouslySetInnerHTML={{ __html: `<main id="content">
   <!-- BEGIN: HeroSection (Exact Glassmorphic Visual Match to ignisia.tech Reference Screenshot) -->

@@ -4833,15 +4833,15 @@
     }
 
     // Scroll-synced timeline progress and active milestone state
-    const timelineItems = Array.from(document.querySelectorAll('#mission-map .timeline-item'));
-    const timelineSpine = document.getElementById('timeline-spine');
-    const timelineProgress = document.getElementById('timeline-progress');
     let timelineScrollFrame = null;
 
     function updateTimelineScrollState() {
       timelineScrollFrame = null;
+      const timelineItems = Array.from(document.querySelectorAll('#mission-map .timeline-item'));
       if (!timelineItems.length) return;
 
+      const timelineSpine = document.getElementById('timeline-spine');
+      const timelineProgress = document.getElementById('timeline-progress');
       const focusLine = window.innerHeight * 0.46;
       const isMobile = window.matchMedia('(max-width: 767px)').matches;
       let activeIndex = 0;
@@ -4874,6 +4874,7 @@
         timelineProgress.style.height = `${progressHeight}px`;
       }
     }
+    window.updateTimelineScrollState = updateTimelineScrollState;
 
     function requestTimelineScrollUpdate() {
       if (timelineScrollFrame !== null) return;
@@ -4953,27 +4954,37 @@
 
       // Sticky / Floating QR Button:
       // - Hidden initially in upper viewport
-      // - Appears fixed on screen only when user scrolls down to reach "Summit Honours & Institutional Perks" heading
+      // - Appears fixed on screen when user scrolls down to reach "Summit Honours & Institutional Perks" heading
       // - Stays visible continuously throughout rest of website
-      if (floatingQrBtn && benefitsSection) {
-        const rect = benefitsSection.getBoundingClientRect();
-        const sectionTop = window.scrollY + rect.top;
-        if (window.scrollY + (window.innerHeight * 0.75) >= sectionTop) {
-          floatingQrBtn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
-          floatingQrBtn.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
+      const fQrBtn = floatingQrBtn || document.getElementById('floating-qr-btn');
+      const bSec = benefitsSection || document.getElementById('benefits');
+      if (fQrBtn) {
+        let shouldShow = false;
+        if (bSec) {
+          const rect = bSec.getBoundingClientRect();
+          const sectionTop = window.scrollY + rect.top;
+          shouldShow = (window.scrollY + (window.innerHeight * 0.75) >= sectionTop) || window.scrollY > 350;
         } else {
-          floatingQrBtn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
-          floatingQrBtn.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+          shouldShow = window.scrollY > 300;
+        }
+
+        if (shouldShow) {
+          fQrBtn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
+          fQrBtn.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
+        } else {
+          fQrBtn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+          fQrBtn.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
         }
       }
     }
+    window.handleScrollUi = handleScrollUi;
 
     window.addEventListener('scroll', handleScrollUi, { passive: true });
     window.addEventListener('resize', handleScrollUi, { passive: true });
     handleScrollUi();
+
     // 2. IntersectionObserver for smooth scroll reveals
-    const revealElements = document.querySelectorAll('.reveal');
-    const revealObserver = new IntersectionObserver((entries) => {
+    let revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('active');
@@ -4981,22 +4992,29 @@
       });
     }, { threshold: 0.08 });
 
-    revealElements.forEach(el => revealObserver.observe(el));
+    function initDynamicDom() {
+      // Re-query reveals
+      document.querySelectorAll('.reveal:not(.active)').forEach(el => revealObserver.observe(el));
 
-    // 3. 3D Tilt on Cards
-    document.querySelectorAll('.tilt-card').forEach(card => {
-      card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left - rect.width / 2;
-        const y = e.clientY - rect.top - rect.height / 2;
-        const rotX = -(y / (rect.height / 2)) * 6;
-        const rotY = (x / (rect.width / 2)) * 6;
-        card.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-4px)`;
+      // 3D Tilt on Cards
+      document.querySelectorAll('.tilt-card').forEach(card => {
+        if (card.dataset.tiltReady) return;
+        card.dataset.tiltReady = 'true';
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
+          const rotX = -(y / (rect.height / 2)) * 6;
+          const rotY = (x / (rect.width / 2)) * 6;
+          card.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-4px)`;
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+        });
       });
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
-      });
-    });
+    }
+    window.initDynamicDom = initDynamicDom;
+    initDynamicDom();
 
     // 4. Mobile menu toggle
     const menuBtn = document.getElementById('mobile-menu-btn');
