@@ -1,5 +1,6 @@
 
 import React from 'react';
+import '../styles/home.css';
 
 export default function Home() {
   return (
@@ -55,6 +56,9 @@ export default function Home() {
             </button>
 
             <div class="hero-secondary-actions">
+              <a href="/upload" class="hero-secondary-link">
+                <span>Upload presentation</span>
+              </a>
               <a href="#arena" onclick="playSound('hover');" class="hero-secondary-link">
                 <iconify-icon icon="ph:rocket-launch-duotone" width="18" height="18" aria-hidden="true"></iconify-icon>
                 <span>Explore Tracks</span>
@@ -503,7 +507,7 @@ export default function Home() {
       <!-- Track Queries & Support Callout -->
       <div class="track-support-bar">
         <div class="track-support-label">
-          <svg class="track-support-icon" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <svg class="track-support-icon" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
           <span>Need help choosing a track or presentation format?</span>

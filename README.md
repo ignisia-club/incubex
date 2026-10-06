@@ -42,6 +42,35 @@ Supabase handles the Database (PostgreSQL), Storage (S3-compatible), and Auth. T
 
 ## How to Test
 
+### Upload/admin integration checklist
+
+1. **Student entry:** the home hero and desktop/mobile navigation link to `/upload`.
+   PDF, PPT and PPTX are accepted up to 25 MiB; empty files and invalid selections
+   are rejected. Checking, uploading, saving, receipt and appeal states are visible.
+2. **Shared records:** `/upload` stores the private storage path against the registered
+   Team ID in `submissions`. `/admin` joins those records to `teams`, including the
+   registered team name and leader email when available. It refreshes every 30 seconds
+   and supports manual refresh. Decks open through 60-second signed URLs.
+3. **Admin access:** `/admin` is reachable by URL, but the dashboard loads only after
+   authentication AND `is_admin()` returns true. Database and storage RLS are the
+   actual protection; hiding a URL alone is not a security boundary. Add organiser
+   accounts to `public.admins` through the SQL editor, never from the browser.
+4. **Existing backend:** this frontend integration uses the existing tables, RPCs
+   and private storage bucket, including the Team ID rules already on `main`. No additional migration is required by
+   these frontend changes.
+5. **Production routing:** the Pages workflow creates `/upload/index.html` and
+   `/admin/index.html` plus the SPA fallback so direct route visits work.
+
+Team IDs remain the existing submission credential, with accepted IDs determined by
+the backend. They do not prove student identity. If identity verification
+is required, use registration-linked login or an email OTP before issuing upload access.
+The dashboard uses registered student details; it does not treat self-entered details as verified.
+Private B2, webhook and API credentials must remain server-side, without a `VITE_` prefix.
+The browser must never receive a Supabase service-role key.
+
+Verification should include one designated test team uploading a deck and an authorised
+organiser opening it in `/admin`. Do not use a real student's Team ID as a test fixture.
+
 ### 1. Setup
 1. Install dependencies: `npm install`
 2. Configure environment variables in `.env` (`VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`).

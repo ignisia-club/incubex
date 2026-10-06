@@ -50,7 +50,11 @@ jobs:
       # GitHub Pages has no rewrite rules: opening /upload or /admin directly would show a 404.
       # Serving the app shell as 404.html makes the React router handle those paths.
       - name: SPA fallback for /upload and /admin
-        run: cp dist/index.html dist/404.html
+        run: |
+          cp dist/index.html dist/404.html
+          mkdir -p dist/upload dist/admin
+          cp dist/index.html dist/upload/index.html
+          cp dist/index.html dist/admin/index.html
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

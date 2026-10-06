@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { supabase } from '../lib/supabase.js';
 import { UploadCloud, CheckCircle2, AlertCircle, Loader2, ArrowRight, FileText, Download } from 'lucide-react';
+import PortalShell from '../components/PortalShell.jsx';
 
 // INC-12345, or a Club OS team number (4-5 digits, leading zeros kept).
 const TEAM_ID_PATTERN = /^(INC-\d{5}|\d{4,5})$/;
@@ -13,18 +14,6 @@ const MIME_BY_EXT = {
 };
 
 const formatWhen = (d) => d.toLocaleString('en-IN', { day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit' });
-
-function PortalShell({ children }) {
-  return (
-    <main className="portal">
-      <section className="portal-shell">
-        <img className="portal-art portal-art--sparkle" src="/assets/hero-poster-sparkle.png" width="349" height="349" alt="" aria-hidden="true" />
-        <img className="portal-art portal-art--star" src="/assets/competition-star.png" width="673" height="762" alt="" aria-hidden="true" />
-        <div className="portal-inner portal-inner--narrow">{children}</div>
-      </section>
-    </main>
-  );
-}
 
 export default function Upload() {
   const [teamId, setTeamId] = useState('');
@@ -39,10 +28,13 @@ export default function Upload() {
   const fail = (msg) => { setStatus('error'); setMessage(msg); };
 
   const pickFile = (picked) => {
+    if (status === 'uploading') return;
     if (!picked) return;
+    setFile(null);
     const ext = picked.name.split('.').pop().toLowerCase();
     if (!ALLOWED_EXT.includes(ext)) return fail('Only PDF, PPT or PPTX files are accepted.');
     if (picked.size > MAX_BYTES) return fail('File is larger than 25 MB. Please compress it and try again.');
+    if (picked.size === 0) return fail('This file is empty. Please choose a valid deck.');
     setFile(picked);
     if (status === 'error') { setStatus('idle'); setMessage(''); }
   };
@@ -59,7 +51,8 @@ export default function Upload() {
     try {
       const { data: teamInfo, error: teamError } = await supabase.rpc('get_team_status', { p_team_id: id });
 
-      if (teamError || !teamInfo || !teamInfo.exists) throw new Error('We couldn’t find that Team ID. Check it and try again.');
+      if (teamError) throw new Error('We couldn’t verify your team right now. Please try again.');
+      if (!teamInfo?.exists) throw new Error('We couldn’t find that Team ID. Check it and try again.');
 
       if (teamInfo.submitted) {
         setMode('appeal');
@@ -110,6 +103,7 @@ export default function Upload() {
 
     setStatus('uploading');
     setMessage('Sending');
+    try {
     const { error } = await supabase.rpc('submit_appeal', {
       p_team_id: teamId.trim().toUpperCase(),
       p_message: appealMessage.trim()
@@ -119,6 +113,9 @@ export default function Upload() {
       fail('We couldn’t send your request. Please try again later.');
     } else {
       setStatus('appeal_success');
+    }
+    } catch {
+      fail('We couldn’t send your request. Please try again later.');
     }
   };
 
@@ -164,7 +161,7 @@ export default function Upload() {
       </header>
 
       <div className="portal-card">
-        <form className="portal-form" onSubmit={appealing ? handleAppeal : handleUpload} noValidate>
+        <form className="portal-form" onSubmit={appealing ? handleAppeal : handleUpload} noValidate aria-busy={busy}>
           {appealing ? (
             <>
               <div className="portal-alert portal-alert--info">
@@ -213,8 +210,9 @@ export default function Upload() {
                 >
                   <input
                     type="file"
+                    aria-label="Presentation file"
                     accept=".pdf,.ppt,.pptx"
-                    onChange={(e) => pickFile(e.target.files[0])}
+                    onChange={(e) => { pickFile(e.target.files[0]); e.target.value = ''; }}
                     disabled={busy}
                   />
                   <span className="portal-drop-icon">
@@ -235,6 +233,7 @@ export default function Upload() {
               <span>{message}</span>
             </div>
           )}
+          {busy && <p role="status" aria-live="polite">{message}… Please keep this page open.</p>}
 
           <button type="submit" className="portal-btn portal-btn--block" disabled={busy || (!appealing && (!teamId || !file))}>
             {busy ? (
@@ -252,11 +251,19 @@ export default function Upload() {
       </div>
 
       {!appealing && (
-        <div className="portal-templates">
-          <span>Templates</span>
-          <a href="/assets/Product_Track_Template.pptx" download><Download size={14} /> Product Track</a>
-          <a href="/assets/Prototype_Expo_Track_Template.pptx" download><Download size={14} /> Prototype Expo</a>
-        </div>
+        <section className="portal-templates" aria-labelledby="template-heading">
+          <h2 id="template-heading">Download your presentation template</h2>
+          <div className="portal-template-options">
+            <a href="/assets/Product_Track_Template.pptx" download>
+              <Download size={20} aria-hidden="true" />
+              <span><strong>Product Track</strong><small>Download PPTX template</small></span>
+            </a>
+            <a href="/assets/Prototype_Expo_Track_Template.pptx" download>
+              <Download size={20} aria-hidden="true" />
+              <span><strong>Prototype Expo</strong><small>Download PPTX template</small></span>
+            </a>
+          </div>
+        </section>
       )}
     </PortalShell>
   );

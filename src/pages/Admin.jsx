@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { supabase } from '../lib/supabase.js';
 import { Loader2, LogOut, Check, X, RefreshCw, AlertCircle, ArrowRight, Download, Trash2, MessageSquareWarning, Search, Users, CheckCircle2 } from 'lucide-react';
 import * as XLSX from 'xlsx';
+import PortalShell from '../components/PortalShell.jsx';
 
 // Maps a ppt_backups row (or its absence) to a label + dot colour.
 function backupInfo(backup) {
@@ -40,20 +41,10 @@ function parseTeamLines(text) {
 
 const formatWhen = (iso) => new Date(iso).toLocaleString('en-IN', { day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit' });
 
-function PortalShell({ wide, children }) {
-  return (
-    <main className="portal">
-      <section className={`portal-shell${wide ? ' portal-shell--top' : ''}`}>
-        {!wide && <img className="portal-art portal-art--sparkle" src="/assets/hero-poster-sparkle.png" width="349" height="349" alt="" aria-hidden="true" />}
-        {!wide && <img className="portal-art portal-art--star" src="/assets/competition-star.png" width="673" height="762" alt="" aria-hidden="true" />}
-        <div className={`portal-inner ${wide ? 'portal-inner--wide' : 'portal-inner--narrow'}`}>{children}</div>
-      </section>
-    </main>
-  );
-}
-
 export default function Admin() {
   const [session, setSession] = useState(null);
+  const [authorized, setAuthorized] = useState(false);
+  const authGeneration = useRef(0);
   const [loading, setLoading] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -71,34 +62,67 @@ export default function Admin() {
   const [teamsBusy, setTeamsBusy] = useState(false);
   const [notice, setNotice] = useState(null); // { kind: 'ok' | 'error', text }
 
+  const runAction = async (action) => {
+    try { await action(); }
+    catch { setNotice({ kind: 'error', text: 'This action could not finish. Refresh to check its status before trying again.' }); }
+  };
+
   useEffect(() => {
-    // Check active session on mount
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setLoading(false);
-      if (session) fetchSubmissions();
+    let active = true;
+    const verifyAccess = async (nextSession) => {
+      const generation = ++authGeneration.current;
+      setLoading(true);
+      setAuthorized(false);
+      setSession(nextSession);
+      setSubmissions([]);
+      try {
+        if (nextSession) {
+          const { data, error } = await supabase.rpc('is_admin');
+          if (!active || generation !== authGeneration.current) return;
+          if (error || data !== true) {
+            setLoginError(error ? 'Unable to verify organiser access. Try signing in again.' : 'This account does not have organiser access.');
+          } else {
+            setAuthorized(true);
+          }
+        }
+      } catch {
+        if (active) setLoginError('Unable to verify organiser access. Try signing in again.');
+      } finally {
+        if (active && generation === authGeneration.current) setLoading(false);
+      }
+    };
+    // Defer Supabase calls outside its auth callback to avoid holding the auth lock.
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, nextSession) => {
+      queueMicrotask(() => { if (active) verifyAccess(nextSession); });
     });
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-      if (session) fetchSubmissions();
-    });
-
-    return () => subscription.unsubscribe();
+    return () => { active = false; ++authGeneration.current; subscription.unsubscribe(); };
   }, []);
 
+  useEffect(() => {
+    if (!authorized) return;
+    fetchSubmissions();
+    const timer = setInterval(fetchSubmissions, 30000);
+    return () => clearInterval(timer);
+  }, [authorized]);
+
   const fetchSubmissions = async () => {
+    const generation = authGeneration.current;
     setRefreshing(true);
+    try {
     const { data, error } = await supabase
       .from('teams')
-      .select('team_id, created_at, submissions(id, ppt_url, submitted, approval_status, submitted_at, appeal_message)')
+      .select('team_id, team_name, leader_email, created_at, submissions(id, ppt_url, submitted, approval_status, submitted_at, appeal_message)')
       .order('created_at', { ascending: false });
+    if (generation !== authGeneration.current) return;
+    if (error) throw error;
 
     // Secondary (Backblaze B2) backup log, keyed by the storage path of each submitted deck.
     // If the table doesn't exist yet (migration 07 not run) we simply show no backup status.
     const { data: backupRows, error: backupError } = await supabase
       .from('ppt_backups')
       .select('source_path, status, backup_key, version, error');
+    if (generation !== authGeneration.current) return;
     setBackupsAvailable(!backupError);
     const backupByPath = {};
     (backupRows || []).forEach(b => { backupByPath[b.source_path] = b; });
@@ -108,6 +132,8 @@ export default function Admin() {
         const sub = Array.isArray(t.submissions) ? t.submissions[0] : t.submissions;
         return {
           team_id: t.team_id,
+          team_name: t.team_name,
+          leader_email: t.leader_email,
           submission_id: sub?.id,
           ppt_url: sub?.ppt_url,
           submitted: !!sub?.submitted,
@@ -119,23 +145,31 @@ export default function Admin() {
       });
       setSubmissions(formatted);
     }
-    setRefreshing(false);
+    } catch {
+      if (generation === authGeneration.current) setNotice({ kind: 'error', text: 'Could not load submissions. Please refresh and try again.' });
+    } finally {
+      if (generation === authGeneration.current) setRefreshing(false);
+    }
   };
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoginError('');
     setSigningIn(true);
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-    if (error) setLoginError(error.message);
-    setSigningIn(false);
+    try {
+      const { error } = await supabase.auth.signInWithPassword({ email: email.trim(), password });
+      if (error) setLoginError('Sign-in failed. Check your email and password.');
+    } catch {
+      setLoginError('Unable to sign in. Please try again.');
+    } finally { setSigningIn(false); }
   };
 
   const handleLogout = () => supabase.auth.signOut();
 
   const handleApprove = async (id, status, teamId) => {
     if (!window.confirm(`Mark ${teamId} as ${status}?`)) return;
-    await supabase.from('submissions').update({ approval_status: status }).eq('id', id);
+    const { error } = await supabase.from('submissions').update({ approval_status: status }).eq('id', id);
+    if (error) { setNotice({ kind: 'error', text: 'Could not update the review status. Try again.' }); return; }
     fetchSubmissions();
   };
 
@@ -144,19 +178,32 @@ export default function Admin() {
 
     // Delete file from storage first
     if (pptUrl) {
-      await supabase.storage.from('incubex-ppts').remove([pptUrl]);
+      const { error } = await supabase.storage.from('incubex-ppts').remove([pptUrl]);
+      if (error) { setNotice({ kind: 'error', text: 'Could not delete the file. The submission has been kept.' }); return; }
     }
 
     // Delete database record
-    await supabase.from('submissions').delete().eq('id', id);
+    const { error } = await supabase.from('submissions').delete().eq('id', id);
+    if (error) { setNotice({ kind: 'error', text: 'The file was removed, but the submission could not be reset. Retry deleting this submission.' }); return; }
     fetchSubmissions();
   };
 
   const openDeck = async (pptUrl) => {
-    if (pptUrl.startsWith('http')) { window.open(pptUrl, '_blank', 'noopener'); return; }
-    const { data, error } = await supabase.storage.from('incubex-ppts').createSignedUrl(pptUrl, 60);
-    if (data) window.open(data.signedUrl, '_blank', 'noopener');
-    else alert('Could not open the deck: ' + error?.message);
+    const deckWindow = window.open('', '_blank');
+    if (deckWindow) deckWindow.opener = null;
+    let data, error;
+    try {
+      ({ data, error } = await supabase.storage.from('incubex-ppts').createSignedUrl(pptUrl, 60));
+    } catch {
+      deckWindow?.close();
+      setNotice({ kind: 'error', text: 'Could not open the deck. Please try again.' });
+      return;
+    }
+    if (data && deckWindow) deckWindow.location.replace(data.signedUrl);
+    else {
+      deckWindow?.close();
+      setNotice({ kind: 'error', text: error ? 'Could not open the deck. Please try again.' : 'Allow pop-ups to open this deck.' });
+    }
   };
 
   const handleAddTeams = async (e) => {
@@ -215,6 +262,8 @@ export default function Admin() {
 
     const exportData = filteredSubmissions.map((sub) => ({
       'Team ID': sub.team_id,
+      'Team name': sub.team_name || '',
+      'Leader email': sub.leader_email || '',
       'Status': sub.approval_status.toUpperCase(),
       'Submitted At': sub.submitted_at ? new Date(sub.submitted_at).toLocaleString() : 'N/A',
       'Pitch Deck Link': sub.ppt_url ? (signedUrlsMap[sub.ppt_url] || 'Error generating link') : 'Not Submitted',
@@ -237,7 +286,7 @@ export default function Admin() {
     const q = query.trim().toUpperCase();
     let result = submissions;
     if (statusFilter !== 'all') result = result.filter(s => s.approval_status === statusFilter);
-    if (q) result = result.filter(s => s.team_id.toUpperCase().includes(q));
+    if (q) result = result.filter(s => [s.team_id, s.team_name, s.leader_email].some(value => value?.toUpperCase().includes(q)));
     // Pending first, then newest upload first
     return [...result].sort((a, b) => {
       if (a.approval_status === 'pending' && b.approval_status !== 'pending') return -1;
@@ -254,7 +303,7 @@ export default function Admin() {
     );
   }
 
-  if (!session) {
+  if (!session || !authorized) {
     return (
       <PortalShell>
         <header className="portal-head">
@@ -303,6 +352,7 @@ export default function Admin() {
                 ? <><Loader2 size={18} className="portal-spin" /> Signing in…</>
                 : <>Sign in <ArrowRight size={18} /></>}
             </button>
+            {session && <button type="button" className="portal-btn portal-btn--ghost" onClick={handleLogout}>Sign out of this account</button>}
           </form>
         </div>
       </PortalShell>
@@ -323,7 +373,7 @@ export default function Admin() {
           <button type="button" className="portal-btn portal-btn--ghost portal-btn--sm" onClick={fetchSubmissions} disabled={refreshing} aria-label="Refresh">
             <RefreshCw size={15} className={refreshing ? 'portal-spin' : ''} /> Refresh
           </button>
-          <button type="button" className="portal-btn portal-btn--ghost portal-btn--sm" onClick={handleExport} disabled={filteredSubmissions.length === 0}>
+          <button type="button" className="portal-btn portal-btn--ghost portal-btn--sm" onClick={() => runAction(handleExport)} disabled={filteredSubmissions.length === 0}>
             <Download size={15} /> Export
           </button>
           <button type="button" className="portal-btn portal-btn--sm" onClick={handleLogout}>
@@ -413,6 +463,8 @@ export default function Admin() {
                 <tr key={sub.team_id}>
                   <td className="col-team">
                     <div className="portal-team">{sub.team_id}</div>
+                    {sub.team_name && <div>{sub.team_name}</div>}
+                    {sub.leader_email && <div className="portal-muted">{sub.leader_email}</div>}
                     {sub.appeal_message && (
                       <div className="portal-appeal" title="Resubmission request">
                         <MessageSquareWarning size={14} />
@@ -436,20 +488,20 @@ export default function Admin() {
                   <td className="col-actions">
                     {!sub.submitted && (
                       <div className="portal-row-actions">
-                        <button type="button" className="portal-icon-btn portal-icon-btn--del" title="Remove team" aria-label={`Remove ${sub.team_id}`} onClick={() => handleRemoveTeam(sub.team_id)}>
+                        <button type="button" className="portal-icon-btn portal-icon-btn--del" title="Remove team" aria-label={`Remove ${sub.team_id}`} onClick={() => runAction(() => handleRemoveTeam(sub.team_id))}>
                           <Trash2 size={16} />
                         </button>
                       </div>
                     )}
                     {sub.submitted && (
                       <div className="portal-row-actions">
-                        <button type="button" className="portal-icon-btn portal-icon-btn--ok" title="Approve" aria-label={`Approve ${sub.team_id}`} onClick={() => handleApprove(sub.submission_id, 'approved', sub.team_id)}>
+                        <button type="button" className="portal-icon-btn portal-icon-btn--ok" title="Approve" aria-label={`Approve ${sub.team_id}`} onClick={() => runAction(() => handleApprove(sub.submission_id, 'approved', sub.team_id))}>
                           <Check size={16} />
                         </button>
-                        <button type="button" className="portal-icon-btn portal-icon-btn--no" title="Reject" aria-label={`Reject ${sub.team_id}`} onClick={() => handleApprove(sub.submission_id, 'rejected', sub.team_id)}>
+                        <button type="button" className="portal-icon-btn portal-icon-btn--no" title="Reject" aria-label={`Reject ${sub.team_id}`} onClick={() => runAction(() => handleApprove(sub.submission_id, 'rejected', sub.team_id))}>
                           <X size={16} />
                         </button>
-                        <button type="button" className="portal-icon-btn portal-icon-btn--del" title="Delete and let the team re-upload" aria-label={`Delete ${sub.team_id}`} onClick={() => handleDelete(sub.submission_id, sub.team_id, sub.ppt_url)}>
+                        <button type="button" className="portal-icon-btn portal-icon-btn--del" title="Delete and let the team re-upload" aria-label={`Delete ${sub.team_id}`} onClick={() => runAction(() => handleDelete(sub.submission_id, sub.team_id, sub.ppt_url))}>
                           <Trash2 size={16} />
                         </button>
                       </div>

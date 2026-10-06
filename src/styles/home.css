@@ -1,0 +1,53 @@
+.track-support-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 24px;
+  padding: 20px 24px;
+  background: rgba(255, 255, 255, 0.86);
+  border: 1px solid #dad5ef;
+  border-radius: 20px;
+  box-shadow: 0 4px 16px rgba(24, 32, 82, 0.05);
+}
+.track-support-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1 1 260px;
+  color: #182052;
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
+.track-support-icon { display: block; width: 22px; height: 22px; flex: 0 0 22px; color: #5346b3; }
+.track-support-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.track-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 10px 16px;
+  background: #f0ecff;
+  border: 1px solid #c7bdeb;
+  border-radius: 999px;
+  color: #342577;
+  font-size: 0.85rem;
+  font-weight: 700;
+  line-height: 1.4;
+  text-decoration: none;
+  transition: background-color 160ms ease;
+}
+.track-pill-btn svg { display: block; width: 16px; height: 16px; flex: 0 0 16px; }
+.track-pill-btn:hover { background: #e5dfff; }
+.track-pill-btn--wa { background: #e9f8ee; border-color: #b5ddc0; color: #17683c; }
+.track-pill-btn--wa:hover { background: #d7f1df; }
+.track-pill-btn:focus-visible { outline: 3px solid #3858c8; outline-offset: 3px; }
+@media (max-width: 639px) {
+  .track-support-bar { padding: 18px; }
+  .track-support-label { flex-basis: 100%; }
+  .track-support-actions { width: 100%; }
+  .track-pill-btn { flex: 1 1 auto; }
+}
