@@ -7,3 +7,4 @@ dev_server.py
 .env
 .env.local
 .env.*.local
+supabase/.temp/

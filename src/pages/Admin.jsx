@@ -3,6 +3,14 @@ import { supabase } from '../lib/supabase.js';
 import { Lock, Loader2, LogOut, Check, X, RefreshCw, ExternalLink, AlertCircle, ArrowRight, Download, Trash2, MessageSquareWarning } from 'lucide-react';
 import * as XLSX from 'xlsx';
 
+// Maps a ppt_backups row (or its absence) to a label + the existing badge colour modifier.
+function backupInfo(backup) {
+  if (!backup) return { label: 'Backup not started', mod: 'not_submitted', title: 'No backup record yet. The webhook may not have fired; the 2-hourly sweep will pick it up.' };
+  if (backup.status === 'success') return { label: 'Backed up', mod: 'approved', title: `Copied to B2 as ${backup.backup_key}` };
+  if (backup.status === 'failed') return { label: 'Backup failed', mod: 'rejected', title: backup.error || 'Backup failed; it will be retried by the next sweep.' };
+  return { label: 'Backup pending', mod: 'pending', title: 'Backup in progress' };
+}
+
 export default function Admin() {
   const [session, setSession] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -14,6 +22,7 @@ export default function Admin() {
   const [submissions, setSubmissions] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
   const [statusFilter, setStatusFilter] = useState('all'); // all, pending, approved, rejected, not_submitted
+  const [backupsAvailable, setBackupsAvailable] = useState(false);
 
   useEffect(() => {
     // Check active session on mount
@@ -38,6 +47,15 @@ export default function Admin() {
       .select('team_id, created_at, submissions(id, ppt_url, submitted, approval_status, submitted_at, appeal_message)')
       .order('created_at', { ascending: false });
 
+    // Secondary (Backblaze B2) backup log, keyed by the storage path of each submitted deck.
+    // If the table doesn't exist yet (migration 07 not run) we simply show no backup badges.
+    const { data: backupRows, error: backupError } = await supabase
+      .from('ppt_backups')
+      .select('source_path, status, backup_key, version, error');
+    setBackupsAvailable(!backupError);
+    const backupByPath = {};
+    (backupRows || []).forEach(b => { backupByPath[b.source_path] = b; });
+
     if (data) {
       const formatted = data.map(t => {
         const sub = Array.isArray(t.submissions) ? t.submissions[0] : t.submissions;
@@ -48,7 +66,8 @@ export default function Admin() {
           submitted: !!sub?.submitted,
           approval_status: sub ? (sub.approval_status || 'pending') : 'not_submitted',
           submitted_at: sub?.submitted_at,
-          appeal_message: sub?.appeal_message
+          appeal_message: sub?.appeal_message,
+          backup: sub?.ppt_url ? backupByPath[sub.ppt_url] : undefined
         };
       });
       setSubmissions(formatted);
@@ -104,7 +123,8 @@ export default function Admin() {
       'Team ID': sub.team_id,
       'Status': sub.approval_status.toUpperCase(),
       'Submitted At': sub.submitted_at ? new Date(sub.submitted_at).toLocaleString() : 'N/A',
-      'Pitch Deck Link': sub.ppt_url ? (signedUrlsMap[sub.ppt_url] || 'Error generating link') : 'Not Submitted'
+      'Pitch Deck Link': sub.ppt_url ? (signedUrlsMap[sub.ppt_url] || 'Error generating link') : 'Not Submitted',
+      ...(backupsAvailable && { 'Backup': sub.ppt_url ? backupInfo(sub.backup).label : 'N/A' })
     }));
 
     const worksheet = XLSX.utils.json_to_sheet(exportData);
@@ -286,6 +306,14 @@ export default function Admin() {
                              View deck <ExternalLink size={14} />
                            </button>
                         )}
+                        {backupsAvailable && sub.ppt_url && (() => {
+                          const info = backupInfo(sub.backup);
+                          return (
+                            <div className="portal-backup">
+                              <span className={`portal-badge portal-badge--sm portal-badge--${info.mod}`} title={info.title}>{info.label}</span>
+                            </div>
+                          );
+                        })()}
                       </td>
                       <td>{sub.submitted_at ? new Date(sub.submitted_at).toLocaleString() : '—'}</td>
                       <td><span className={`portal-badge portal-badge--${st}`}>{st.replace('_', ' ')}</span></td>

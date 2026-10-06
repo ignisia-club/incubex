@@ -369,6 +369,8 @@ button.portal-link { background: transparent; border: 0; padding: 0; cursor: poi
 .portal-badge--approved { color: #047857; background: rgba(209, 250, 229, 0.7); border-color: rgba(16, 185, 129, 0.3); }
 .portal-badge--rejected { color: #be123c; background: rgba(255, 228, 230, 0.7); border-color: rgba(244, 63, 94, 0.3); }
 .portal-badge--not_submitted { color: #475569; background: rgba(241, 245, 249, 0.7); border-color: rgba(148, 163, 184, 0.3); }
+.portal-badge--sm { padding: 0.15rem 0.55rem; font-size: 0.62rem; letter-spacing: 0.04em; white-space: nowrap; }
+.portal-backup { margin-top: 0.35rem; }
 .portal-muted { color: var(--p-muted); font-style: italic; font-size: 0.85em; }
 
 .portal-row-actions { display: flex; gap: 0.4rem; }
