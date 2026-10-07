@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { supabase } from '../lib/supabase.js';
-import { Loader2, LogOut, Check, X, RefreshCw, AlertCircle, ArrowRight, Download, Trash2, MessageSquareWarning, Search, Users, CheckCircle2 } from 'lucide-react';
+import { Loader2, LogOut, Check, X, RefreshCw, AlertCircle, ArrowRight, Download, Trash2, MessageSquareWarning, Search, Users, CheckCircle2, FileSpreadsheet } from 'lucide-react';
 import * as XLSX from 'xlsx';
 import PortalShell from '../components/PortalShell.jsx';
 
@@ -41,6 +41,40 @@ function parseTeamLines(text) {
 
 const formatWhen = (iso) => new Date(iso).toLocaleString('en-IN', { day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit' });
 
+// Reads the first sheet of an .xlsx/.xls/.csv file into "id" / "id, email" lines for the Add teams box.
+// Uses a header row if present (a column named like "Team ID"/"ID" and one like "Email"); otherwise
+// column A is the ID and the email is whichever other column contains an "@".
+async function parseTeamSheet(file) {
+  const workbook = XLSX.read(await file.arrayBuffer(), { type: 'array' });
+  const sheet = workbook.Sheets[workbook.SheetNames[0]];
+  if (!sheet) return [];
+  const grid = XLSX.utils.sheet_to_json(sheet, { header: 1, raw: false, defval: '' })
+    .map((row) => row.map((cell) => String(cell ?? '').trim()));
+  if (grid.length === 0) return [];
+
+  const head = grid[0].map((cell) => cell.toLowerCase());
+  let idCol = head.findIndex((h) => /team\s*_?\s*(id|no|number|code)|^id$|^team$/.test(h));
+  let emailCol = head.findIndex((h) => /e-?mail/.test(h));
+  const hasHeader = idCol !== -1 || emailCol !== -1;
+  const body = hasHeader ? grid.slice(1) : grid;
+  if (idCol === -1) idCol = 0;
+  if (emailCol === -1) {
+    const width = Math.max(0, ...body.map((row) => row.length));
+    for (let c = 0; c < width; c++) {
+      if (c !== idCol && body.some((row) => (row[c] || '').includes('@'))) { emailCol = c; break; }
+    }
+  }
+
+  return body
+    .map((row) => {
+      const id = (row[idCol] || '').toUpperCase();
+      const mail = emailCol === -1 ? '' : (row[emailCol] || '');
+      if (!id) return '';
+      return mail.includes('@') ? `${id}, ${mail.toLowerCase()}` : id;
+    })
+    .filter(Boolean);
+}
+
 export default function Admin() {
   const [session, setSession] = useState(null);
   const [authorized, setAuthorized] = useState(false);
@@ -61,6 +95,35 @@ export default function Admin() {
   const [teamsText, setTeamsText] = useState('');
   const [teamsBusy, setTeamsBusy] = useState(false);
   const [notice, setNotice] = useState(null); // { kind: 'ok' | 'error', text }
+  const importFileRef = useRef(null);
+
+  // Fills the Add teams box from a spreadsheet. Nothing is saved until the organiser clicks Add.
+  const handleImportFile = async (e) => {
+    const file = e.target.files?.[0];
+    e.target.value = '';
+    if (!file) return;
+    try {
+      const lines = await parseTeamSheet(file);
+      if (lines.length === 0) {
+        setNotice({ kind: 'error', text: `No Team IDs found in ${file.name}. Put IDs in the first column (or a column named "Team ID"), emails optional.` });
+        return;
+      }
+      setTeamsText((prev) => {
+        const existing = prev.split(/\r?\n/).map((l) => l.trim()).filter(Boolean);
+        const seen = new Set(existing.map((l) => l.split(/[,;\t]/)[0].trim().toUpperCase()));
+        const added = lines.filter((l) => {
+          const id = l.split(',')[0].trim();
+          if (seen.has(id)) return false;
+          seen.add(id);
+          return true;
+        });
+        return [...existing, ...added].join('\n');
+      });
+      setNotice({ kind: 'ok', text: `Imported ${lines.length} row${lines.length === 1 ? '' : 's'} from ${file.name}. Review the list, then click Add.` });
+    } catch {
+      setNotice({ kind: 'error', text: `Couldn't read ${file.name}. Use an .xlsx, .xls or .csv file.` });
+    }
+  };
 
   const runAction = async (action) => {
     try { await action(); }
@@ -395,8 +458,18 @@ export default function Admin() {
             spellCheck="false"
           />
           <div className="portal-teams-foot">
-            <span className="portal-hint">One per line: Team ID, then the leader’s email if you have it.</span>
+            <span className="portal-hint">One per line: Team ID, then the leader’s email if you have it. Or import an Excel/CSV with columns ID | Email.</span>
             <div className="portal-toolbar-actions">
+              <input
+                ref={importFileRef}
+                type="file"
+                accept=".xlsx,.xls,.csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,text/csv"
+                onChange={handleImportFile}
+                hidden
+              />
+              <button type="button" className="portal-btn portal-btn--ghost portal-btn--sm" onClick={() => importFileRef.current?.click()} disabled={teamsBusy}>
+                <FileSpreadsheet size={15} /> Import Excel/CSV
+              </button>
               <button type="button" className="portal-btn portal-btn--ghost portal-btn--sm" onClick={() => { setTeamsOpen(false); setNotice(null); }}>Close</button>
               <button type="submit" className="portal-btn portal-btn--sm" disabled={teamsBusy || !teamsText.trim()}>
                 {teamsBusy ? <><Loader2 size={15} className="portal-spin" /> Adding…</> : 'Add'}
