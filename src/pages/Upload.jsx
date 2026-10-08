@@ -5,7 +5,7 @@ import PortalShell from '../components/PortalShell.jsx';
 
 // INC-12345, or a Club OS team number (4-5 digits, leading zeros kept).
 const TEAM_ID_PATTERN = /^(INC-\d{5}|\d{4,5})$/;
-const MAX_BYTES = 25 * 1024 * 1024;
+const MAX_BYTES = 10 * 1024 * 1024;
 const ALLOWED_EXT = ['pdf', 'ppt', 'pptx'];
 const MIME_BY_EXT = {
   pdf: 'application/pdf',
@@ -17,6 +17,7 @@ const formatWhen = (d) => d.toLocaleString('en-IN', { day: 'numeric', month: 'sh
 
 export default function Upload() {
   const [teamId, setTeamId] = useState('');
+  const [teamPin, setTeamPin] = useState('');
   const [file, setFile] = useState(null);
   const [dragging, setDragging] = useState(false);
   const [status, setStatus] = useState('idle'); // idle | uploading | success | error | appeal_success
@@ -33,7 +34,7 @@ export default function Upload() {
     setFile(null);
     const ext = picked.name.split('.').pop().toLowerCase();
     if (!ALLOWED_EXT.includes(ext)) return fail('Only PDF, PPT or PPTX files are accepted.');
-    if (picked.size > MAX_BYTES) return fail('File is larger than 25 MB. Please compress it and try again.');
+    if (picked.size > MAX_BYTES) return fail('File is larger than 10 MB. Please compress it and try again.');
     if (picked.size === 0) return fail('This file is empty. Please choose a valid deck.');
     setFile(picked);
     if (status === 'error') { setStatus('idle'); setMessage(''); }
@@ -43,16 +44,17 @@ export default function Upload() {
     e.preventDefault();
     const id = teamId.trim().toUpperCase();
     if (!TEAM_ID_PATTERN.test(id)) return fail('Enter the Team ID from your registration, e.g. 1003 or INC-12345.');
+    if (!teamPin.trim()) return fail('Please enter your 8-digit Team PIN.');
     if (!file) return fail('Please attach your deck.');
 
     setStatus('uploading');
-    setMessage('Checking Team ID');
+    setMessage('Verifying Team ID & PIN');
 
     try {
-      const { data: teamInfo, error: teamError } = await supabase.rpc('get_team_status', { p_team_id: id });
+      const { data: teamInfo, error: teamError } = await supabase.rpc('get_team_status', { p_team_id: id, p_team_pin: teamPin.trim() });
 
       if (teamError) throw new Error('We couldn’t verify your team right now. Please try again.');
-      if (!teamInfo?.exists) throw new Error('We couldn’t find that Team ID. Check it and try again.');
+      if (!teamInfo?.exists) throw new Error('Incorrect Team ID or PIN. Please check and try again.');
 
       if (teamInfo.submitted) {
         setMode('appeal');
@@ -74,14 +76,11 @@ export default function Upload() {
 
       setMessage('Saving');
       // Bucket is private: store the storage path; admins open it via a short-lived signed URL.
-      const { error: submitError } = await supabase
-        .from('submissions')
-        .insert({
-          team_id: id,
-          ppt_url: filePath,
-          submitted: true,
-          submitted_at: new Date().toISOString()
-        });
+      const { error: submitError } = await supabase.rpc('submit_deck', {
+        p_team_id: id,
+        p_team_pin: teamPin.trim(),
+        p_file_path: filePath
+      });
 
       if (submitError) {
         if (submitError.code === '23505') throw new Error('Your team has already submitted a deck.');
@@ -106,6 +105,7 @@ export default function Upload() {
     try {
     const { error } = await supabase.rpc('submit_appeal', {
       p_team_id: teamId.trim().toUpperCase(),
+      p_team_pin: teamPin.trim(),
       p_message: appealMessage.trim()
     });
 
@@ -119,7 +119,7 @@ export default function Upload() {
     }
   };
 
-  const reset = () => { setMode('upload'); setStatus('idle'); setTeamId(''); setFile(null); setMessage(''); setAppealMessage(''); setReceipt(null); };
+  const reset = () => { setMode('upload'); setStatus('idle'); setTeamId(''); setTeamPin(''); setFile(null); setMessage(''); setAppealMessage(''); setReceipt(null); };
   const busy = status === 'uploading';
   const appealing = mode === 'appeal';
 
@@ -200,6 +200,23 @@ export default function Upload() {
                 />
               </div>
 
+                <div className="portal-field">
+                  <label className="portal-label" htmlFor="team-pin">Team PIN</label>
+                  <input
+                    id="team-pin"
+                    className="portal-input portal-input--id"
+                    type="text"
+                    autoComplete="off"
+                    spellCheck="false"
+                    maxLength={8}
+                    placeholder="8-digit PIN"
+                    value={teamPin}
+                    onChange={(e) => setTeamPin(e.target.value)}
+                    disabled={busy}
+                    required
+                  />
+                </div>
+
               <div className="portal-field">
                 <span className="portal-label">Deck</span>
                 <label
@@ -220,7 +237,7 @@ export default function Upload() {
                   </span>
                   <span className="portal-drop-title">{file ? file.name : 'Drop your file or browse'}</span>
                   <span className="portal-drop-meta">
-                    {file ? `${(file.size / (1024 * 1024)).toFixed(1)} MB · tap to replace` : 'PDF, PPT or PPTX · up to 25 MB'}
+                    {file ? `${(file.size / (1024 * 1024)).toFixed(1)} MB · tap to replace` : 'PDF, PPT or PPTX · up to 10 MB'}
                   </span>
                 </label>
               </div>

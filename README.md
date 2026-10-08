@@ -36,6 +36,8 @@ Supabase handles the Database (PostgreSQL), Storage (S3-compatible), and Auth. T
   - Click the **Check** (Approve) or **X** (Reject) to update status (requires confirmation).
   - Click the **Trash** icon to completely reset a team. This deletes the file from the Storage Bucket and removes the database row, resetting their status to "Not Submitted".
 - **Appeals:** If a team submitted an appeal, it displays in orange directly beneath their Team ID.
+- **Excel/CSV Import:** The "Import Excel/CSV" button in the Teams panel allows bulk-adding teams (reads ID and Email columns). 
+  > **⚠️ IMPORTANT:** If a team ID like `0123` is stored as a number in Excel, Excel drops the leading zero before the file is read. **Format the ID column as Text** in Excel to preserve leading zeros.
 - **Excel Export:** The "Export" button generates an instant `.xlsx` Excel download. It automatically generates 7-day temporary Signed URLs for every pitch deck so you can click them straight from Excel!
 
 ---
