@@ -683,15 +683,16 @@ export default function Home() {
         <!-- 8 Timeline Milestones -->
         <div class="space-y-12 sm:space-y-16">
 
-          <!-- Step 1: 7 Oct 2026 -->
+          <!-- Step 1: 12 Oct 2026 -->
           <div class="relative flex flex-col md:flex-row items-start group timeline-item" id="step-node-1">
             <!-- Left Date Column -->
             <div class="w-full md:w-72 md:shrink-0 md:pr-8 text-left md:text-right pb-3 md:pb-0">
-              <time datetime="2026-10-07" class="font-serif italic text-2xl sm:text-3xl text-slate-900 font-bold group-hover:text-indigo-600 transition-colors">
-                7 Oct 2026
+              <time datetime="2026-10-12" class="font-serif italic text-2xl sm:text-3xl text-slate-900 font-bold group-hover:text-indigo-600 transition-colors">
+                12 Oct 2026
               </time>
+              <span class="text-sm font-semibold text-slate-500 block mt-0.5">11:59 PM</span>
               <span class="text-[11px] font-mono uppercase tracking-wider text-indigo-600 font-bold block mt-1">
-                Step 01 • Registration
+                Step 01 • Registration Deadline
               </span>
             </div>
 
@@ -711,7 +712,7 @@ export default function Home() {
                   </span>
                 </div>
                 <h3 class="text-xl sm:text-2xl font-black text-slate-900 mb-2">
-                  Team Enrolment on Unstop
+                  Registrations Close
                 </h3>
                 <p class="text-sm text-slate-700 leading-relaxed font-normal mb-4">
                   Register your team: 1–6 members for Product Track or 1 - 6 members for Prototype Expo Track. Registration is ₹300 per team and free for MIT-WPU Pune students.
@@ -733,9 +734,10 @@ export default function Home() {
           <!-- Step 4: 9 - 10 Oct 2026 -->
           <div class="relative flex flex-col md:flex-row items-start group timeline-item" id="step-node-4">
             <div class="w-full md:w-72 md:shrink-0 md:pr-8 text-left md:text-right pb-3 md:pb-0">
-              <time datetime="2026-10-09" data-end-date="2026-10-10" class="font-serif italic text-2xl sm:text-3xl text-slate-900 font-bold group-hover:text-indigo-600 transition-colors">
-                9 – 10 Oct 2026
+              <time datetime="2026-10-16" data-end-date="2026-10-17" class="font-serif italic text-2xl sm:text-3xl text-slate-900 font-bold group-hover:text-indigo-600 transition-colors">
+                16 – 17 Oct 2026
               </time>
+              <span class="text-sm font-semibold text-slate-500 block mt-0.5">5:00 AM (16th) to 11:59 PM (17th)</span>
               <span class="text-[11px] font-mono uppercase tracking-wider text-indigo-600 font-bold block mt-1">
                 Step 02 • Qualifier Round
               </span>
@@ -776,7 +778,7 @@ export default function Home() {
 
           <div class="relative flex flex-col md:flex-row items-start group timeline-item" id="step-node-5">
             <div class="w-full md:w-72 md:shrink-0 md:pr-8 text-left md:text-right pb-3 md:pb-0">
-              <time datetime="2026-10-12" class="font-serif italic text-2xl sm:text-3xl text-slate-900 font-bold">12 Oct 2026</time>
+              <time datetime="2026-10-12" class="font-serif italic text-2xl sm:text-3xl text-slate-900 font-bold">19 Oct 2026</time>
               <span class="text-[11px] font-mono uppercase tracking-wider text-indigo-600 font-bold block mt-1">Round 1 Results</span>
             </div>
             <div class="hidden md:flex absolute left-72 -translate-x-1/2 items-center justify-center z-10">
@@ -785,51 +787,7 @@ export default function Home() {
             <div class="w-full md:flex-1 md:min-w-0 md:pl-12">
               <div class="rounded-2xl p-6 sm:p-7 border border-indigo-200">
                 <h3 class="text-xl sm:text-2xl font-black text-slate-900 mb-2">Round 1 Results</h3>
-                <p class="text-sm text-slate-700 leading-relaxed">Round 1 results will be announced on 12 October 2026.</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Step 6: 15 – 16 Oct 2026 -->
-          <div class="relative flex flex-col md:flex-row items-start group timeline-item" id="step-node-6">
-            <div class="w-full md:w-72 md:shrink-0 md:pr-8 text-left md:text-right pb-3 md:pb-0">
-              <time datetime="2026-10-15" data-end-date="2026-10-16" class="font-serif italic text-2xl sm:text-3xl text-slate-900 font-bold group-hover:text-indigo-600 transition-colors">
-                15 – 16 Oct 2026
-              </time>
-              <span class="text-[11px] font-mono uppercase tracking-wider text-indigo-600 font-bold block mt-1">
-                Step 03 • Mentorship
-              </span>
-            </div>
-
-            <div class="hidden md:flex absolute left-72 -translate-x-1/2 items-center justify-center z-10">
-              <div class="w-8 h-8 rounded-full border-2 border-indigo-600 bg-white flex items-center justify-center shadow-md group-hover:scale-110 group-hover:border-blue-500 transition-transform">
-                <div class="w-3 h-3 rounded-full bg-indigo-600"></div>
-              </div>
-            </div>
-
-            <div class="w-full md:flex-1 md:min-w-0 md:pl-12">
-              <div class="bg-white/90 backdrop-blur-sm border border-indigo-100/90 rounded-2xl p-6 sm:p-7 shadow-xs hover:shadow-card hover:border-indigo-300 transition-all">
-                <div class="flex items-center space-x-2 mb-2">
-                  <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold tracking-wider uppercase bg-cyan-50 text-cyan-700 border border-cyan-200">
-                    Mentoring
-                  </span>
-                </div>
-                <h3 class="text-xl sm:text-2xl font-black text-slate-900 mb-2">
-                  Mentoring Sessions
-                </h3>
-                <p class="text-sm text-slate-700 leading-relaxed font-normal mb-4">
-                  Finalist teams work with domain mentors in online sessions to refine their build, strengthen the pitch, and prepare for the Grand Finale.
-                </p>
-                <div id="step-expanded-6" class="hidden mt-4 pt-4 border-t border-slate-100 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                  <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
-                    <span class="block font-bold text-slate-700 mb-1">Hardware Testing:</span>
-                    <span class="text-slate-600">Review sensor calibrations, mechanical casings, power supplies, and battery specs.</span>
-                  </div>
-                  <div class="bg-cyan-50/70 p-3.5 rounded-xl border border-cyan-100">
-                    <span class="block font-bold text-cyan-900 mb-1">Presentation Coaching:</span>
-                    <span class="text-cyan-800">Feedback on executive pitch narrative and live stage demo pacing.</span>
-                  </div>
-                </div>
+                <p class="text-sm text-slate-700 leading-relaxed">Round 1 results will be announced on 19 October 2026.</p>
               </div>
             </div>
           </div>
@@ -840,8 +798,9 @@ export default function Home() {
               <time datetime="2026-10-21" class="font-serif italic text-3xl sm:text-4xl text-indigo-700 group-hover:text-indigo-800 transition-colors font-bold">
                 21 Oct 2026
               </time>
+              <span class="text-sm font-semibold text-slate-500 block mt-0.5">8:30 AM to 6:00 PM</span>
               <span class="text-xs font-mono uppercase tracking-wider text-indigo-600 font-extrabold block mt-1">
-                Step 04 • Grand Finale
+                Step 03 • Grand Finale
               </span>
             </div>
 
@@ -904,7 +863,7 @@ export default function Home() {
                 Post 21 Oct 2026
               </time>
               <span class="text-[11px] font-mono uppercase tracking-wider text-indigo-600 font-bold block mt-1">
-                Step 05 • Evolve &amp; Scale
+                Step 04 • Evolve &amp; Scale
               </span>
             </div>
 
@@ -1074,7 +1033,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div class="faq-item border border-indigo-100/90 rounded-2xl bg-white/95 overflow-hidden shadow-xs hover:border-indigo-300 hover:shadow-card transition-all duration-300" data-category="event" data-keywords="What is the event format and when is the finale? The event begins with an online evaluation round (9th–10th October 2026), followed by mentoring sessions for shortlisted teams (15th–16th October) and an offline Grand Finale at the MIT-WPU campus in Pune on 21st October 2026. Only shortlisted finalist teams need to travel to Pune.">
+            <div class="faq-item border border-indigo-100/90 rounded-2xl bg-white/95 overflow-hidden shadow-xs hover:border-indigo-300 hover:shadow-card transition-all duration-300" data-category="event" data-keywords="What is the event format and when is the finale? The event begins with an online evaluation round (16th - 17th October 2026), followed by an offline Grand Finale at the MIT-WPU campus in Pune on 21st October 2026. Only shortlisted finalist teams need to travel to Pune.">
               <button class="w-full text-left px-6 py-5 font-extrabold text-slate-900 flex justify-between items-center focus:outline-none cursor-pointer group" onclick="toggleFaq(this); playSound('click');">
                 <span class="text-sm sm:text-base pr-4 group-hover:text-indigo-600 transition-colors">What is the event format and when is the finale?</span>
                 <div class="faq-icon-wrapper w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center flex-shrink-0 text-indigo-600 transition-transform duration-300">
@@ -1082,7 +1041,7 @@ export default function Home() {
                 </div>
               </button>
               <div class="faq-answer hidden px-6 pb-6 text-xs sm:text-sm text-slate-700 leading-relaxed font-normal border-t border-slate-100 pt-4">
-                <p>The event begins with an online evaluation round (9th–10th October 2026), followed by mentoring sessions for shortlisted teams (15th–16th October) and an offline Grand Finale at the MIT-WPU campus in Pune on 21st October 2026. Only shortlisted finalist teams need to travel to Pune.</p>
+                <p>The event begins with an online evaluation round (16th - 17th October 2026), followed by an offline Grand Finale at the MIT-WPU campus in Pune on 21st October 2026. Only shortlisted finalist teams need to travel to Pune.</p>
               </div>
             </div>
 
@@ -1208,7 +1167,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div class="faq-item border border-indigo-100/90 rounded-2xl bg-white/95 overflow-hidden shadow-xs hover:border-indigo-300 hover:shadow-card transition-all duration-300" data-category="finale" data-keywords="When will shortlisted teams be announced? Round 1 results and shortlisted finalist announcements will be made on 12th October 2026. Selected teams will be notified via email and phone.">
+            <div class="faq-item border border-indigo-100/90 rounded-2xl bg-white/95 overflow-hidden shadow-xs hover:border-indigo-300 hover:shadow-card transition-all duration-300" data-category="finale" data-keywords="When will shortlisted teams be announced? Round 1 results and shortlisted finalist announcements will be made on 19th October 2026. Selected teams will be notified via email and phone.">
               <button class="w-full text-left px-6 py-5 font-extrabold text-slate-900 flex justify-between items-center focus:outline-none cursor-pointer group" onclick="toggleFaq(this); playSound('click');">
                 <span class="text-sm sm:text-base pr-4 group-hover:text-indigo-600 transition-colors">When will shortlisted teams be announced?</span>
                 <div class="faq-icon-wrapper w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center flex-shrink-0 text-indigo-600 transition-transform duration-300">
@@ -1216,7 +1175,7 @@ export default function Home() {
                 </div>
               </button>
               <div class="faq-answer hidden px-6 pb-6 text-xs sm:text-sm text-slate-700 leading-relaxed font-normal border-t border-slate-100 pt-4">
-                <p>Round 1 results and shortlisted finalist announcements will be made on 12th October 2026. Selected teams will be notified via email and phone.</p>
+                <p>Round 1 results and shortlisted finalist announcements will be made on 19th October 2026. Selected teams will be notified via email and phone.</p>
               </div>
             </div>
 
