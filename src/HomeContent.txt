@@ -39,7 +39,7 @@
             <span class="hero-venture-word">Venture</span>
           </p>
 
-          <p class="hero-launchpad-line"><span>National-Level Tech Launchpad</span> by <span class="poster-ignisia">Ignisia</span></p>
+          <p class="hero-launchpad-line"><span>Pune Tech Launchpad</span> by <span class="poster-ignisia">Ignisia</span></p>
 
           <div class="hero-cta-stack">
             <button type="button" onclick="openRegisterModal(); playSound('click');" class="hero-register-big">
@@ -168,7 +168,7 @@
           </span>
         </div>
       </div>
-      <p class="event-info-eligibility">National-level &nbsp;•&nbsp; Diploma, UG &amp; PG students &nbsp;•&nbsp; Across India</p>
+      <p class="event-info-eligibility">Pune &nbsp;•&nbsp; Diploma, UG &amp; PG students &nbsp;•&nbsp; Across India</p>
     </div>
   </section>
   <!-- END: Event details -->
@@ -971,7 +971,7 @@
           <p id="faq-results-status" class="faq-results-status" role="status" aria-live="polite"></p>
           <!-- FAQ Accordion List (Animated Cards) -->
           <div class="space-y-4" id="faq-container">
-            <div class="faq-item border border-indigo-100/90 rounded-2xl bg-white/95 overflow-hidden shadow-xs hover:border-indigo-300 hover:shadow-card transition-all duration-300" data-category="event" data-keywords="What is INCUBEX 2026? INCUBEX 2026 is a national-level Project Expo + Launchpad Event organized by Ignisia Club at MIT-WPU. It brings together student innovators to showcase working projects, prototypes, and products to expert panels and investors.">
+            <div class="faq-item border border-indigo-100/90 rounded-2xl bg-white/95 overflow-hidden shadow-xs hover:border-indigo-300 hover:shadow-card transition-all duration-300" data-category="event" data-keywords="What is INCUBEX 2026? INCUBEX 2026 is a Pune Project Expo + Launchpad Event organized by Ignisia Club at MIT-WPU. It brings together student innovators to showcase working projects, prototypes, and products to expert panels and investors.">
               <button class="w-full text-left px-6 py-5 font-extrabold text-slate-900 flex justify-between items-center focus:outline-none cursor-pointer group" onclick="toggleFaq(this); playSound('click');">
                 <span class="text-sm sm:text-base pr-4 group-hover:text-indigo-600 transition-colors">What is INCUBEX 2026?</span>
                 <div class="faq-icon-wrapper w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center flex-shrink-0 text-indigo-600 transition-transform duration-300">
@@ -979,7 +979,7 @@
                 </div>
               </button>
               <div class="faq-answer hidden px-6 pb-6 text-xs sm:text-sm text-slate-700 leading-relaxed font-normal border-t border-slate-100 pt-4">
-                <p>INCUBEX 2026 is a national-level Project Expo + Launchpad Event organized by Ignisia Club at MIT-WPU. It brings together student innovators to showcase working projects, prototypes, and products to expert panels and investors.</p>
+                <p>INCUBEX 2026 is a Pune Project Expo + Launchpad Event organized by Ignisia Club at MIT-WPU. It brings together student innovators to showcase working projects, prototypes, and products to expert panels and investors.</p>
               </div>
             </div>
 
@@ -1246,7 +1246,7 @@
             </a>
           </div>
           <p class="max-w-lg text-xs sm:text-sm leading-relaxed text-slate-600">
-            A national-level technology launchpad hosted by <strong class="font-bold text-slate-800">IGNISIA Club</strong> at <strong class="font-bold text-slate-800">Dr. Vishwanath Karad MIT World Peace University (MIT-WPU), Pune.</strong> Since 1983, nurturing technical and entrepreneurial excellence. Over 1,600+ students engaged in previous editions.
+            A Pune technology launchpad hosted by <strong class="font-bold text-slate-800">IGNISIA Club</strong> at <strong class="font-bold text-slate-800">Dr. Vishwanath Karad MIT World Peace University (MIT-WPU), Pune.</strong> Since 1983, nurturing technical and entrepreneurial excellence. Over 1,600+ students engaged in previous editions.
           </p>
           <p class="mt-4 text-xs sm:text-sm leading-relaxed text-slate-600">
             <strong class="font-bold text-slate-800">Campus Address:</strong> MIT World Peace University, S.No. 124, Paud Road, Kothrud, Pune, Maharashtra 411038
