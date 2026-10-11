@@ -1214,7 +1214,6 @@ export default function Home() {
                 <iconify-icon icon="ph:download-simple-bold" width="21" height="21"></iconify-icon>
               </span>
             </button>
-            <a class="faq-brochure-download" href="/assets/incubex-brochure-2026.pdf" download="INCUBEX_2026_Brochure.pdf">Download updated brochure (PDF) ↓</a>
           </div>
         </aside>
       </div>
