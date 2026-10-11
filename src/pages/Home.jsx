@@ -385,7 +385,7 @@ export default function Home() {
               </li>
               <li class="flex items-start space-x-3">
                 <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">✓</span>
-                <span class="text-slate-800"><strong class="text-slate-900 font-black">Stage:</strong> Working product, ready to demo (TRL 5–7).</span>
+                <span class="text-slate-800"><strong class="text-slate-900 font-black">Stage:</strong> Working product, ready for real-world use and a live demo.</span>
               </li>
               <li class="flex items-start space-x-3">
                 <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">✓</span>
@@ -474,7 +474,7 @@ export default function Home() {
               </li>
               <li class="flex items-start space-x-3">
                 <span class="w-5 h-5 rounded-full bg-cyan-100 text-cyan-800 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">✓</span>
-                <span class="text-slate-800"><strong class="text-slate-900 font-black">Stage:</strong> Working prototype (TRL 1–4), not just an idea.</span>
+                <span class="text-slate-800"><strong class="text-slate-900 font-black">Stage:</strong> Early working prototype you can demonstrate, not just an idea.</span>
               </li>
               <li class="flex items-start space-x-3">
                 <span class="w-5 h-5 rounded-full bg-cyan-100 text-cyan-800 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">✓</span>
@@ -1045,7 +1045,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div class="faq-item border border-indigo-100/90 rounded-2xl bg-white/95 overflow-hidden shadow-xs hover:border-indigo-300 hover:shadow-card transition-all duration-300" data-category="tracks" data-keywords="What are the two tracks? Product Track: For operational ventures or working software/hardware products with a business model (TRL 5–7). Prototype Expo Track: For academic projects, research builds, hardware models, and functional early-stage builds.">
+            <div class="faq-item border border-indigo-100/90 rounded-2xl bg-white/95 overflow-hidden shadow-xs hover:border-indigo-300 hover:shadow-card transition-all duration-300" data-category="tracks" data-keywords="What are the two tracks? Product Track: For operational ventures or working software/hardware products with a business model, ready for real-world use. Prototype Expo Track: For academic projects, research builds, hardware models, and functional early-stage builds.">
               <button class="w-full text-left px-6 py-5 font-extrabold text-slate-900 flex justify-between items-center focus:outline-none cursor-pointer group" onclick="toggleFaq(this); playSound('click');">
                 <span class="text-sm sm:text-base pr-4 group-hover:text-indigo-600 transition-colors">What are the two tracks?</span>
                 <div class="faq-icon-wrapper w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center flex-shrink-0 text-indigo-600 transition-transform duration-300">
@@ -1053,7 +1053,7 @@ export default function Home() {
                 </div>
               </button>
               <div class="faq-answer hidden px-6 pb-6 text-xs sm:text-sm text-slate-700 leading-relaxed font-normal border-t border-slate-100 pt-4">
-                <p>Product Track: For operational ventures or working software/hardware products with a business model (TRL 5–7).</p>
+                <p>Product Track: For operational ventures or working software/hardware products with a business model, ready for real-world use.</p>
                 <p>Prototype Expo Track: For academic projects, research builds, hardware models, and functional early-stage builds.</p>
               </div>
             </div>
