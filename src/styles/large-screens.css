@@ -1,0 +1,49 @@
+/* ==========================================================================
+   Large-screen scaling (24" 1080p, 1440p / 4K, ultrawide)
+
+   The whole site is designed around a ~1536px-wide laptop canvas. On bigger
+   displays the layout used to stay at that size and float in the middle. Instead
+   of re-tuning every rule, we scale the page up uniformly so it looks the same as
+   on a laptop, only larger (what a browser zoom would do).
+
+   --lz is the scale factor. A tier only applies when the viewport is wide AND tall
+   enough: the effective layout size (viewport / --lz) must stay at roughly
+   1536 x 750 or more, so ultrawide / short windows never get zoomed past what fits.
+
+   `zoom` also multiplies viewport units (100vh becomes 100vh * --lz), so the few
+   rules that depend on the viewport HEIGHT are divided back by --lz below.
+   Phones, tablets and laptops (< 1600px wide) are untouched.
+   ========================================================================== */
+
+:root { --lz: 1; }
+
+@media (min-width: 1600px) and (min-height: 780px)   { :root { --lz: 1.04; } }
+@media (min-width: 1690px) and (min-height: 825px)   { :root { --lz: 1.1; } }
+@media (min-width: 1766px) and (min-height: 863px)   { :root { --lz: 1.15; } }
+@media (min-width: 1843px) and (min-height: 900px)   { :root { --lz: 1.2; } }
+@media (min-width: 1900px) and (min-height: 938px)   { :root { --lz: 1.25; } }  /* 1920x1080 */
+@media (min-width: 2150px) and (min-height: 1050px)   { :root { --lz: 1.4; } }
+@media (min-width: 2300px) and (min-height: 1125px)  { :root { --lz: 1.5; } }
+@media (min-width: 2500px) and (min-height: 1238px)  { :root { --lz: 1.65; } }  /* 2560x1440 */
+@media (min-width: 2800px) and (min-height: 1350px)  { :root { --lz: 1.8; } }
+@media (min-width: 3000px) and (min-height: 1463px)  { :root { --lz: 1.95; } }
+@media (min-width: 3400px) and (min-height: 1650px)  { :root { --lz: 2.2; } }
+@media (min-width: 3800px) and (min-height: 1875px)  { :root { --lz: 2.5; } }   /* 3840x2160 */
+@media (min-width: 4400px) and (min-height: 2250px)  { :root { --lz: 3; } }
+@media (min-width: 5000px) and (min-height: 2475px)  { :root { --lz: 3.3; } }   /* 5K+ */
+
+@media (min-width: 1600px) {
+  html { zoom: var(--lz); }
+
+  /* Anything sized from the viewport height has to be un-zoomed. */
+  #contact { min-height: calc(100dvh / var(--lz)) !important; }
+  #hero { min-height: min(800px, calc(100svh / var(--lz) - 40px)) !important; }
+
+  .portal { min-height: calc(100svh / var(--lz)); }
+  .portal-shell { min-height: calc(100svh / var(--lz) - 152px); }
+  .portal--hero .portal-shell { min-height: calc(100svh / var(--lz) - 40px); }
+  .portal-loading { min-height: calc(50vh / var(--lz)); }
+
+  .max-h-\[90vh\] { max-height: calc(90vh / var(--lz)); }
+  .max-h-\[75vh\] { max-height: calc(75vh / var(--lz)); }
+}
