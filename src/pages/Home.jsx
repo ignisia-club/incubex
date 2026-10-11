@@ -354,7 +354,7 @@ export default function Home() {
             <!-- Quote badge from poster -->
             <div class="bg-indigo-50/90 rounded-2xl p-4 border border-indigo-200/80 mb-6">
               <p class="text-xs sm:text-sm font-bold text-indigo-950 italic">
-                Turn your working product into a real-world venture.
+                For demo-ready products &amp; ventures.
               </p>
             </div>
 
@@ -389,7 +389,7 @@ export default function Home() {
               </li>
               <li class="flex items-start space-x-3">
                 <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">✓</span>
-                <span class="text-slate-800"><strong class="text-slate-900 font-black">Format:</strong> Online qualifier, then a private on-campus pitch to investors &amp; jury.</span>
+                <span class="text-slate-800"><strong class="text-slate-900 font-black">Format:</strong> Online qualifier → private campus pitch to investors &amp; jury.</span>
               </li>
             </ul>
           </div>
@@ -443,7 +443,7 @@ export default function Home() {
             <!-- Quote badge from poster -->
             <div class="bg-cyan-50/90 rounded-2xl p-4 border border-cyan-200/80 mb-6">
               <p class="text-xs sm:text-sm font-bold text-cyan-950 italic">
-                Showcase your research with a working prototype.
+                For research builds &amp; early prototypes.
               </p>
             </div>
 
@@ -453,7 +453,7 @@ export default function Home() {
               <div class="grid grid-cols-1 gap-2 text-xs font-semibold">
                 <div class="bg-white p-2.5 rounded-xl border border-slate-100 flex items-center space-x-2">
                   <span class="text-cyan-600 font-bold">1.</span>
-                  <span><strong>Academic builds:</strong> Capstones, research &amp; proof-of-concept models.</span>
+                  <span><strong>Academic builds:</strong> Capstones &amp; research models.</span>
                 </div>
                 <div class="bg-white p-2.5 rounded-xl border border-slate-100 flex items-center space-x-2">
                   <span class="text-cyan-600 font-bold">2.</span>
@@ -461,7 +461,7 @@ export default function Home() {
                 </div>
                 <div class="bg-white p-2.5 rounded-xl border border-slate-100 flex items-center space-x-2">
                   <span class="text-cyan-600 font-bold">3.</span>
-                  <span><strong>Software &amp; impact:</strong> AI, social-impact tech &amp; cross-domain projects.</span>
+                  <span><strong>Software &amp; impact:</strong> AI &amp; cross-domain solutions.</span>
                 </div>
               </div>
             </div>
@@ -474,11 +474,11 @@ export default function Home() {
               </li>
               <li class="flex items-start space-x-3">
                 <span class="w-5 h-5 rounded-full bg-cyan-100 text-cyan-800 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">✓</span>
-                <span class="text-slate-800"><strong class="text-slate-900 font-black">Stage:</strong> Working hardware or software prototype (TRL 1–4). Ideas alone aren’t eligible.</span>
+                <span class="text-slate-800"><strong class="text-slate-900 font-black">Stage:</strong> Working prototype (TRL 1–4), not just an idea.</span>
               </li>
               <li class="flex items-start space-x-3">
                 <span class="w-5 h-5 rounded-full bg-cyan-100 text-cyan-800 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">✓</span>
-                <span class="text-slate-800"><strong class="text-slate-900 font-black">Format:</strong> Full-day exhibition at MIT-WPU, with live demos &amp; jury visits.</span>
+                <span class="text-slate-800"><strong class="text-slate-900 font-black">Format:</strong> Full-day MIT-WPU expo with live demos &amp; jury visits.</span>
               </li>
             </ul>
           </div>
