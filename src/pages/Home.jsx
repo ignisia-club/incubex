@@ -1209,7 +1209,7 @@ export default function Home() {
         <aside class="faq-brochure-aside">
           <div class="faq-brochure-card sticky top-24 overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-card max-w-sm mx-auto">
             <button class="faq-brochure-trigger" onclick="openPosterModal(); playSound('click');" aria-label="Download the INCUBEX 2026 poster">
-              <img src="/assets/incubex-poster.jpg" alt="INCUBEX 2026 poster" width="1061" height="1500" class="w-full max-h-[500px] object-cover object-top" loading="lazy" />
+              <img src="/assets/incubex-poster.jpg" alt="INCUBEX 2026 poster" width="1131" height="1600" class="w-full max-h-[500px] object-cover object-top" loading="lazy" />
               <span class="faq-brochure-open-icon" aria-hidden="true">
                 <iconify-icon icon="ph:download-simple-bold" width="21" height="21"></iconify-icon>
               </span>
