@@ -710,10 +710,6 @@
                     <span class="block font-bold text-slate-700 mb-1">Defense Timing:</span>
                     <span class="text-slate-600">7-minute pitch presentation + 5-minute technical Q&amp;A defense before panels.</span>
                   </div>
-                  <div class="bg-amber-50/70 p-3.5 rounded-xl border border-amber-100">
-                    <span class="block font-bold text-amber-900 mb-1">Jury Rubric:</span>
-                    <span class="text-amber-800">Scored across Problem Need (25%), Tech Feasibility (25%), Novelty (25%), and Market Impact (25%).</span>
-                  </div>
                 </div>
               </div>
             </div>
@@ -804,7 +800,7 @@
                   </span>
                 </div>
                 <h3 class="text-2xl sm:text-3xl font-black text-slate-900 mb-3 tracking-tight">
-                  The Grand Finale &amp; National Technology Expo
+                  The Grand Finale &amp; Project Expo
                 </h3>
                 <p class="text-sm sm:text-base text-slate-600 leading-relaxed mb-5">
                   A full-day exhibition at the MIT-WPU Kothrud campus in Pune, with live booth judging, investor pitches, and the awards ceremony.
@@ -835,7 +831,7 @@
                   </div>
                   <div class="bg-indigo-50/70 p-3.5 rounded-xl border border-indigo-100">
                     <span class="block font-bold text-indigo-900 mb-1">Afternoon &amp; Evening:</span>
-                    <span class="text-indigo-800">2:30 PM Top 10 Stage Pitching in front of VCs &amp; Angels → 5:00 PM Cash Awards &amp; Valedictory Ceremony.</span>
+                    <span class="text-indigo-800">Top 10 stage pitching to VCs &amp; angels → Cash awards &amp; valedictory ceremony.</span>
                   </div>
                 </div>
               </div>
@@ -870,18 +866,8 @@
                   Incubation, Seed Support &amp; Network Access
                 </h3>
                 <p class="text-sm text-slate-700 leading-relaxed font-normal mb-4">
-                  Winners and standout projects receive fast-track incubation support through incubation partners, direct investor syndicate introductions, patent consultation, national merit certificates, and cash prize disbursements.
+                  Winners and standout projects receive fast-track incubation support, direct investor syndicate introductions, patent consultation, and cash prize disbursements.
                 </p>
-                <div id="step-expanded-8" class="hidden mt-4 pt-4 border-t border-slate-100 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                  <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
-                    <span class="block font-bold text-slate-700 mb-1">Ongoing Mentorship:</span>
-                    <span class="text-slate-600">Access to Ignisia's alumni network, venture capital partner office hours, and technical labs.</span>
-                  </div>
-                  <div class="bg-emerald-50/70 p-3.5 rounded-xl border border-emerald-100">
-                    <span class="block font-bold text-emerald-900 mb-1">Venture Fast-Track:</span>
-                    <span class="text-emerald-800">Direct pitch routing to institutional venture funds and state/central government grant programs.</span>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -1253,9 +1239,9 @@
           </p>
         </div>
 
-        <!-- Col 2: Summit Navigation -->
+        <!-- Col 2: Quick Links -->
         <div class="lg:col-span-3">
-          <h2 class="mb-4 text-xs font-bold uppercase tracking-wider text-slate-900">Summit Navigation</h2>
+          <h2 class="mb-4 text-xs font-bold uppercase tracking-wider text-slate-900">Quick Links</h2>
           <ul class="space-y-2.5 text-xs sm:text-sm text-slate-600">
             <li><a class="transition-colors hover:text-indigo-600" href="#arena">Competition Tracks</a></li>
             <li><button type="button" class="text-left transition-colors hover:text-indigo-600 cursor-pointer" onclick="openRegisterModal(); playSound('click');">Register</button></li>

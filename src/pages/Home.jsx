@@ -188,18 +188,6 @@ export default function Home() {
   </section>
   <!-- END: Event details -->
 
-  <section id="sponsors" class="sponsors-section" aria-labelledby="sponsors-title">
-    <div class="sponsors-inner">
-      <span class="ix-kicker">Supporting student innovation</span>
-      <h2 id="sponsors-title" class="ix-title">Our <em>Sponsors</em></h2>
-      <div class="sponsors-grid">
-        <div class="sponsor-card"><img src="/assets/sponsor-operforce.jpg" class="sponsor-logo sponsor-logo--wide" alt="OperForce — AI Platform for Enterprise" width="1280" height="960" loading="lazy" /></div>
-        <div class="sponsor-card"><img src="/assets/sponsor-ztudium.png" class="sponsor-logo sponsor-logo--wordmark" alt="ztudium" width="554" height="554" loading="lazy" /></div>
-        <div class="sponsor-card"><img src="/assets/sponsor-auxipower.png" class="sponsor-logo" alt="AUXIPOWER Dynamic Technologies Pvt Ltd" width="1254" height="1254" loading="lazy" /></div>
-      </div>
-    </div>
-  </section>
-
   <!-- BEGIN: HighlightPosterPillars (Infinite Auto-scrolling Carousel of 6 Perks) -->
   <section class="w-full py-8 md:py-12 relative z-20 overflow-hidden reveal" id="benefits">
     <!-- Prominent Bold Heading with generous vertical spacing -->
@@ -326,13 +314,31 @@ export default function Home() {
   <!-- END: HighlightPosterPillars -->
 
   <section class="prize-breakdown" aria-label="Prize breakdown">
-    <div class="prize-breakdown-heading"><span class="ix-kicker">₹50,000+ prize pool</span><h2>Prizes across both tracks</h2></div>
+    <div class="prize-breakdown-heading"><span class="ix-kicker">₹50,000+ prize pool</span><h2 class="ix-title">Prizes &amp; <em>Rewards</em></h2></div>
     <div class="prize-breakdown-grid">
-      <div><span>Prototype Expo · 1st</span><strong>₹20,000</strong></div>
-      <div><span>Prototype Expo · 2nd</span><strong>₹15,000</strong></div>
-      <div><span>Product Track · 1st</span><strong>₹10,000</strong></div>
-      <div><span>Consolation pool · Both tracks</span><strong>₹5,000</strong></div>
+      <article class="award-podium award-podium--winner">
+        <span class="award-track">Prototype Expo</span>
+        <div class="award-emblem award-emblem--gold" aria-hidden="true"><iconify-icon icon="ph:trophy-duotone" width="36" height="36"></iconify-icon></div>
+        <h3 class="award-amount">₹20,000</h3>
+        <p class="award-rank">First place</p>
+        <span class="award-pedestal" aria-hidden="true">01</span>
+      </article>
+      <article class="award-podium award-podium--runner">
+        <span class="award-track">Prototype Expo</span>
+        <div class="award-emblem award-emblem--silver" aria-hidden="true"><iconify-icon icon="ph:medal-duotone" width="32" height="32"></iconify-icon></div>
+        <h3 class="award-amount">₹15,000</h3>
+        <p class="award-rank">Second place</p>
+        <span class="award-pedestal" aria-hidden="true">02</span>
+      </article>
+      <article class="award-podium award-podium--product">
+        <span class="award-track">Product Track</span>
+        <div class="award-emblem award-emblem--violet" aria-hidden="true"><iconify-icon icon="ph:trophy-duotone" width="32" height="32"></iconify-icon></div>
+        <h3 class="award-amount">₹10,000</h3>
+        <p class="award-rank">First place</p>
+        <span class="award-pedestal" aria-hidden="true">01</span>
+      </article>
     </div>
+    <div class="prize-shared"><span class="prize-shared-icon" aria-hidden="true"><iconify-icon icon="ph:sparkle-duotone" width="24" height="24"></iconify-icon></span><span>More ideas. More recognition.<small>Consolation pool · Shared across both tracks</small></span><strong>₹5,000</strong></div>
   </section>
 
   <!-- ======================================================== -->
@@ -413,7 +419,7 @@ export default function Home() {
               </li>
               <li class="flex items-start space-x-3">
                 <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">✓</span>
-                <span class="text-slate-800"><strong class="text-slate-900 font-black">Stage:</strong> Working product, ready for real-world use and a live demo.</span>
+                <span class="text-slate-800"><strong class="text-slate-900 font-black">Stage:</strong> Working product (TRL 5–7), ready for real-world use and a live demo.</span>
               </li>
               <li class="flex items-start space-x-3">
                 <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">✓</span>
@@ -502,7 +508,7 @@ export default function Home() {
               </li>
               <li class="flex items-start space-x-3">
                 <span class="w-5 h-5 rounded-full bg-cyan-100 text-cyan-800 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">✓</span>
-                <span class="text-slate-800"><strong class="text-slate-900 font-black">Stage:</strong> Early working prototype you can demonstrate, not just an idea.</span>
+                <span class="text-slate-800"><strong class="text-slate-900 font-black">Stage:</strong> Early working prototype (TRL 1–4) you can demonstrate, not just an idea.</span>
               </li>
               <li class="flex items-start space-x-3">
                 <span class="w-5 h-5 rounded-full bg-cyan-100 text-cyan-800 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">✓</span>
@@ -790,14 +796,10 @@ export default function Home() {
                 <p class="text-sm text-slate-700 leading-relaxed font-normal mb-4">
                   Registered teams present online to screening panels of faculty and industry experts. The round is fully online, so teams across India can take part without travelling.
                 </p>
-                <div id="step-expanded-4" class="hidden mt-4 pt-4 border-t border-slate-100 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                <div id="step-expanded-4" class="hidden mt-4 pt-4 border-t border-slate-100 grid grid-cols-1 gap-3 text-xs">
                   <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
                     <span class="block font-bold text-slate-700 mb-1">Defense Timing:</span>
                     <span class="text-slate-600">7-minute pitch presentation + 5-minute technical Q&amp;A defense before panels.</span>
-                  </div>
-                  <div class="bg-amber-50/70 p-3.5 rounded-xl border border-amber-100">
-                    <span class="block font-bold text-amber-900 mb-1">Jury Rubric:</span>
-                    <span class="text-amber-800">Scored across Problem Need (25%), Tech Feasibility (25%), Novelty (25%), and Market Impact (25%).</span>
                   </div>
                 </div>
               </div>
@@ -846,7 +848,7 @@ export default function Home() {
                   </span>
                 </div>
                 <h3 class="text-2xl sm:text-3xl font-black text-slate-900 mb-3 tracking-tight">
-                  The Grand Finale &amp; National Technology Expo
+                  The Grand Finale &amp; Project Expo
                 </h3>
                 <p class="text-sm sm:text-base text-slate-600 leading-relaxed mb-5">
                   A full-day exhibition at the MIT-WPU Kothrud campus in Pune, with live booth judging, investor pitches, and the awards ceremony.
@@ -877,7 +879,7 @@ export default function Home() {
                   </div>
                   <div class="bg-indigo-50/70 p-3.5 rounded-xl border border-indigo-100">
                     <span class="block font-bold text-indigo-900 mb-1">Afternoon &amp; Evening:</span>
-                    <span class="text-indigo-800">2:30 PM Top 10 Stage Pitching in front of VCs &amp; Angels → 5:00 PM Cash Awards &amp; Valedictory Ceremony.</span>
+                    <span class="text-indigo-800">Top 10 stage pitching to VCs &amp; angels → Cash awards &amp; valedictory ceremony.</span>
                   </div>
                 </div>
               </div>
@@ -912,18 +914,8 @@ export default function Home() {
                   Incubation, Seed Support &amp; Network Access
                 </h3>
                 <p class="text-sm text-slate-700 leading-relaxed font-normal mb-4">
-                  Winners and standout projects receive fast-track incubation support through incubation partners, direct investor syndicate introductions, patent consultation, national merit certificates, and cash prize disbursements.
+                  Winners and standout projects receive fast-track incubation support, direct investor syndicate introductions, patent consultation, and cash prize disbursements.
                 </p>
-                <div id="step-expanded-8" class="hidden mt-4 pt-4 border-t border-slate-100 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                  <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
-                    <span class="block font-bold text-slate-700 mb-1">Ongoing Mentorship:</span>
-                    <span class="text-slate-600">Access to Ignisia's alumni network, venture capital partner office hours, and technical labs.</span>
-                  </div>
-                  <div class="bg-emerald-50/70 p-3.5 rounded-xl border border-emerald-100">
-                    <span class="block font-bold text-emerald-900 mb-1">Venture Fast-Track:</span>
-                    <span class="text-emerald-800">Direct pitch routing to institutional venture funds and state/central government grant programs.</span>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -937,6 +929,18 @@ export default function Home() {
   <!-- ======================================================== -->
   <!-- TRANSPARENT FEES SECTION (EXACT COMPLIANCE WITH POSTER)  -->
   <!-- ======================================================== -->
+  <section id="sponsors" class="sponsors-section" aria-labelledby="sponsors-title">
+    <div class="sponsors-inner">
+      <span class="ix-kicker">Supporting student innovation</span>
+      <h2 id="sponsors-title" class="ix-title">Our <em>Sponsors</em></h2>
+      <div class="sponsors-grid">
+        <div class="sponsor-card"><img src="/assets/sponsor-operforce.jpg" class="sponsor-logo sponsor-logo--wide" alt="OperForce — AI Platform for Enterprise" width="1280" height="960" loading="lazy" /></div>
+        <div class="sponsor-card"><img src="/assets/sponsor-ztudium.png" class="sponsor-logo sponsor-logo--wordmark" alt="ztudium" width="554" height="554" loading="lazy" /></div>
+        <div class="sponsor-card"><img src="/assets/sponsor-auxipower.png" class="sponsor-logo" alt="AUXIPOWER Dynamic Technologies Pvt Ltd" width="1254" height="1254" loading="lazy" /></div>
+      </div>
+    </div>
+  </section>
+
   <section class="py-16 md:py-24 relative reveal" id="fees">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
@@ -1073,7 +1077,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div class="faq-item border border-indigo-100/90 rounded-2xl bg-white/95 overflow-hidden shadow-xs hover:border-indigo-300 hover:shadow-card transition-all duration-300" data-category="tracks" data-keywords="What are the two tracks? Product Track: For operational ventures or working software/hardware products with a business model, ready for real-world use. Prototype Expo Track: For academic projects, research builds, hardware models, and functional early-stage builds (TRL 1–4: early-stage working prototypes).">
+            <div class="faq-item border border-indigo-100/90 rounded-2xl bg-white/95 overflow-hidden shadow-xs hover:border-indigo-300 hover:shadow-card transition-all duration-300" data-category="tracks" data-keywords="What are the two tracks? Product Track: For operational ventures or working software/hardware products with a business model (TRL 5–7), ready for real-world use. Prototype Expo Track: For academic projects, research builds, hardware models, and functional early-stage builds (TRL 1–4: early-stage working prototypes).">
               <button class="w-full text-left px-6 py-5 font-extrabold text-slate-900 flex justify-between items-center focus:outline-none cursor-pointer group" onclick="toggleFaq(this); playSound('click');">
                 <span class="text-sm sm:text-base pr-4 group-hover:text-indigo-600 transition-colors">What are the two tracks?</span>
                 <div class="faq-icon-wrapper w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center flex-shrink-0 text-indigo-600 transition-transform duration-300">
@@ -1081,7 +1085,7 @@ export default function Home() {
                 </div>
               </button>
               <div class="faq-answer hidden px-6 pb-6 text-xs sm:text-sm text-slate-700 leading-relaxed font-normal border-t border-slate-100 pt-4">
-                <p>Product Track: For operational ventures or working software/hardware products with a business model, ready for real-world use.</p>
+                <p>Product Track: For operational ventures or working software/hardware products with a business model (TRL 5–7), ready for real-world use.</p>
                 <p>Prototype Expo Track: For academic projects, research builds, hardware models, and functional early-stage builds (TRL 1–4: early-stage working prototypes).</p>
               </div>
             </div>
@@ -1292,9 +1296,9 @@ export default function Home() {
           </p>
         </div>
 
-        <!-- Col 2: Summit Navigation -->
+        <!-- Col 2: Quick Links -->
         <div class="lg:col-span-3">
-          <h2 class="mb-4 text-xs font-bold uppercase tracking-wider text-slate-900">Summit Navigation</h2>
+          <h2 class="mb-4 text-xs font-bold uppercase tracking-wider text-slate-900">Quick Links</h2>
           <ul class="space-y-2.5 text-xs sm:text-sm text-slate-600">
             <li><a class="transition-colors hover:text-indigo-600" href="#sponsors">Our Sponsors</a></li>
             <li><a class="transition-colors hover:text-indigo-600" href="#arena">Competition Tracks</a></li>

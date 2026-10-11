@@ -199,7 +199,7 @@
           "name": "What are the two tracks?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Product Track: For operational ventures or working software/hardware products with a business model, ready for real-world use. Prototype Expo Track: For academic projects, research builds, hardware models, and functional early-stage builds (TRL 1–4: early-stage working prototypes)."
+            "text": "Product Track: For operational ventures or working software/hardware products with a business model (TRL 5–7), ready for real-world use. Prototype Expo Track: For academic projects, research builds, hardware models, and functional early-stage builds (TRL 1–4: early-stage working prototypes)."
           }
         },
         {
@@ -6119,6 +6119,35 @@
       }
     }
   </style>
+  <style data-purpose="readable-ignisia-brand">
+    #main-header .nav-ignisia-link { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+    #main-header .nav-ignisia-mark { position: relative; display: block; width: 140px; height: 36px; overflow: hidden; }
+    #main-header .nav-ignisia-mark .nav-ignisia-logo { position: absolute; width: 170px !important; height: auto !important; max-width: none !important; left: 50%; top: -12px; transform: translateX(-50%); }
+    #main-header .nav-ignisia-tagline { font-size: 10px; font-weight: 700; line-height: 1.2; letter-spacing: .05em; color: #303252; white-space: nowrap; }
+    #main-header .nav-ignisia-link:focus-visible { outline: 3px solid #3858c8; outline-offset: 4px; border-radius: 6px; }
+    #main-header .nav-brand-divider { display: block; width: 1px; height: 36px; flex-shrink: 0; background: rgba(81,88,120,.3); }
+    @media (max-width: 767px) {
+      #main-header { border-radius: 18px !important; }
+      #main-header .navbar-shell { height: 52px !important; }
+      #main-header .nav-brand-lockup { gap: 12px !important; }
+      #main-header .nav-mit-logo { width: 100px !important; }
+      #main-header .nav-brand-divider { height: 28px; }
+      #main-header .nav-ignisia-mark { width: 120px; height: 28px; }
+      #main-header .nav-ignisia-mark .nav-ignisia-logo { width: 140px !important; top: -10px; }
+      #main-header .nav-ignisia-tagline { font-size: 9px; letter-spacing: 0; }
+      #main-header .btn-shimmer { display: none !important; }
+      #main-header #mobile-menu-btn { width: 44px !important; height: 44px !important; flex-basis: 44px; background: rgba(255,255,255,.5); border: 1px solid rgba(81,88,120,.12); border-radius: 12px; }
+      #mobile-menu { top: 70px !important; }
+    }
+    @media (max-width: 359px) {
+      #main-header > div { padding-inline: 10px !important; }
+      #main-header .nav-brand-lockup { gap: 10px !important; }
+      #main-header .nav-mit-logo { width: 88px !important; }
+      #main-header .nav-ignisia-mark { width: 110px; height: 26px; }
+      #main-header .nav-ignisia-mark .nav-ignisia-logo { width: 132px !important; top: -9px; }
+    }
+    #mobile-menu .mobile-register-action { display: block; width: 100%; min-height: 44px; margin-top: 12px; border: 0; border-radius: 14px; background: #5346b3; color: #fff; font-size: .9rem; font-weight: 700; cursor: pointer; }
+  </style>
 </head>
 
 <body class="text-slate-900 antialiased selection:bg-indigo-500 selection:text-white">
@@ -6166,23 +6195,27 @@
           </a>
 
           <!-- Sleek Vertical Separator -->
-          <div class="h-8 w-px bg-slate-300/80 hidden sm:block"></div>
+          <div class="nav-brand-divider" aria-hidden="true"></div>
 
           <!-- Ignisia Official Logo -->
-          <a class="flex items-center space-x-2 min-w-0 group transition-transform hover:scale-[1.02]" href="/#hero"
+          <a class="nav-ignisia-link min-w-0 group transition-transform hover:scale-[1.02]" href="https://ignisia.tech" target="_blank" rel="noopener noreferrer"
             title="Ignisia Club - Think Build Evolve">
+            <span class="nav-ignisia-mark">
             <img src="/assets/ignisia-logo.png" alt="Ignisia - Think Build Evolve" width="817" height="305"
               class="nav-ignisia-logo h-5 sm:h-8 w-auto max-w-[50px] sm:max-w-none object-contain drop-shadow-xs"
               loading="eager" />
+            </span>
+            <span class="nav-ignisia-tagline" aria-hidden="true">Think · Build · Evolve</span>
           </a>
         </div>
 
         <!-- Desktop Navigation Links: Clear, Intuitive, Tidy & Beautifully Spaced -->
         <nav class="hidden lg:flex items-center text-[12px] font-semibold text-slate-600">
-          <a class="whitespace-nowrap py-1 hover:text-indigo-600 transition-colors nav-link" href="/#sponsors">Sponsors</a>
           <a class="whitespace-nowrap py-1 hover:text-indigo-600 transition-colors nav-link" href="/#arena">Tracks</a>
           <a class="whitespace-nowrap py-1 hover:text-indigo-600 transition-colors nav-link"
             href="/#mission-map">Timeline</a>
+          <a class="whitespace-nowrap py-1 hover:text-indigo-600 transition-colors nav-link" href="/#sponsors">Sponsors</a>
+          <a class="whitespace-nowrap py-1 hover:text-indigo-600 transition-colors nav-link" href="/#fees">Fees</a>
           <a class="whitespace-nowrap py-1 hover:text-indigo-600 transition-colors nav-link" href="/#faq">FAQ</a>
           <a class="whitespace-nowrap py-1 hover:text-indigo-600 transition-colors nav-link" href="/upload">Upload
             PPT</a>
@@ -6219,15 +6252,16 @@
   <!-- Mobile Navigation Dropdown — animated vertical panel below the pill navbar -->
   <div id="mobile-menu-backdrop" aria-hidden="true"></div>
   <nav id="mobile-menu" aria-hidden="true" aria-label="Mobile navigation">
-    <a class="block py-1.5 hover:text-indigo-600" href="/#sponsors">Sponsors</a>
     <a class="block py-1.5 hover:text-indigo-600" href="/#arena">Tracks</a>
     <a class="block py-1.5 hover:text-indigo-600" href="/#mission-map">Timeline</a>
+    <a class="block py-1.5 hover:text-indigo-600" href="/#sponsors">Sponsors</a>
+    <a class="block py-1.5 hover:text-indigo-600" href="/#fees">Fees</a>
     <a class="block py-1.5 hover:text-indigo-600" href="/#faq">FAQ</a>
     <a class="block py-1.5 hover:text-indigo-600" href="/upload">Upload PPT</a>
     <div class="pt-3 border-t border-slate-100 flex flex-col gap-2">
       <p class="mobile-menu-mantra">Think · Build · Evolve</p>
-      <button type="button" onclick="openRegisterModal(); playSound('click');"
-        class="w-full py-2.5 text-center text-xs font-bold text-white bg-indigo-600 rounded-xl shadow-md cursor-pointer">Register
+      <button type="button" onclick="document.getElementById('mobile-menu-btn').click(); openRegisterModal(); playSound('click');"
+        class="mobile-register-action">Register
         Now →</button>
     </div>
   </nav>
