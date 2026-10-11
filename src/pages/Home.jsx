@@ -45,7 +45,7 @@ export default function Home() {
             <span class="hero-venture-word">Venture</span>
           </p>
 
-          <p class="hero-launchpad-line"><span>Pune Tech Launchpad</span> by <span class="poster-ignisia">Ignisia</span></p>
+          <p class="hero-launchpad-line"><span>Tech Launchpad</span> by <span class="poster-ignisia">Ignisia</span></p>
 
           <div class="hero-cta-stack">
             <button type="button" onclick="openRegisterModal(); playSound('click');" class="hero-register-big">
@@ -63,10 +63,10 @@ export default function Home() {
                 <iconify-icon icon="ph:rocket-launch-duotone" width="18" height="18" aria-hidden="true"></iconify-icon>
                 <span>Explore Tracks</span>
               </a>
-              <button type="button" onclick="openPosterModal(); playSound('click');" class="hero-secondary-link">
+              <a href="/assets/incubex-brochure-2026.pdf" download="INCUBEX_2026_Brochure.pdf" class="hero-secondary-link">
                 <iconify-icon icon="ph:download-simple-bold" width="17" height="17" aria-hidden="true"></iconify-icon>
                 <span>View Brochure</span>
-              </button>
+              </a>
             </div>
           </div>
 
@@ -884,7 +884,7 @@ export default function Home() {
                   Incubation, Seed Support &amp; Network Access
                 </h3>
                 <p class="text-sm text-slate-700 leading-relaxed font-normal mb-4">
-                  Winners and standout projects receive fast-track incubation support at MIT-WPU Technology Business Incubator (TBI), direct investor syndicate introductions, patent consultation, national merit certificates, and cash prize disbursements.
+                  Winners and standout projects receive fast-track incubation support at MIT-WPU Technology Business Incubator, direct investor syndicate introductions, patent consultation, national merit certificates, and cash prize disbursements.
                 </p>
                 <div id="step-expanded-8" class="hidden mt-4 pt-4 border-t border-slate-100 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                   <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
@@ -1208,12 +1208,13 @@ export default function Home() {
 
         <aside class="faq-brochure-aside">
           <div class="faq-brochure-card sticky top-24 overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-card max-w-sm mx-auto">
-            <button class="faq-brochure-trigger" onclick="openPosterModal(); playSound('click');" aria-label="Download the INCUBEX 2026 brochure">
+            <button class="faq-brochure-trigger" onclick="openPosterModal(); playSound('click');" aria-label="Download the INCUBEX 2026 poster">
               <img src="/assets/incubex-poster.jpg" alt="INCUBEX 2026 poster" width="1061" height="1500" class="w-full max-h-[500px] object-cover object-top" loading="lazy" />
               <span class="faq-brochure-open-icon" aria-hidden="true">
                 <iconify-icon icon="ph:download-simple-bold" width="21" height="21"></iconify-icon>
               </span>
             </button>
+            <a class="faq-brochure-download" href="/assets/incubex-brochure-2026.pdf" download="INCUBEX_2026_Brochure.pdf">Download updated brochure (PDF) ↓</a>
           </div>
         </aside>
       </div>
@@ -1273,7 +1274,7 @@ export default function Home() {
           <ul class="space-y-2.5 text-xs sm:text-sm text-slate-600">
             <li><a class="transition-colors hover:text-indigo-600" href="#arena">Competition Tracks</a></li>
             <li><button type="button" class="text-left transition-colors hover:text-indigo-600 cursor-pointer" onclick="openRegisterModal(); playSound('click');">Register</button></li>
-            <li><a class="transition-colors hover:text-indigo-600" href="/assets/incubex-poster.pdf">Official Brochure (PDF)</a></li>
+            <li><a class="transition-colors hover:text-indigo-600" href="/assets/incubex-brochure-2026.pdf" download="INCUBEX_2026_Brochure.pdf">Official Brochure (PDF)</a></li>
             <li><a class="transition-colors hover:text-indigo-600" href="#categories">Innovation Domains</a></li>
             <li><a class="transition-colors hover:text-indigo-600" href="#mission-map">Event Timeline</a></li>
             <li><a class="transition-colors hover:text-indigo-600" href="#fees">Registration Fees</a></li>
