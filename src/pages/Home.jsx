@@ -314,7 +314,7 @@ export default function Home() {
   <!-- END: HighlightPosterPillars -->
 
   <section class="prize-breakdown" aria-label="Prize breakdown">
-    <div class="prize-breakdown-heading"><span class="ix-kicker">₹50,000+ prize pool</span><h2 class="ix-title">Prizes &amp; <em>Rewards</em></h2></div>
+    <div class="prize-breakdown-heading"><span class="ix-kicker">Total prize pool</span><p class="prize-pool-amount">₹50,000+</p><h2 class="ix-title">Prizes &amp; <em>Rewards</em></h2></div>
     <div class="prize-breakdown-grid">
       <article class="award-podium award-podium--winner">
         <span class="award-track">Prototype Expo</span>
