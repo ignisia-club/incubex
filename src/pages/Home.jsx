@@ -354,25 +354,25 @@ export default function Home() {
             <!-- Quote badge from poster -->
             <div class="bg-indigo-50/90 rounded-2xl p-4 border border-indigo-200/80 mb-6">
               <p class="text-xs sm:text-sm font-bold text-indigo-950 italic">
-                "For projects and products ready to transition into real-world ventures."
+                Turn your working product into a real-world venture.
               </p>
             </div>
 
             <!-- 3 Core Themes from PDF -->
             <div class="mb-6 space-y-2">
-              <span class="text-[10px] font-black uppercase tracking-wider text-slate-600 block">3 Strategic Themes:</span>
+              <span class="text-[10px] font-black uppercase tracking-wider text-slate-600 block">What you can bring</span>
               <div class="grid grid-cols-1 gap-2 text-xs font-semibold">
                 <div class="bg-white p-2.5 rounded-xl border border-slate-100 flex items-center space-x-2">
                   <span class="text-indigo-600 font-bold">1.</span>
-                  <span><strong>Digital &amp; Software Ventures:</strong> SaaS, FinTech, EdTech, mobile apps, digital platforms.</span>
+                  <span><strong>Software:</strong> Apps, SaaS, FinTech &amp; EdTech.</span>
                 </div>
                 <div class="bg-white p-2.5 rounded-xl border border-slate-100 flex items-center space-x-2">
                   <span class="text-indigo-600 font-bold">2.</span>
-                  <span><strong>Smart Systems &amp; Hardware:</strong> Robotics, IoT systems, consumer electronics, physical devices.</span>
+                  <span><strong>Hardware:</strong> Robotics, IoT &amp; smart devices.</span>
                 </div>
                 <div class="bg-white p-2.5 rounded-xl border border-slate-100 flex items-center space-x-2">
                   <span class="text-indigo-600 font-bold">3.</span>
-                  <span><strong>Open Innovation:</strong> Unconventional business models, novel services, cross-domain products.</span>
+                  <span><strong>Open innovation:</strong> New services &amp; business models.</span>
                 </div>
               </div>
             </div>
@@ -381,15 +381,15 @@ export default function Home() {
             <ul class="space-y-3 text-xs sm:text-sm text-slate-800 font-semibold mb-8">
               <li class="flex items-start space-x-3">
                 <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">✓</span>
-                <span class="text-slate-800"><strong class="text-slate-900 font-black">Team Size:</strong> 1 – 6 members per team (Solo participation allowed).</span>
+                <span class="text-slate-800"><strong class="text-slate-900 font-black">Team:</strong> 1–6 members. Solo entries welcome.</span>
               </li>
               <li class="flex items-start space-x-3">
                 <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">✓</span>
-                <span class="text-slate-800"><strong class="text-slate-900 font-black">Maturity:</strong> Technology Readiness Level (TRL) 5–7 (operational venture or working product ready for practical demonstration).</span>
+                <span class="text-slate-800"><strong class="text-slate-900 font-black">Stage:</strong> Working product, ready to demo (TRL 5–7).</span>
               </li>
               <li class="flex items-start space-x-3">
                 <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">✓</span>
-                <span class="text-slate-800"><strong class="text-slate-900 font-black">Format:</strong> Live online qualifier pitch &amp; on-campus closed-door pitch/walkthrough to investors/jury.</span>
+                <span class="text-slate-800"><strong class="text-slate-900 font-black">Format:</strong> Online qualifier, then a private on-campus pitch to investors &amp; jury.</span>
               </li>
             </ul>
           </div>
@@ -401,7 +401,7 @@ export default function Home() {
               class="arena-download-btn"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-              <span>Download Presentation Format</span>
+              <span>Download PPT template</span>
             </a>
 
             <button
@@ -409,7 +409,7 @@ export default function Home() {
               onclick="openRegisterModal(); playSound('click');"
               class="btn-shimmer w-full py-4 text-center rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs uppercase tracking-wider transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 relative z-10 cursor-pointer"
             >
-              Apply For Product Track &rarr;
+              Apply for Product Track &rarr;
             </button>
           </div>
         </div>
@@ -443,25 +443,25 @@ export default function Home() {
             <!-- Quote badge from poster -->
             <div class="bg-cyan-50/90 rounded-2xl p-4 border border-cyan-200/80 mb-6">
               <p class="text-xs sm:text-sm font-bold text-cyan-950 italic">
-                "For academic projects, research builds, and early-stage functional models."
+                Showcase your research with a working prototype.
               </p>
             </div>
 
             <!-- Core Focus from PDF -->
             <div class="mb-6 space-y-2">
-              <span class="text-[10px] font-black uppercase tracking-wider text-slate-600 block">3 Core Focus Areas:</span>
+              <span class="text-[10px] font-black uppercase tracking-wider text-slate-600 block">What you can bring</span>
               <div class="grid grid-cols-1 gap-2 text-xs font-semibold">
                 <div class="bg-white p-2.5 rounded-xl border border-slate-100 flex items-center space-x-2">
                   <span class="text-cyan-600 font-bold">1.</span>
-                  <span><strong>Academic Builds &amp; Capstones:</strong> Engineering prototypes, research models, capstone builds, and proof-of-concept implementations.</span>
+                  <span><strong>Academic builds:</strong> Capstones, research &amp; proof-of-concept models.</span>
                 </div>
                 <div class="bg-white p-2.5 rounded-xl border border-slate-100 flex items-center space-x-2">
                   <span class="text-cyan-600 font-bold">2.</span>
-                  <span><strong>DeepTech &amp; Hardware Systems:</strong> Robotics, IoT, embedded devices, AgriTech, and healthcare innovations.</span>
+                  <span><strong>DeepTech:</strong> Robotics, IoT, AgriTech &amp; healthcare devices.</span>
                 </div>
                 <div class="bg-white p-2.5 rounded-xl border border-slate-100 flex items-center space-x-2">
                   <span class="text-cyan-600 font-bold">3.</span>
-                  <span><strong>Open Software &amp; Social Impact:</strong> High-potential software builds, AI for Bharat, social impact tech, and novel cross-domain projects.</span>
+                  <span><strong>Software &amp; impact:</strong> AI, social-impact tech &amp; cross-domain projects.</span>
                 </div>
               </div>
             </div>
@@ -470,15 +470,15 @@ export default function Home() {
             <ul class="space-y-3 text-xs sm:text-sm text-slate-800 font-semibold mb-8">
               <li class="flex items-start space-x-3">
                 <span class="w-5 h-5 rounded-full bg-cyan-100 text-cyan-800 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">✓</span>
-                <span class="text-slate-800"><strong class="text-slate-900 font-black">Team Size:</strong> 1 - 6 members per team (Solo participation allowed).</span>
+                <span class="text-slate-800"><strong class="text-slate-900 font-black">Team:</strong> 1–6 members. Solo entries welcome.</span>
               </li>
               <li class="flex items-start space-x-3">
                 <span class="w-5 h-5 rounded-full bg-cyan-100 text-cyan-800 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">✓</span>
-                <span class="text-slate-800"><strong class="text-slate-900 font-black">Maturity:</strong> Functional working prototype required with TRL level 1-4 (Hardware build or software model mandatory; purely theoretical concepts are not eligible).</span>
+                <span class="text-slate-800"><strong class="text-slate-900 font-black">Stage:</strong> Working hardware or software prototype (TRL 1–4). Ideas alone aren’t eligible.</span>
               </li>
               <li class="flex items-start space-x-3">
                 <span class="w-5 h-5 rounded-full bg-cyan-100 text-cyan-800 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">✓</span>
-                <span class="text-slate-800"><strong class="text-slate-900 font-black">Format:</strong> Full-day live public exhibition booth at MIT-WPU campus &amp; walk-around jury evaluation.</span>
+                <span class="text-slate-800"><strong class="text-slate-900 font-black">Format:</strong> Full-day exhibition at MIT-WPU, with live demos &amp; jury visits.</span>
               </li>
             </ul>
           </div>
@@ -490,7 +490,7 @@ export default function Home() {
               class="arena-download-btn"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-              <span>Download Presentation Format</span>
+              <span>Download PPT template</span>
             </a>
 
             <button
@@ -498,7 +498,7 @@ export default function Home() {
               onclick="openRegisterModal(); playSound('click');"
               class="btn-shimmer w-full py-4 text-center rounded-2xl bg-cyan-700 hover:bg-cyan-800 text-white font-extrabold text-xs uppercase tracking-wider transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 relative z-10 cursor-pointer"
             >
-              Apply For Prototype Expo Track &rarr;
+              Apply for Prototype Expo &rarr;
             </button>
           </div>
         </div>
