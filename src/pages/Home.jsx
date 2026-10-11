@@ -1,8 +1,14 @@
 
-import React from 'react';
+import React, { useLayoutEffect } from 'react';
 import '../styles/home.css';
 
 export default function Home() {
+  useLayoutEffect(() => {
+    // Refresh scroll tracking after React mounts the timeline, including route returns.
+    window.dispatchEvent(new Event('resize'));
+    // Apply the default FAQ section before paint, not before the React markup exists.
+    window.setFaqCategory?.('event', document.querySelector('.faq-filter-btn'));
+  }, []);
   return (
     <div dangerouslySetInnerHTML={{ __html: `<main id="content">
   <!-- BEGIN: HeroSection (Exact Glassmorphic Visual Match to ignisia.tech Reference Screenshot) -->
@@ -45,7 +51,7 @@ export default function Home() {
             <span class="hero-venture-word">Venture</span>
           </p>
 
-          <p class="hero-launchpad-line"><span>Tech Launchpad</span> by <span class="poster-ignisia">Ignisia</span></p>
+          <p class="hero-launchpad-line"><span>A Tech Launchpad and Project Expo</span> by <span class="poster-ignisia">Ignisia</span></p>
 
           <div class="hero-cta-stack">
             <button type="button" onclick="openRegisterModal(); playSound('click');" class="hero-register-big">
@@ -163,7 +169,7 @@ export default function Home() {
           <span class="event-info-copy">
             <span class="event-info-label">Grand Finale</span>
             <span class="event-info-value">21 October 2026</span>
-            <span class="event-info-sub">9:00 AM – 6:00 PM IST</span>
+            <span class="event-info-sub">On campus · Full day</span>
           </span>
         </div>
         <div class="event-info-card">
@@ -177,10 +183,22 @@ export default function Home() {
           </span>
         </div>
       </div>
-      <p class="event-info-eligibility">Pune &nbsp;•&nbsp; Diploma, UG &amp; PG students &nbsp;•&nbsp; Across India</p>
+      <p class="event-info-eligibility">Diploma, UG &amp; PG students &nbsp;•&nbsp; Across India</p>
     </div>
   </section>
   <!-- END: Event details -->
+
+  <section id="sponsors" class="sponsors-section" aria-labelledby="sponsors-title">
+    <div class="sponsors-inner">
+      <span class="ix-kicker">Supporting student innovation</span>
+      <h2 id="sponsors-title" class="ix-title">Our <em>Sponsors</em></h2>
+      <div class="sponsors-grid">
+        <div class="sponsor-card"><img src="/assets/sponsor-operforce.jpg" class="sponsor-logo sponsor-logo--wide" alt="OperForce — AI Platform for Enterprise" width="1280" height="960" loading="lazy" /></div>
+        <div class="sponsor-card"><img src="/assets/sponsor-ztudium.png" class="sponsor-logo sponsor-logo--wordmark" alt="ztudium" width="554" height="554" loading="lazy" /></div>
+        <div class="sponsor-card"><img src="/assets/sponsor-auxipower.png" class="sponsor-logo" alt="AUXIPOWER Dynamic Technologies Pvt Ltd" width="1254" height="1254" loading="lazy" /></div>
+      </div>
+    </div>
+  </section>
 
   <!-- BEGIN: HighlightPosterPillars (Infinite Auto-scrolling Carousel of 6 Perks) -->
   <section class="w-full py-8 md:py-12 relative z-20 overflow-hidden reveal" id="benefits">
@@ -199,8 +217,8 @@ export default function Home() {
           <div class="w-12 h-12 mx-auto rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-3 group-hover:scale-110 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
             <iconify-icon icon="ph:trophy-duotone" width="26" height="26"></iconify-icon>
           </div>
-          <h3 class="font-extrabold text-sm sm:text-base text-slate-900 leading-snug">₹50,000 Prize Pool</h3>
-          <p class="text-xs text-slate-500 mt-1 font-medium">Plus consolation prize vouchers and credits</p>
+          <h3 class="font-extrabold text-sm sm:text-base text-slate-900 leading-snug">₹50,000+</h3>
+          <p class="text-xs text-slate-500 mt-1 font-medium">Cash prizes across both tracks</p>
         </div>
 
         <!-- Card 2: Incubation Support -->
@@ -209,7 +227,7 @@ export default function Home() {
             <iconify-icon icon="ph:plant-duotone" width="26" height="26"></iconify-icon>
           </div>
           <h3 class="font-extrabold text-sm sm:text-base text-slate-900 leading-snug">Incubation Support</h3>
-          <p class="text-xs text-slate-500 mt-1 font-medium">MIT-WPU Innovation</p>
+          <p class="text-xs text-slate-500 mt-1 font-medium">Startup guidance &amp; support</p>
         </div>
 
         <!-- Card 3: Investor Pitch -->
@@ -236,7 +254,7 @@ export default function Home() {
             <iconify-icon icon="ph:certificate-duotone" width="26" height="26"></iconify-icon>
           </div>
           <h3 class="font-extrabold text-sm sm:text-base text-slate-900 leading-snug">Certificates</h3>
-          <p class="text-xs text-slate-500 mt-1 font-medium">All Participants</p>
+          <p class="text-xs text-slate-500 mt-1 font-medium">Digital for all registrants, physical for finalists</p>
         </div>
 
         <!-- Card 6: Mentorship -->
@@ -254,8 +272,8 @@ export default function Home() {
           <div class="w-12 h-12 mx-auto rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-3 group-hover:scale-110 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
             <iconify-icon icon="ph:trophy-duotone" width="26" height="26"></iconify-icon>
           </div>
-          <h3 class="font-extrabold text-sm sm:text-base text-slate-900 leading-snug">₹50,000 Prize Pool</h3>
-          <p class="text-xs text-slate-500 mt-1 font-medium">Plus consolation prize vouchers and credits</p>
+          <h3 class="font-extrabold text-sm sm:text-base text-slate-900 leading-snug">₹50,000+</h3>
+          <p class="text-xs text-slate-500 mt-1 font-medium">Cash prizes across both tracks</p>
         </div>
 
         <!-- Card 2: Incubation Support -->
@@ -264,7 +282,7 @@ export default function Home() {
             <iconify-icon icon="ph:plant-duotone" width="26" height="26"></iconify-icon>
           </div>
           <h3 class="font-extrabold text-sm sm:text-base text-slate-900 leading-snug">Incubation Support</h3>
-          <p class="text-xs text-slate-500 mt-1 font-medium">MIT-WPU Innovation</p>
+          <p class="text-xs text-slate-500 mt-1 font-medium">Startup guidance &amp; support</p>
         </div>
 
         <!-- Card 3: Investor Pitch -->
@@ -291,7 +309,7 @@ export default function Home() {
             <iconify-icon icon="ph:certificate-duotone" width="26" height="26"></iconify-icon>
           </div>
           <h3 class="font-extrabold text-sm sm:text-base text-slate-900 leading-snug">Certificates</h3>
-          <p class="text-xs text-slate-500 mt-1 font-medium">All Participants</p>
+          <p class="text-xs text-slate-500 mt-1 font-medium">Digital for all registrants, physical for finalists</p>
         </div>
 
         <!-- Card 6: Mentorship -->
@@ -306,6 +324,16 @@ export default function Home() {
     </div>
   </section>
   <!-- END: HighlightPosterPillars -->
+
+  <section class="prize-breakdown" aria-label="Prize breakdown">
+    <div class="prize-breakdown-heading"><span class="ix-kicker">₹50,000+ prize pool</span><h2>Prizes across both tracks</h2></div>
+    <div class="prize-breakdown-grid">
+      <div><span>Prototype Expo · 1st</span><strong>₹20,000</strong></div>
+      <div><span>Prototype Expo · 2nd</span><strong>₹15,000</strong></div>
+      <div><span>Product Track · 1st</span><strong>₹10,000</strong></div>
+      <div><span>Consolation pool · Both tracks</span><strong>₹5,000</strong></div>
+    </div>
+  </section>
 
   <!-- ======================================================== -->
   <!-- UNIQUE FEATURE 1: INTERACTIVE COMPETITION ARENA MATRIX   -->
@@ -798,7 +826,7 @@ export default function Home() {
               <time datetime="2026-10-21" class="font-serif italic text-3xl sm:text-4xl text-indigo-700 group-hover:text-indigo-800 transition-colors font-bold">
                 21 Oct 2026
               </time>
-              <span class="text-sm font-semibold text-slate-500 block mt-0.5">8:30 AM to 6:00 PM</span>
+              <span class="text-sm font-semibold text-slate-500 block mt-0.5">On-campus Grand Finale</span>
               <span class="text-xs font-mono uppercase tracking-wider text-indigo-600 font-extrabold block mt-1">
                 Step 03 • Grand Finale
               </span>
@@ -845,7 +873,7 @@ export default function Home() {
                 <div id="step-expanded-7" class="hidden mt-4 pt-4 border-t border-indigo-100 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                   <div class="bg-white p-3.5 rounded-xl border border-indigo-100 shadow-2xs">
                     <span class="block font-bold text-slate-700 mb-1">Morning Schedule:</span>
-                    <span class="text-slate-600">8:30 AM Booth Setup → 10:00 AM Inauguration → 11:00 AM Walk-around Jury Rounds.</span>
+                    <span class="text-slate-600">Booth setup → Inauguration → Walk-around jury rounds.</span>
                   </div>
                   <div class="bg-indigo-50/70 p-3.5 rounded-xl border border-indigo-100">
                     <span class="block font-bold text-indigo-900 mb-1">Afternoon &amp; Evening:</span>
@@ -884,7 +912,7 @@ export default function Home() {
                   Incubation, Seed Support &amp; Network Access
                 </h3>
                 <p class="text-sm text-slate-700 leading-relaxed font-normal mb-4">
-                  Winners and standout projects receive fast-track incubation support at MIT-WPU Technology Business Incubator, direct investor syndicate introductions, patent consultation, national merit certificates, and cash prize disbursements.
+                  Winners and standout projects receive fast-track incubation support through incubation partners, direct investor syndicate introductions, patent consultation, national merit certificates, and cash prize disbursements.
                 </p>
                 <div id="step-expanded-8" class="hidden mt-4 pt-4 border-t border-slate-100 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                   <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
@@ -931,7 +959,7 @@ export default function Home() {
           <li><span aria-hidden="true">✓</span>Covers the whole team (Product: 1–6; Prototype Expo: 1 - 6 members)</li>
           <li><span aria-hidden="true">✓</span>Entry to the online qualifier round</li>
           <li><span aria-hidden="true">✓</span>Evaluation by the jury panel</li>
-          <li><span aria-hidden="true">✓</span>Digital participation certificate for every member</li>
+          <li><span aria-hidden="true">✓</span>Digital participation certificate for every member; physical certificate for finalists</li>
         </ul>
       </div>
 
@@ -947,7 +975,7 @@ export default function Home() {
             <span class="ix-kicker">Need to know</span>
             <h2 class="ix-title">Frequently Asked <em>Questions</em></h2>
             <p class="text-base text-slate-600 mt-3">
-              Explore interactive answers categorized by eligibility, screening, finale logistics, and intellectual property.
+              Choose a topic below, or search across all questions.
             </p>
 
             <!-- Live FAQ Search Bar -->
@@ -985,7 +1013,7 @@ export default function Home() {
           <p id="faq-results-status" class="faq-results-status" role="status" aria-live="polite"></p>
           <!-- FAQ Accordion List (Animated Cards) -->
           <div class="space-y-4" id="faq-container">
-            <div class="faq-item border border-indigo-100/90 rounded-2xl bg-white/95 overflow-hidden shadow-xs hover:border-indigo-300 hover:shadow-card transition-all duration-300" data-category="event" data-keywords="What is INCUBEX 2026? INCUBEX 2026 is a Pune Project Expo + Launchpad Event organized by Ignisia Club at MIT-WPU. It brings together student innovators to showcase working projects, prototypes, and products to expert panels and investors.">
+            <div class="faq-item border border-indigo-100/90 rounded-2xl bg-white/95 overflow-hidden shadow-xs hover:border-indigo-300 hover:shadow-card transition-all duration-300" data-category="event" data-keywords="What is INCUBEX 2026? INCUBEX 2026 is a tech launchpad and project expo organized by Ignisia Club at MIT-WPU. It brings together student innovators to showcase working projects, prototypes, and products to expert panels and investors.">
               <button class="w-full text-left px-6 py-5 font-extrabold text-slate-900 flex justify-between items-center focus:outline-none cursor-pointer group" onclick="toggleFaq(this); playSound('click');">
                 <span class="text-sm sm:text-base pr-4 group-hover:text-indigo-600 transition-colors">What is INCUBEX 2026?</span>
                 <div class="faq-icon-wrapper w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center flex-shrink-0 text-indigo-600 transition-transform duration-300">
@@ -993,11 +1021,11 @@ export default function Home() {
                 </div>
               </button>
               <div class="faq-answer hidden px-6 pb-6 text-xs sm:text-sm text-slate-700 leading-relaxed font-normal border-t border-slate-100 pt-4">
-                <p>INCUBEX 2026 is a Pune Project Expo + Launchpad Event organized by Ignisia Club at MIT-WPU. It brings together student innovators to showcase working projects, prototypes, and products to expert panels and investors.</p>
+                <p>INCUBEX 2026 is a tech launchpad and project expo organized by Ignisia Club at MIT-WPU. It brings together student innovators to showcase working projects, prototypes, and products to expert panels and investors.</p>
               </div>
             </div>
 
-            <div class="faq-item border border-indigo-100/90 rounded-2xl bg-white/95 overflow-hidden shadow-xs hover:border-indigo-300 hover:shadow-card transition-all duration-300" data-category="event" data-keywords="Who can participate? College students (Diploma, UG, and PG) from any branch or stream across India are eligible. School students are not eligible.">
+            <div class="faq-item border border-indigo-100/90 rounded-2xl bg-white/95 overflow-hidden shadow-xs hover:border-indigo-300 hover:shadow-card transition-all duration-300" data-category="event" data-keywords="Who can participate? College students (Diploma, UG, and PG) from any branch or stream across India are eligible. School students are not eligible. Ignisia members on INCUBEX organising, evaluation, or jury &amp; industry relations teams cannot participate. Media/design members and members not involved in organising may participate.">
               <button class="w-full text-left px-6 py-5 font-extrabold text-slate-900 flex justify-between items-center focus:outline-none cursor-pointer group" onclick="toggleFaq(this); playSound('click');">
                 <span class="text-sm sm:text-base pr-4 group-hover:text-indigo-600 transition-colors">Who can participate?</span>
                 <div class="faq-icon-wrapper w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center flex-shrink-0 text-indigo-600 transition-transform duration-300">
@@ -1005,7 +1033,7 @@ export default function Home() {
                 </div>
               </button>
               <div class="faq-answer hidden px-6 pb-6 text-xs sm:text-sm text-slate-700 leading-relaxed font-normal border-t border-slate-100 pt-4">
-                <p>College students (Diploma, UG, and PG) from any branch or stream across India are eligible. School students are not eligible.</p>
+                <p>College students (Diploma, UG, and PG) from any branch or stream across India are eligible. School students are not eligible. Ignisia members on INCUBEX organising, evaluation, or jury &amp; industry relations teams cannot participate. Media/design members and members not involved in organising may participate.</p>
               </div>
             </div>
 
@@ -1045,7 +1073,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div class="faq-item border border-indigo-100/90 rounded-2xl bg-white/95 overflow-hidden shadow-xs hover:border-indigo-300 hover:shadow-card transition-all duration-300" data-category="tracks" data-keywords="What are the two tracks? Product Track: For operational ventures or working software/hardware products with a business model, ready for real-world use. Prototype Expo Track: For academic projects, research builds, hardware models, and functional early-stage builds.">
+            <div class="faq-item border border-indigo-100/90 rounded-2xl bg-white/95 overflow-hidden shadow-xs hover:border-indigo-300 hover:shadow-card transition-all duration-300" data-category="tracks" data-keywords="What are the two tracks? Product Track: For operational ventures or working software/hardware products with a business model, ready for real-world use. Prototype Expo Track: For academic projects, research builds, hardware models, and functional early-stage builds (TRL 1–4: early-stage working prototypes).">
               <button class="w-full text-left px-6 py-5 font-extrabold text-slate-900 flex justify-between items-center focus:outline-none cursor-pointer group" onclick="toggleFaq(this); playSound('click');">
                 <span class="text-sm sm:text-base pr-4 group-hover:text-indigo-600 transition-colors">What are the two tracks?</span>
                 <div class="faq-icon-wrapper w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center flex-shrink-0 text-indigo-600 transition-transform duration-300">
@@ -1054,7 +1082,7 @@ export default function Home() {
               </button>
               <div class="faq-answer hidden px-6 pb-6 text-xs sm:text-sm text-slate-700 leading-relaxed font-normal border-t border-slate-100 pt-4">
                 <p>Product Track: For operational ventures or working software/hardware products with a business model, ready for real-world use.</p>
-                <p>Prototype Expo Track: For academic projects, research builds, hardware models, and functional early-stage builds.</p>
+                <p>Prototype Expo Track: For academic projects, research builds, hardware models, and functional early-stage builds (TRL 1–4: early-stage working prototypes).</p>
               </div>
             </div>
 
@@ -1131,7 +1159,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div class="faq-item border border-indigo-100/90 rounded-2xl bg-white/95 overflow-hidden shadow-xs hover:border-indigo-300 hover:shadow-card transition-all duration-300" data-category="registration" data-keywords="How do we register and what is the fee? Registration must be completed by the Team Leader via Unstop, Luma, or incubex.ignisia.tech. Registration is free for MIT-WPU teams and ₹300 per team for non-MIT-WPU teams.">
+            <div class="faq-item border border-indigo-100/90 rounded-2xl bg-white/95 overflow-hidden shadow-xs hover:border-indigo-300 hover:shadow-card transition-all duration-300" data-category="registration" data-keywords="How do we register and what is the fee? Registration must be completed by the Team Leader via Unstop or incubex.ignisia.tech. Registration is free for MIT-WPU teams and ₹300 per team for non-MIT-WPU teams.">
               <button class="w-full text-left px-6 py-5 font-extrabold text-slate-900 flex justify-between items-center focus:outline-none cursor-pointer group" onclick="toggleFaq(this); playSound('click');">
                 <span class="text-sm sm:text-base pr-4 group-hover:text-indigo-600 transition-colors">How do we register and what is the fee?</span>
                 <div class="faq-icon-wrapper w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center flex-shrink-0 text-indigo-600 transition-transform duration-300">
@@ -1139,7 +1167,7 @@ export default function Home() {
                 </div>
               </button>
               <div class="faq-answer hidden px-6 pb-6 text-xs sm:text-sm text-slate-700 leading-relaxed font-normal border-t border-slate-100 pt-4">
-                <p>Registration must be completed by the Team Leader via Unstop, Luma, or incubex.ignisia.tech. Registration is free for MIT-WPU teams and ₹300 per team for non-MIT-WPU teams.</p>
+                <p>Registration must be completed by the Team Leader via Unstop or incubex.ignisia.tech. Registration is free for MIT-WPU teams and ₹300 per team for non-MIT-WPU teams.</p>
               </div>
             </div>
 
@@ -1179,7 +1207,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div class="faq-item border border-indigo-100/90 rounded-2xl bg-white/95 overflow-hidden shadow-xs hover:border-indigo-300 hover:shadow-card transition-all duration-300" data-category="finale" data-keywords="What is provided at the exhibition booth, and what should teams bring? Finalists will receive an assigned exhibition booth with power access on campus. Teams must bring their own laptops, extension boards, chargers, testing devices, and demonstration equipment.">
+            <div class="faq-item border border-indigo-100/90 rounded-2xl bg-white/95 overflow-hidden shadow-xs hover:border-indigo-300 hover:shadow-card transition-all duration-300" data-category="finale" data-keywords="What is provided at the exhibition booth, and what should teams bring? Pitching rooms have projectors, HDMI and Wi-Fi. Exhibition rooms have assigned booths and power extensions for prototype and hardware demos. Teams must bring their own laptops, extension boards, chargers, testing devices, and demonstration equipment.">
               <button class="w-full text-left px-6 py-5 font-extrabold text-slate-900 flex justify-between items-center focus:outline-none cursor-pointer group" onclick="toggleFaq(this); playSound('click');">
                 <span class="text-sm sm:text-base pr-4 group-hover:text-indigo-600 transition-colors">What is provided at the exhibition booth, and what should teams bring?</span>
                 <div class="faq-icon-wrapper w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center flex-shrink-0 text-indigo-600 transition-transform duration-300">
@@ -1187,7 +1215,7 @@ export default function Home() {
                 </div>
               </button>
               <div class="faq-answer hidden px-6 pb-6 text-xs sm:text-sm text-slate-700 leading-relaxed font-normal border-t border-slate-100 pt-4">
-                <p>Finalists will receive an assigned exhibition booth with power access on campus. Teams must bring their own laptops, extension boards, chargers, testing devices, and demonstration equipment.</p>
+                <p>Pitching rooms have projectors, HDMI and Wi-Fi. Exhibition rooms have assigned booths and power extensions for prototype and hardware demos. Teams must bring their own laptops, extension boards, chargers, testing devices, and demonstration equipment.</p>
               </div>
             </div>
 
@@ -1208,12 +1236,9 @@ export default function Home() {
 
         <aside class="faq-brochure-aside">
           <div class="faq-brochure-card sticky top-24 overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-card max-w-sm mx-auto">
-            <button class="faq-brochure-trigger" onclick="openPosterModal(); playSound('click');" aria-label="Download the INCUBEX 2026 poster">
+            <a class="faq-brochure-trigger" href="/assets/incubex-poster.jpg" download="INCUBEX_2026_Poster.jpg" aria-label="Download the INCUBEX 2026 poster">
               <img src="/assets/incubex-poster.jpg" alt="INCUBEX 2026 poster" width="1131" height="1600" class="w-full max-h-[500px] object-cover object-top" loading="lazy" />
-              <span class="faq-brochure-open-icon" aria-hidden="true">
-                <iconify-icon icon="ph:download-simple-bold" width="21" height="21"></iconify-icon>
-              </span>
-            </button>
+            </a>
           </div>
         </aside>
       </div>
@@ -1260,7 +1285,7 @@ export default function Home() {
             </a>
           </div>
           <p class="max-w-lg text-xs sm:text-sm leading-relaxed text-slate-600">
-            A Pune technology launchpad hosted by <strong class="font-bold text-slate-800">IGNISIA Club</strong> at <strong class="font-bold text-slate-800">Dr. Vishwanath Karad MIT World Peace University (MIT-WPU), Pune.</strong> Since 1983, nurturing technical and entrepreneurial excellence. Over 1,600+ students engaged in previous editions.
+            A tech launchpad and project expo hosted by <strong class="font-bold text-slate-800">IGNISIA Club</strong> at <strong class="font-bold text-slate-800">Dr. Vishwanath Karad MIT World Peace University (MIT-WPU), Pune.</strong> Since 1983, nurturing technical and entrepreneurial excellence. INCUBEX is in its first year, building on Ignisia Club’s previous AI Hackathon with 1,600+ student participants.
           </p>
           <p class="mt-4 text-xs sm:text-sm leading-relaxed text-slate-600">
             <strong class="font-bold text-slate-800">Campus Address:</strong> MIT World Peace University, S.No. 124, Paud Road, Kothrud, Pune, Maharashtra 411038
@@ -1271,6 +1296,7 @@ export default function Home() {
         <div class="lg:col-span-3">
           <h2 class="mb-4 text-xs font-bold uppercase tracking-wider text-slate-900">Summit Navigation</h2>
           <ul class="space-y-2.5 text-xs sm:text-sm text-slate-600">
+            <li><a class="transition-colors hover:text-indigo-600" href="#sponsors">Our Sponsors</a></li>
             <li><a class="transition-colors hover:text-indigo-600" href="#arena">Competition Tracks</a></li>
             <li><button type="button" class="text-left transition-colors hover:text-indigo-600 cursor-pointer" onclick="openRegisterModal(); playSound('click');">Register</button></li>
             <li><a class="transition-colors hover:text-indigo-600" href="/assets/incubex-brochure-2026.pdf" download="INCUBEX_2026_Brochure.pdf">Official Brochure (PDF)</a></li>

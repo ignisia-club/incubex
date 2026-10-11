@@ -1,17 +1,17 @@
 # INCUBEX 2026
 
-> INCUBEX 2026 is Ignisia's Pune student tech launchpad at MIT-WPU Pune on 21 October 2026.
+> INCUBEX 2026 is Ignisia's tech launchpad and project expo at MIT-WPU Pune on 21 October 2026.
 
 ## Official resources
 
 - [Official INCUBEX 2026 website](https://incubex.ignisia.tech/)
 - [Registration on Unstop](https://unstop.com/p/incubex-by-ignisia-2026-national-level-tech-launchpad-mit-world-peace-university-pune-maharashtra-1759743)
-- [Official INCUBEX 2026 brochure](https://incubex.ignisia.tech/assets/incubex-poster.pdf)
+- [Official INCUBEX 2026 brochure](https://incubex.ignisia.tech/assets/incubex-brochure-2026.pdf)
 - [Ignisia organizer website](https://ignisia.tech/)
 
 ## Verified event facts
 
-- Date and time: 21 October 2026, 9:00 AM-6:00 PM IST
+- Date: 21 October 2026
 - Venue: Dr. Vishwanath Karad MIT World Peace University, Kothrud, Pune, Maharashtra, India
 - Format: Online screening followed by an on-campus Grand Finale
 - Tracks: Product Track and Prototype Expo Track
@@ -22,7 +22,7 @@
 - Online qualifier rounds: 9–10 October 2026
 - Round 1 results: 12 October 2026
 - Online mentoring sessions: 15–16 October 2026
-- Prize pool: INR 50,000, plus consolation prize vouchers and credits
+- Prize pool: INR 50,000+; Prototype Expo: first INR 20,000, second INR 15,000; Product Track: first INR 10,000; shared consolation pool INR 5,000
 - Finalists: 80 teams, comprising 30 Product Track teams and 50 Prototype Expo Track teams
 
 For current deadlines, rules, eligibility, and registration status, use the official website, brochure, and Unstop registration page above.
