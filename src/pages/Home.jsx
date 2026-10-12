@@ -717,12 +717,12 @@ export default function Home() {
         <!-- 8 Timeline Milestones -->
         <div class="space-y-12 sm:space-y-16">
 
-          <!-- Step 1: 12 Oct 2026 -->
+          <!-- Step 1: 14 Oct 2026 -->
           <div class="relative flex flex-col md:flex-row items-start group timeline-item" id="step-node-1">
             <!-- Left Date Column -->
             <div class="w-full md:w-72 md:shrink-0 md:pr-8 text-left md:text-right pb-3 md:pb-0">
-              <time datetime="2026-10-12" class="font-serif italic text-2xl sm:text-3xl text-slate-900 font-bold group-hover:text-indigo-600 transition-colors">
-                12 Oct 2026
+              <time datetime="2026-10-14" class="font-serif italic text-2xl sm:text-3xl text-slate-900 font-bold group-hover:text-indigo-600 transition-colors">
+                14 Oct 2026
               </time>
               <span class="text-sm font-semibold text-slate-500 block mt-0.5">11:59 PM</span>
               <span class="text-[11px] font-mono uppercase tracking-wider text-indigo-600 font-bold block mt-1">
@@ -808,7 +808,7 @@ export default function Home() {
 
           <div class="relative flex flex-col md:flex-row items-start group timeline-item" id="step-node-5">
             <div class="w-full md:w-72 md:shrink-0 md:pr-8 text-left md:text-right pb-3 md:pb-0">
-              <time datetime="2026-10-12" class="font-serif italic text-2xl sm:text-3xl text-slate-900 font-bold">19 Oct 2026</time>
+              <time datetime="2026-10-19" class="font-serif italic text-2xl sm:text-3xl text-slate-900 font-bold">19 Oct 2026</time>
               <span class="text-[11px] font-mono uppercase tracking-wider text-indigo-600 font-bold block mt-1">Round 1 Results</span>
             </div>
             <div class="hidden md:flex absolute left-72 -translate-x-1/2 items-center justify-center z-10">
@@ -870,6 +870,11 @@ export default function Home() {
                       <span>Auditorium Keynote Stage &amp; Live Jury Rounds • MIT-WPU Pune</span>
                     </span>
                   </div>
+                </div>
+
+                <div class="mt-4 pt-3.5 border-t border-indigo-100/90 flex items-center gap-2.5 text-xs text-slate-700">
+                  <iconify-icon icon="ph:coffee-duotone" width="18" height="18" class="text-indigo-600 shrink-0" aria-hidden="true"></iconify-icon>
+                  <span><strong>Hospitality:</strong> Complimentary snacks and high tea will be provided to all attending finalist teams.</span>
                 </div>
 
                 <div id="step-expanded-7" class="hidden mt-4 pt-4 border-t border-indigo-100 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
@@ -1220,6 +1225,18 @@ export default function Home() {
               </button>
               <div class="faq-answer hidden px-6 pb-6 text-xs sm:text-sm text-slate-700 leading-relaxed font-normal border-t border-slate-100 pt-4">
                 <p>Pitching rooms have projectors, HDMI and Wi-Fi. Exhibition rooms have assigned booths and power extensions for prototype and hardware demos. Teams must bring their own laptops, extension boards, chargers, testing devices, and demonstration equipment.</p>
+              </div>
+            </div>
+
+            <div class="faq-item border border-indigo-100/90 rounded-2xl bg-white/95 overflow-hidden shadow-xs hover:border-indigo-300 hover:shadow-card transition-all duration-300" data-category="finale" data-keywords="Are refreshments provided during the Grand Finale? snacks hi-tea tea coffee food lunch drinks hospitality Yes, complimentary snacks and high tea will be provided to all attending finalist teams on campus. Additional meals and beverages can be purchased across campus cafeterias.">
+              <button class="w-full text-left px-6 py-5 font-extrabold text-slate-900 flex justify-between items-center focus:outline-none cursor-pointer group" onclick="toggleFaq(this); playSound('click');">
+                <span class="text-sm sm:text-base pr-4 group-hover:text-indigo-600 transition-colors">Are refreshments provided during the Grand Finale?</span>
+                <div class="faq-icon-wrapper w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center flex-shrink-0 text-indigo-600 transition-transform duration-300">
+                  <span class="faq-icon text-lg font-bold">+</span>
+                </div>
+              </button>
+              <div class="faq-answer hidden px-6 pb-6 text-xs sm:text-sm text-slate-700 leading-relaxed font-normal border-t border-slate-100 pt-4">
+                <p>Yes. Complimentary snacks and high tea will be provided to all attending finalist teams during the event at MIT-WPU. Additional meals and beverages are accessible at campus cafeterias throughout the day.</p>
               </div>
             </div>
 
