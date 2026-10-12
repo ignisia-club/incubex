@@ -28,6 +28,8 @@
 #hero .hero-secondary-link { justify-content: center; }
 #hero .poster-wordmark span { background-image: linear-gradient(45deg, #8464ff, #42c4e6); }
 #hero .hero-launchpad-line { max-width: 780px; margin-inline: auto; text-wrap: balance; }
+#hero .hero-launchpad-attribution { display: block; }
+#hero .hero-launchpad-attribution .poster-ignisia { display: inline !important; }
 .prize-breakdown { max-width: 1040px; margin: 0 auto; padding: 40px 24px; }
 .prize-breakdown-heading { text-align: center; margin-bottom: 48px; }
 .prize-pool-amount { margin: 6px 0 4px; font-family: 'League Spartan', 'Satoshi', sans-serif; font-size: clamp(4.5rem, 13vw, 9rem); font-weight: 800; letter-spacing: -.05em; line-height: .95; background: linear-gradient(135deg, #182052 10%, #3858c8 55%, #8464ff 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }

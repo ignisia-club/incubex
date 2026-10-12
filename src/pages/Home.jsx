@@ -51,7 +51,7 @@ export default function Home() {
             <span class="hero-venture-word">Venture</span>
           </p>
 
-          <p class="hero-launchpad-line"><span>A Tech Launchpad and Project Expo</span> by <span class="poster-ignisia">Ignisia</span></p>
+          <p class="hero-launchpad-line"><span>A National-Level Tech Launchpad and Project Expo</span><span class="hero-launchpad-attribution">by <span class="poster-ignisia">Ignisia</span></span></p>
 
           <div class="hero-cta-stack">
             <button type="button" onclick="openRegisterModal(); playSound('click');" class="hero-register-big">
