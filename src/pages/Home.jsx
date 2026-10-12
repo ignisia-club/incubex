@@ -952,6 +952,7 @@ export default function Home() {
         <div class="sponsor-card"><img src="/assets/sponsor-operforce.jpg" class="sponsor-logo sponsor-logo--wide" alt="OperForce — AI Platform for Enterprise" width="1280" height="960" loading="lazy" /></div>
         <div class="sponsor-card"><img src="/assets/sponsor-ztudium.png" class="sponsor-logo sponsor-logo--wordmark" alt="ztudium" width="554" height="554" loading="lazy" /></div>
         <div class="sponsor-card"><img src="/assets/sponsor-auxipower.png" class="sponsor-logo" alt="AUXIPOWER Dynamic Technologies Pvt Ltd" width="1254" height="1254" loading="lazy" /></div>
+        <div class="sponsor-card"><img src="/assets/sponsor-aim-investments.png" class="sponsor-logo sponsor-logo--aim" alt="AIM Investments" width="2048" height="2048" loading="lazy" /></div>
       </div>
     </div>
   </section>
