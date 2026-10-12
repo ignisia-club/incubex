@@ -169,7 +169,7 @@ export default function Home() {
           <span class="event-info-copy">
             <span class="event-info-label">Grand Finale</span>
             <span class="event-info-value">21 October 2026</span>
-            <span class="event-info-sub">On campus · Full day</span>
+            <span class="event-info-sub">On campus</span>
           </span>
         </div>
         <div class="event-info-card">
@@ -725,6 +725,9 @@ export default function Home() {
                 14 Oct 2026
               </time>
               <span class="text-sm font-semibold text-slate-500 block mt-0.5">11:59 PM</span>
+              <p class="text-xs text-emerald-600 font-semibold mt-1 leading-snug">
+                Good news! Deadline extended because of overwhelming requests from colleges.
+              </p>
               <span class="text-[11px] font-mono uppercase tracking-wider text-indigo-600 font-bold block mt-1">
                 Step 01 • Registration Deadline
               </span>
@@ -744,10 +747,16 @@ export default function Home() {
                   <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold tracking-wider uppercase bg-blue-50 text-blue-700 border border-blue-200">
                     Registration &amp; Outreach
                   </span>
+                  <span class="px-2 py-0.5 rounded-full text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200">
+                    Extended
+                  </span>
                 </div>
                 <h3 class="text-xl sm:text-2xl font-black text-slate-900 mb-2">
                   Registrations Close
                 </h3>
+                <p class="text-xs text-emerald-700 font-semibold mb-3">
+                  Good news! Deadline extended because of overwhelming requests from colleges.
+                </p>
                 <p class="text-sm text-slate-700 leading-relaxed font-normal mb-4">
                   Register your team: 1–6 members for Product Track or 1 - 6 members for Prototype Expo Track. Registration is ₹300 per team and free for MIT-WPU Pune students.
                 </p>
@@ -771,7 +780,7 @@ export default function Home() {
               <time datetime="2026-10-15" data-end-date="2026-10-16" class="font-serif italic text-2xl sm:text-3xl text-slate-900 font-bold group-hover:text-indigo-600 transition-colors">
                 15 – 16 Oct 2026
               </time>
-              <span class="text-sm font-semibold text-slate-500 block mt-0.5">5:00 AM (15th) to 11:59 PM (16th)</span>
+              <span class="text-sm font-semibold text-slate-500 block mt-0.5">2:00 PM to 10:00 PM</span>
               <span class="text-[11px] font-mono uppercase tracking-wider text-indigo-600 font-bold block mt-1">
                 Step 02 • Qualifier Round
               </span>
@@ -809,7 +818,7 @@ export default function Home() {
           <div class="relative flex flex-col md:flex-row items-start group timeline-item" id="step-node-5">
             <div class="w-full md:w-72 md:shrink-0 md:pr-8 text-left md:text-right pb-3 md:pb-0">
               <time datetime="2026-10-17" class="font-serif italic text-2xl sm:text-3xl text-slate-900 font-bold">17 Oct 2026</time>
-              <span class="text-sm font-semibold text-slate-500 block mt-0.5">Morning</span>
+              <span class="text-sm font-semibold text-slate-500 block mt-0.5">7:10 AM</span>
               <span class="text-[11px] font-mono uppercase tracking-wider text-indigo-600 font-bold block mt-1">Round 1 Results</span>
             </div>
             <div class="hidden md:flex absolute left-72 -translate-x-1/2 items-center justify-center z-10">
@@ -818,7 +827,7 @@ export default function Home() {
             <div class="w-full md:flex-1 md:min-w-0 md:pl-12">
               <div class="rounded-2xl p-6 sm:p-7 border border-indigo-200">
                 <h3 class="text-xl sm:text-2xl font-black text-slate-900 mb-2">Round 1 Results</h3>
-                <p class="text-sm text-slate-700 leading-relaxed">Round 1 results will be announced on 17 October 2026 (Morning).</p>
+                <p class="text-sm text-slate-700 leading-relaxed">Round 1 results will be announced on 17 October 2026 at 7:10 AM.</p>
               </div>
             </div>
           </div>
@@ -852,7 +861,7 @@ export default function Home() {
                   The Grand Finale &amp; Project Expo
                 </h3>
                 <p class="text-sm sm:text-base text-slate-600 leading-relaxed mb-5">
-                  A full-day exhibition at the MIT-WPU Kothrud campus in Pune, with live booth judging, investor pitches, and the awards ceremony.
+                  An exhibition at the MIT-WPU Kothrud campus in Pune, with live booth judging, investor pitches, and the awards ceremony.
                 </p>
 
                 <!-- Featured Stage Image (Matching Screenshot 3 design from ignisia.tech) -->
@@ -1205,7 +1214,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div class="faq-item border border-indigo-100/90 rounded-2xl bg-white/95 overflow-hidden shadow-xs hover:border-indigo-300 hover:shadow-card transition-all duration-300" data-category="finale" data-keywords="When will shortlisted teams be announced? Round 1 results and shortlisted finalist announcements will be made on 17th October 2026 (Morning). Selected teams will be notified via email and phone.">
+            <div class="faq-item border border-indigo-100/90 rounded-2xl bg-white/95 overflow-hidden shadow-xs hover:border-indigo-300 hover:shadow-card transition-all duration-300" data-category="finale" data-keywords="When will shortlisted teams be announced? Round 1 results and shortlisted finalist announcements will be made on 17th October 2026 (7:10 AM). Selected teams will be notified via email and phone.">
               <button class="w-full text-left px-6 py-5 font-extrabold text-slate-900 flex justify-between items-center focus:outline-none cursor-pointer group" onclick="toggleFaq(this); playSound('click');">
                 <span class="text-sm sm:text-base pr-4 group-hover:text-indigo-600 transition-colors">When will shortlisted teams be announced?</span>
                 <div class="faq-icon-wrapper w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center flex-shrink-0 text-indigo-600 transition-transform duration-300">
@@ -1213,7 +1222,7 @@ export default function Home() {
                 </div>
               </button>
               <div class="faq-answer hidden px-6 pb-6 text-xs sm:text-sm text-slate-700 leading-relaxed font-normal border-t border-slate-100 pt-4">
-                <p>Round 1 results and shortlisted finalist announcements will be made on 17th October 2026 (Morning). Selected teams will be notified via email and phone.</p>
+                <p>Round 1 results and shortlisted finalist announcements will be made on 17th October 2026 at 7:10 AM. Selected teams will be notified via email and phone.</p>
               </div>
             </div>
 
@@ -1229,7 +1238,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div class="faq-item border border-indigo-100/90 rounded-2xl bg-white/95 overflow-hidden shadow-xs hover:border-indigo-300 hover:shadow-card transition-all duration-300" data-category="finale" data-keywords="Are refreshments provided during the Grand Finale? snacks hi-tea tea coffee food lunch drinks hospitality Yes, complimentary snacks and high tea will be provided to all attending finalist teams on campus. Additional meals and beverages can be purchased across campus cafeterias.">
+            <div class="faq-item border border-indigo-100/90 rounded-2xl bg-white/95 overflow-hidden shadow-xs hover:border-indigo-300 hover:shadow-card transition-all duration-300" data-category="finale" data-keywords="Are refreshments provided during the Grand Finale? snacks hi-tea tea coffee food lunch drinks hospitality Yes, complimentary snacks and high tea will be provided to all attending finalist teams on campus.">
               <button class="w-full text-left px-6 py-5 font-extrabold text-slate-900 flex justify-between items-center focus:outline-none cursor-pointer group" onclick="toggleFaq(this); playSound('click');">
                 <span class="text-sm sm:text-base pr-4 group-hover:text-indigo-600 transition-colors">Are refreshments provided during the Grand Finale?</span>
                 <div class="faq-icon-wrapper w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center flex-shrink-0 text-indigo-600 transition-transform duration-300">
@@ -1237,7 +1246,7 @@ export default function Home() {
                 </div>
               </button>
               <div class="faq-answer hidden px-6 pb-6 text-xs sm:text-sm text-slate-700 leading-relaxed font-normal border-t border-slate-100 pt-4">
-                <p>Yes. Complimentary snacks and high tea will be provided to all attending finalist teams during the event at MIT-WPU. Additional meals and beverages are accessible at campus cafeterias throughout the day.</p>
+                <p>Yes. Complimentary snacks and high tea will be provided to all attending finalist teams during the event at MIT-WPU.</p>
               </div>
             </div>
 
