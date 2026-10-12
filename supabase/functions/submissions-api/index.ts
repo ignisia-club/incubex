@@ -5,13 +5,14 @@
 //       &expires_in=3600       optional - link lifetime in seconds (60 .. 604800, default 3600)
 //   Header:  x-api-key: <API_KEY>        (or  Authorization: Bearer <API_KEY>)
 //
-// Returns every submitted deck:
+// Returns every upload (a team may upload more than once: each upload is listed, newest first;
+// the newest one counts):
 //   team_id      the team
 //   uploaded_at  ISO-8601 upload time (UTC)
 //   link_1       temporary signed link to the primary copy (Supabase Storage)
 //   link_2       temporary signed link to the backup copy (Backblaze B2), or null if not backed up yet
 //   backup_status "success" | "pending" | "failed" | "none"
-//   approval_status, file_type
+//   file_type
 //
 // Club OS reads the same items under `entries`, with these names (added alongside the ones above):
 //   id, teamId, url (link_1, else link_2), fileName (<team_id>.<ext>), submittedAt
@@ -135,7 +136,7 @@ Deno.serve(async (req) => {
     // ---- read data -----------------------------------------------------------
     let query = supabase
       .from("submissions")
-      .select("id, team_id, ppt_url, approval_status, submitted_at, created_at")
+      .select("id, team_id, ppt_url, submitted_at, created_at")
       .not("ppt_url", "is", null)
       .order("submitted_at", { ascending: false })
       .limit(MAX_ROWS);
@@ -182,7 +183,6 @@ Deno.serve(async (req) => {
         link_1,
         link_2,
         backup_status: backup?.status ?? "none",
-        approval_status: r.approval_status ?? "pending",
         file_type,
       };
     }));

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { supabase } from '../lib/supabase.js';
-import { Loader2, LogOut, Check, X, RefreshCw, AlertCircle, ArrowRight, Download, Trash2, MessageSquareWarning, Search, Users, CheckCircle2, FileSpreadsheet } from 'lucide-react';
+import { Loader2, LogOut, X, RefreshCw, AlertCircle, ArrowRight, Download, Trash2, Search, Users, CheckCircle2, FileSpreadsheet, History, ChevronDown } from 'lucide-react';
 import * as XLSX from 'xlsx';
 import PortalShell from '../components/PortalShell.jsx';
 
@@ -12,11 +12,10 @@ function backupInfo(backup) {
   return { label: 'Backup pending', mod: 'pending', title: 'Backup in progress' };
 }
 
+// Evaluation (marks, results) lives in Club OS; here it's only who has uploaded.
 const FILTERS = [
   ['all', 'All'],
-  ['pending', 'Pending'],
-  ['approved', 'Approved'],
-  ['rejected', 'Rejected'],
+  ['submitted', 'Submitted'],
   ['not_submitted', 'Not submitted'],
 ];
 
@@ -87,7 +86,8 @@ export default function Admin() {
 
   const [submissions, setSubmissions] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
-  const [statusFilter, setStatusFilter] = useState('all'); // all, pending, approved, rejected, not_submitted
+  const [statusFilter, setStatusFilter] = useState('all'); // all | submitted | not_submitted
+  const [expanded, setExpanded] = useState(() => new Set()); // teams showing their earlier uploads
   const [query, setQuery] = useState('');
   const [backupsAvailable, setBackupsAvailable] = useState(false);
 
@@ -175,7 +175,7 @@ export default function Admin() {
     try {
     const { data, error } = await supabase
       .from('teams')
-      .select('team_id, team_name, leader_email, created_at, submissions(id, ppt_url, submitted, approval_status, submitted_at, appeal_message)')
+      .select('team_id, team_name, leader_email, created_at, submissions(id, ppt_url, submitted_at)')
       .order('created_at', { ascending: false });
     if (generation !== authGeneration.current) return;
     if (error) throw error;
@@ -191,19 +191,23 @@ export default function Admin() {
     (backupRows || []).forEach(b => { backupByPath[b.source_path] = b; });
 
     if (data) {
+      // A team may upload more than once: the newest upload counts, earlier ones are kept.
       const formatted = data.map(t => {
-        const sub = Array.isArray(t.submissions) ? t.submissions[0] : t.submissions;
+        const uploads = (Array.isArray(t.submissions) ? t.submissions : t.submissions ? [t.submissions] : [])
+          .filter((u) => u.ppt_url)
+          .map((u) => ({ id: u.id, ppt_url: u.ppt_url, submitted_at: u.submitted_at, backup: backupByPath[u.ppt_url] }))
+          .sort((a, b) => (Date.parse(b.submitted_at || 0) || 0) - (Date.parse(a.submitted_at || 0) || 0));
+        const latest = uploads[0];
         return {
           team_id: t.team_id,
           team_name: t.team_name,
           leader_email: t.leader_email,
-          submission_id: sub?.id,
-          ppt_url: sub?.ppt_url,
-          submitted: !!sub?.submitted,
-          approval_status: sub ? (sub.approval_status || 'pending') : 'not_submitted',
-          submitted_at: sub?.submitted_at,
-          appeal_message: sub?.appeal_message,
-          backup: sub?.ppt_url ? backupByPath[sub.ppt_url] : undefined
+          uploads,
+          submitted: uploads.length > 0,
+          state: uploads.length > 0 ? 'submitted' : 'not_submitted',
+          ppt_url: latest?.ppt_url,
+          submitted_at: latest?.submitted_at,
+          backup: latest?.backup
         };
       });
       setSubmissions(formatted);
@@ -229,15 +233,9 @@ export default function Admin() {
 
   const handleLogout = () => supabase.auth.signOut();
 
-  const handleApprove = async (id, status, teamId) => {
-    if (!window.confirm(`Mark ${teamId} as ${status}?`)) return;
-    const { error } = await supabase.from('submissions').update({ approval_status: status }).eq('id', id);
-    if (error) { setNotice({ kind: 'error', text: 'Could not update the review status. Try again.' }); return; }
-    fetchSubmissions();
-  };
-
-  const handleDelete = async (id, teamId, pptUrl) => {
-    if (!window.confirm(`Delete ${teamId}'s deck? This removes the file and lets the team upload again. It cannot be undone.`)) return;
+  const handleDelete = async (id, teamId, pptUrl, isLatest, hasEarlier) => {
+    const after = isLatest ? (hasEarlier ? ' Their previous upload becomes the current one.' : ' They will show as not submitted.') : '';
+    if (!window.confirm(`Delete this upload from ${teamId}? The file is removed and it can't be undone.${after}`)) return;
 
     // Delete file from storage first
     if (pptUrl) {
@@ -327,9 +325,9 @@ export default function Admin() {
       'Team ID': sub.team_id,
       'Team name': sub.team_name || '',
       'Leader email': sub.leader_email || '',
-      'Status': sub.approval_status.toUpperCase(),
-      'Submitted At': sub.submitted_at ? new Date(sub.submitted_at).toLocaleString() : 'N/A',
-      'Pitch Deck Link': sub.ppt_url ? (signedUrlsMap[sub.ppt_url] || 'Error generating link') : 'Not Submitted',
+      'Uploads': sub.uploads.length,
+      'Latest upload': sub.submitted_at ? new Date(sub.submitted_at).toLocaleString() : 'Not submitted',
+      'Latest deck link': sub.ppt_url ? (signedUrlsMap[sub.ppt_url] || 'Error generating link') : 'Not submitted',
       ...(backupsAvailable && { 'Backup': sub.ppt_url ? backupInfo(sub.backup).label : 'N/A' })
     }));
 
@@ -340,22 +338,20 @@ export default function Admin() {
   };
 
   const counts = useMemo(() => {
-    const c = { all: submissions.length, pending: 0, approved: 0, rejected: 0, not_submitted: 0 };
-    submissions.forEach((s) => { c[s.approval_status] = (c[s.approval_status] || 0) + 1; });
+    const c = { all: submissions.length, submitted: 0, not_submitted: 0 };
+    submissions.forEach((s) => { c[s.state] += 1; });
     return c;
   }, [submissions]);
 
   const filteredSubmissions = useMemo(() => {
     const q = query.trim().toUpperCase();
     let result = submissions;
-    if (statusFilter !== 'all') result = result.filter(s => s.approval_status === statusFilter);
+    if (statusFilter !== 'all') result = result.filter(s => s.state === statusFilter);
     if (q) result = result.filter(s => [s.team_id, s.team_name, s.leader_email].some(value => value?.toUpperCase().includes(q)));
-    // Pending first, then newest upload first
-    return [...result].sort((a, b) => {
-      if (a.approval_status === 'pending' && b.approval_status !== 'pending') return -1;
-      if (b.approval_status === 'pending' && a.approval_status !== 'pending') return 1;
-      return (Date.parse(b.submitted_at || 0) || 0) - (Date.parse(a.submitted_at || 0) || 0);
-    });
+    // Newest upload first; teams that haven't uploaded last, by Team ID
+    return [...result].sort((a, b) =>
+      (Date.parse(b.submitted_at || 0) || 0) - (Date.parse(a.submitted_at || 0) || 0)
+      || a.team_id.localeCompare(b.team_id, undefined, { numeric: true }));
   }, [submissions, statusFilter, query]);
 
   if (loading) {
@@ -521,66 +517,81 @@ export default function Admin() {
             <tr>
               <th>Team</th>
               <th>Deck</th>
-              <th>Submitted</th>
-              <th>Status</th>
+              <th>Uploaded</th>
               <th aria-label="Actions"></th>
             </tr>
           </thead>
           <tbody>
             {filteredSubmissions.length === 0 ? (
-              <tr><td colSpan={5} className="portal-empty">{submissions.length === 0 ? 'No teams yet. Add them with Teams.' : 'Nothing matches.'}</td></tr>
+              <tr><td colSpan={4} className="portal-empty">{submissions.length === 0 ? 'No teams yet. Add them with Teams.' : 'Nothing matches.'}</td></tr>
             ) : filteredSubmissions.map((sub) => {
-              const st = sub.approval_status;
               const info = backupsAvailable && sub.ppt_url ? backupInfo(sub.backup) : null;
+              const earlier = sub.uploads.slice(1);
+              const open = expanded.has(sub.team_id);
+              const toggle = () => setExpanded((cur) => { const n = new Set(cur); n.has(sub.team_id) ? n.delete(sub.team_id) : n.add(sub.team_id); return n; });
               return (
-                <tr key={sub.team_id}>
+                <React.Fragment key={sub.team_id}>
+                <tr>
                   <td className="col-team">
                     <div className="portal-team">{sub.team_id}</div>
                     {sub.team_name && <div>{sub.team_name}</div>}
                     {sub.leader_email && <div className="portal-muted">{sub.leader_email}</div>}
-                    {sub.appeal_message && (
-                      <div className="portal-appeal" title="Resubmission request">
-                        <MessageSquareWarning size={14} />
-                        <span>{sub.appeal_message}</span>
-                      </div>
-                    )}
                   </td>
                   <td className="col-deck">
                     {!sub.ppt_url ? (
-                      <span className="portal-muted">—</span>
+                      <span className="portal-muted">Not submitted</span>
                     ) : (
                       <span className="portal-deck">
                         <button type="button" className="portal-link" onClick={() => openDeck(sub.ppt_url)}>Open</button>
                         <span className="portal-ext">{sub.ppt_url.split('.').pop()}</span>
                         {info && <span className={`portal-backup portal-backup--${info.mod}`} title={info.title} aria-label={info.label}></span>}
+                        {earlier.length > 0 && (
+                          <button type="button" className="portal-versions" onClick={toggle} aria-expanded={open}>
+                            <History size={13} /> {earlier.length} earlier <ChevronDown size={12} className={open ? 'is-open' : ''} />
+                          </button>
+                        )}
                       </span>
                     )}
                   </td>
                   <td className="col-when">{sub.submitted_at ? <span className="portal-when">{formatWhen(sub.submitted_at)}</span> : <span className="portal-muted">—</span>}</td>
-                  <td className="col-status"><span className={`portal-badge portal-badge--${st}`}>{st.replace('_', ' ')}</span></td>
                   <td className="col-actions">
-                    {!sub.submitted && (
-                      <div className="portal-row-actions">
+                    <div className="portal-row-actions">
+                      {sub.submitted ? (
+                        <button type="button" className="portal-icon-btn portal-icon-btn--del" title="Delete this upload" aria-label={`Delete ${sub.team_id}'s latest upload`} onClick={() => runAction(() => handleDelete(sub.uploads[0].id, sub.team_id, sub.ppt_url, true, earlier.length > 0))}>
+                          <Trash2 size={16} />
+                        </button>
+                      ) : (
                         <button type="button" className="portal-icon-btn portal-icon-btn--del" title="Remove team" aria-label={`Remove ${sub.team_id}`} onClick={() => runAction(() => handleRemoveTeam(sub.team_id))}>
                           <Trash2 size={16} />
                         </button>
-                      </div>
-                    )}
-                    {sub.submitted && (
-                      <div className="portal-row-actions">
-                        <button type="button" className="portal-icon-btn portal-icon-btn--ok" title="Approve" aria-label={`Approve ${sub.team_id}`} onClick={() => runAction(() => handleApprove(sub.submission_id, 'approved', sub.team_id))}>
-                          <Check size={16} />
-                        </button>
-                        <button type="button" className="portal-icon-btn portal-icon-btn--no" title="Reject" aria-label={`Reject ${sub.team_id}`} onClick={() => runAction(() => handleApprove(sub.submission_id, 'rejected', sub.team_id))}>
-                          <X size={16} />
-                        </button>
-                        <button type="button" className="portal-icon-btn portal-icon-btn--del" title="Delete and let the team re-upload" aria-label={`Delete ${sub.team_id}`} onClick={() => runAction(() => handleDelete(sub.submission_id, sub.team_id, sub.ppt_url))}>
-                          <Trash2 size={16} />
-                        </button>
-                      </div>
-                    )}
+                      )}
+                    </div>
                   </td>
                 </tr>
+                {open && earlier.map((u) => {
+                  const ui = backupsAvailable ? backupInfo(u.backup) : null;
+                  return (
+                    <tr key={u.id} className="portal-earlier">
+                      <td className="col-team"><span className="portal-muted">Earlier upload</span></td>
+                      <td className="col-deck">
+                        <span className="portal-deck">
+                          <button type="button" className="portal-link" onClick={() => openDeck(u.ppt_url)}>Open</button>
+                          <span className="portal-ext">{u.ppt_url.split('.').pop()}</span>
+                          {ui && <span className={`portal-backup portal-backup--${ui.mod}`} title={ui.title} aria-label={ui.label}></span>}
+                        </span>
+                      </td>
+                      <td className="col-when">{u.submitted_at ? <span className="portal-when">{formatWhen(u.submitted_at)}</span> : <span className="portal-muted">—</span>}</td>
+                      <td className="col-actions">
+                        <div className="portal-row-actions">
+                          <button type="button" className="portal-icon-btn portal-icon-btn--del" title="Delete this upload" aria-label={`Delete an earlier upload from ${sub.team_id}`} onClick={() => runAction(() => handleDelete(u.id, sub.team_id, u.ppt_url, false, false))}>
+                            <Trash2 size={16} />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })}
+                </React.Fragment>
               );
             })}
           </tbody>

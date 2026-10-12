@@ -508,3 +508,22 @@ textarea.portal-input { min-height: 104px; padding: 12px 14px; font-weight: 500;
 .portal-notice span { flex: 1; }
 .portal-notice-close { display: grid; place-items: center; width: 24px; height: 24px; padding: 0; color: inherit; background: none; border: 0; border-radius: 6px; cursor: pointer; opacity: 0.7; }
 .portal-notice-close:hover { opacity: 1; }
+
+/* ---------- Admin: earlier uploads (re-uploads keep every version) ----------- */
+.portal-versions {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 2px 8px;
+  font: 600 0.75rem 'Satoshi', system-ui, sans-serif;
+  color: var(--p-copy);
+  background: #f4f3fc;
+  border: 1px solid var(--p-line-soft);
+  border-radius: 999px;
+  cursor: pointer;
+}
+.portal-versions:hover { color: var(--p-ink); background: #fff; }
+.portal-versions svg:last-child { transition: transform 160ms ease; }
+.portal-versions svg.is-open { transform: rotate(180deg); }
+.portal-table tr.portal-earlier td { background: rgba(244, 243, 252, 0.55); font-size: 0.85rem; }
+.portal-success .portal-hint { margin: 0 0 1.1rem; }

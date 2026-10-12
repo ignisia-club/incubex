@@ -20,11 +20,9 @@ export default function Upload() {
   const [teamPin, setTeamPin] = useState('');
   const [file, setFile] = useState(null);
   const [dragging, setDragging] = useState(false);
-  const [status, setStatus] = useState('idle'); // idle | uploading | success | error | appeal_success
+  const [status, setStatus] = useState('idle'); // idle | uploading | success | error
   const [message, setMessage] = useState('');
-  const [appealMessage, setAppealMessage] = useState('');
   const [receipt, setReceipt] = useState(null);
-  const [mode, setMode] = useState('upload'); // upload | appeal (team already submitted)
 
   const fail = (msg) => { setStatus('error'); setMessage(msg); };
 
@@ -56,12 +54,8 @@ export default function Upload() {
       if (teamError) throw new Error('We couldn’t verify your team right now. Please try again.');
       if (!teamInfo?.exists) throw new Error('Incorrect Team ID or PIN. Please check and try again.');
 
-      if (teamInfo.submitted) {
-        setMode('appeal');
-        setStatus('idle');
-        setMessage('');
-        return;
-      }
+      // A team may upload again: the newest deck counts, earlier ones are kept.
+      const replaced = teamInfo.submitted && teamInfo.last_submitted_at ? new Date(teamInfo.last_submitted_at) : null;
 
       setMessage('Uploading');
       const fileExt = file.name.split('.').pop().toLowerCase();
@@ -83,11 +77,12 @@ export default function Upload() {
       });
 
       if (submitError) {
-        if (submitError.code === '23505') throw new Error('Your team has already submitted a deck.');
+        if (/limit/i.test(submitError.message || '')) throw new Error('Your team has reached the upload limit. Contact the organisers.');
+        if (/PIN/i.test(submitError.message || '')) throw new Error('Incorrect Team ID or PIN. Please check and try again.');
         throw new Error('We couldn’t save your submission. Please try again.');
       }
 
-      setReceipt({ teamId: id, fileName: file.name, at: new Date() });
+      setReceipt({ teamId: id, fileName: file.name, at: new Date(), replaced });
       setStatus('success');
       setMessage('');
     } catch (err) {
@@ -96,32 +91,8 @@ export default function Upload() {
     }
   };
 
-  const handleAppeal = async (e) => {
-    e.preventDefault();
-    if (!appealMessage.trim()) return fail('Tell us why you need to resubmit.');
-
-    setStatus('uploading');
-    setMessage('Sending');
-    try {
-    const { error } = await supabase.rpc('submit_appeal', {
-      p_team_id: teamId.trim().toUpperCase(),
-      p_team_pin: teamPin.trim(),
-      p_message: appealMessage.trim()
-    });
-
-    if (error) {
-      fail('We couldn’t send your request. Please try again later.');
-    } else {
-      setStatus('appeal_success');
-    }
-    } catch {
-      fail('We couldn’t send your request. Please try again later.');
-    }
-  };
-
-  const reset = () => { setMode('upload'); setStatus('idle'); setTeamId(''); setTeamPin(''); setFile(null); setMessage(''); setAppealMessage(''); setReceipt(null); };
+  const reset = () => { setStatus('idle'); setTeamId(''); setTeamPin(''); setFile(null); setMessage(''); setReceipt(null); };
   const busy = status === 'uploading';
-  const appealing = mode === 'appeal';
 
   if (status === 'success' && receipt) {
     return (
@@ -133,21 +104,10 @@ export default function Upload() {
             <div><dt>Team ID</dt><dd>{receipt.teamId}</dd></div>
             <div><dt>File</dt><dd>{receipt.fileName}</dd></div>
             <div><dt>Received</dt><dd>{formatWhen(receipt.at)}</dd></div>
+            {receipt.replaced && <div><dt>Replaces</dt><dd>Upload from {formatWhen(receipt.replaced)}</dd></div>}
           </dl>
+          <p className="portal-hint">Need to change it? Upload again with your Team ID and PIN. The latest upload counts.</p>
           <button type="button" className="portal-btn portal-btn--ghost portal-btn--block" onClick={reset}>Upload for another team</button>
-        </div>
-      </PortalShell>
-    );
-  }
-
-  if (status === 'appeal_success') {
-    return (
-      <PortalShell hero>
-        <div className="portal-card portal-success" role="status">
-          <div className="portal-success-icon"><CheckCircle2 size={30} /></div>
-          <h2>Request sent</h2>
-          <p>The organisers will review it.</p>
-          <button type="button" className="portal-btn portal-btn--ghost portal-btn--block" style={{ marginTop: '1.4rem' }} onClick={reset}>Done</button>
         </div>
       </PortalShell>
     );
@@ -157,32 +117,11 @@ export default function Upload() {
     <PortalShell hero>
       <header className="portal-head">
         <span className="portal-wordmark" aria-label="INCUBEX">INCUBE<span>X</span></span>
-        <h1 className="portal-title">{appealing ? 'Already submitted' : 'Submit your deck'}</h1>
+        <h1 className="portal-title">Submit your deck</h1>
       </header>
 
       <div className="portal-card">
-        <form className="portal-form" onSubmit={appealing ? handleAppeal : handleUpload} noValidate aria-busy={busy}>
-          {appealing ? (
-            <>
-              <div className="portal-alert portal-alert--info">
-                <AlertCircle size={18} />
-                <span><strong>{teamId.trim().toUpperCase()}</strong> has already uploaded a deck. To replace it, send a request.</span>
-              </div>
-              <div className="portal-field">
-                <label className="portal-label" htmlFor="appeal">Why do you need to resubmit?</label>
-                <textarea
-                  id="appeal"
-                  className="portal-input"
-                  value={appealMessage}
-                  onChange={(e) => setAppealMessage(e.target.value)}
-                  disabled={busy}
-                  maxLength={500}
-                  required
-                />
-              </div>
-            </>
-          ) : (
-            <>
+        <form className="portal-form" onSubmit={handleUpload} noValidate aria-busy={busy}>
               <div className="portal-field">
                 <label className="portal-label" htmlFor="team-id">Team ID</label>
                 <input
@@ -241,8 +180,6 @@ export default function Upload() {
                   </span>
                 </label>
               </div>
-            </>
-          )}
 
           {status === 'error' && (
             <div className="portal-alert portal-alert--error" role="alert">
@@ -252,23 +189,17 @@ export default function Upload() {
           )}
           {busy && <p role="status" aria-live="polite">{message}… Please keep this page open.</p>}
 
-          <button type="submit" className="portal-btn portal-btn--block" disabled={busy || (!appealing && (!teamId || !file))}>
+          <button type="submit" className="portal-btn portal-btn--block" disabled={busy || !teamId || !teamPin || !file}>
             {busy ? (
               <><Loader2 size={18} className="portal-spin" /> {message}…</>
-            ) : appealing ? (
-              <>Send request <ArrowRight size={18} /></>
             ) : (
               <>Submit <ArrowRight size={18} /></>
             )}
           </button>
-          {appealing && !busy && (
-            <button type="button" className="portal-btn portal-btn--ghost portal-btn--block" onClick={reset}>Back</button>
-          )}
         </form>
       </div>
 
-      {!appealing && (
-        <section className="portal-templates" aria-labelledby="template-heading">
+      <section className="portal-templates" aria-labelledby="template-heading">
           <h2 id="template-heading">Download your presentation template</h2>
           <div className="portal-template-options">
             <a href="/assets/Product_Track_Template.pptx" download>
@@ -281,7 +212,6 @@ export default function Upload() {
             </a>
           </div>
         </section>
-      )}
     </PortalShell>
   );
 }

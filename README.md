@@ -25,17 +25,16 @@ Supabase handles the Database (PostgreSQL), Storage (S3-compatible), and Auth. T
 ## Key Features
 
 ### 1. Upload Portal (`/`)
-- Teams upload their pitch decks (max 25MB). 
-- Validates Team IDs instantly.
-- **Appeals System:** If a team has already submitted a pitch deck, the file-drop area dynamically switches to an "Appeal Form". The team can write a message requesting to resubmit, which is saved to the database for admins to review.
+- Teams upload their pitch decks (max 10 MB) with their **Team ID and 8-digit PIN** (both from Club OS).
+- **Re-uploads:** a team can upload again with its ID + PIN until organisers say otherwise. Every upload is kept; the newest counts
+  (migration `15`). There is no request/appeal step.
 
 ### 2. Admin Dashboard (`/admin`)
 - Secure dashboard accessible only via login.
-- **Filters & Stats:** Sort views by "All Teams", "Pending", "Approved", "Rejected", or "Not Submitted".
-- **Actions:** 
-  - Click the **Check** (Approve) or **X** (Reject) to update status (requires confirmation).
-  - Click the **Trash** icon to completely reset a team. This deletes the file from the Storage Bucket and removes the database row, resetting their status to "Not Submitted".
-- **Appeals:** If a team submitted an appeal, it displays in orange directly beneath their Team ID.
+- **Filters:** All, Submitted, Not submitted, plus search by Team ID, team name or email.
+- **Per team:** the latest upload (open, file type, backup status, upload time) and its earlier uploads under "N earlier".
+- **Delete:** the bin icon deletes one upload (file + record). If it was the newest, the previous upload becomes current.
+- No approve/reject or review status: evaluation happens in Club OS.
 - **Excel/CSV Import:** The "Import Excel/CSV" button in the Teams panel allows bulk-adding teams (reads ID and Email columns). 
   > **⚠️ IMPORTANT:** If a team ID like `0123` is stored as a number in Excel, Excel drops the leading zero before the file is read. **Format the ID column as Text** in Excel to preserve leading zeros.
 - **Excel Export:** The "Export" button generates an instant `.xlsx` Excel download. It automatically generates 7-day temporary Signed URLs for every pitch deck so you can click them straight from Excel!
@@ -48,7 +47,7 @@ Supabase handles the Database (PostgreSQL), Storage (S3-compatible), and Auth. T
 
 1. **Student entry:** the home hero and desktop/mobile navigation link to `/upload`.
    PDF, PPT and PPTX are accepted up to 25 MiB; empty files and invalid selections
-   are rejected. Checking, uploading, saving, receipt and appeal states are visible.
+   are rejected. Checking, uploading, saving and receipt states are visible.
 2. **Shared records:** `/upload` stores the private storage path against the registered
    Team ID in `submissions`. `/admin` joins those records to `teams`, including the
    registered team name and leader email when available. It refreshes every 30 seconds
@@ -88,7 +87,8 @@ Go to `http://localhost:5173/upload`.
   (add them from `/admin` → **Teams**).
   Dummy IDs `INC-12345`, `INC-56789` and `INC-99999` are seeded in migration `02`.
 - **Test Upload:** Enter `INC-12345`, upload a PDF, and hit Submit.
-- **Test Appeal:** Refresh the page and try entering `INC-12345` again. The system will detect the existing submission and prompt you with the Appeal form instead of the file drop!
+- **Test re-upload:** upload again with the same Team ID + PIN. The receipt says which earlier upload it replaces, and `/admin`
+  shows both (newest first).
 
 ### 3. Testing the Admin Dashboard
 Go to `http://localhost:5173/admin` and sign in with an admin account (a user listed in `public.admins`).
@@ -96,9 +96,8 @@ Admin passwords are set in the Supabase SQL editor (migration `03`) and are **ne
 
 Once inside:
 - Click **Teams** to add Team IDs, or the bin icon on a team without a submission to remove it.
-- Try filtering by "Pending" or "Not Submitted".
-- Approve or reject a submission.
-- Click the "Trash" icon on a submission to reset it, then check the Upload page to see if that team can upload again.
+- Try filtering by "Submitted" or "Not submitted", and open "N earlier" on a team that uploaded twice.
+- Delete an upload and check that the previous one becomes current.
 - Click the **Export** button and open the resulting Excel file to test the generated Pitch Deck links.
 
 ## Secondary Backup (Backblaze B2)
@@ -206,7 +205,6 @@ GET /functions/v1/submissions-api?team_id=INC-12345&expires_in=600
       "link_1": "https://gxftluqkfouxdpcskzdq.supabase.co/storage/v1/object/sign/incubex-ppts/INC-12345_1791298800725.pdf?token=...",
       "link_2": "https://s3.us-east-005.backblazeb2.com/incubexbackupppts/INC-12345.pdf?X-Amz-Expires=3600&...",
       "backup_status": "success",
-      "approval_status": "pending",
       "file_type": "pdf"
     },
     {
@@ -215,7 +213,6 @@ GET /functions/v1/submissions-api?team_id=INC-12345&expires_in=600
       "link_1": "https://...",
       "link_2": null,
       "backup_status": "pending",
-      "approval_status": "approved",
       "file_type": "pptx"
     }
   ]
@@ -227,12 +224,11 @@ GET /functions/v1/submissions-api?team_id=INC-12345&expires_in=600
 | `generated_at` | string | When this response was produced (UTC). |
 | `links_expire_in_seconds` | number | How long the links in **this** response stay valid. |
 | `count` | number | Number of items in `submissions`. |
-| `submissions[].team_id` | string | Team ID, e.g. `INC-12345`. Unique: one current submission per team. |
+| `submissions[].team_id` | string | Team ID, e.g. `1003`. A team appears once per upload; the newest counts. |
 | `submissions[].uploaded_at` | string | When the team uploaded the deck (UTC). Use this as the "date/time uploaded". |
 | `submissions[].link_1` | string \| null | **Link 1** - temporary signed link to the **primary** copy (Supabase Storage). |
 | `submissions[].link_2` | string \| null | **Link 2** - temporary signed link to the **backup** copy (Backblaze B2). `null` until `backup_status` is `success`. |
 | `submissions[].backup_status` | string | `success` (backup done), `pending` (in progress), `failed` (will be retried automatically every 2 hours), `none` (not started yet). |
-| `submissions[].approval_status` | string | Organisers' review result: `pending`, `approved` or `rejected`. |
 | `submissions[].file_type` | string | `pdf`, `ppt` or `pptx`. |
 
 **Club OS fields.** Every item also carries `id`, `teamId`, `url` (`link_1`, else `link_2`), `fileName` (`<team_id>.<ext>`)
@@ -243,8 +239,8 @@ original fields are unchanged. Club OS calls `GET /functions/v1/submissions-api?
 Notes:
 - Results are sorted newest upload first. Teams that have **not** submitted are not listed. Maximum 2000 rows per call (far above the ~80 teams expected).
 - Both links point to the **same deck**; `link_2` is simply the independent backup. Prefer `link_1`, fall back to `link_2` if it fails.
-- If a team re-uploads after an organiser reset, the API returns only their **current** deck. Older versions stay in the B2 bucket
-  (`INC-12345_v2.pdf`, ...) but are not exposed by the API.
+- A team may upload more than once: the API lists **every** upload (newest first); the newest counts. Each version is also kept in the B2 bucket
+  (`INC-12345_v2.pdf`, ...).
 
 ### IMPORTANT: links are temporary
 
