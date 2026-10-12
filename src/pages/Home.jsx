@@ -765,13 +765,13 @@ export default function Home() {
             </div>
           </div>
 
-          <!-- Step 4: 9 - 10 Oct 2026 -->
+          <!-- Step 2: 15 – 16 Oct 2026 -->
           <div class="relative flex flex-col md:flex-row items-start group timeline-item" id="step-node-4">
             <div class="w-full md:w-72 md:shrink-0 md:pr-8 text-left md:text-right pb-3 md:pb-0">
-              <time datetime="2026-10-16" data-end-date="2026-10-17" class="font-serif italic text-2xl sm:text-3xl text-slate-900 font-bold group-hover:text-indigo-600 transition-colors">
-                16 – 17 Oct 2026
+              <time datetime="2026-10-15" data-end-date="2026-10-16" class="font-serif italic text-2xl sm:text-3xl text-slate-900 font-bold group-hover:text-indigo-600 transition-colors">
+                15 – 16 Oct 2026
               </time>
-              <span class="text-sm font-semibold text-slate-500 block mt-0.5">5:00 AM (16th) to 11:59 PM (17th)</span>
+              <span class="text-sm font-semibold text-slate-500 block mt-0.5">5:00 AM (15th) to 11:59 PM (16th)</span>
               <span class="text-[11px] font-mono uppercase tracking-wider text-indigo-600 font-bold block mt-1">
                 Step 02 • Qualifier Round
               </span>
@@ -808,7 +808,8 @@ export default function Home() {
 
           <div class="relative flex flex-col md:flex-row items-start group timeline-item" id="step-node-5">
             <div class="w-full md:w-72 md:shrink-0 md:pr-8 text-left md:text-right pb-3 md:pb-0">
-              <time datetime="2026-10-19" class="font-serif italic text-2xl sm:text-3xl text-slate-900 font-bold">19 Oct 2026</time>
+              <time datetime="2026-10-17" class="font-serif italic text-2xl sm:text-3xl text-slate-900 font-bold">17 Oct 2026</time>
+              <span class="text-sm font-semibold text-slate-500 block mt-0.5">Morning</span>
               <span class="text-[11px] font-mono uppercase tracking-wider text-indigo-600 font-bold block mt-1">Round 1 Results</span>
             </div>
             <div class="hidden md:flex absolute left-72 -translate-x-1/2 items-center justify-center z-10">
@@ -817,7 +818,7 @@ export default function Home() {
             <div class="w-full md:flex-1 md:min-w-0 md:pl-12">
               <div class="rounded-2xl p-6 sm:p-7 border border-indigo-200">
                 <h3 class="text-xl sm:text-2xl font-black text-slate-900 mb-2">Round 1 Results</h3>
-                <p class="text-sm text-slate-700 leading-relaxed">Round 1 results will be announced on 19 October 2026.</p>
+                <p class="text-sm text-slate-700 leading-relaxed">Round 1 results will be announced on 17 October 2026 (Morning).</p>
               </div>
             </div>
           </div>
@@ -1070,7 +1071,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div class="faq-item border border-indigo-100/90 rounded-2xl bg-white/95 overflow-hidden shadow-xs hover:border-indigo-300 hover:shadow-card transition-all duration-300" data-category="event" data-keywords="What is the event format and when is the finale? The event begins with an online evaluation round (16th - 17th October 2026), followed by an offline Grand Finale at the MIT-WPU campus in Pune on 21st October 2026. Only shortlisted finalist teams need to travel to Pune.">
+            <div class="faq-item border border-indigo-100/90 rounded-2xl bg-white/95 overflow-hidden shadow-xs hover:border-indigo-300 hover:shadow-card transition-all duration-300" data-category="event" data-keywords="What is the event format and when is the finale? The event begins with an online evaluation round (15th - 16th October 2026), followed by an offline Grand Finale at the MIT-WPU campus in Pune on 21st October 2026. Only shortlisted finalist teams need to travel to Pune.">
               <button class="w-full text-left px-6 py-5 font-extrabold text-slate-900 flex justify-between items-center focus:outline-none cursor-pointer group" onclick="toggleFaq(this); playSound('click');">
                 <span class="text-sm sm:text-base pr-4 group-hover:text-indigo-600 transition-colors">What is the event format and when is the finale?</span>
                 <div class="faq-icon-wrapper w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center flex-shrink-0 text-indigo-600 transition-transform duration-300">
@@ -1078,7 +1079,7 @@ export default function Home() {
                 </div>
               </button>
               <div class="faq-answer hidden px-6 pb-6 text-xs sm:text-sm text-slate-700 leading-relaxed font-normal border-t border-slate-100 pt-4">
-                <p>The event begins with an online evaluation round (16th - 17th October 2026), followed by an offline Grand Finale at the MIT-WPU campus in Pune on 21st October 2026. Only shortlisted finalist teams need to travel to Pune.</p>
+                <p>The event begins with an online evaluation round (15th - 16th October 2026), followed by an offline Grand Finale at the MIT-WPU campus in Pune on 21st October 2026. Only shortlisted finalist teams need to travel to Pune.</p>
               </div>
             </div>
 
@@ -1204,7 +1205,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div class="faq-item border border-indigo-100/90 rounded-2xl bg-white/95 overflow-hidden shadow-xs hover:border-indigo-300 hover:shadow-card transition-all duration-300" data-category="finale" data-keywords="When will shortlisted teams be announced? Round 1 results and shortlisted finalist announcements will be made on 19th October 2026. Selected teams will be notified via email and phone.">
+            <div class="faq-item border border-indigo-100/90 rounded-2xl bg-white/95 overflow-hidden shadow-xs hover:border-indigo-300 hover:shadow-card transition-all duration-300" data-category="finale" data-keywords="When will shortlisted teams be announced? Round 1 results and shortlisted finalist announcements will be made on 17th October 2026 (Morning). Selected teams will be notified via email and phone.">
               <button class="w-full text-left px-6 py-5 font-extrabold text-slate-900 flex justify-between items-center focus:outline-none cursor-pointer group" onclick="toggleFaq(this); playSound('click');">
                 <span class="text-sm sm:text-base pr-4 group-hover:text-indigo-600 transition-colors">When will shortlisted teams be announced?</span>
                 <div class="faq-icon-wrapper w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center flex-shrink-0 text-indigo-600 transition-transform duration-300">
@@ -1212,7 +1213,7 @@ export default function Home() {
                 </div>
               </button>
               <div class="faq-answer hidden px-6 pb-6 text-xs sm:text-sm text-slate-700 leading-relaxed font-normal border-t border-slate-100 pt-4">
-                <p>Round 1 results and shortlisted finalist announcements will be made on 19th October 2026. Selected teams will be notified via email and phone.</p>
+                <p>Round 1 results and shortlisted finalist announcements will be made on 17th October 2026 (Morning). Selected teams will be notified via email and phone.</p>
               </div>
             </div>
 
