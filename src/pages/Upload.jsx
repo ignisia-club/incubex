@@ -54,6 +54,10 @@ export default function Upload() {
       if (teamError) throw new Error('We couldn’t verify your team right now. Please try again.');
       if (!teamInfo?.exists) throw new Error('Incorrect Team ID or PIN. Please check and try again.');
 
+      if (teamInfo?.uploads >= 10) {
+        throw new Error('Your team has reached the upload limit (maximum 10 uploads). Contact the organisers.');
+      }
+
       // A team may upload again: the newest deck counts, earlier ones are kept.
       const replaced = teamInfo.submitted && teamInfo.last_submitted_at ? new Date(teamInfo.last_submitted_at) : null;
 
@@ -77,7 +81,7 @@ export default function Upload() {
       });
 
       if (submitError) {
-        if (/limit/i.test(submitError.message || '')) throw new Error('Your team has reached the upload limit. Contact the organisers.');
+        if (/limit/i.test(submitError.message || '')) throw new Error('Your team has reached the upload limit (maximum 10 uploads). Contact the organisers.');
         if (/PIN/i.test(submitError.message || '')) throw new Error('Incorrect Team ID or PIN. Please check and try again.');
         throw new Error('We couldn’t save your submission. Please try again.');
       }
