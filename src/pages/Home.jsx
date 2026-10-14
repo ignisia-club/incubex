@@ -65,6 +65,10 @@ export default function Home() {
               <a href="/upload" class="hero-secondary-link">
                 <span>Upload presentation</span>
               </a>
+              <a href="/slots" class="hero-secondary-link hero-secondary-link--slots">
+                <iconify-icon icon="ph:calendar-check-bold" width="17" height="17" aria-hidden="true"></iconify-icon>
+                <span>Select Time Slot</span>
+              </a>
               <a href="#arena" onclick="playSound('hover');" class="hero-secondary-link">
                 <iconify-icon icon="ph:rocket-launch-duotone" width="18" height="18" aria-hidden="true"></iconify-icon>
                 <span>Explore Tracks</span>
