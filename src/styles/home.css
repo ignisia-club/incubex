@@ -165,7 +165,8 @@
   }
 }
 #hero .hero-cta-stack { flex-direction: column; }
-#hero .hero-secondary-actions { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+/* Three buttons while slot booking is hidden (src/features.js); use repeat(4, …) if it comes back. */
+#hero .hero-secondary-actions { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
 #hero .hero-secondary-link { justify-content: center; }
 #hero .hero-secondary-link--slots {
   background: rgba(238, 242, 255, 0.9);
@@ -228,6 +229,8 @@
 }
 @media (max-width: 860px) {
   #hero .hero-secondary-actions { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  /* An odd button out takes the whole last row instead of sitting alone on the left. */
+  #hero .hero-secondary-actions > :last-child:nth-child(odd) { grid-column: 1 / -1; }
 }
 @media (max-width: 639px) {
   #hero .hero-secondary-actions { grid-template-columns: repeat(2, minmax(0, 1fr)); }
