@@ -111,6 +111,13 @@ export default function Upload() {
             {receipt.replaced && <div><dt>Replaces</dt><dd>Upload from {formatWhen(receipt.replaced)}</dd></div>}
           </dl>
           <p className="portal-hint">Need to change it? Upload again with your Team ID and PIN. The latest upload counts.</p>
+          <a
+            href="/slots"
+            className="portal-btn portal-btn--block"
+            style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', textDecoration: 'none', marginBottom: '10px' }}
+          >
+            Select Your Presentation Slot <ArrowRight size={16} />
+          </a>
           <button type="button" className="portal-btn portal-btn--ghost portal-btn--block" onClick={reset}>Upload for another team</button>
         </div>
       </PortalShell>

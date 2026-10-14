@@ -527,3 +527,165 @@ textarea.portal-input { min-height: 104px; padding: 12px 14px; font-weight: 500;
 .portal-versions svg.is-open { transform: rotate(180deg); }
 .portal-table tr.portal-earlier td { background: rgba(244, 243, 252, 0.55); font-size: 0.85rem; }
 .portal-success .portal-hint { margin: 0 0 1.1rem; }
+
+/* ---------- Admin: Time Slots Management ----------------------------------- */
+.portal-slots-container { display: flex; flex-direction: column; gap: 16px; margin-top: 16px; }
+.portal-slot-card {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid var(--p-line-soft);
+  border-radius: 20px;
+  padding: 20px 24px;
+  box-shadow: 0 4px 20px rgba(70, 51, 176, 0.04);
+  transition: all 0.2s ease;
+}
+.portal-slot-card:hover {
+  border-color: #c4b5fd;
+  box-shadow: 0 6px 24px rgba(70, 51, 176, 0.08);
+}
+.portal-slot-card.is-ended {
+  background: rgba(248, 248, 252, 0.7);
+  opacity: 0.88;
+}
+.portal-slot-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+.portal-slot-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.portal-slot-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--p-ink);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.portal-slot-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.85rem;
+  color: var(--p-copy);
+}
+.portal-slot-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.portal-slot-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.portal-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-radius: 999px;
+}
+.portal-pill--open { background: #ecfdf5; color: #047857; border: 1px solid #a7f3d0; }
+.portal-pill--full { background: #fffbeb; color: #b45309; border: 1px solid #fde68a; }
+.portal-pill--ended { background: #fef2f2; color: #b91c1c; border: 1px solid #fecaca; }
+.portal-pill--cap { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; font-family: monospace; }
+
+.portal-slot-teams-section {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--p-line-soft);
+}
+.portal-slot-teams-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.portal-slot-teams-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--p-copy);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.portal-slot-teams-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.portal-slot-team-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  background: #f8f8fd;
+  border: 1px solid var(--p-line-soft);
+  border-radius: 12px;
+  font-size: 0.88rem;
+}
+.portal-slot-team-id {
+  font-weight: 700;
+  color: var(--p-blue);
+  font-family: monospace;
+}
+.portal-slot-team-name {
+  color: var(--p-ink);
+  font-weight: 600;
+}
+.portal-slot-team-meta {
+  color: var(--p-muted);
+  font-size: 0.78rem;
+}
+
+/* Modal */
+.portal-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.portal-modal {
+  width: 100%;
+  max-width: 520px;
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 28px;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.16);
+  border: 1px solid var(--p-line);
+}
+.portal-modal-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--p-ink);
+  margin: 0 0 18px;
+}
+.portal-modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.portal-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+}
