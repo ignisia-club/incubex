@@ -948,11 +948,69 @@ export default function Home() {
     <div class="sponsors-inner">
       <span class="ix-kicker">Supporting student innovation</span>
       <h2 id="sponsors-title" class="ix-title">Our <em>Sponsors</em></h2>
-      <div class="sponsors-grid">
-        <div class="sponsor-card"><img src="/assets/sponsor-operforce.jpg" class="sponsor-logo sponsor-logo--wide" alt="OperForce — AI Platform for Enterprise" width="1280" height="960" loading="lazy" /></div>
-        <div class="sponsor-card"><img src="/assets/sponsor-ztudium.png" class="sponsor-logo sponsor-logo--wordmark" alt="ztudium" width="554" height="554" loading="lazy" /></div>
-        <div class="sponsor-card"><img src="/assets/sponsor-auxipower.png" class="sponsor-logo" alt="AUXIPOWER Dynamic Technologies Pvt Ltd" width="1254" height="1254" loading="lazy" /></div>
-        <div class="sponsor-card"><img src="/assets/sponsor-aim-investments.png" class="sponsor-logo sponsor-logo--aim" alt="AIM Investments" width="2048" height="2048" loading="lazy" /></div>
+
+      <div class="sponsors-showcase">
+        <!-- Top Row: Main Sponsors -->
+        <div class="sponsors-tier-row">
+          
+          <div class="sponsor-cluster sponsor-cluster--title">
+            <span class="sponsor-tier-label">Title Sponsor</span>
+            <div class="sponsor-card">
+              <img src="/assets/sponsor-auxipower.png" class="sponsor-logo sponsor-logo--auxipower" alt="AUXIPOWER Dynamic Technologies Pvt Ltd" width="1254" height="1254" loading="lazy" />
+            </div>
+          </div>
+
+          <div class="sponsor-cluster sponsor-cluster--powered">
+            <span class="sponsor-tier-label">Powered By</span>
+            <div class="sponsor-card">
+              <img src="/assets/poweredby-unstop-logo.jpg" class="sponsor-logo sponsor-logo--unstop" alt="Unstop" width="2000" height="796" loading="lazy" />
+            </div>
+          </div>
+
+          <div class="sponsor-cluster sponsor-cluster--copowered">
+            <span class="sponsor-tier-label">Co-Powered By</span>
+            <div class="sponsor-card">
+              <img src="/assets/sponsor-operforce.jpg" class="sponsor-logo sponsor-logo--operforce" alt="OperForce — AI Platform for Enterprise" width="1280" height="960" loading="lazy" />
+            </div>
+          </div>
+
+          <div class="sponsor-cluster sponsor-cluster--associate">
+            <span class="sponsor-tier-label">Associate Sponsors</span>
+            <div class="sponsor-card-group">
+              <div class="sponsor-card">
+                <img src="/assets/sponsor-ztudium.png" class="sponsor-logo sponsor-logo--ztudium" alt="ztudium" width="554" height="554" loading="lazy" />
+              </div>
+              <div class="sponsor-card">
+                <img src="/assets/sponsor-aim-investments.png" class="sponsor-logo sponsor-logo--aim" alt="AIM Investments" width="2048" height="2048" loading="lazy" />
+              </div>
+              <div class="sponsor-card">
+                <img src="/assets/sponsor-mindorbit.jpeg" class="sponsor-logo sponsor-logo--mindorbit" alt="MindOrbit" width="1600" height="471" loading="lazy" />
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Bottom Row: In Association With -->
+        <div class="sponsors-association-row">
+          <div class="association-label-block">
+            <span class="sponsor-tier-label sponsor-tier-label--assoc">In Association With</span>
+          </div>
+          <div class="association-card-group">
+            <div class="sponsor-card">
+              <img src="/assets/association-iet-logo.png" class="sponsor-logo sponsor-logo--iet" alt="The Institution of Engineering and Technology (IET)" width="599" height="333" loading="lazy" />
+            </div>
+            <div class="sponsor-card">
+              <img src="/assets/association-ieeemitwpu-logo.jpeg" class="sponsor-logo sponsor-logo--ieee" alt="IEEE MIT-WPU Student Branch" width="200" height="200" loading="lazy" />
+            </div>
+            <div class="sponsor-card">
+              <img src="/assets/association-iic-logo.png" class="sponsor-logo sponsor-logo--iic" alt="Institution's Innovation Council (IIC)" width="255" height="147" loading="lazy" />
+            </div>
+            <div class="sponsor-card">
+              <img src="/assets/association-iste-logo.png" class="sponsor-logo sponsor-logo--iste" alt="Indian Society for Technical Education (ISTE)" width="512" height="512" loading="lazy" />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
