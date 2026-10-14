@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { supabase } from '../lib/supabase.js';
 import { UploadCloud, CheckCircle2, AlertCircle, Loader2, ArrowRight, FileText, Download } from 'lucide-react';
 import PortalShell from '../components/PortalShell.jsx';
+import { SLOTS_ENABLED } from '../features.js';
 
 // INC-12345, or a Club OS team number (4-5 digits, leading zeros kept).
 const TEAM_ID_PATTERN = /^(INC-\d{5}|\d{4,5})$/;
@@ -111,13 +112,13 @@ export default function Upload() {
             {receipt.replaced && <div><dt>Replaces</dt><dd>Upload from {formatWhen(receipt.replaced)}</dd></div>}
           </dl>
           <p className="portal-hint">Need to change it? Upload again with your Team ID and PIN. The latest upload counts.</p>
-          <a
+          {SLOTS_ENABLED && <a
             href="/slots"
             className="portal-btn portal-btn--block"
             style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', textDecoration: 'none', marginBottom: '10px' }}
           >
             Select Your Presentation Slot <ArrowRight size={16} />
-          </a>
+          </a>}
           <button type="button" className="portal-btn portal-btn--ghost portal-btn--block" onClick={reset}>Upload for another team</button>
         </div>
       </PortalShell>

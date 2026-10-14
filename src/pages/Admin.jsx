@@ -3,6 +3,7 @@ import { supabase } from '../lib/supabase.js';
 import { Loader2, LogOut, X, RefreshCw, AlertCircle, ArrowRight, Download, Trash2, Search, Users, CheckCircle2, FileSpreadsheet, History, ChevronDown, Clock, Plus, Edit2, UserPlus, UserMinus, ArrowRightLeft, Lock, Unlock, ChevronUp, Calendar, CalendarDays, FolderOpen } from 'lucide-react';
 import * as XLSX from 'xlsx';
 import PortalShell from '../components/PortalShell.jsx';
+import { SLOTS_ENABLED } from '../features.js';
 
 // Maps a ppt_backups row (or its absence) to a label + dot colour.
 function backupInfo(backup) {
@@ -708,9 +709,9 @@ export default function Admin() {
         <div className="portal-toolbar-actions">
           {activeTab === 'submissions' ? (
             <>
-              <button type="button" className="portal-btn portal-btn--ghost portal-btn--sm" onClick={() => setActiveTab('slots')}>
+              {SLOTS_ENABLED && <button type="button" className="portal-btn portal-btn--ghost portal-btn--sm" onClick={() => setActiveTab('slots')}>
                 <Clock size={15} /> Time Slots
-              </button>
+              </button>}
               <button type="button" className="portal-btn portal-btn--ghost portal-btn--sm" onClick={() => setTeamsOpen((o) => !o)} aria-expanded={teamsOpen}>
                 <Users size={15} /> Teams
               </button>
