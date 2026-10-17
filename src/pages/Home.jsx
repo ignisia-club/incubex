@@ -8,6 +8,8 @@ export default function Home() {
     window.dispatchEvent(new Event('resize'));
     // Apply the default FAQ section before paint, not before the React markup exists.
     window.setFaqCategory?.('event', document.querySelector('.faq-filter-btn'));
+    // Initialize hero countdown timer
+    window.initCountdown?.();
   }, []);
   return (
     <div dangerouslySetInnerHTML={{ __html: `<main id="content">
@@ -71,16 +73,21 @@ export default function Home() {
               </a>
             </div>
 
-            <!-- Results Announcement Notice: Eye-catching announcement pill with badge tag -->
-            <a href="#mission-map" class="hero-results-notice" title="View Round 1 timeline schedule">
+            <!-- Results Announcement Notice: Results Out & Download Document -->
+            <a
+              href="/assets/incubex-round-1-results.pdf"
+              download="INCUBEX_2026_Qualifier_Results.pdf"
+              class="hero-results-notice"
+              title="Download INCUBEX 2026 Qualifier Round Results (Selected Finalists)"
+            >
               <span class="hero-results-badge">
-                <iconify-icon icon="ph:sparkle-fill" width="13" height="13" aria-hidden="true"></iconify-icon>
-                <span>Round 1</span>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-300 animate-pulse" aria-hidden="true"></span>
+                <span>RESULTS OUT</span>
               </span>
               <span class="hero-results-text">
-                Results Announcement Coming Soon &middot; <strong class="hero-results-time">~3:00 PM</strong>
+                Round 1 Selected Finalists &middot; <strong class="hero-results-time">Download PDF</strong>
               </span>
-              <iconify-icon icon="ph:arrow-right-bold" width="14" height="14" class="hero-results-arrow" aria-hidden="true"></iconify-icon>
+              <iconify-icon icon="ph:download-simple-bold" width="14" height="14" class="hero-results-arrow" aria-hidden="true"></iconify-icon>
             </a>
           </div>
 
@@ -120,6 +127,45 @@ export default function Home() {
             <iconify-icon icon="mdi:linkedin" width="26" height="26"></iconify-icon>
           </a>
         </nav>
+
+        <!-- 8. Countdown strictly to the right: Card -->
+        <div class="flex justify-end z-20" id="hero-countdown-block">
+          <div class="flex flex-col items-end text-right">
+            <!-- Explicit Heading: "COUNTDOWN" -->
+            <div class="mb-1 text-[11px] sm:text-xs font-black uppercase tracking-widest text-indigo-600 flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-indigo-600 animate-ping"></span>
+              <span>COUNTDOWN</span>
+            </div>
+
+            <!-- Pure Text Monospace Countdown Timer -->
+            <div class="grid auto-cols-max grid-flow-col gap-3 sm:gap-4 text-center" id="countdown-timer">
+              <div class="flex flex-col items-center">
+                <span class="countdown font-mono text-indigo-700">
+                  <span id="days" style="--value:23;" aria-live="polite" aria-label="23">23</span>
+                </span>
+                <span class="countdown-unit">DAYS</span>
+              </div>
+              <div class="flex flex-col items-center">
+                <span class="countdown font-mono text-indigo-700">
+                  <span id="hours" style="--value:14;" aria-live="polite" aria-label="14">14</span>
+                </span>
+                <span class="countdown-unit">HOURS</span>
+              </div>
+              <div class="flex flex-col items-center">
+                <span class="countdown font-mono text-indigo-700">
+                  <span id="minutes" style="--value:45;" aria-live="polite" aria-label="45">45</span>
+                </span>
+                <span class="countdown-unit">MIN</span>
+              </div>
+              <div class="flex flex-col items-center">
+                <span class="countdown font-mono text-indigo-700">
+                  <span id="seconds" style="--value:24;" aria-live="polite" aria-label="24">24</span>
+                </span>
+                <span class="countdown-unit">SEC</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -495,7 +541,7 @@ export default function Home() {
               <span>Download PPT template</span>
             </a>
 
-            <div class="track-closed-status track-closed-status--cyan">
+            <div class="track-closed-status">
               <span class="track-closed-icon" aria-hidden="true">
                 <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>
               </span>

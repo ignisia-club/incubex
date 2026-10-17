@@ -463,9 +463,9 @@
       flex-direction: column !important;
       align-items: flex-end !important;
       justify-content: flex-end !important;
-      width: 100% !important;
-      margin-top: 1.5rem !important;
-      padding-right: 1.5rem !important;
+      width: auto !important;
+      margin-top: 0 !important;
+      padding-right: 0 !important;
       text-align: right !important;
     }
 
@@ -1664,86 +1664,7 @@
     }
 
 
-    /* ── Navbar Countdown Pill ── */
-    .nav-countdown-pill {
-      display: inline-flex !important;
-      align-items: center !important;
-      gap: 11px !important;
-      padding: 8px 18px !important;
-      border-radius: 9999px !important;
-      background: rgba(255, 255, 255, 0.9) !important;
-      border: 1.5px solid rgba(199, 210, 254, 0.95) !important;
-      box-shadow: 0 2px 14px rgba(99, 102, 241, 0.1), inset 0 1px 0 #ffffff !important;
-      backdrop-filter: blur(12px) !important;
-      -webkit-backdrop-filter: blur(12px) !important;
-      user-select: none !important;
-    }
-    .nav-countdown-header {
-      display: inline-flex !important;
-      align-items: center !important;
-      gap: 6px !important;
-    }
-    .nav-countdown-dot {
-      width: 8px !important;
-      height: 8px !important;
-      border-radius: 50% !important;
-      background: #4f46e5 !important;
-      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite !important;
-    }
-    .nav-countdown-title {
-      font-family: 'Satoshi', sans-serif !important;
-      font-size: 11.5px !important;
-      font-weight: 800 !important;
-      letter-spacing: 0.08em !important;
-      text-transform: uppercase !important;
-      color: #4338ca !important;
-    }
-    .nav-countdown-timer {
-      display: inline-flex !important;
-      align-items: center !important;
-      gap: 3.5px !important;
-    }
-    .nav-countdown-unit {
-      display: inline-flex !important;
-      align-items: baseline !important;
-    }
-    .nav-num {
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
-      font-size: 16.5px !important;
-      font-weight: 800 !important;
-      color: #0f172a !important;
-      line-height: 1 !important;
-      min-width: 21px !important;
-      text-align: center !important;
-    }
-    .nav-label {
-      font-family: 'Satoshi', sans-serif !important;
-      font-size: 11.5px !important;
-      font-weight: 700 !important;
-      color: #6366f1 !important;
-      margin-left: 1.5px !important;
-    }
-    .nav-countdown-sep {
-      font-family: ui-monospace, monospace !important;
-      font-size: 14px !important;
-      font-weight: 800 !important;
-      color: #94a3b8 !important;
-      margin: 0 1px !important;
-      line-height: 1 !important;
-    }
-    @media (max-width: 639px) {
-      .nav-countdown-pill {
-        padding: 5px 12px !important;
-        gap: 7px !important;
-      }
-      .nav-num {
-        font-size: 13.5px !important;
-        min-width: 17px !important;
-      }
-      .nav-label {
-        font-size: 10.5px !important;
-      }
-    }
+
 
     /* ── Results Notice (Below Explore Tracks & View Brochure) ── */
     #hero .hero-results-notice {
@@ -6035,17 +5956,19 @@
 
       #hero .hero-layout-wrapper {
         grid-template-columns: 1fr;
-        gap: 24px;
+        gap: 20px;
       }
 
       #hero .hero-social-dock {
         grid-column: 1;
-        justify-content: center;
+        justify-content: flex-start !important;
+        justify-self: start !important;
       }
 
       #hero-countdown-block {
         grid-column: 1;
-        justify-content: center;
+        justify-content: flex-end !important;
+        justify-self: end !important;
       }
 
       #hero .hero-secondary-link {
@@ -6409,7 +6332,7 @@
   <header class="glass-header transition-all duration-300" id="main-header"
     style="position:fixed;top:12px;left:50%;transform:translateX(-50%);width:calc(100% - 24px);max-width:1312px;z-index:40;border-radius:9999px;">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="navbar-shell flex items-center justify-between h-16 sm:h-20 min-w-0 gap-2 relative">
+      <div class="navbar-shell flex items-center justify-between h-16 sm:h-20 min-w-0 gap-2">
 
         <!-- Left: MIT-WPU Official Logo + IGNISIA Official 3D Glossy Logo -->
         <div class="nav-brand-lockup flex items-center gap-1.5 sm:gap-4 min-w-0">
@@ -6437,7 +6360,7 @@
         </div>
 
         <!-- Desktop Navigation Links: Clear, Intuitive, Tidy & Beautifully Spaced -->
-        <nav class="hidden lg:flex items-center text-[12px] font-semibold text-slate-600 lg:absolute lg:left-1/2 lg:-translate-x-1/2">
+        <nav class="hidden lg:flex items-center text-[12px] font-semibold text-slate-600">
           <a class="whitespace-nowrap py-1 hover:text-indigo-600 transition-colors nav-link" href="/#arena">Tracks</a>
           <a class="whitespace-nowrap py-1 hover:text-indigo-600 transition-colors nav-link"
             href="/#mission-map">Timeline</a>
@@ -6447,24 +6370,8 @@
           <!-- Slot booking hidden (src/features.js): <a class="whitespace-nowrap py-1 text-indigo-600 font-bold hover:text-indigo-800 transition-colors nav-link flex items-center gap-1" href="/slots" title="Pitch Time Slot Selection"><span>Select Slot</span><span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span></a> -->
         </nav>
 
-        <!-- Right Action: Clean Prominent Register Button with ample space -->
+        <!-- Right Action: Mobile Menu Trigger -->
         <div class="flex items-center gap-1.5 sm:gap-3 shrink-0">
-          <div class="nav-countdown-pill" id="nav-countdown-block" title="Time remaining until INCUBEX Grand Finale">
-            <span class="nav-countdown-header">
-              <span class="nav-countdown-dot"></span>
-              <span class="nav-countdown-title hidden sm:inline">COUNTDOWN</span>
-            </span>
-            <div class="nav-countdown-timer" id="countdown-timer">
-              <div class="nav-countdown-unit"><span class="nav-num" id="days">23</span><span class="nav-label">d</span></div>
-              <span class="nav-countdown-sep">:</span>
-              <div class="nav-countdown-unit"><span class="nav-num" id="hours">14</span><span class="nav-label">h</span></div>
-              <span class="nav-countdown-sep">:</span>
-              <div class="nav-countdown-unit"><span class="nav-num" id="minutes">45</span><span class="nav-label">m</span></div>
-              <span class="nav-countdown-sep">:</span>
-              <div class="nav-countdown-unit"><span class="nav-num" id="seconds">24</span><span class="nav-label">s</span></div>
-            </div>
-          </div>
-
           <!-- Mobile Menu Trigger -->
           <button aria-label="Open navigation menu" aria-controls="mobile-menu" aria-expanded="false"
             class="lg:hidden rounded-xl text-slate-700 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
@@ -6784,6 +6691,7 @@
 
   <!-- Script 4: Countdown Timer to 21 October 2026 -->
   <script data-purpose="countdown-logic">
+    let countdownInterval = null;
     function initCountdown() {
       const targetDate = new Date("2026-10-21T00:00:00+05:30").getTime();
 
@@ -6791,11 +6699,16 @@
         const now = new Date().getTime();
         const difference = targetDate - now;
 
+        const daysEl = document.getElementById("days");
+        const hoursEl = document.getElementById("hours");
+        const minutesEl = document.getElementById("minutes");
+        const secondsEl = document.getElementById("seconds");
+
         if (difference <= 0) {
-          document.getElementById("days").innerText = "00";
-          document.getElementById("hours").innerText = "00";
-          document.getElementById("minutes").innerText = "00";
-          document.getElementById("seconds").innerText = "00";
+          if (daysEl) daysEl.innerText = "00";
+          if (hoursEl) hoursEl.innerText = "00";
+          if (minutesEl) minutesEl.innerText = "00";
+          if (secondsEl) secondsEl.innerText = "00";
           return;
         }
 
@@ -6804,24 +6717,19 @@
         const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-        const daysEl = document.getElementById("days");
-        const hoursEl = document.getElementById("hours");
-        const minutesEl = document.getElementById("minutes");
-        const secondsEl = document.getElementById("seconds");
-
         if (daysEl) {
           daysEl.style.setProperty("--value", days);
-          daysEl.innerText = String(days).padStart(2, '0');
+          daysEl.innerText = days;
           daysEl.setAttribute("aria-label", days);
         }
         if (hoursEl) {
           hoursEl.style.setProperty("--value", hours);
-          hoursEl.innerText = String(hours).padStart(2, '0');
+          hoursEl.innerText = hours;
           hoursEl.setAttribute("aria-label", hours);
         }
         if (minutesEl) {
           minutesEl.style.setProperty("--value", minutes);
-          minutesEl.innerText = String(minutes).padStart(2, '0');
+          minutesEl.innerText = minutes;
           minutesEl.setAttribute("aria-label", minutes);
         }
         if (secondsEl) {
@@ -6832,9 +6740,15 @@
       }
 
       updateTimer();
-      setInterval(updateTimer, 1000);
+      if (countdownInterval) clearInterval(countdownInterval);
+      countdownInterval = setInterval(updateTimer, 1000);
     }
-    if (document.readyState === "loading") { document.addEventListener("DOMContentLoaded", initCountdown); } else { initCountdown(); }
+    window.initCountdown = initCountdown;
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initCountdown);
+    } else {
+      initCountdown();
+    }
   </script>
 
 
