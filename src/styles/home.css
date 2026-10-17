@@ -181,6 +181,12 @@
   align-items: center;
   justify-content: center;
 }
+#hero .hero-secondary-link--slots {
+  background: rgba(238, 242, 255, 0.9);
+  border-color: rgba(99, 102, 241, 0.45);
+  color: #3730a3;
+  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.1);
+}
 
 /* ── Results Notice (Below Explore Tracks & View Brochure) ───────────────── */
 #hero .hero-results-notice {

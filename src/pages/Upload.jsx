@@ -11,7 +11,7 @@ export default function Upload() {
             <Archive size={32} strokeWidth={1.5} />
           </div>
 
-          <p className="upload-closed-label">INCUBEX 2025</p>
+          <p className="upload-closed-label">INCUBEX 2026</p>
 
           <h1 className="upload-closed-title">Submission Period Closed</h1>
 
