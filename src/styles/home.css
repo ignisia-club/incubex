@@ -164,21 +164,209 @@
     padding: 14px 16px;
   }
 }
-#hero .hero-cta-stack { flex-direction: column; }
-#hero .hero-secondary-actions { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
-#hero .hero-secondary-link { justify-content: center; }
-#hero .hero-secondary-link--slots {
-  background: rgba(238, 242, 255, 0.9);
-  border-color: rgba(99, 102, 241, 0.45);
-  color: #3730a3;
-  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.1);
+#hero .hero-cta-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
 }
-#hero .hero-secondary-link--slots:hover {
-  background: #ffffff;
-  border-color: #4f46e5;
-  color: #312e81;
+#hero .hero-secondary-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+#hero .hero-secondary-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Results Notice (Below Explore Tracks & View Brochure) ───────────────── */
+#hero .hero-results-notice {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 52px;
+  padding: 10px 24px;
+  margin-top: 6px;
+  border-radius: 9999px !important;
+  background: rgba(255, 255, 255, 0.85) !important;
+  color: #080e46 !important;
+  border: 1.5px solid rgba(165, 180, 252, 0.75) !important;
+  backdrop-filter: blur(16px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(160%) !important;
+  box-shadow: 0 4px 20px -2px rgba(99, 102, 241, 0.16), 0 0 0 3.5px rgba(224, 231, 255, 0.55), inset 0 1px 0 #ffffff !important;
+  font-family: 'Satoshi', -apple-system, sans-serif;
+  font-size: 1.02rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+#hero .hero-results-notice:hover {
+  background: rgba(255, 255, 255, 0.98) !important;
+  border-color: rgba(99, 102, 241, 0.85) !important;
   transform: translateY(-2px);
+  box-shadow: 0 8px 28px -2px rgba(99, 102, 241, 0.24), 0 0 0 4.5px rgba(199, 210, 254, 0.7), inset 0 1px 0 #ffffff !important;
 }
+#hero .hero-results-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  padding: 4px 10px !important;
+  border-radius: 9999px !important;
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%) !important;
+  color: #ffffff !important;
+  font-family: 'Satoshi', sans-serif !important;
+  font-size: 0.72rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  box-shadow: 0 2px 8px rgba(79, 70, 229, 0.28) !important;
+  flex-shrink: 0 !important;
+}
+#hero .hero-results-text {
+  color: #0f172a !important;
+  font-weight: 600 !important;
+}
+#hero .hero-results-time {
+  color: #4338ca !important;
+  font-weight: 800 !important;
+}
+#hero .hero-results-arrow {
+  color: #6366f1 !important;
+  transition: transform 0.2s ease !important;
+  flex-shrink: 0 !important;
+}
+#hero .hero-results-notice:hover .hero-results-arrow {
+  transform: translateX(3px) !important;
+  color: #4338ca !important;
+}
+@media (max-width: 639px) {
+  #hero .hero-results-notice {
+    font-size: 0.86rem !important;
+    padding: 9px 16px !important;
+    gap: 8px !important;
+    max-width: 95% !important;
+  }
+  #hero .hero-results-badge {
+    font-size: 0.65rem !important;
+    padding: 3px 8px !important;
+  }
+}
+
+/* ── Navbar Countdown Pill (Frosted Glass, Matches Header) ───────────────── */
+.nav-countdown-pill {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 11px !important;
+  padding: 8px 18px !important;
+  border-radius: 9999px !important;
+  background: rgba(255, 255, 255, 0.9) !important;
+  border: 1.5px solid rgba(199, 210, 254, 0.95) !important;
+  box-shadow: 0 2px 14px rgba(99, 102, 241, 0.1), inset 0 1px 0 #ffffff !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  user-select: none !important;
+}
+.nav-countdown-header {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+}
+.nav-countdown-dot {
+  width: 8px !important;
+  height: 8px !important;
+  border-radius: 50% !important;
+  background: #4f46e5 !important;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite !important;
+}
+.nav-countdown-title {
+  font-family: 'Satoshi', sans-serif !important;
+  font-size: 11.5px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: #4338ca !important;
+}
+.nav-countdown-timer {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 3.5px !important;
+}
+.nav-countdown-unit {
+  display: inline-flex !important;
+  align-items: baseline !important;
+}
+.nav-num {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+  font-size: 16.5px !important;
+  font-weight: 800 !important;
+  color: #0f172a !important;
+  line-height: 1 !important;
+  min-width: 21px !important;
+  text-align: center !important;
+}
+.nav-label {
+  font-family: 'Satoshi', sans-serif !important;
+  font-size: 11.5px !important;
+  font-weight: 700 !important;
+  color: #6366f1 !important;
+  margin-left: 1.5px !important;
+}
+.nav-countdown-sep {
+  font-family: ui-monospace, monospace !important;
+  font-size: 14px !important;
+  font-weight: 800 !important;
+  color: #94a3b8 !important;
+  margin: 0 1px !important;
+  line-height: 1 !important;
+}
+@media (max-width: 639px) {
+  .nav-countdown-pill {
+    padding: 5px 12px !important;
+    gap: 7px !important;
+  }
+  .nav-num {
+    font-size: 13.5px !important;
+    min-width: 17px !important;
+  }
+  .nav-label {
+    font-size: 10.5px !important;
+  }
+}
+
+/* ── Track Closed Badge ──────────────────────────────────────────────────── */
+.track-closed-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 14px 20px;
+  border-radius: 16px;
+  background: rgba(248, 250, 252, 0.9);
+  border: 1px solid rgba(203, 213, 225, 0.7);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #64748b;
+}
+.track-closed-status--cyan {
+  background: rgba(240, 253, 254, 0.9);
+  border-color: rgba(165, 243, 252, 0.6);
+  color: #0e7490;
+}
+.track-closed-icon {
+  display: flex;
+  align-items: center;
+  opacity: 0.65;
+}
+
 #hero .poster-wordmark span { background-image: linear-gradient(45deg, #8464ff, #42c4e6); }
 #hero .hero-launchpad-line { max-width: 780px; margin-inline: auto; text-wrap: balance; }
 #hero .hero-launchpad-attribution { display: block; }
@@ -226,12 +414,7 @@
   .prize-shared small { font-size: .72rem; }
   .prize-shared strong { font-size: 1.65rem; }
 }
-@media (max-width: 860px) {
-  #hero .hero-secondary-actions { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-@media (max-width: 639px) {
-  #hero .hero-secondary-actions { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
+
 @media (max-width: 767px) {
   /* Keep the composition compact on tall phones, while allowing content to grow. */
   #hero { min-height: min(700px, calc(100svh - 16px)) !important; }
@@ -248,7 +431,6 @@
   #hero .hero-layout-wrapper { display: grid; grid-template-columns: 1fr auto; grid-template-rows: 1fr auto; gap: 36px 20px; position: relative; flex: 1; }
   #hero .hero-content-col { grid-column: 1 / -1; align-self: center; min-width: 0; }
   #hero .hero-social-dock { position: static; grid-column: 1; align-self: end; justify-self: start; }
-  #hero #hero-countdown-block { position: static !important; grid-column: 2; width: auto !important; justify-self: end; }
 }
 @media (min-width: 768px) and (max-height: 750px) {
   #hero { padding-top: 112px !important; }

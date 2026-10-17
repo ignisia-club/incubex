@@ -689,3 +689,80 @@ textarea.portal-input { min-height: 104px; padding: 12px 14px; font-weight: 500;
   gap: 10px;
   margin-top: 10px;
 }
+/* ─── Upload: Submissions Closed ──────────────────────────────────────────── */
+.upload-closed-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+  padding: 40px 16px;
+}
+.upload-closed-card {
+  max-width: 520px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 20px;
+  padding: 40px 36px;
+  text-align: center;
+  box-shadow: 0 4px 32px rgba(15, 23, 42, 0.08);
+}
+.upload-closed-icon-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  color: #64748b;
+  margin-bottom: 20px;
+}
+.upload-closed-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #94a3b8;
+  margin: 0 0 10px;
+}
+.upload-closed-title {
+  font-family: 'League Spartan', sans-serif;
+  font-size: clamp(1.45rem, 4vw, 1.9rem);
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0 0 14px;
+  line-height: 1.15;
+}
+.upload-closed-body {
+  font-size: 0.875rem;
+  color: #475569;
+  line-height: 1.7;
+  margin: 0 0 24px;
+}
+.upload-closed-divider {
+  border: none;
+  border-top: 1px solid #e2e8f0;
+  margin: 0 0 20px;
+}
+.upload-closed-contact {
+  font-size: 0.8rem;
+  color: #64748b;
+  margin: 0;
+}
+.upload-closed-contact a {
+  color: #0f172a;
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid #cbd5e1;
+  transition: border-color 0.15s;
+}
+.upload-closed-contact a:hover {
+  border-color: #0f172a;
+}
+@media (max-width: 540px) {
+  .upload-closed-card { padding: 28px 20px; }
+}

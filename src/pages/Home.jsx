@@ -54,21 +54,7 @@ export default function Home() {
           <p class="hero-launchpad-line"><span>A National-Level Tech Launchpad and Project Expo</span><span class="hero-launchpad-attribution">by <span class="poster-ignisia">Ignisia</span></span></p>
 
           <div class="hero-cta-stack">
-            <button type="button" onclick="openRegisterModal(); playSound('click');" class="hero-register-big">
-              <span>Register Now</span>
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" stroke-linecap="round" stroke-linejoin="round"></path>
-              </svg>
-            </button>
-
             <div class="hero-secondary-actions">
-              <a href="/upload" class="hero-secondary-link">
-                <span>Upload presentation</span>
-              </a>
-              <a href="/slots" class="hero-secondary-link hero-secondary-link--slots">
-                <iconify-icon icon="ph:calendar-check-bold" width="17" height="17" aria-hidden="true"></iconify-icon>
-                <span>Select Time Slot</span>
-              </a>
               <a href="#arena" onclick="playSound('hover');" class="hero-secondary-link">
                 <iconify-icon icon="ph:rocket-launch-duotone" width="18" height="18" aria-hidden="true"></iconify-icon>
                 <span>Explore Tracks</span>
@@ -78,6 +64,18 @@ export default function Home() {
                 <span>View Brochure</span>
               </a>
             </div>
+
+            <!-- Results Announcement Notice: Eye-catching announcement pill with badge tag -->
+            <a href="#mission-map" class="hero-results-notice" title="View Round 1 timeline schedule">
+              <span class="hero-results-badge">
+                <iconify-icon icon="ph:sparkle-fill" width="13" height="13" aria-hidden="true"></iconify-icon>
+                <span>Round 1</span>
+              </span>
+              <span class="hero-results-text">
+                Results Announcement Coming Soon &middot; <strong class="hero-results-time">~3:00 PM</strong>
+              </span>
+              <iconify-icon icon="ph:arrow-right-bold" width="14" height="14" class="hero-results-arrow" aria-hidden="true"></iconify-icon>
+            </a>
           </div>
 
         </div>
@@ -116,45 +114,6 @@ export default function Home() {
             <iconify-icon icon="mdi:linkedin" width="26" height="26"></iconify-icon>
           </a>
         </nav>
-
-        <!-- 8. Countdown strictly to the right: NO CARD, ONLY TEXT -->
-        <div class="w-full flex justify-end mt-6 pr-2 sm:pr-6 lg:absolute lg:right-0 lg:bottom-1 lg:mt-0 lg:w-auto z-20" id="hero-countdown-block">
-          <div class="flex flex-col items-end text-right">
-            <!-- Explicit Heading: "Countdown" -->
-            <div class="mb-1 text-[11px] sm:text-xs font-black uppercase tracking-widest text-indigo-600 flex items-center gap-1.5">
-              <span class="w-2 h-2 rounded-full bg-indigo-600 animate-ping"></span>
-              <span>Countdown</span>
-            </div>
-
-            <!-- Pure Text Monospace Countdown Timer (No enclosing card or border) -->
-            <div class="grid auto-cols-max grid-flow-col gap-3 sm:gap-4 text-center" id="countdown-timer">
-              <div class="flex flex-col items-center">
-                <span class="countdown font-mono text-indigo-700">
-                  <span id="days" style="--value:23;" aria-live="polite" aria-label="23">23</span>
-                </span>
-                <span class="countdown-unit">days</span>
-              </div>
-              <div class="flex flex-col items-center">
-                <span class="countdown font-mono text-indigo-700">
-                  <span id="hours" style="--value:14;" aria-live="polite" aria-label="14">14</span>
-                </span>
-                <span class="countdown-unit">hours</span>
-              </div>
-              <div class="flex flex-col items-center">
-                <span class="countdown font-mono text-indigo-700">
-                  <span id="minutes" style="--value:45;" aria-live="polite" aria-label="45">45</span>
-                </span>
-                <span class="countdown-unit">min</span>
-              </div>
-              <div class="flex flex-col items-center">
-                <span class="countdown font-mono text-indigo-700">
-                  <span id="seconds" style="--value:24;" aria-live="polite" aria-label="24">24</span>
-                </span>
-                <span class="countdown-unit">sec</span>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </section>
@@ -442,13 +401,12 @@ export default function Home() {
               <span>Download PPT template</span>
             </a>
 
-            <button
-              type="button"
-              onclick="openRegisterModal(); playSound('click');"
-              class="btn-shimmer w-full py-4 text-center rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs uppercase tracking-wider transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 relative z-10 cursor-pointer"
-            >
-              Apply for Product Track &rarr;
-            </button>
+            <div class="track-closed-status">
+              <span class="track-closed-icon" aria-hidden="true">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>
+              </span>
+              Registrations Closed &middot; In Evaluation
+            </div>
           </div>
         </div>
 
@@ -531,13 +489,12 @@ export default function Home() {
               <span>Download PPT template</span>
             </a>
 
-            <button
-              type="button"
-              onclick="openRegisterModal(); playSound('click');"
-              class="btn-shimmer w-full py-4 text-center rounded-2xl bg-cyan-700 hover:bg-cyan-800 text-white font-extrabold text-xs uppercase tracking-wider transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 relative z-10 cursor-pointer"
-            >
-              Apply for Prototype Expo &rarr;
-            </button>
+            <div class="track-closed-status track-closed-status--cyan">
+              <span class="track-closed-icon" aria-hidden="true">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>
+              </span>
+              Registrations Closed &middot; In Evaluation
+            </div>
           </div>
         </div>
       </div>
@@ -822,7 +779,7 @@ export default function Home() {
           <div class="relative flex flex-col md:flex-row items-start group timeline-item" id="step-node-5">
             <div class="w-full md:w-72 md:shrink-0 md:pr-8 text-left md:text-right pb-3 md:pb-0">
               <time datetime="2026-10-17" class="font-serif italic text-2xl sm:text-3xl text-slate-900 font-bold">17 Oct 2026</time>
-              <span class="text-sm font-semibold text-slate-500 block mt-0.5">10:00 AM</span>
+              <span class="text-sm font-semibold text-slate-500 block mt-0.5">~3:00 PM</span>
               <span class="text-[11px] font-mono uppercase tracking-wider text-indigo-600 font-bold block mt-1">Round 1 Results</span>
             </div>
             <div class="hidden md:flex absolute left-72 -translate-x-1/2 items-center justify-center z-10">
@@ -831,7 +788,7 @@ export default function Home() {
             <div class="w-full md:flex-1 md:min-w-0 md:pl-12">
               <div class="rounded-2xl p-6 sm:p-7 border border-indigo-200">
                 <h3 class="text-xl sm:text-2xl font-black text-slate-900 mb-2">Round 1 Results</h3>
-                <p class="text-sm text-slate-700 leading-relaxed">Round 1 results will be announced on 17 October 2026 at 10:00 AM.</p>
+                <p class="text-sm text-slate-700 leading-relaxed">Round 1 results will be announced on 17 October 2026 at ~3:00 PM.</p>
               </div>
             </div>
           </div>
@@ -1277,7 +1234,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div class="faq-item border border-indigo-100/90 rounded-2xl bg-white/95 overflow-hidden shadow-xs hover:border-indigo-300 hover:shadow-card transition-all duration-300" data-category="finale" data-keywords="When will shortlisted teams be announced? Round 1 results and shortlisted finalist announcements will be made on 17th October 2026 (10:00 AM). Selected teams will be notified via email and phone.">
+            <div class="faq-item border border-indigo-100/90 rounded-2xl bg-white/95 overflow-hidden shadow-xs hover:border-indigo-300 hover:shadow-card transition-all duration-300" data-category="finale" data-keywords="When will shortlisted teams be announced? Round 1 results and shortlisted finalist announcements will be made on 17th October 2026 (~3:00 PM). Selected teams will be notified via email and phone.">
               <button class="w-full text-left px-6 py-5 font-extrabold text-slate-900 flex justify-between items-center focus:outline-none cursor-pointer group" onclick="toggleFaq(this); playSound('click');">
                 <span class="text-sm sm:text-base pr-4 group-hover:text-indigo-600 transition-colors">When will shortlisted teams be announced?</span>
                 <div class="faq-icon-wrapper w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center flex-shrink-0 text-indigo-600 transition-transform duration-300">
@@ -1285,7 +1242,7 @@ export default function Home() {
                 </div>
               </button>
               <div class="faq-answer hidden px-6 pb-6 text-xs sm:text-sm text-slate-700 leading-relaxed font-normal border-t border-slate-100 pt-4">
-                <p>Round 1 results and shortlisted finalist announcements will be made on 17th October 2026 at 10:00 AM. Selected teams will be notified via email and phone.</p>
+                <p>Round 1 results and shortlisted finalist announcements will be made on 17th October 2026 at ~3:00 PM. Selected teams will be notified via email and phone.</p>
               </div>
             </div>
 
@@ -1348,10 +1305,6 @@ export default function Home() {
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
             <span>Email Committee</span>
           </a>
-          <button type="button" onclick="openRegisterModal(); playSound('click');" class="px-5 py-2.5 rounded-full text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-700 transition-all shadow-xs inline-flex items-center space-x-1.5 cursor-pointer">
-            <span>Register Now</span>
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
-          </button>
         </div>
       </div>
     </div>
@@ -1392,7 +1345,6 @@ export default function Home() {
           <ul class="space-y-2.5 text-xs sm:text-sm text-slate-600">
             <li><a class="transition-colors hover:text-indigo-600" href="#sponsors">Our Sponsors</a></li>
             <li><a class="transition-colors hover:text-indigo-600" href="#arena">Competition Tracks</a></li>
-            <li><button type="button" class="text-left transition-colors hover:text-indigo-600 cursor-pointer" onclick="openRegisterModal(); playSound('click');">Register</button></li>
             <li><a class="transition-colors hover:text-indigo-600" href="/assets/incubex-brochure-2026.pdf" download="INCUBEX_2026_Brochure.pdf">Official Brochure (PDF)</a></li>
             <li><a class="transition-colors hover:text-indigo-600" href="#categories">Innovation Domains</a></li>
             <li><a class="transition-colors hover:text-indigo-600" href="#mission-map">Event Timeline</a></li>
