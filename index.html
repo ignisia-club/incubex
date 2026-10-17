@@ -279,7 +279,7 @@
           "name": "When will shortlisted teams be announced?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Round 1 results and shortlisted finalist announcements will be made on 17th October 2026 at 10:00 AM. Selected teams will be notified via email and phone."
+            "text": "Round 1 results and shortlisted finalist announcements will be made on 17th October 2026 at ~3:00 PM. Selected teams will be notified via email and phone."
           }
         },
         {
@@ -1600,6 +1600,225 @@
 
     nav a.nav-link:hover {
       color: #2938cf !important;
+    }
+
+
+    /* ── Results CTA Button with Red Boundary Highlight & Blue Gradient ── */
+    .nav-results-cta {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+      padding: 8px 18px !important;
+      border-radius: 9999px !important;
+      background: linear-gradient(135deg, #2563eb 0%, #4f46e5 50%, #4338ca 100%) !important;
+      color: #ffffff !important;
+      font-family: 'Satoshi', -apple-system, BlinkMacSystemFont, sans-serif !important;
+      font-size: 11px !important;
+      font-weight: 800 !important;
+      letter-spacing: 0.05em !important;
+      text-transform: uppercase !important;
+      text-decoration: none !important;
+      border: 2.5px solid #ef4444 !important;
+      box-shadow: 0 0 16px rgba(239, 68, 68, 0.6), 0 4px 16px rgba(37, 99, 235, 0.35) !important;
+      transition: all 0.25s ease !important;
+      cursor: pointer !important;
+      position: relative !important;
+      overflow: hidden !important;
+    }
+    .nav-results-cta:hover {
+      background: linear-gradient(135deg, #1d4ed8 0%, #4338ca 50%, #3730a3 100%) !important;
+      border-color: #f87171 !important;
+      box-shadow: 0 0 22px rgba(239, 68, 68, 0.8), 0 6px 22px rgba(37, 99, 235, 0.45) !important;
+      transform: translateY(-1.5px) !important;
+    }
+    .nav-results-live-tag {
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      padding: 2px 7px !important;
+      border-radius: 9999px !important;
+      background: #ef4444 !important;
+      color: #ffffff !important;
+      font-size: 9px !important;
+      font-weight: 900 !important;
+      letter-spacing: 0.08em !important;
+      line-height: 1 !important;
+      box-shadow: 0 0 8px rgba(239, 68, 68, 0.6) !important;
+    }
+    .nav-results-mobile-cta {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      margin: 6px 0 !important;
+      padding: 10px 16px !important;
+      border-radius: 14px !important;
+      background: linear-gradient(135deg, #2563eb 0%, #4f46e5 50%, #4338ca 100%) !important;
+      border: 2px solid #ef4444 !important;
+      box-shadow: 0 0 12px rgba(239, 68, 68, 0.45) !important;
+      color: #ffffff !important;
+      text-decoration: none !important;
+      font-size: 12px !important;
+      font-weight: 800 !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.05em !important;
+    }
+
+
+    /* ── Navbar Countdown Pill ── */
+    .nav-countdown-pill {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 11px !important;
+      padding: 8px 18px !important;
+      border-radius: 9999px !important;
+      background: rgba(255, 255, 255, 0.9) !important;
+      border: 1.5px solid rgba(199, 210, 254, 0.95) !important;
+      box-shadow: 0 2px 14px rgba(99, 102, 241, 0.1), inset 0 1px 0 #ffffff !important;
+      backdrop-filter: blur(12px) !important;
+      -webkit-backdrop-filter: blur(12px) !important;
+      user-select: none !important;
+    }
+    .nav-countdown-header {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 6px !important;
+    }
+    .nav-countdown-dot {
+      width: 8px !important;
+      height: 8px !important;
+      border-radius: 50% !important;
+      background: #4f46e5 !important;
+      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite !important;
+    }
+    .nav-countdown-title {
+      font-family: 'Satoshi', sans-serif !important;
+      font-size: 11.5px !important;
+      font-weight: 800 !important;
+      letter-spacing: 0.08em !important;
+      text-transform: uppercase !important;
+      color: #4338ca !important;
+    }
+    .nav-countdown-timer {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 3.5px !important;
+    }
+    .nav-countdown-unit {
+      display: inline-flex !important;
+      align-items: baseline !important;
+    }
+    .nav-num {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+      font-size: 16.5px !important;
+      font-weight: 800 !important;
+      color: #0f172a !important;
+      line-height: 1 !important;
+      min-width: 21px !important;
+      text-align: center !important;
+    }
+    .nav-label {
+      font-family: 'Satoshi', sans-serif !important;
+      font-size: 11.5px !important;
+      font-weight: 700 !important;
+      color: #6366f1 !important;
+      margin-left: 1.5px !important;
+    }
+    .nav-countdown-sep {
+      font-family: ui-monospace, monospace !important;
+      font-size: 14px !important;
+      font-weight: 800 !important;
+      color: #94a3b8 !important;
+      margin: 0 1px !important;
+      line-height: 1 !important;
+    }
+    @media (max-width: 639px) {
+      .nav-countdown-pill {
+        padding: 5px 12px !important;
+        gap: 7px !important;
+      }
+      .nav-num {
+        font-size: 13.5px !important;
+        min-width: 17px !important;
+      }
+      .nav-label {
+        font-size: 10.5px !important;
+      }
+    }
+
+    /* ── Results Notice (Below Explore Tracks & View Brochure) ── */
+    #hero .hero-results-notice {
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 12px !important;
+      min-height: 52px !important;
+      padding: 10px 24px !important;
+      margin: 8px auto 0 !important;
+      border-radius: 9999px !important;
+      background: rgba(255, 255, 255, 0.85) !important;
+      color: #080e46 !important;
+      border: 1.5px solid rgba(165, 180, 252, 0.75) !important;
+      backdrop-filter: blur(16px) saturate(160%) !important;
+      -webkit-backdrop-filter: blur(16px) saturate(160%) !important;
+      box-shadow: 0 4px 20px -2px rgba(99, 102, 241, 0.16), 0 0 0 3.5px rgba(224, 231, 255, 0.55), inset 0 1px 0 #ffffff !important;
+      font-family: 'Satoshi', -apple-system, sans-serif !important;
+      font-size: 1.02rem !important;
+      font-weight: 700 !important;
+      letter-spacing: -0.01em !important;
+      text-decoration: none !important;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      cursor: pointer !important;
+    }
+    #hero .hero-results-notice:hover {
+      background: rgba(255, 255, 255, 0.98) !important;
+      border-color: rgba(99, 102, 241, 0.85) !important;
+      transform: translateY(-2px) !important;
+      box-shadow: 0 8px 28px -2px rgba(99, 102, 241, 0.24), 0 0 0 4.5px rgba(199, 210, 254, 0.7), inset 0 1px 0 #ffffff !important;
+    }
+    #hero .hero-results-badge {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 5px !important;
+      padding: 4px 10px !important;
+      border-radius: 9999px !important;
+      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%) !important;
+      color: #ffffff !important;
+      font-family: 'Satoshi', sans-serif !important;
+      font-size: 0.72rem !important;
+      font-weight: 800 !important;
+      letter-spacing: 0.08em !important;
+      text-transform: uppercase !important;
+      box-shadow: 0 2px 8px rgba(79, 70, 229, 0.28) !important;
+      flex-shrink: 0 !important;
+    }
+    #hero .hero-results-text {
+      color: #0f172a !important;
+      font-weight: 600 !important;
+    }
+    #hero .hero-results-time {
+      color: #4338ca !important;
+      font-weight: 800 !important;
+    }
+    #hero .hero-results-arrow {
+      color: #6366f1 !important;
+      transition: transform 0.2s ease !important;
+      flex-shrink: 0 !important;
+    }
+    #hero .hero-results-notice:hover .hero-results-arrow {
+      transform: translateX(3px) !important;
+      color: #4338ca !important;
+    }
+    @media (max-width: 639px) {
+      #hero .hero-results-notice {
+        font-size: 0.86rem !important;
+        padding: 9px 16px !important;
+        gap: 8px !important;
+        max-width: 95% !important;
+      }
+      #hero .hero-results-badge {
+        font-size: 0.65rem !important;
+        padding: 3px 8px !important;
+      }
     }
 
     /* ── 12. REGISTER CTA BUTTON (Shimmer & Glow) ── */
@@ -6190,7 +6409,7 @@
   <header class="glass-header transition-all duration-300" id="main-header"
     style="position:fixed;top:12px;left:50%;transform:translateX(-50%);width:calc(100% - 24px);max-width:1312px;z-index:40;border-radius:9999px;">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="navbar-shell flex items-center justify-between h-16 sm:h-20 min-w-0 gap-2">
+      <div class="navbar-shell flex items-center justify-between h-16 sm:h-20 min-w-0 gap-2 relative">
 
         <!-- Left: MIT-WPU Official Logo + IGNISIA Official 3D Glossy Logo -->
         <div class="nav-brand-lockup flex items-center gap-1.5 sm:gap-4 min-w-0">
@@ -6218,29 +6437,33 @@
         </div>
 
         <!-- Desktop Navigation Links: Clear, Intuitive, Tidy & Beautifully Spaced -->
-        <nav class="hidden lg:flex items-center text-[12px] font-semibold text-slate-600">
+        <nav class="hidden lg:flex items-center text-[12px] font-semibold text-slate-600 lg:absolute lg:left-1/2 lg:-translate-x-1/2">
           <a class="whitespace-nowrap py-1 hover:text-indigo-600 transition-colors nav-link" href="/#arena">Tracks</a>
           <a class="whitespace-nowrap py-1 hover:text-indigo-600 transition-colors nav-link"
             href="/#mission-map">Timeline</a>
           <a class="whitespace-nowrap py-1 hover:text-indigo-600 transition-colors nav-link" href="/#sponsors">Sponsors</a>
           <a class="whitespace-nowrap py-1 hover:text-indigo-600 transition-colors nav-link" href="/#fees">Fees</a>
           <a class="whitespace-nowrap py-1 hover:text-indigo-600 transition-colors nav-link" href="/#faq">FAQ</a>
-          <a class="whitespace-nowrap py-1 hover:text-indigo-600 transition-colors nav-link" href="/upload">Upload
-            PPT</a>
           <!-- Slot booking hidden (src/features.js): <a class="whitespace-nowrap py-1 text-indigo-600 font-bold hover:text-indigo-800 transition-colors nav-link flex items-center gap-1" href="/slots" title="Pitch Time Slot Selection"><span>Select Slot</span><span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span></a> -->
         </nav>
 
         <!-- Right Action: Clean Prominent Register Button with ample space -->
         <div class="flex items-center gap-1.5 sm:gap-3 shrink-0">
-          <!-- Register Now CTA with Shimmer & Glow -->
-          <button type="button" onclick="openRegisterModal(); playSound('click');"
-            class="btn-shimmer relative px-2.5 sm:px-6 py-2 sm:py-2.5 rounded-full font-bold text-[10px] sm:text-xs tracking-wider uppercase text-white bg-gradient-to-r from-blue-600 via-indigo-600 to-indigo-700 shadow-glow hover:shadow-hover hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 inline-flex items-center gap-1.5 sm:gap-2 cursor-pointer">
-            <span>REGISTER NOW</span>
-            <svg class="hidden sm:block w-4 h-4 transition-transform group-hover:translate-x-1" fill="none"
-              stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-              <path d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" stroke-linecap="round" stroke-linejoin="round"></path>
-            </svg>
-          </button>
+          <div class="nav-countdown-pill" id="nav-countdown-block" title="Time remaining until INCUBEX Grand Finale">
+            <span class="nav-countdown-header">
+              <span class="nav-countdown-dot"></span>
+              <span class="nav-countdown-title hidden sm:inline">COUNTDOWN</span>
+            </span>
+            <div class="nav-countdown-timer" id="countdown-timer">
+              <div class="nav-countdown-unit"><span class="nav-num" id="days">23</span><span class="nav-label">d</span></div>
+              <span class="nav-countdown-sep">:</span>
+              <div class="nav-countdown-unit"><span class="nav-num" id="hours">14</span><span class="nav-label">h</span></div>
+              <span class="nav-countdown-sep">:</span>
+              <div class="nav-countdown-unit"><span class="nav-num" id="minutes">45</span><span class="nav-label">m</span></div>
+              <span class="nav-countdown-sep">:</span>
+              <div class="nav-countdown-unit"><span class="nav-num" id="seconds">24</span><span class="nav-label">s</span></div>
+            </div>
+          </div>
 
           <!-- Mobile Menu Trigger -->
           <button aria-label="Open navigation menu" aria-controls="mobile-menu" aria-expanded="false"
@@ -6266,13 +6489,9 @@
     <a class="block py-1.5 hover:text-indigo-600" href="/#sponsors">Sponsors</a>
     <a class="block py-1.5 hover:text-indigo-600" href="/#fees">Fees</a>
     <a class="block py-1.5 hover:text-indigo-600" href="/#faq">FAQ</a>
-    <a class="block py-1.5 hover:text-indigo-600" href="/upload">Upload PPT</a>
     <!-- Slot booking hidden (src/features.js): <a class="block py-1.5 font-bold text-indigo-600 hover:text-indigo-800 flex items-center justify-between" href="/slots"><span>Select Pitch Slot</span><span class="text-[9px] uppercase tracking-wider px-1.5 py-0.5 rounded-full bg-emerald-100 text-emerald-700 font-bold">Live</span></a> -->
     <div class="pt-3 border-t border-slate-100 flex flex-col gap-2">
       <p class="mobile-menu-mantra">Think · Build · Evolve</p>
-      <button type="button" onclick="document.getElementById('mobile-menu-btn').click(); openRegisterModal(); playSound('click');"
-        class="mobile-register-action">Register
-        Now →</button>
     </div>
   </nav>
 
@@ -6592,7 +6811,7 @@
 
         if (daysEl) {
           daysEl.style.setProperty("--value", days);
-          daysEl.innerText = days;
+          daysEl.innerText = String(days).padStart(2, '0');
           daysEl.setAttribute("aria-label", days);
         }
         if (hoursEl) {
@@ -6615,7 +6834,7 @@
       updateTimer();
       setInterval(updateTimer, 1000);
     }
-    document.addEventListener("DOMContentLoaded", initCountdown);
+    if (document.readyState === "loading") { document.addEventListener("DOMContentLoaded", initCountdown); } else { initCountdown(); }
   </script>
 
 
