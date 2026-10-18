@@ -67,7 +67,7 @@
 .portal--hero .portal-shell {
   max-width: 1500px;
   min-height: calc(100svh - 40px);
-  padding-top: 128px;
+  padding-top: clamp(140px, 16vw, 175px);
   padding-bottom: 64px;
   border-radius: 34px;
 }

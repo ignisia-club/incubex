@@ -104,6 +104,10 @@ export default function Admin() {
   // Tab State: 'submissions' or 'slots'
   const [activeTab, setActiveTab] = useState('submissions');
 
+  // Upload Portal Toggle State
+  const [uploadEnabled, setUploadEnabled] = useState(true);
+  const [togglingUpload, setTogglingUpload] = useState(false);
+
   // Submissions State
   const [submissions, setSubmissions] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
@@ -213,11 +217,31 @@ export default function Admin() {
     return () => { active = false; ++authGeneration.current; subscription.unsubscribe(); };
   }, []);
 
+  const fetchUploadStatus = async () => {
+    try {
+      const { data, error } = await supabase.rpc('get_upload_status');
+      if (!error && typeof data === 'boolean') {
+        setUploadEnabled(data);
+      } else {
+        const { data: row } = await supabase.from('app_settings').select('value').eq('key', 'upload_submissions').maybeSingle();
+        if (row?.value?.enabled !== undefined) {
+          setUploadEnabled(Boolean(row.value.enabled));
+        }
+      }
+    } catch (err) {
+      console.error('Failed to fetch upload status:', err);
+    }
+  };
+
   useEffect(() => {
     if (!authorized) return;
+    fetchUploadStatus();
     if (activeTab === 'submissions') {
       fetchSubmissions();
-      const timer = setInterval(fetchSubmissions, 30000);
+      const timer = setInterval(() => {
+        fetchSubmissions();
+        fetchUploadStatus();
+      }, 30000);
       return () => clearInterval(timer);
     } else if (activeTab === 'slots') {
       fetchSlots();
@@ -514,6 +538,38 @@ export default function Admin() {
 
   const handleLogout = () => supabase.auth.signOut();
 
+  const handleToggleUploadStatus = async () => {
+    const next = !uploadEnabled;
+    const confirmMessage = next
+      ? 'Open presentation submissions? Participants will be able to upload pitch decks.'
+      : 'Close presentation submissions? Participants will see the Submission Period Closed page.';
+    if (!window.confirm(confirmMessage)) return;
+
+    setTogglingUpload(true);
+    try {
+      const { data, error } = await supabase.rpc('set_upload_status', { p_enabled: next });
+      if (error) {
+        // Fallback: direct table upsert
+        const { error: upsertErr } = await supabase.from('app_settings').upsert({
+          key: 'upload_submissions',
+          value: { enabled: next },
+          updated_at: new Date().toISOString(),
+        });
+        if (upsertErr) throw upsertErr;
+        setUploadEnabled(next);
+        setNotice({ kind: 'ok', text: `Upload portal is now ${next ? 'OPEN' : 'CLOSED'}.` });
+      } else {
+        setUploadEnabled(Boolean(data));
+        setNotice({ kind: 'ok', text: `Upload portal is now ${data ? 'OPEN' : 'CLOSED'}.` });
+      }
+    } catch (err) {
+      console.error(err);
+      setNotice({ kind: 'error', text: `Failed to update upload status: ${err.message}` });
+    } finally {
+      setTogglingUpload(false);
+    }
+  };
+
   const handleDelete = async (id, teamId, pptUrl, isLatest, hasEarlier) => {
     const after = isLatest ? (hasEarlier ? ' Their previous upload becomes the current one.' : ' They will show as not submitted.') : '';
     if (!window.confirm(`Delete this upload from ${teamId}? The file is removed and it can't be undone.${after}`)) return;
@@ -712,6 +768,29 @@ export default function Admin() {
               {SLOTS_ENABLED && <button type="button" className="portal-btn portal-btn--ghost portal-btn--sm" onClick={() => setActiveTab('slots')}>
                 <Clock size={15} /> Time Slots
               </button>}
+              <button
+                type="button"
+                className="portal-btn portal-btn--ghost portal-btn--sm"
+                style={{
+                  borderColor: uploadEnabled ? 'rgba(34, 197, 94, 0.45)' : 'rgba(239, 68, 68, 0.45)',
+                  color: uploadEnabled ? '#4ade80' : '#f87171',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                }}
+                onClick={handleToggleUploadStatus}
+                disabled={togglingUpload}
+                title={uploadEnabled ? 'Upload portal is currently OPEN. Click to lock.' : 'Upload portal is currently CLOSED. Click to open.'}
+              >
+                {togglingUpload ? (
+                  <Loader2 size={15} className="portal-spin" />
+                ) : uploadEnabled ? (
+                  <Unlock size={15} />
+                ) : (
+                  <Lock size={15} />
+                )}
+                <span>Submissions: {uploadEnabled ? 'OPEN' : 'CLOSED'}</span>
+              </button>
               <button type="button" className="portal-btn portal-btn--ghost portal-btn--sm" onClick={() => setTeamsOpen((o) => !o)} aria-expanded={teamsOpen}>
                 <Users size={15} /> Teams
               </button>
@@ -1015,6 +1094,23 @@ export default function Admin() {
         </div>
       ) : (
         <>
+          {!uploadEnabled && (
+            <div className="portal-alert portal-alert--error" style={{ marginBottom: 16 }} role="alert">
+              <Lock size={18} />
+              <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap' }}>
+                <span>Presentation submissions are currently <strong>CLOSED</strong>. Participants cannot upload decks right now.</span>
+                <button
+                  type="button"
+                  className="portal-btn portal-btn--sm"
+                  style={{ minHeight: 28, padding: '2px 10px', fontSize: '0.78rem' }}
+                  onClick={handleToggleUploadStatus}
+                  disabled={togglingUpload}
+                >
+                  Open Portal
+                </button>
+              </div>
+            </div>
+          )}
           {teamsOpen && (
             <form className="portal-card portal-teams" onSubmit={handleAddTeams}>
               <label className="portal-label" htmlFor="teams-input">Add teams</label>

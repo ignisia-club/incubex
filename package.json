@@ -12,8 +12,10 @@
   "dependencies": {
     "@dpawlikowski/liquid-glass": "^0.3.0",
     "@jungherz-de/glasskit": "^1.19.1",
+    "dotenv": "^18.0.8",
     "liquid-glass-component-kit": "^1.0.3",
     "lucide-react": "^1.52.0",
+    "node-appwrite": "^30.0.1",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
     "react-router-dom": "^7.18.4",
