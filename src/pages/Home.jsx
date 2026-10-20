@@ -1274,18 +1274,6 @@ export default function Home() {
               </div>
             </div>
 
-            <div class="faq-item border border-indigo-100/90 rounded-2xl bg-white/95 overflow-hidden shadow-xs hover:border-indigo-300 hover:shadow-card transition-all duration-300" data-category="finale" data-keywords="How many teams qualify for the Grand Finale? A total of 80 finalist teams (30 Product Track teams and 50 Prototype Expo Track teams) will be shortlisted for on-campus booths at the Grand Finale on 21st October.">
-              <button class="w-full text-left px-6 py-5 font-extrabold text-slate-900 flex justify-between items-center focus:outline-none cursor-pointer group" onclick="toggleFaq(this); playSound('click');">
-                <span class="text-sm sm:text-base pr-4 group-hover:text-indigo-600 transition-colors">How many teams qualify for the Grand Finale?</span>
-                <div class="faq-icon-wrapper w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center flex-shrink-0 text-indigo-600 transition-transform duration-300">
-                  <span class="faq-icon text-lg font-bold">+</span>
-                </div>
-              </button>
-              <div class="faq-answer hidden px-6 pb-6 text-xs sm:text-sm text-slate-700 leading-relaxed font-normal border-t border-slate-100 pt-4">
-                <p>A total of 80 finalist teams (30 Product Track teams and 50 Prototype Expo Track teams) will be shortlisted for on-campus booths at the Grand Finale on 21st October.</p>
-              </div>
-            </div>
-
             <div class="faq-item border border-indigo-100/90 rounded-2xl bg-white/95 overflow-hidden shadow-xs hover:border-indigo-300 hover:shadow-card transition-all duration-300" data-category="finale" data-keywords="When will shortlisted teams be announced? Round 1 results and shortlisted finalist announcements will be made on 17th October 2026 (~3:00 PM). Selected teams will be notified via email and phone.">
               <button class="w-full text-left px-6 py-5 font-extrabold text-slate-900 flex justify-between items-center focus:outline-none cursor-pointer group" onclick="toggleFaq(this); playSound('click');">
                 <span class="text-sm sm:text-base pr-4 group-hover:text-indigo-600 transition-colors">When will shortlisted teams be announced?</span>
